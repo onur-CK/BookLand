@@ -61,3 +61,18 @@ As we grow, we plan to expand our offerings to include:
 BookLand is more than just an online bookstore—it's a growing community for book lovers designed to make discovering your next favorite read as enjoyable as reading it.
 
 We invite you to browse our carefully curated collection and experience the BookLand difference for yourself.
+
+
+
+# Wireframes
+
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
+[Home page wireframe](docs/wireframes/)
