@@ -2,70 +2,70 @@
 {% load static %}
 
 {% block content %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container">
-            <!-- Logo/Bookland -->
-             <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">Bookland</a>
-
-             <!-- Shopping Cart for Mobile (visible only on small screens) -->
-             <div class="d-lg-none order-lg-3 ms-auto me-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">BookLand</a>
+        
+        <!-- Shopping Cart for Mobile (visible on small screens only) -->
+        <div class="d-lg-none order-lg-3 ms-auto me-3">
+            <a href="#" class="text-dark position-relative">
+                <i class="bi bi-cart2 fs-4"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                </span>
+            </a>
+        </div>
+        
+        <!-- Hamburger Menu Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Collapsible Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                        <li><a class="dropdown-item" href="#">Fiction</a></li>
+                        <li><a class="dropdown-item" href="#">Non-Fiction</a></li>
+                        <li><a class="dropdown-item" href="#">Mystery</a></li>
+                        <li><a class="dropdown-item" href="#">Science Fiction</a></li>
+                        <li><a class="dropdown-item" href="#">Romance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+            
+            <!-- Shopping Cart for Desktop (hidden on small screens) -->
+            <div class="d-none d-lg-block me-3">
                 <a href="#" class="text-dark position-relative">
                     <i class="bi bi-cart2 fs-4"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         0
                     </span>
                 </a>
-            </div>  
+            </div>
             
-            <!-- Hamburger Menu Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Collapsible Navbar Content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labeledby="categoriesDropdown">
-                            <li><a class="dropdown-item" href="#">Biography</a></li>
-                            <li><a class="dropdown-item" href="#">Personal development</a></li>
-                            <li><a class="dropdown-item" href="#">Philosophy</a></li>
-                            <li><a class="dropdown-item" href="#">Psychology</a></li>
-                            <li><a class="dropdown-item" href="#">Decide Later</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                </ul>
-
-                <!-- Shopping Cart for Desktop (hidden on small screens) -->
-                <div class="d-none d-lg-block me-3">
-                    <a href="#" class="text-dark position-relative">
-                        <i class="bi bi-cart-2 fs-4"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle">
-                            0
-                        </span>
-                    </a>
-                </div>
-
-                <!-- Signup/Login Buttons -->
-                 <div class="d-flex">
-                    <a href="#" class="btn btn-outline-dark me-2">Login</a>
-                    <a href="#" class="btn btn-outline-dark">Sign up</a>
-                 </div>
+            <!-- Auth Buttons -->
+            <div class="d-flex">
+                <a href="#" class="btn btn-outline-dark me-2">Login</a>
+                <a href="#" class="btn btn-outline-dark">Sign Up</a>
             </div>
         </div>
-    </nav>    
+    </div>
+</nav>
 {% endblock %}
