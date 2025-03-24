@@ -28,7 +28,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="url 'home">Home</a>
+                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labeledby="categoriesDropdown">
+                            <li><a class="dropdown-item" href="#">Biography</a></li>
+                            <li><a class="dropdown-item" href="#">Personal development</a></li>
+                            <li><a class="dropdown-item" href="#">Philosophy</a></li>
+                            <li><a class="dropdown-item" href="#">Psychology</a></li>
+                            <li><a class="dropdown-item" href="#">Decide Later</a></li>
+                        </ul>
+                    </li>`
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
                     </li>
                 </ul>
             </div>
