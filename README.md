@@ -66,13 +66,13 @@ We invite you to browse our carefully curated collection and experience the Book
 
 # Wireframes
 
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
-[Home page wireframe](docs/wireframes/)
+[Home page medium+](docs/wireframes/Home%20Page%20Medium%20Plus.png)
+[Home page mobile](docs/wireframes/Home%20Page%20Mobile.png)
+[Checkout page shipping](docs/wireframes/Checkout%20Page%20Shipping%20info%20and%20order%20summary.png)
+[Order confirmation](docs/wireframes/Order%20Confirmation%20Page.png)
+[Product details medium+](docs/wireframes/Product%20Details%20Medium%20Plus.png)
+[Product details mobile](docs/wireframes/Product%20details%20mobile.png)
+[Profile management](docs/wireframes/Profile%20Management.png)
+[Shopping cart page](docs/wireframes/Shopping%20Cart%20Page.png)
+[Sign up](docs/wireframes/Sign%20Up%20Global.png)
+[Wishlist](docs/wireframes/Wishlist.png)

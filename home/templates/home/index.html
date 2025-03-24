@@ -3,10 +3,17 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-md navbar-darkl bg-white border-bottom">
+<nav class="navbar navbar-expand-md navbar-dark bg-white border-bottom">
     <div class="container">
         <!-- Logo/Bookland -->
         <a class="navbar-brand fw-bold fs-3" href="#">BookLand</a> 
+
+        <!-- Shopping Cart for Mobile(only visible on mobile size devices) -->
+         <div class="d-md-none order-md-3 ms-auto me-2">
+            <a href="#" class="text-dark position-relative me-2">
+                <i class="bi bi-cart fs-4"></i>
+            </a>
+         </div>
     </div>
 </nav>
 
