@@ -71,10 +71,24 @@
 </nav>
 
 <!-- Main Content -->
-<div class="container py-4">`
+<div class="container py-2">
     <!-- Hero Image/Content Section -->
-     <div class="text-center my-4">
+     <div class="text-center my-3">
         <h2>Discover Your Next Book</h2>
+
+        <!-- Search Bar -->
+         <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <form method="GET" action="#" class="search-bar">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Saerch by title or author...">
+                        <button class="btn" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+         </div>
      </div>
 </div>
 {% endblock %}
