@@ -1,21 +1,83 @@
 /* Global styles for BookLand */
 
+/* Core elements */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    flex: 1; /* Ensures footer stays at bottom */
+}
+
 /* Navbar adjustments */
 .navbar-brand {
     color: #2c3e50;
+    letter-spacing: -0.5px;
 }
 
-/* Main content container */
-main {
-    min-height: 70vh; /* Ensures footer stays at bottom even with little content */
+/* Book card styling */
+.book-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Book card */
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
 
-/* Main content container */
+.book-image-container {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
 
-/* Main content container */
+.book-image-placeholder {
+    color: #6c757d;
+    font-weight: 500;
+}
 
-/* Main content container */
+/* Wishlist button */
+.wishlist-btn {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* Main content container */
+.wishlist-btn i {
+    font-size: 1rem;
+}
+
+/* Search bar */
+.search-form .input-group {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-form .form-control,
+.search-form .btn {
+    border-radius: 0;
+    padding: 0.75rem 1.5rem;
+}
+
+/* Newsletter section */
+.newsletter-section {
+    background-color: #f8f9fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .book-card {
+        margin-bottom: 1.5rem;
+    }
+}
