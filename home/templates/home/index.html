@@ -2,73 +2,7 @@
 {% load static %}
 
 {% block content %}
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-    <div class="container">
-        <!-- Logo/Brand -->
-        <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">BookLand</a>
 
-        <!-- Shopping Cart for Mobile (visible on small screens only) -->
-        <div class="d-lg-none order-lg-3 ms-auto me-3">
-            <a href="#" class="text-dark position-relative">
-                <i class="bi bi-cart2 fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    0
-                </span>
-            </a>
-        </div>
-
-        <!-- Hamburger Menu Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Collapsible Navbar Content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                        <li><a class="dropdown-item" href="#">Philosophy</a></li>
-                        <li><a class="dropdown-item" href="#">Self Development</a></li>
-                        <li><a class="dropdown-item" href="#">Psychology</a></li>
-                        <li><a class="dropdown-item" href="#">Biography</a></li>
-                        <li><a class="dropdown-item" href="#">Romance</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-            </ul>
-
-            <!-- Shopping Cart for Desktop (hidden on small screens) -->
-            <div class="d-none d-lg-block me-3">
-                <a href="#" class="text-dark position-relative">
-                    <i class="bi bi-cart2 fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        0
-                    </span>
-                </a>
-            </div>
-
-            <!-- Auth Buttons -> Signup/Login -->
-            <div class="d-flex">
-                <a href="#" class="btn btn-outline-dark me-2">Login</a>
-                <a href="#" class="btn btn-outline-dark">Sign Up</a>
-            </div>
-        </div>
-    </div>
-</nav>
 
 <!-- Main Content -->
 <div class="container py-2">
@@ -81,8 +15,7 @@
             <div class="col-md-8 col-lg-6">
                 <form method="GET" action="#" class="search-form">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q"
-                            placeholder="Search by title, author...">
+                        <input type="text" class="form-control" name="q" placeholder="Search by title, author...">
                         <button class="btn btn-outline-secondary" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
@@ -123,7 +56,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Book Card 2 -->
         <div class="col">
             <div class="card h-100 book-card border">
@@ -147,7 +80,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Book Card 3 -->
         <div class="col">
             <div class="card h-100 book-card border">
@@ -171,7 +104,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Book Card 4 -->
         <div class="col">
             <div class="card h-100 book-card border">
@@ -196,74 +129,8 @@
             </div>
         </div>
     </div>
-        <!-- Newsletter Section -->
-        <div class="row justify-content-center mt-5 pt-3 border-top">
-            <div class="col-12 text-center mb-3">
-                <h4>Join Our Newsletter</h4>
-            </div>
-            <div class="col-md-6">
-                <form class="row g-0">
-                    <div class="col">
-                        <input type="email" class="form-control" placeholder="Enter your email">
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-dark ms-1">Subscribe</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Footer -->
-     <footer class="bg-white border-top py-4 mt-4">
-        <div class="container">
-            <div class=row>
-                <!-- Brand and Description -->
-                 <div class="col-md-4">
-                    <h5 class="small">Bookland</h5>
-                    <hr>
-                    <p class="small">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                        incididunt ut labore et dolore magna aliqua.
-                    </p>
-                 </div>
+</div>
 
-                 <!-- Customer Service Links -->
-                 <div class="col-md-4">
-                    <h5>Customer Service</h5>
-                    <hr>
-                    <ul>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Contact Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">FAQ</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Shipping Policy</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Returns</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Privacy Policy</a></li>
-                    </ul>
-                 </div>
 
-                 <!-- Connect With Us -->
-                 <div class="col-md-4">
-                    <h5 class="fw-bold mb-3">Connect With Us</h5>
-                    <hr>
-                    <p class="mb-2"><i class="bi bi-envelope-fill me-2"></i>support@bookland.test.com</p>
-                    <p class="mb-3"><i class="bi bi-telephone-fill me-2"></i>+123 456-789</p>
-                    
-                    <!-- Social Media Icons -->
-                    <div class="d-flex">
-                        <a href="#" class="text-dark me-3 fs-5"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-dark me-3 fs-5"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="text-dark fs-5"><i class="bi bi-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="row mt-4">
-                <div class="col text-center">
-                    <hr>
-                    <p class="small">© 2025 BookLand. All rights reserved.</p>
-                </div>
-            </div> 
-        </div>
-     </footer>
-    {% endblock %}
+{% endblock %}

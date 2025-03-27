@@ -87,6 +87,23 @@
         </div>
      </footer>
 
+     <!-- Newsletter Section -->
+     <div class="row justify-content-center mt-5 pt-3 border-top">
+        <div class="col-12 text-center mb-3">
+            <h4>Join Our Newsletter</h4>
+        </div>
+        <div class="col-md-6">
+            <form class="row g-0">
+                <div class="col">
+                    <input type="email" class="form-control" placeholder="Enter your email">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-dark ms-1">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Jquery, Popper, Bootstrap JS.... -->
     {% block corejs %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -98,7 +115,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
             integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     {% endblock %}
-    
+
     {% block extra_js %}
     {% endblock %}
 </body>
