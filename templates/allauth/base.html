@@ -25,11 +25,67 @@
 </head>
 
 <body>
+    <!-- Navigation -->
+    {% include 'include/main_nav.html' %}
+
     <!-- Page content -->
-    <main>
+    <main class="container py-4">
         {% block content %}
         {% endblock %}
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top py-4 mt-4">
+        <div class="container">
+            <div class=row>
+                <!-- Brand and Description -->
+                 <div class="col-md-4">
+                    <h5 class="small">Bookland</h5>
+                    <hr>
+                    <p class="small">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolore magna aliqua.
+                    </p>
+                 </div>
+
+                 <!-- Customer Service Links -->
+                 <div class="col-md-4">
+                    <h5>Customer Service</h5>
+                    <hr>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Shipping Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Returns</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Privacy Policy</a></li>
+                    </ul>
+                 </div>
+
+                 <!-- Connect With Us -->
+                 <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Connect With Us</h5>
+                    <hr>
+                    <p class="mb-2"><i class="bi bi-envelope-fill me-2"></i>support@bookland.test.com</p>
+                    <p class="mb-3"><i class="bi bi-telephone-fill me-2"></i>+123 456-789</p>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="d-flex">
+                        <a href="#" class="text-dark me-3 fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-dark me-3 fs-5"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-dark fs-5"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <hr>
+                    <p class="small">© 2025 BookLand. All rights reserved.</p>
+                </div>
+            </div> 
+        </div>
+     </footer>
 
     <!-- Jquery, Popper, Bootstrap JS.... -->
     {% block corejs %}
@@ -42,6 +98,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
             integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     {% endblock %}
+    
     {% block extra_js %}
     {% endblock %}
 </body>
