@@ -17,8 +17,15 @@
                     {% if search_term %}
                         <p class="small">Search: <strong>{{ search_term }}</strong></p>
                     {% endif %}   
-                    
+                    {% if current_categories %}
+                        <p class="">Categories:
+                            {% for category in current_categories %}
+                                <strong>{ category.friendly_name }</strong>{% if not forloop %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    {% endif %}    
                 </div>
+            {% endif %}    
         </div>
         <div class="col-12 md-6">
             <div class="sort-select">
@@ -40,18 +47,21 @@
             <div class="card h-100 book-card border">
                 <a href="{% url 'product_detail' product.id %}">
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.title }} class="card-img">
+                        <img src="{{ product.image.url }}" alt="{{ product.title }} class="card-img-top p-3">
                     {% else %}
-                        <div class="card-img">
+                        <div class="card-img-top p-3 text-center">
                             <div class="book-image-container">
                                 <span class="book-image-placeholder">Book Image</span>
                             </div>
                         </div>
                     {% endif %}    
                 </a>
-                <div class="card-img-top p-3 text-center">
-                    <div class="book-image-container">
-                        <span class="book-image-placeholder">Book Image</span>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                       <h5 class="card-title">{{ product.title }}</h5>
+                       {% if product.rating %}
+                           <span class="badge">{{ product.rating }}</span>
+                       {% endif %}    
                     </div>
                 </div>
                 <div class="card-body">
@@ -78,5 +88,6 @@
     </div>
     {% endfor %}
 </div>
+{% endblock %}
 <!-- Pagination Next-Previous 1-2-3 pages, work on this later ?????? -->
  

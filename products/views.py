@@ -52,7 +52,7 @@ def all_products(request):
 
     return render(request, 'products/products.html', context)
 
-def product_detail(request):
+def product_detail(request, product_id):
     """A veiw to show individual product deatails"""
     product = get_object_or_404(Book, pk=product_id)
 
