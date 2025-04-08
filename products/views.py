@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from .models import Book, Category
 from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import reverse, redirect, get_object_or_404, render
+from django.db.models.functions import Lower
 
 def all_products(request):
     """A view to show all products"""

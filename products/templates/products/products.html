@@ -35,11 +35,15 @@
             </div>
         </div>
     </div>
+
     <!-- Book Card Section/Grid -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <!-- Book Card 1 -->
+        <!-- Book Cards -->
         <div class="col">
             <div class="card h-100 book-card border">
+                <a href="{% url 'product_detail' product.id %}">
+                    {% if product.image %}
+                </a>
                 <div class="card-img-top p-3 text-center">
                     <div class="book-image-container">
                         <span class="book-image-placeholder">Book Image</span>
