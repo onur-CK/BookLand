@@ -44,7 +44,20 @@ def all_products(request):
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
 
+    context = {
+        'products': products,
+        'search_term': query,
+        'current_categories': categories,
+    }
+
+    return render(request, 'products/products.html', context)
 
 def product_detail(request):
     """A veiw to show individual product deatails"""
+    product = get_object_or_404(Book, pk=product_id)
+
+    context = {
+        'product': product,
+    }
+
     return render(request, 'products/product_details.html')
