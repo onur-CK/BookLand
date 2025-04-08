@@ -12,15 +12,12 @@
     <!-- Filters and Sorting Row -->
     <div class="row">
         <div class="col-12 col-md-6">
-            {% if %}
+            {% if search_term or current_categories %}
                 <div class="active-filters">
-                    {%  %}
-                        <p class="small">Search: <strong> </strong></p>
-                    {%  %}   
-                    {%  %}
-                        <p class="small">Categories:
-
-                        </p>
+                    {% if search_term %}
+                        <p class="small">Search: <strong>{{ search_term }}</strong></p>
+                    {% endif %}   
+                    
                 </div>
         </div>
         <div class="col-12 md-6">
@@ -36,13 +33,21 @@
         </div>
     </div>
 
-    <!-- Book Card Section/Grid -->
+    <!-- Book Cards -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <!-- Book Cards -->
+        {% for product in products %}    
         <div class="col">
             <div class="card h-100 book-card border">
                 <a href="{% url 'product_detail' product.id %}">
                     {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.title }} class="card-img">
+                    {% else %}
+                        <div class="card-img">
+                            <div class="book-image-container">
+                                <span class="book-image-placeholder">Book Image</span>
+                            </div>
+                        </div>
+                    {% endif %}    
                 </a>
                 <div class="card-img-top p-3 text-center">
                     <div class="book-image-container">
@@ -71,6 +76,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 <!-- Pagination Next-Previous 1-2-3 pages, work on this later ?????? -->
  
