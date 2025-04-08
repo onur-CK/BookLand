@@ -3,7 +3,18 @@
   <div class="row mt-5">
     <!-- Book Image -->
     <div class="col-md-5 mb-4">
-      <div class="card">{% if product.image %}</div>
+      <div class="card">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        {% else %}
+            <div class="card text-center">
+                <div class="book-image-container">
+                    <span class="book-image-placeholder">Book Image</span>
+                </div>
+            </div>
+        {% endif %}    
+      </div>
     </div>
   </div>
+  
 </div>
