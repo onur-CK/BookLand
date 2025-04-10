@@ -60,20 +60,20 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title mb-0">{{ product.title }}</h5>
+                            </div>
+                        <p class="card-text text-muted mt-2">{{ product.author }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <h6 class="price-tag fw-bold">${{ product.price }}</h6>
                             {% if product.rating %}
                                 <span class="badge bg-secondary">{{ product.rating }}</span>
                             {% endif %}
                         </div>
-                        <p class="card-text text-muted">{{ product.author }}</p>
-                        <div class="d-flex justify-content-between align-items-center mt-2">
-                            <h6 class="price-tag fw-bold">${{ product.price }}</h6>
-                            <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
-                                <i class="bi bi-info-circle-fill"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="card-footer bg-white d-flex justify-content-between align-items-center">
                         <button class="btn btn-outline-dark btn-sm">Add to cart</button>
+                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
+                            <i class="bi bi-info-circle-fill"></i>
+                        </a>
                         <button class="btn btn-outline-danger btn-sm wishlist-btn">
                             <i class="bi bi-heart-fill"></i>
                         </button>
@@ -116,6 +116,37 @@
     </div>
     {% endif %}
 </div>
-{% endblock %}
 <!-- Pagination Next-Previous 1-2-3 pages, work on this later ?????? -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    //Sort selector functionality
+    document.getElementById('sort-selector').addEventListener('change', function() {
+        var selector = this;
+        var currentUrl = new URL(window.location);
+
+        var selectedVal = selector.value;
+        if(selectedVal != "reset"){
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
+            
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
+
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.sarchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    });
+</script>
+{% endblock %}
+
+
+
+
  
