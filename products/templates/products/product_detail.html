@@ -4,36 +4,36 @@
 {% block content %}
 <div class="container">
   <div class="row mt-5">
-    <!-- Book Image -->
+    <!-- Book Image Column -->
     <div class="col-md-5 mb-4">
-      <div class="card">
+      <div class="card border h-100">
         {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top-3">
         {% else %}
-            <div class="card text-center">
+            <div class="card-img-top p-3 text-center">
                 <div class="book-image-container">
                     <span class="book-image-placeholder">Book Image</span>
                 </div>
             </div>
-        {% endif %}    
+        {% endif %}
       </div>
     </div>
 
-    <!-- Book Info -->
+    <!-- Book Info Column -->
      <div class="col-md-7">
-        <h1 class="book-title"></h1>
-        <p class="text-muted"></p>
+        <h1 class="book-title">{{ product.title }}</h1>
+        <p class="text-muted">{{ product.author }}</p>
 
         {% if product.rating %}
         <div class="rating mb-2">
-            <span class="badge"></span>
+            <span class="badge">{{ product.rating }} / 5</span>
         </div>
         {% endif %}
 
-        <h4 class="price"></h4>
+        <h4 class="price">${{ product.price }}</h4>
 
-        <div class="d-flex">
-            <form class="add-to-cart-form">
+        <div class="d-flex mt-3 mb-4">
+            <form class="add-to-cart-form me-2">
                 <div class="input-group">
                     <button type="submit" class="btn">Add to cart</button>
                 </div>
@@ -46,7 +46,7 @@
 
         <h4 class="mt-4">Book Description</h4>
         <div class="book-description">
-
+            {{ product.description }}
         </div>
 
         <div class="mt-3">
@@ -60,6 +60,7 @@
 </div>
 
 <!-- Check this part for mobile view !!!!!!!!!!!!!$@%^$%&^$%&^%*%^&*(&^%(&*(%^%^@$#%$#!@%@#))) -->
-<div class="d-md-none">
+<div class="d-md-none d-sm-block">
     
 </div>
+{% endblock %}
