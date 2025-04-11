@@ -9,6 +9,23 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <h2 class="text-center">Create Account</h2>
+            <form action="{% url 'account_signup' %}" class="signup" id="signup_form" method="post">
+                {% csrf_token %}
+
+                {% if form.erros %}
+                <div class="alert">
+                    <strong>Error:</strong> Please correct the erros below.
+                </div>
+                {% endif %}
+
+                <!-- First Name -->
+                <div class="">
+                    <label for="id_first_name" class="form-label">First Name*</label>
+                    <input type="text" name="first_name" id="id_first_name" class="form-control" required>
+                </div>
+
+                
+            </form>
         </div>
     </div>
 </div>
