@@ -18,19 +18,54 @@
                 </div>
                 {% endif %}
 
-                <!-- Email/Username -->
+                <!-- Email -->
                 <div class="mb-3">
                     <label for="id_login" class="form-label">Email*</label>
-                    <input type="text" name="login" id="id_login" class="form-control" placeholder="Enter your email" required>
+                    <input type="text" name="login" id="id_login" class="form-control" placeholder="E-mail address" required>
                     {% if form.login.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.login.errors %}
-                                {{ erros }}
+                                {{ errors }}
                             {% endfor %}
                         </div>
                     {% endif %}
                 </div>
 
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">Password*</label>
+                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+                    {% if form.login.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.login.errors %}
+                                {{ errors }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Remember me -->
+                <div class="mb-3">
+                    <input type="checkbox" name="remember" id="id_remember" class="form-check-input">
+                    <label for="id_remember" class="form-check-label">Remember Me</label>
+                </div>
+
+                <!-- Django allauth redirection -->
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+
+                <!-- Submit Button -->
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark w-100">Sign In</button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="text-center">
+                    <p>
+                        <a href="{% url 'account_reset_password'%}">Forgot Password?</a>
+                    </p>
+                </div>
             </form>
         </div>
     </div>
