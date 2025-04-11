@@ -46,7 +46,7 @@
                 <!-- Password -->
                 <div class="mb-3">
                     <label for="id_password1" class="form-label">Password*</label>
-                    <input type="email" name="password1" id="id_password1" class="form-control" required placeholder="Password">
+                    <input type="password" name="password1" id="id_password1" class="form-control" required placeholder="Password">
                     {% if form.password1.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password1.errors %}
@@ -59,7 +59,7 @@
                 <!-- Confirm Password -->
                 <div class="mb-3">
                     <label for="id_password2" class="form-label">Password*</label>
-                    <input type="email" name="password2" id="id_password2" class="form-control" required placeholder="Password (again)">
+                    <input type="password" name="password2" id="id_password2" class="form-control" required placeholder="Password (again)">
                     {% if form.password2.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password2.errors %}
