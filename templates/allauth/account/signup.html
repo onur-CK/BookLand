@@ -75,6 +75,11 @@
                     <label for="id_terms" class="form-check-label">I agree to the Terms and Conditions*</label>
                 </div>
 
+                <!-- Django allauth redirection -->
+                 {% if redirect_field_value %}
+                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+
                 <!-- Submit button -->
                 <div class="mb-3">
                     <button type="submit" class="btn btn-dark w-100">Sign Up</button>
