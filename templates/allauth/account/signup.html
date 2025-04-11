@@ -13,7 +13,7 @@
                 {% csrf_token %}
 
                 {% if form.erros %}
-                <div class="alert">
+                <div class="alert alert-danger">
                     <strong>Error:</strong> Please correct the erros below.
                 </div>
                 {% endif %}
@@ -47,6 +47,29 @@
                     <label for="id_password2" class="form-label">Password*</label>
                     <input type="email" name="password2" id="id_password2" class="form-control" required>
                 </div>
+
+                <!-- Terms and Conditions -->
+                <div class="mb-3">
+                    <input type="checkbox" name="terms" id="id_terms" class="form-check-input" required>
+                    <label for="id_terms" class="form-check-label">I agree to the Terms and Conditions*</label>
+                </div>
+
+                <!-- Submit button -->
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+                </div>
+
+                <!-- Social Login -->
+                 <div class="mb-3">
+                    <a href="{% url 'socialaccount_signup' %}" class="btn btn-outline-dark w-100">Sign In with Google</a>
+                 </div>
+
+                 <!-- Login Link -->
+                  <p class="text-center">
+                    Already have an account?<a href="{{ login_url }}">
+                        <br>Login
+                    </a>
+                  </p>
             </form>
         </div>
     </div>
