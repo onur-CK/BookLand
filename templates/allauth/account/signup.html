@@ -13,9 +13,17 @@
             <form action="{% url 'account_signup' %}" class="signup" id="signup_form" method="post">
                 {% csrf_token %}
 
-                {% if form.erros %}
+                {% if form.errors %}
                 <div class="alert alert-danger">
-                    <strong>Error:</strong> Please correct the erros below.
+                    <strong>Error:</strong> Please correct the errors below.
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ field.label }}: {{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
                 </div>
                 {% endif %}
 
