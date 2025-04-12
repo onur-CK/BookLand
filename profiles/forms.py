@@ -3,5 +3,11 @@ from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
 
 class CustomSignupForm(SignupForm):
-    first name = forms.CharField(max_length=30, label='First Name',
-                                 widget=forms.TextInput(attrs={'placeholder': "First Name"}))
+    """
+    Custom signup form that extends the default allauth SignupForm.
+    Currently doesn't add any additional fields, but can be extended in the future.
+    """
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        return user
+    
