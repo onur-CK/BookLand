@@ -82,6 +82,10 @@ We invite you to browse our carefully curated collection and experience the Book
 
 [Shopping cart page](media/wireframes/Shopping%20Cart%20Page.png)
 
-[Sign up](media/wireframes/Sign%20Up%20Global.png)
+[Sign up](media/wireframes/Sign%20up.png)
+
+[Login/Sign-In](media/wireframes/Login.png)
 
 [Wishlist](media/wireframes/Wishlist.png)
+
+
