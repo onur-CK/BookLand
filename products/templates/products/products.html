@@ -3,12 +3,27 @@
 
 {% block content %}
 <div class="container">
-    <div class="row my-4">
+    <div class="row">
         <div class="col">
-            <h2 class="text-center mb-4">Books</h2>
+            <h2 class="text-center ">Books</h2>
         </div>
     </div>
     
+    <!-- Search Bar -->
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search by title,authr..." {% if search_term %}value="{{ search_term }}"{% endif %}>
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Filters and Sorting Row -->
     <div class="row mb-4">
         <div class="col-12 col-md-6">
@@ -26,7 +41,7 @@
                     {% endif %}
                 </div>
             {% endif %}
-        </div>
+        </div> 
         <div class="col-12 col-md-6">
             <div class="sort-select-wrapper">
                 <select id="sort-selector" class="form-select form-select-sm">
@@ -42,7 +57,7 @@
     </div>
     
     <!-- Book Cards -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for product in products %}
             <div class="col">
                 <div class="card h-100 book-card border">
