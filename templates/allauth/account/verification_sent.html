@@ -2,41 +2,39 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock head_title %}
+{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock %}
 
 {% block content %}
-
-<div class="container my-4">
-    <div class="row justify-content-center">
+<div class="container">
+    <div class="row justify-content-center my-5">
         <div class="col-12 col-md-8 col-lg-6">
-            <div class="card">
-                <h2 class="text-center my-2">{% trans "Verify Your Email Address" %}</h2>
-    
-                <div class="text-center">
+            <div class="card border p-4">
+                <h2 class="text-center mb-4">{% trans "Verify Your Email Address" %}</h2>
+                
+                <div class="text-center mb-4">
                     <i class="bi bi-envelope-check fs-1 text-success"></i>
                 </div>
-
-                <div class="my-3">
+                
+                <div class="my-4">
                     <p class="text-center">
                         {% blocktrans %}
-                        We have sent an email to verify your email address.
+                        We have sent an email to verify your email address. 
                         Please follow the link provided to complete your registration.
                         {% endblocktrans %}
                     </p>
-
-                    <p class="text-center mx-2">
+                    
+                    <p class="text-center text-muted">
                         {% blocktrans %}
                         Please contact us if you do not receive it within a few minutes.
                         {% endblocktrans %}
                     </p>
                 </div>
-
-                <div class="text-center mt-2 mb-4">
+                
+                <div class="text-center mt-4">
                     <a href="{% url 'home' %}" class="btn btn-outline-dark">Return to Home</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{% endblock content %}
+{% endblock %}
