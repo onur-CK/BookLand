@@ -98,6 +98,10 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True # Allows confirmation by clicking the link in email
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True # Allows confirmation by clicking the link in email
 
 WSGI_APPLICATION = 'bookland.wsgi.application'
 
