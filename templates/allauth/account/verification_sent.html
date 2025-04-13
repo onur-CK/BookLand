@@ -1,14 +1,42 @@
-{% extends "account/base_entrance.html" %}
+{% extends "base.html" %}
+
 {% load i18n %}
-{% load allauth %}
-{% block head_title %}
-    {% trans "Verify Your Email Address" %}
-{% endblock head_title %}
+
+{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Verify Your Email Address" %}
-    {% endelement %}
-    {% element p %}
-        {% blocktrans %}We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.{% endblocktrans %}
-    {% endelement %}
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card">
+                <h2 class="text-center my-2">{% trans "Verify Your Email Address" %}</h2>
+    
+                <div class="text-center">
+                    <i class="bi bi-envelope-check fs-1 text-success"></i>
+                </div>
+
+                <div class="my-3">
+                    <p class="text-center">
+                        {% blocktrans %}
+                        We have sent an email to verify your email address.
+                        Please follow the link provided to complete your registration.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p class="text-center mx-2">
+                        {% blocktrans %}
+                        Please contact us if you do not receive it within a few minutes.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+
+                <div class="text-center mt-2 mb-4">
+                    <a href="{% url 'home' %}" class="btn btn-outline-dark">Return to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
