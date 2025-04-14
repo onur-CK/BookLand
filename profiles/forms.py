@@ -47,3 +47,13 @@ class UserProfileForm(forms.ModelForm):
             self.fields[field].label = False
             self.fields[field].widget.attrs['class'] = "form-control"
                 
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
