@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     default_apartment = models.CharField(max_length=80, null=True, blank=True)
     default_city = models.CharField(max_length=40, null=True, blank=True)
     default_postal_code = models.CharField(max_length=20, null=True, blank=True)
-    default_country = models.Charfield(max_length=40, null=True, blank=True)
+    default_country = models.CharField(max_length=40, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):

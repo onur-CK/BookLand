@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
+from .models import UserProfile
 
 class CustomSignupForm(SignupForm):
     """
@@ -11,3 +12,37 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
         return user
     
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ('user',)
+        fields = ['default_phone_number', 'default_street_address',
+                  'default_apartment', 'default_city',
+                  'default_postal_code', 'default_country', 'date_of_birth']
+        
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'default_phone_number': 'Phone Number',
+            'default_street_address': 'Street Address',
+            'default_apartment': 'Apartment, Suite, etc.',
+            'default_city': 'City',
+            'default_postal_code': 'Postal Code',
+            'default_country': 'Country',
+            'date_of_birth': 'Date of Birty (YYYY-MM-DD)',
+        }
+
+        for field in self.fields:
+            if field != 'default_country':
+                if self.fields[field].required:
+                    placeholder = f'{placeholder[field]}'
+                else:
+                    placeholder = placeholders[field]
+                self.field[field].label = False
+                self.fields[field].widget.attrs['class'] = "form-control"
+                
