@@ -56,19 +56,34 @@
                             <small class="text-muted">Email cannot be changed. Contact support if needed.</small>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-12">
-                                <label for="id_date_of_birth" class="form-label">Date of Birth</label>
+                                <label for="id_date_of_birth" class="form-label">Date of Birth*</label>
                                 <div class="row">
                                     <div class="col-4">
                                         <select class="form-select" name="birth_month" id="birth_month">
                                             <option value="" selected disabled>MM</option>
                                             {% for i in "123456789012" %}
                                                 <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
-                                            {% endfor %}    
+                                            {% endfor %}
                                         </select>
                                     </div>
-
+                                    <div class="col-4">
+                                        <select class="form-select" name="birth_day" id="birth_day">
+                                            <option value="" selected disabled>DD</option>
+                                            {% for i in "1234567890123456789012345678901" %}
+                                                <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <select class="form-select" name="birth_year" id="birth_year">
+                                            <option value="" selected disabled>YYYY</option>
+                                            {% for year in year_range %}
+                                                <option value="{{ year }}">{{ year }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
