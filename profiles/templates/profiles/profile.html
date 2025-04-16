@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/base.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -23,9 +23,7 @@
                 <a href="#" class="list-group-item">
                     Order History
                 </a>
-                <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                    Delete Account
-                </button>
+                <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
             </div>
          </div>
 

@@ -104,6 +104,9 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True # Allows confirmation by clicking the link in email
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True # Allows confirmation by clicking the link in email
 
+SOCIALACCOUNT_PROVIDERS = {}
+ACCOUNT_SOCIALACCOUNT_ENABLED = False
+
 WSGI_APPLICATION = 'bookland.wsgi.application'
 
 
@@ -116,7 +119,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -19,20 +19,23 @@ def profile(request):
     else:
         form = UserProfileForm(instance=profile)
 
-    template = 'profiles/profile.html'
-    context = {
-        'form': form,
-        'profile': profile,
-    }
-
-    return render(request, template, context)
+    # Using the app and template format explicitly after the Template Path Resolution Bug(explained in TESTING.md)
+    return render(
+        request,
+        'profiles/profile.html',  # Explicit path format
+        {
+            'form': form,
+            'profile': profile,
+            'year_range': range(1940, 2006), # Context variable
+        }
+    )
 
 @login_required
 def order_history(request):
     """ Display the user's order history """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    template = 'profiles/order_history.html'
+    template = 'profiles/templates/order_history.html'
     context = {
         'profile',
     }
@@ -44,7 +47,7 @@ def wishlist(request):
     """ Display the user's wishlist """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    template = 'profiles/wishlist.html'
+    template = 'profiles/templates/wishlist.html'
     context = {
         'profile': profile,
     }
