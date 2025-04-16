@@ -30,6 +30,36 @@
          </div>
 
          <!-- Main Content -->
-          
+         <div class="col-12 col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Personal Information</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for=""></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for=""></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <label for=""></label>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
     </div>
 </div>
