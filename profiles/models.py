@@ -27,6 +27,12 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     if created:
         UserProfile.objects.create(user=instance)
-    #Existing users: just save the profile
-    instance.userprofile.save()
+    else: 
+        #Existing users: just save the profile
+        # This handles the case where a user might exist without a profile (can be created by admin)
+        try:
+            instance.userprofile.save()
+        except User.userprofile.RelatedObjectDoesNotExist:
+            # If the profile doesn't exist, create it
+            UserProfile.objects.create(user=instance)
 
