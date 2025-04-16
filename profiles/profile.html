@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>My Profile</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Sidebar Nav -->
+         <div class="col-12 col-md-3">
+            <div class="list-group">
+                <a href="{% url 'profile' %}" class="list-group-item">
+                    Personal Information
+                </a>
+                <a href="#" class="list-group-item">
+                    Order History
+                </a>
+                <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                    Delete Account
+                </button>
+            </div>
+         </div>
+
+         <!-- Main Content -->
+          
+    </div>
+</div>
