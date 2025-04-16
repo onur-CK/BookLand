@@ -60,13 +60,15 @@
                             <div class="col-12">
                                 <label for="id_date_of_birth" class="form-label">Date of Birth</label>
                                 <div class="row">
-                                    <div class="col=3">
+                                    <div class="col-4">
                                         <select class="form-select" name="birth_month" id="birth_month">
-                                            <option value=""></option>
-                                            <option value=""></option>
+                                            <option value="" selected disabled>MM</option>
+                                            {% for i in "123456789012" %}
+                                                <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                            {% endfor %}    
                                         </select>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
