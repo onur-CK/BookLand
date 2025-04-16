@@ -160,3 +160,15 @@
     </div>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize date of birth fields if value exists
+    {% if profile.date_of_birth %}
+        const dateOfBirth = new Date("{{ profile.date_of_birth|date:'Y-m-d' }}");
+        document.getElementById('birth_month').value = dateOfBirth.getMonth() + 1;
+        document.getElementById('birth_day').value = dateOfBirth.getDate();
+        document.getElementById('birth_year').value = dateOfBirth.getFullYear();
+    {% endif %}
+</script>
+{% endblock %}
