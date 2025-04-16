@@ -90,6 +90,22 @@
                     </form>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Default Address</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'profile' %}" method="POST" id="address-update-form">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_default_street_address" class="form-label">Street Address*</label>
+                            <input type="text" class="form-control" id="id_default_street_address" name="default_street_address" value="{{ profile.default_street_address }}" required>
+                        </div>
+                    </form>
+                </div>
+            </div>
          </div>
     </div>
 </div>
