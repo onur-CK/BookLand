@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
+from .models import UserProfile, WishlistItem
 from .forms import UserProfileForm
 
 @login_required
@@ -45,11 +45,11 @@ def order_history(request):
 @login_required
 def wishlist(request):
     """ Display the user's wishlist """
-    profile = get_object_or_404(UserProfile, user=request.user)
+    wishlist_items = WishlistItem.objects.filter(user=request.user)
 
-    template = 'profiles/profile/wishlist.html'
+    template = 'profiles/wishlist.html'
     context = {
-        'profile': profile,
+        'wishlist_items': wishlist_items,
     }
 
     return render(request, template, context)

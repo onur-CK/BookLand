@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from products.models import Book
 
 class UserProfile(models.Model):
     """
@@ -35,4 +36,19 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         except User.userprofile.RelatedObjectDoesNotExist:
             # If the profile doesn't exist, create it
             UserProfile.objects.create(user=instance)
+
+class WishlistItem(models.Model):
+    """
+    A model to store wishlist items for users
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'book')
+        ordering = ['-date_added']
+
+        def __str__(self):
+            return f"{self.user.username}'s wishlist item: {self.book.title}"
 
