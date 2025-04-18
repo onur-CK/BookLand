@@ -20,10 +20,15 @@
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="{% url 'order_history' %}" class="list-group-item">
                     Order History
                 </a>
-                <button type="button" class="list-group-item" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
+                <a href="{% url 'wishlist' %}" class="list-group-item">
+                    Wishlist
+                </a>
+                <button type="button" class="btn btn-outline-danger fw-semibold" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                Delete Account
+                </button>
             </div>
          </div>
 

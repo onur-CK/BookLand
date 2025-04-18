@@ -35,9 +35,9 @@ def order_history(request):
     """ Display the user's order history """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    template = 'profiles/templates/order_history.html'
+    template = 'profiles/order_history.html'
     context = {
-        'profile',
+        'profile': profile,
     }
 
     return render(request, template, context)
@@ -47,7 +47,7 @@ def wishlist(request):
     """ Display the user's wishlist """
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    template = 'profiles/templates/wishlist.html'
+    template = 'profiles/profile/wishlist.html'
     context = {
         'profile': profile,
     }
