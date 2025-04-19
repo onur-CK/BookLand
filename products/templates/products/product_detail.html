@@ -3,75 +3,73 @@
 
 {% block content %}
 <div class="container">
-  <div class="row mt-5">
-    <!-- Book Image Column -->
-    <div class="col-md-5 mb-4">
-      <div class="card border h-100">
-        {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top-3">
-        {% else %}
-            <div class="card-img-top p-3 text-center">
-                <div class="book-image-container">
-                    <span class="book-image-placeholder">Book Image</span>
+    <div class="row mt-5">
+        <!-- Book Image Column -->
+        <div class="col-md-5 mb-4">
+            <div class="card border h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top-3">
+                {% else %}
+                <div class="card-img-top p-3 text-center">
+                    <div class="book-image-container">
+                        <span class="book-image-placeholder">Book Image</span>
+                    </div>
                 </div>
+                {% endif %}
             </div>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Book Info Column -->
-     <div class="col-md-7">
-        <h1 class="book-title">{{ product.title }}</h1>
-        <p class="text-muted">{{ product.author }}</p>
-
-        {% if product.rating %}
-        <div class="rating mb-2">
-            <span class="badge">{{ product.rating }} / 5</span>
-        </div>
-        {% endif %}
-
-        <h4 class="price">${{ product.price }}</h4>
-
-        <div class="d-flex mt-3 mb-4">
-            <form class="add-to-cart-form me-2">
-                <div class="input-group">
-                    <button type="submit" class="btn">Add to cart</button>
-                </div>
-            </form>
-            
-            <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                <button class="btn wishlist-btn">
-                    <i class="bi bi-heart-fill"></i>
-                </button>
-            </form>
         </div>
 
-        <h4 class="mt-4">Book Description</h4>
-        <div class="book-description">
-            {{ product.description }}
-        </div>
+        <!-- Book Info Column -->
+        <div class="col-md-7">
+            <h1 class="book-title">{{ product.title }}</h1>
+            <p class="text-muted">{{ product.author }}</p>
 
-        <div class="mt-3">
-            {% if product.category %}
-                <p><strong>Category:</strong> 
+            {% if product.rating %}
+            <div class="rating mb-2">
+                <span class="badge">{{ product.rating }} / 5</span>
+            </div>
+            {% endif %}
+
+            <h4 class="price">${{ product.price }}</h4>
+
+            <div class="d-flex mt-3 mb-4">
+                <form class="add-to-cart-form me-2">
+                    <div class="input-group">
+                        <button type="submit" class="btn">Add to cart</button>
+                    </div>
+                </form>
+
+                <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <button class="btn wishlist-btn">
+                        <i class="bi bi-heart-fill"></i>
+                    </button>
+                </form>
+            </div>
+
+            <h4 class="mt-4">Book Description</h4>
+            <div class="book-description">
+                {{ product.description }}
+            </div>
+
+            <div class="mt-3">
+                {% if product.category %}
+                <p><strong>Category:</strong>
                     <a href="{% url 'products' %}?category={{ product.category.name }}">
                         {{ product.category.friendly_name|default:product.category.name }}
                     </a>
                 </p>
-            {% endif %}
-            <p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}</p>
-            {% if product.inventory %}
+                {% endif %}
+                <p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}
+                </p>
+                {% if product.inventory %}
                 <p><strong>Inventory:</strong> {{ product.inventory }} available</p>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
-     </div>
-  </div>
+    </div>
 </div>
 
-<!-- Check this part for mobile view !!!!!!!!!!!!!$@%^$%&^$%&^%*%^&*(&^%(&*(%^%^@$#%$#!@%@#))) -->
-<div class="d-md-none d-sm-block">
-    
 </div>
 {% endblock %}
