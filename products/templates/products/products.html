@@ -90,9 +90,13 @@
                         <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
                             <i class="bi bi-info-circle-fill"></i>
                         </a>
-                        <button class="btn btn-outline-danger btn-sm wishlist-btn">
-                            <i class="bi bi-heart-fill"></i>
-                        </button>
+                        <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <button class="btn btn-outline-danger btn-sm wishlist-btn">
+                                <i class="bi bi-heart-fill"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
