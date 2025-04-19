@@ -16,6 +16,23 @@
         </div>
     </div>
     
+    <!-- Categories Bar -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-12">
+            <div class="categories-container d-flex flex-wrap justify-content-center">
+                <a href="{% url 'products' %}" class="category-badge {% if not active_category %}active{% endif %}">
+                    All Books
+                </a>
+                {% for category in all_categories %}
+                    <a href="{% url 'products' %}?category={{ category.name }}" 
+                       class="category-badge {% if active_category and active_category.name == category.name %}active{% endif %}">
+                        {{ category.friendly_name|default:category.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
     <!-- Search Bar -->
 
     <div class="row justify-content-center">
