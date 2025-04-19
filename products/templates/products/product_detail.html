@@ -55,9 +55,16 @@
 
         <div class="mt-3">
             {% if product.category %}
-                <p><strong>Category:</strong> </p>
+                <p><strong>Category:</strong> 
+                    <a href="{% url 'products' %}?category={{ product.category.name }}">
+                        {{ product.category.friendly_name|default:product.category.name }}
+                    </a>
+                </p>
             {% endif %}
-            <p><strong>Availability:</strong> </p>
+            <p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}</p>
+            {% if product.inventory %}
+                <p><strong>Inventory:</strong> {{ product.inventory }} available</p>
+            {% endif %}
         </div>
      </div>
   </div>
