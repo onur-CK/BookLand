@@ -25,6 +25,7 @@
                 </a>
                 <a href="{% url 'wishlist' %}" class="list-group-item">
                     Wishlist
+                    <span class="badge bg-danger">{{ wishlist_count }}</span>
                 </a>
                 <button type="button" class="btn btn-outline-danger fw-semibold" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                 Delete Account
