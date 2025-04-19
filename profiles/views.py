@@ -78,3 +78,19 @@ def add_to_wishlist(request, book_id):
 
     # If no redirection URL, go to product detail page
     return redirect('product_detail', book_id)
+
+@login_required
+def remove_from_wishlist(request, book_id):
+    """ Remove a book from the user's wishlist """
+    book = get_object_or_404(Book, pk=book_id)
+
+    try:
+        wishlist_item = WishlistItem.objects.get(user=request.user, book=book)
+        wishlist_item.delete()
+        messages.success(request, f'{book.title} has been removed from your wishlist')
+    except WishlistItem.DoesNotExist:
+        messages.error(request, f'{book.title} was not in your wishlist')
+
+    # Redirection to wishlist page
+    return redirect('wishlist')
+
