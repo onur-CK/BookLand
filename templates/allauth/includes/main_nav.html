@@ -17,7 +17,7 @@
       </a>
     </div>
 
-    <!-- Wishlist for Lobile (visible on small screen only) -->
+    <!-- Wishlist for Mobile (visible on small screen only) -->
     <div class="d-lg-none order-lg-3 mx-2">
       <a href="{% url 'wishlist' %}" class="text-danger position-relative">
         <i class="bi bi-heart fs-4"></i>
@@ -64,11 +64,15 @@
             Categories
           </a>
           <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <li><a class="dropdown-item" href="#">Philosophy</a></li>
-            <li><a class="dropdown-item" href="#">Self Development</a></li>
-            <li><a class="dropdown-item" href="#">Psychology</a></li>
-            <li><a class="dropdown-item" href="#">Biography</a></li>
-            <li><a class="dropdown-item" href="#">Literature</a></li>
+            <!-- Dynamic category list -->
+            {% for category in all_categories %}
+              <li>
+                <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">
+                  {{ category.friendly_name|default:category.name }}
+                </a>
+              </li>
+            {% endfor %}
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url 'products' %}">All Products</a></li>
           </ul>
         </li>

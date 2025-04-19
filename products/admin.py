@@ -4,6 +4,12 @@ from .models import Category, Book
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'friendly_name')
     search_fields = ('name', 'friendly_name')
+    prepopulated_fields = {'name': ('friendly_name',)}
+
+    def get_book_count(self, obj):
+        return obj.book_set.count()
+    
+    get_book_count.short_description = 'Books'
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'price', 'rating', 'available', 'inventory')
@@ -13,5 +19,25 @@ class BookAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     list_editable = ('price', 'available', 'inventory')
 
+    # Add fieldsets to organize the admin form better
+    fieldsets = (
+        ('Book Information', {
+            'fields': ('title', 'author', 'description', 'category', 'image')
+        }),
+        ('Pricing & Inventory', {
+            'fields': ('price', 'inventory', 'available')
+        }),
+        ('Metadata', {
+            'fields': ('rating', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    # Filter the foreign key dropdown for category to only show active categories
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "category":
+            kwargs["queryset"] = Category.objects.all().order_by('friendly_name')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Book, BookAdmin)
