@@ -8,7 +8,11 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2 class="text-center ">Books</h2>
+            {% if active_category %}
+                <h2 class="text-center ">{{ active_category.friendly_name|default:active_category.name }}</h2>
+            {% else %}
+                <h2 class="text-center">All Books</h2>
+            {% endif %}
         </div>
     </div>
     

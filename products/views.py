@@ -10,8 +10,11 @@ def all_products(request):
     products = Book.objects.filter(available=True)
     query = None
     categories = None
+    category_filter = None
     sort = None
     direction = None
+    current_sorting = None
+    active_category = None
 
     if request.GET:
         # Handle categories filter
@@ -19,6 +22,9 @@ def all_products(request):
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
+            # Get the first category to display as active for the user
+            if categories:
+                active_category = categories[0]
 
         # Handle search queries
         if 'q' in request.GET:
@@ -56,8 +62,16 @@ def product_detail(request, product_id):
     """A veiw to show individual product deatails"""
     product = get_object_or_404(Book, pk=product_id)
 
+    # Get related books (same cateogory)
+    related_books = []
+    if product.category:
+        related_books = Book.objects.filter(
+            category=product.category
+        ).exclude(id=product.id)[:4] # Limit to 4 related books
+
     context = {
         'product': product,
+        'related_books': related_books,
     }
 
     return render(request, 'products/product_detail.html', context)
