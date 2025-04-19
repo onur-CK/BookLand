@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, WishlistItem
 from .forms import UserProfileForm
+from products.models import Book
 
 @login_required
 def profile(request):
@@ -53,3 +54,27 @@ def wishlist(request):
     }
 
     return render(request, template, context)
+
+@login_required
+def add_to_wishlist(request, book_id):
+    """ Add a book to the user's wishlist """
+    book = get_object_or_404(Book, pk=book_id)
+
+    # Check if the item is already in the wishlist
+    wishlist_item, created = WishlistItem.objects.get_object_or_create(
+        user=request.user,
+        book=book
+    )
+
+    if created:
+        messages.success(request, f'{book.title} has been added to your wishlist')
+    else:
+        messages.info(request, f'{book.title} is already in your wishlist')
+
+    # Redirection to page they came from
+    redirect_url = request.POST.get('redirect_url')
+    if redirect_url:
+        return redirect(redirect_url)
+
+    # If no redirection URL, go to product detail page
+    return redirect('product_detail', book_id)

@@ -49,6 +49,6 @@ class WishlistItem(models.Model):
         unique_together = ('user', 'book')
         ordering = ['-date_added']
 
-        def __str__(self):
-            return f"{self.user.username}'s wishlist item: {self.book.title}"
+    def __str__(self):
+        return f"{self.user.username}'s wishlist item: {self.book.title}"
 
