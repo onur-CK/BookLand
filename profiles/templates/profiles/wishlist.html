@@ -56,5 +56,12 @@
         {% endfor %}
     </div>
     {% else %}
+        <div class="text-center">
+            <i class="bi bi-heart fs-1 text-muted"></i>
+            <h3 class="text-muted">Your wishlist is empty</h3>
+            <p class="text-muted">Save items you'd like to purchase later by clicking the heart icon on product pages.</p>
+            <a href="{% url 'products' %}" class="btn btn-dark">Browse Books</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
