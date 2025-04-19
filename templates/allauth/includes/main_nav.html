@@ -78,6 +78,18 @@
         </a>
       </div>
 
+      <div class="d-none d-lg-block">
+        <a href="{% url 'wishlist' %}" class="text-danger position-relative">
+          <i class="bi bi-heart fs-4"></i>
+          <span
+          class="posotion-absolute badge">
+          {% if request.user.is_authenticated %}
+            {{ wishlist_count|default:"0" }}
+          {% endif %}
+        </span>
+        </a>
+      </div>
+      
       <!-- Auth Buttons -> Signup/Login -->
       <div class="d-flex">
         {% if request.user.is_authenticated %}  
