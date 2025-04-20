@@ -64,14 +64,27 @@
             Categories
           </a>
           <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <!-- Dynamic category list -->
-            {% for category in all_categories %}
-              <li>
-                <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">
-                  {{ category.friendly_name|default:category.name }}
-                </a>
-              </li>
-            {% endfor %}
+            <!-- Category list -->
+            <a href="{% url 'products' %}?category=philosophy" 
+   class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
+  Philosophy
+</a>
+<a href="{% url 'products' %}?category=psychology" 
+   class="category-badge {% if active_category and active_category.name == 'psychology' %}active{% endif %}">
+  Psychology
+</a>
+<a href="{% url 'products' %}?category=self_development" 
+   class="category-badge {% if active_category and active_category.name == 'self_development' %}active{% endif %}">
+  Self Development
+</a>
+<a href="{% url 'products' %}?category=literature" 
+   class="category-badge {% if active_category and active_category.name == 'literature' %}active{% endif %}">
+  Literature
+</a>
+<a href="{% url 'products' %}?category=biography" 
+   class="category-badge {% if active_category and active_category.name == 'biography' %}active{% endif %}">
+  Biography
+</a>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url 'products' %}">All Products</a></li>
           </ul>
