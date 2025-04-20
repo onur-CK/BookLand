@@ -9,8 +9,4 @@ def wishlist_count(request):
     if request.user.is_authenticated:
         wishlist_count = WishlistItem.objects.filter(user=request.user).count()
 
-    context = {
-        'wishlist_count': wishlist_count,
-    }
-
-    return context
+    return {'wishlist_count': wishlist_count}

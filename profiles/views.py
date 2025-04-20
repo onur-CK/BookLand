@@ -61,7 +61,7 @@ def add_to_wishlist(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
 
     # Check if the item is already in the wishlist
-    wishlist_item, created = WishlistItem.objects.get_object_or_create(
+    wishlist_item, created = WishlistItem.objects.get_or_create(
         user=request.user,
         book=book
     )
@@ -93,4 +93,6 @@ def remove_from_wishlist(request, book_id):
 
     # Redirection to wishlist page
     return redirect('wishlist')
+
+
 
