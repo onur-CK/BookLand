@@ -195,3 +195,70 @@ This bug highlights several important considerations for Django template develop
 Resolving this bug ensured that users can now see the correct numerical count of items in their wishlist, and the navigation bar displays correctly across all device sizes. This supports our goal of providing a consistent and user-friendly experience regardless of the device being used to access BookLand.
 
 
+# Category Duplication in Navigation and Product Page
+
+## Bug Description
+During the development of BookLand's product browsing functionality, we encountered a visual bug where category names were being displayed multiple times in both the navigation dropdown menu and in the category badges section below the "All Books" header. Specifically, the Philosophy category appeared 2 times, Psychology 2 times, and Self Development 3 times across the interface.
+
+## Error Manifestation
+The navigation dropdown and category badges sections displayed duplicate entries for each category despite having a single definition in our database schema. This created a cluttered and unprofessional appearance in the user interface and could potentially confuse users browsing our product categories.
+
+![Category Dropdown Duplication Bug Screenshot](media/bugs_and_fixes/duplicating%20category.png)
+
+![Category Buttons Duplication Bug Screenshot](media/bugs_and_fixes/duplicating%20category%20buttons.png)
+
+## Root Cause
+The root cause was related to how category data was being queried and displayed in the templates:
+
+1. **Database Query Issue**: The context processor in `products/contexts.py` was retrieving all categories from the database without filtering for uniqueness, potentially including duplicate entries that had been created during development.
+
+2. **Template Processing**: The template logic in both `main_nav.html` and `products.html` was iterating through the entire `all_categories` context variable, displaying each entry regardless of duplication.
+
+3. **Development Data**: During development and testing, categories may have been inadvertently created multiple times with slightly different attributes but the same name.
+
+## Solution Implemented
+Instead of modifying the database or creating migrations to remove duplicates, we opted for a more straightforward approach by implementing fixed category listings in the templates:
+
+1. **Fixed Navigation Dropdown**: We replaced the dynamic category loop in `main_nav.html` with manually defined category links:
+
+```html
+<li>
+  <a class="dropdown-item" href="{% url 'products' %}?category=philosophy">
+    Philosophy
+  </a>
+</li>
+<li>
+  <a class="dropdown-item" href="{% url 'products' %}?category=psychology">
+    Psychology
+  </a>
+</li>
+<!-- Additional fixed categories -->
+```
+
+2. **Fixed Category Badges**: Similarly, we replaced the dynamic category loop in `products.html` with manually defined category badges:
+
+```html
+<a href="{% url 'products' %}?category=philosophy" 
+   class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
+  Philosophy
+</a>
+<!-- Additional fixed category badges -->
+```
+
+This solution eliminated the duplicate display issues while maintaining all the original functionality.
+
+## Lessons Learned
+This bug highlights several important considerations for e-commerce development:
+
+1. **Data Integrity**: Even in development environments, maintaining data integrity is crucial. Implementing unique constraints on category names from the beginning would have prevented duplicate entries.
+
+2. **Static vs. Dynamic Content**: For relatively stable content like product categories, a static implementation in templates can sometimes be more predictable and maintainable than dynamic database queries.
+
+3. **UI Consistency**: Regular visual testing across the application is essential to catch display anomalies that might not trigger functional errors but can significantly impact user experience.
+
+4. **Solution Trade-offs**: When addressing bugs, consider both database-level solutions (cleaning duplicates, adding constraints) and presentation-level solutions (fixed template elements). Choose the approach that balances immediate fix needs with long-term maintenance.
+
+## Impact on BookLand
+Resolving this bug improved the user experience by presenting a clean, professional category navigation system. The fixed category implementation also provides greater control over the presentation and ordering of our book categories, which are fundamental to helping customers browse our inventory effectively. This aligns with our goal of creating an intuitive and frustration-free shopping experience.
+
+
