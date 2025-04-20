@@ -47,29 +47,29 @@
             Categories
           </a>
           <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <!-- Category list -->
+            <!-- Fixed Category list -->
             <li>
-              <a href="{% url 'products' %}?category=philosophy" class="dropdown-item {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
+              <a href="{% url 'products' %}?category=philosophy" class="dropdown-item">
                 Philosophy
               </a>
             </li>
             <li>
-              <a href="{% url 'products' %}?category=psychology" class="dropdown-item {% if active_category and active_category.name == 'psychology' %}active{% endif %}">
+              <a href="{% url 'products' %}?category=psychology" class="dropdown-item">
                 Psychology
               </a>
             </li>
             <li>
-              <a href="{% url 'products' %}?category=self_development" class="dropdown-item {% if active_category and active_category.name == 'self_development' %}active{% endif %}">
+              <a href="{% url 'products' %}?category=self_development" class="dropdown-item">
                 Self Development
               </a>
             </li>
             <li>
-              <a href="{% url 'products' %}?category=literature" class="dropdown-item {% if active_category and active_category.name == 'literature' %}active{% endif %}">
+              <a href="{% url 'products' %}?category=literature" class="dropdown-item">
                 Literature
               </a>
             </li>
             <li>
-              <a href="{% url 'products' %}?category=biography" class="dropdown-item {% if active_category and active_category.name == 'biography' %}active{% endif %}">
+              <a href="{% url 'products' %}?category=biography" class="dropdown-item">
                 Biography
               </a>
             </li>
@@ -82,7 +82,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile'  %}">Profile</a>
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact Us</a>

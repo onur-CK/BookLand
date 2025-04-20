@@ -9,37 +9,50 @@
     <div class="row">
         <div class="col">
             {% if active_category %}
-                <h2 class="text-center ">{{ active_category.friendly_name|default:active_category.name }}</h2>
+                <h2 class="text-center">{{ active_category.friendly_name|default:active_category.name }}</h2>
             {% else %}
                 <h2 class="text-center">All Books</h2>
             {% endif %}
         </div>
     </div>
     
-    <!-- Categories Bar -->
+    <!-- Fixed Categories Bar -->
     <div class="row justify-content-center mb-4">
         <div class="col-12">
             <div class="categories-container d-flex flex-wrap justify-content-center">
                 <a href="{% url 'products' %}" class="category-badge {% if not active_category %}active{% endif %}">
                     All Books
                 </a>
-                {% for category in all_categories %}
-                    <a href="{% url 'products' %}?category={{ category.name }}" 
-                       class="category-badge {% if active_category and active_category.name == category.name %}active{% endif %}">
-                        {{ category.friendly_name|default:category.name }}
-                    </a>
-                {% endfor %}
+                <a href="{% url 'products' %}?category=philosophy" 
+                   class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
+                    Philosophy
+                </a>
+                <a href="{% url 'products' %}?category=psychology" 
+                   class="category-badge {% if active_category and active_category.name == 'psychology' %}active{% endif %}">
+                    Psychology
+                </a>
+                <a href="{% url 'products' %}?category=self_development" 
+                   class="category-badge {% if active_category and active_category.name == 'self_development' %}active{% endif %}">
+                    Self Development
+                </a>
+                <a href="{% url 'products' %}?category=literature" 
+                   class="category-badge {% if active_category and active_category.name == 'literature' %}active{% endif %}">
+                    Literature
+                </a>
+                <a href="{% url 'products' %}?category=biography" 
+                   class="category-badge {% if active_category and active_category.name == 'biography' %}active{% endif %}">
+                    Biography
+                </a>
             </div>
         </div>
     </div>
 
     <!-- Search Bar -->
-
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Search by title,authr..." {% if search_term %}value="{{ search_term }}"{% endif %}>
+                    <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}"{% endif %}>
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
@@ -51,17 +64,13 @@
     <!-- Filters and Sorting Row -->
     <div class="row mb-4">
         <div class="col-12 col-md-6">
-            {% if search_term or current_categories %}
+            {% if search_term or active_category %}
                 <div class="active-filters">
                     {% if search_term %}
                         <p class="small">Search: <strong>{{ search_term }}</strong></p>
                     {% endif %}
-                    {% if current_categories %}
-                        <p class="small">Categories: 
-                            {% for category in current_categories %}
-                                <strong>{{ category.friendly_name }}</strong>{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </p>
+                    {% if active_category %}
+                        <p class="small">Category: <strong>{{ active_category.friendly_name|default:active_category.name }}</strong></p>
                     {% endif %}
                 </div>
             {% endif %}
@@ -157,13 +166,12 @@
     </div>
     {% endif %}
 </div>
-<!-- Pagination Next-Previous 1-2-3 pages, work on this later ?????? -->
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    //Sort selector functionality
+    // Sort selector functionality
     document.getElementById('sort-selector').addEventListener('change', function() {
         var selector = this;
         var currentUrl = new URL(window.location);
@@ -179,13 +187,10 @@
             window.location.replace(currentUrl);
         } else {
             currentUrl.searchParams.delete("sort");
-            currentUrl.sarchParams.delete("direction");
+            currentUrl.searchParams.delete("direction");
 
             window.location.replace(currentUrl);
         }
     });
 </script>
 {% endblock %}
-
-
- 

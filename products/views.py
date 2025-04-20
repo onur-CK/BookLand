@@ -10,7 +10,6 @@ def all_products(request):
     products = Book.objects.filter(available=True)
     query = None
     categories = None
-    category_filter = None
     sort = None
     direction = None
     current_sorting = None
@@ -19,12 +18,10 @@ def all_products(request):
     if request.GET:
         # Handle categories filter
         if 'category' in request.GET:
-            categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)
-            # Get the first category to display as active for the user
-            if categories:
-                active_category = categories[0]
+            category_name = request.GET['category']
+            products = products.filter(category__name=category_name)
+            # Get the first matching category instead of requiring uniqueness
+            active_category = Category.objects.filter(name=category_name).first()
 
         # Handle search queries
         if 'q' in request.GET:
@@ -53,7 +50,7 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
-        'current_categories': categories,
+        'active_category': active_category,
     }
 
     return render(request, 'products/products.html', context)
