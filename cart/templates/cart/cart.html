@@ -61,6 +61,14 @@
                                 </div>
                             </form>
                         </td>
+                        <td class="py-3">
+                            <p class="my-0">${{ item.book.price | floatformat:2 }}</p>
+                        </td>
+                        <td class="py-3">
+                            <a class="remove-item text-danger" id="remove_{{ item.item_id }}">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
