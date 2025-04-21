@@ -5,7 +5,7 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from products.models import Book
-from profiles.models import UserProfile
+from profiles.models import UserProfile, UserProfileForm
 from cart.contexts import cart_contents
 
 def checkout(request):
@@ -64,3 +64,44 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    save_info = request.session.get('save_info')
+    order = get_object_or_404(Order, order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'default_phone_number': order.phone_number,
+                'default_street_address': order.street_address,
+                'default_apartment': order.apartment,
+                'default_city': order.city,
+                'default_postal_code': order.postal_code,
+                'default_country': order.country,
+            }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
+
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+
+    if 'cart' in request.session:
+        del request.session['cart']
+
+    context = {
+        'order': order,
+    }
+
+    return render(request, 'checkout/checkout_success.html', context)
