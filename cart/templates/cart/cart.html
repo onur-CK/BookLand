@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -43,6 +46,20 @@
                                     <p class="small text-muted mb-0">{{ item.book.author }}</p>
                                 </div>
                             </div>
+                        </td>
+                        <td class="py-3">
+                            <form class="form update-form" method="POST" action="">
+                                {% csrf_token %}
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control form-control-sm qty_input" type="number" 
+                                        name="quantity" value="{{ item.quantity }}" min="1" max="99" 
+                                        data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                    <button class="btn btn-sm btn-outline-dark update-link" 
+                                        data-item_id="{{ item.item_id }}">
+                                        <i class="bi bi-arrow-repeat"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
