@@ -277,20 +277,20 @@
   .book-card .card-title {
     font-size: 0.85rem;
   }
-  
+
   .book-card .card-img-top {
     height: 150px;
   }
-  
+
   .sort-select-wrapper {
     justify-content: flex-start;
     margin-top: 1rem;
   }
-  
+
   .product-image-container img {
     max-height: 250px;
   }
-  
+
   .book-title {
     font-size: 1.5rem;
     margin-top: 1rem;
