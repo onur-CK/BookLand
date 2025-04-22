@@ -1,86 +1,175 @@
-/* Global styles for BookLand */
+/* Global styles */
 
-/* Core elements */
+/* Base structure and typography */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #ecf0f1;
+    --accent-color: #e74c3c;
+    --text-color: #333333;
+    --light-text: #6c757d;
+    --light-bg: #f8f9fa;
+    --border-color: #e9ecef;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 main {
-    flex: 1; /* Ensures footer stays at bottom */
+    flex: 1;
+    /* Ensures footer stays at bottom */
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-color);
 }
 
 /* Navbar adjustments */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
 .navbar-brand {
-    color: #2c3e50;
+    color: var(--primary-color);
+    font-weight: 700;
     letter-spacing: -0.5px;
 }
 
-/* Book card styling */
-.book-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
-.book-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.btn-primary:hover {
+    background-color: #1a252f;
+    border-color: #1a252f;
 }
 
-.book-image-container {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
-.book-image-placeholder {
-    color: #6c757d;
-    font-weight: 500;
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
-/* Wishlist button */
-.wishlist-btn {
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Footer */
+footer {
+    background-color: var(--light-bg);
+    padding: 2rem 0;
+    margin-top: 3rem;
 }
 
-.wishlist-btn i {
-    font-size: 1rem;
+/* Forms */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(44, 62, 80, 0.25);
 }
 
-/* Search bar */
-.search-form .input-group {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
-    border-radius: 50px;
+/* Toast notifications */
+.toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+}
+
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+}
+
+.custom-toast {
+    max-width: 350px;
     overflow: hidden;
+    font-size: 0.875rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
+    border-radius: 0.25rem;
 }
 
-.search-form .form-control {
-    border-radius: 50px;
-    border-right: 1px solid #ced4da;
+.toast-capper {
+    height: 2px;
 }
 
-.search-form .btn {
-    border-radius: 50px;
+/* Arrow indicators for toasts */
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    top: -8px;
+    right: 36px;
+}
+
+.arrow-success {
+    border-bottom: 8px solid #28a745;
+}
+
+.arrow-danger {
+    border-bottom: 8px solid #dc3545;
+}
+
+.arrow-warning {
+    border-bottom: 8px solid #ffc107;
+}
+
+.arrow-info {
+    border-bottom: 8px solid #17a2b8;
 }
 
 /* Newsletter section */
 .newsletter-section {
-    background-color: #f8f9fa;
+    background-color: var(--light-bg);
+    padding: 2rem 0;
+    margin-top: 3rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 767.98px) {
-    .book-card {
-        margin-bottom: 1.5rem;
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
