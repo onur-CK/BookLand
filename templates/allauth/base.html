@@ -68,6 +68,23 @@
         <script src="{% static 'js/toasts/toast_handler.js' %}"></script>
     {% endblock %}
 
+    <!-- Extra JavaScript -->
+    {% block extra_js %}
+    <script>
+        // Wait for document to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update quantity on click
+            const updateButtons = document.querySelectorAll('.update-link');
+            updateButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.closest('.update-form').submit();
+                });
+            });
+        });
+    </script>
+    {% endblock %}
+
     <!-- Footer -->
     <footer class="bg-white border-top py-4 mt-4">
         <div class="container">
