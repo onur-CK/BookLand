@@ -69,7 +69,7 @@
                             </td>
                             <td class="py-3">
                                 <a class="remove-item text-danger" id="remove_{{ item.item_id }}">
-                                    <i class="bi bi-x-lg"></i>
+                                    <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -123,4 +123,45 @@
     {% endif %}
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Wait for document to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove item and reload on click
+        const removeButtons = document.querySelectorAll('.remove-item');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.id.split('remove_')[1];
+                const url = `/cart/remove/${itemId}/`;
+                
+                // Create a form and submit it as POST
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                
+                // Add CSRF token
+                const csrfToken = "{{ csrf_token }}";
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = csrfToken;
+                form.appendChild(csrfInput);
+                
+                document.body.appendChild(form);
+                form.submit();
+            });
+        });
+
+        // Update quantity on click
+        const updateButtons = document.querySelectorAll('.update-link');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.closest('.update-form').submit();
+            });
+        });
+    });
+</script>
 {% endblock %}
