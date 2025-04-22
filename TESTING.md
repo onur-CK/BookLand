@@ -360,3 +360,87 @@ This bug highlights several important considerations for frontend development in
 Resolving this bug ensures that users can easily remove items from their cart with a single click, providing a smoother and more intuitive shopping experience. This functionality is crucial for the cart management workflow and directly impacts the user's ability to customize their order before proceeding to checkout.
 
 This improvement aligns with our goal of creating a frustration-free shopping experience by ensuring that all interactive elements behave as expected, reducing friction in the purchase process.
+
+
+# Missing Subtract Filter Bug in Cart Template
+
+## Bug Description
+During the development of BookLand's shopping cart functionality, we encountered a template syntax error when users viewed their shopping carts. The error prevented the cart page from displaying correctly, showing a server error instead. This occurred specifically when attempting to show users how much more they needed to spend to qualify for free shipping.
+
+## Error Message
+```
+TemplateSyntaxError at /cart/
+Invalid filter: 'subtract'
+113 Add ${{ 40|subtract:total|floatformat:2 }} more to get free shipping!
+```
+
+![Missing Subtract Filter Bug](media/bugs_and_fixes/tag%20library%20bug.png)
+
+## Root Cause
+The root cause was the use of a `subtract` template filter in the cart.html template that doesn't exist in Django's default template filter library. Django provides many built-in template filters like `add`, `default`, and `floatformat`, but it doesn't include a `subtract` filter for performing subtraction operations in templates.
+
+The problematic code was attempting to calculate how much more a customer needed to spend to reach the $40 free shipping threshold:
+
+```html
+{% if total < 40 %}
+<div class="alert alert-info mt-2 text-center small">
+    Add ${{ 40|subtract:total|floatformat:2 }} more to get free shipping!
+</div>
+{% endif %}
+```
+
+## Solution Implemented
+We resolved the issue by creating a custom template filter in the cart app. This approach followed Django's recommended method for extending template functionality.
+
+### Implementation Steps:
+
+1. **Created a templatetags directory** in the cart app to hold custom template filters:
+   ```
+   cart/
+     └── templatetags/
+         ├── __init__.py
+         └── cart_tags.py
+   ```
+
+2. **Implemented the subtract filter** in cart_tags.py:
+   ```python
+   from django import template
+
+   register = template.Library()
+
+   @register.filter
+   def subtract(value, arg):
+       return value - arg
+   ```
+
+3. **Added the template tag loading statement** at the top of cart.html:
+   ```html
+   {% extends "base.html" %}
+   {% load static %}
+   {% load cart_tags %}
+   ```
+
+4. **Kept the original template code** which could now successfully use the subtract filter:
+   ```html
+   {% if total < 40 %}
+   <div class="alert alert-info mt-2 text-center small">
+       Add ${{ 40|subtract:total|floatformat:2 }} more to get free shipping!
+   </div>
+   {% endif %}
+   ```
+
+## Lessons Learned
+This bug highlights several important considerations for Django template development:
+
+1. **Know Your Template Filters**: Django's built-in template filters are powerful but limited. Familiarize yourself with the available options before assuming a particular operation is possible.
+
+2. **Custom Template Filters**: Creating custom template filters is relatively straightforward and provides a clean way to extend Django's template language with application-specific functionality.
+
+3. **Testing All Conditional Paths**: The bug only appeared when viewing a cart with a total less than $40. This emphasizes the importance of testing all conditional paths in templates, especially those involving calculations.
+
+4. **Template Error Messages**: Django's template error messages provide specific line numbers and context, making it easier to locate and fix template-related issues.
+
+## Impact on BookLand
+Resolving this bug ensured that users receive proper feedback about how much more they need to spend to qualify for free shipping, encouraging higher order values while providing a smooth user experience. This feature is aligned with our business goals of increasing average order value while maintaining transparency about shipping costs.
+
+The implementation of the custom template filter also created a reusable component that can be leveraged for other subtraction operations throughout the template system, improving code maintainability and consistency.
