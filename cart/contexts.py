@@ -22,7 +22,12 @@ def cart_contents(request):
             'book': product,
         })
 
-    shipping = 5
+    # Free shipping for orders over $40
+    if total >= 40:
+        shipping = 0
+    else:
+        shipping = 5
+        
     grand_total = total + Decimal(shipping)
 
     context = {
