@@ -10,7 +10,7 @@ from cart.contexts import cart_contents
 
 def checkout(request):
     """
-    Handle the checkout process
+    Handle the checkout process with dynamic shipping cost
     """
     cart = request.session.get('cart', {})
     if not cart:
@@ -29,8 +29,23 @@ def checkout(request):
             'country': request.POST['country'],
         }
         order_form = OrderForm(form_data)
+        
         if order_form.is_valid():
-            order = order_form.save()
+            # Calculate total and shipping
+            current_cart = cart_contents(request)
+            total = current_cart['total']
+            
+            # Determine shipping cost
+            shipping_cost = Decimal('0.00') if total >= 40 else Decimal('5.00')
+            
+            # Save the order with calculated shipping
+            order = order_form.save(commit=False)
+            order.shipping_cost = shipping_cost
+            order.order_total = total
+            order.grand_total = total + shipping_cost
+            order.save()
+
+            # Create order line items
             for item_id, quantity in cart.items():
                 try:
                     book = Book.objects.get(id=item_id)
@@ -53,14 +68,23 @@ def checkout(request):
     else:
         order_form = OrderForm()
 
+    # Calculate cart contents and shipping
     current_cart = cart_contents(request)
+    total = current_cart['total']
+    
+    # Determine shipping cost
+    shipping_cost = Decimal('0.00') if total >= 40 else Decimal('5.00')
+    grand_total = total + shipping_cost
+
     context = {
         'order_form': order_form,
         'cart_items': current_cart['cart_items'],
-        'total': current_cart['total'],
+        'total': total,
         'product_count': current_cart['product_count'],
-        'shipping': current_cart['shipping'],
-        'grand_total': current_cart['grand_total'],
+        'shipping': shipping_cost,
+        'grand_total': grand_total,
+        'free_shipping_threshold': 40,
+        'remaining_for_free_shipping': max(0, Decimal('40.00') - total),
     }
 
     return render(request, 'checkout/checkout.html', context)
