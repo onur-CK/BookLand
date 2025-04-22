@@ -80,7 +80,7 @@ We invite you to browse our carefully curated collection and experience the Book
 
 [Profile management](media/wireframes/Profile%20Management.png)
 
-[Shopping cart page](media/wireframes/Shopping%20Cart%20Page.png)
+[Shopping cart page](media/wireframes/Shopping%20Cart%20Page.png) ! Add explanation about the change of the cart summary position and talk through why without changing the ss !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 [Sign up](media/wireframes/Sign%20up.png)
 
