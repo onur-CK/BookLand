@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
@@ -21,46 +22,7 @@
             <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
                 {% csrf_token %}
                 
-                <div class="mb-3">
-                    <label for="id_full_name" class="form-label">Full Name*</label>
-                    {{ order_form.full_name|as_crispy_field }}
-                </div>
-                
-                <div class="mb-3">
-                    <label for="id_email" class="form-label">Email Address*</label>
-                    {{ order_form.email|as_crispy_field }}
-                </div>
-                
-                <div class="mb-3">
-                    <label for="id_street_address" class="form-label">Street Address*</label>
-                    {{ order_form.street_address|as_crispy_field }}
-                </div>
-                
-                <div class="mb-3">
-                    <label for="id_apartment" class="form-label">Apartment, suite etc. (optional)</label>
-                    {{ order_form.apartment|as_crispy_field }}
-                </div>
-                
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label for="id_city" class="form-label">City*</label>
-                        {{ order_form.city|as_crispy_field }}
-                    </div>
-                    <div class="col-6">
-                        <label for="id_postal_code" class="form-label">Postal Code*</label>
-                        {{ order_form.postal_code|as_crispy_field }}
-                    </div>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="id_country" class="form-label">Country*</label>
-                    {{ order_form.country|as_crispy_field }}
-                </div>
-                
-                <div class="mb-3">
-                    <label for="id_phone_number" class="form-label">Phone Number*</label>
-                    {{ order_form.phone_number|as_crispy_field }}
-                </div>
+                {{ order_form|crispy }}
 
                 <!-- Save Information Checkbox -->
                 {% if user.is_authenticated %}
@@ -70,7 +32,13 @@
                 </div>
                 {% endif %}
 
-                <!-- Payment section check this part later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <!-- Payment section will be added here -->
+                <div id="card-element" class="mb-3">
+                    <!-- Stripe.js will insert the card element here -->
+                </div>
+                
+                <!-- Display form errors -->
+                <div id="card-errors" class="text-danger mb-3" role="alert"></div>
             </form>
         </div>
 
@@ -111,7 +79,7 @@
                     </div>
                     {% if total < 40 %}
                     <div class="alert alert-info mt-2 text-center small">
-                        Add ${{ 40|subtract:total|floatformat:2 }} more to get free shipping!
+                        Add ${{ remaining_for_free_shipping|floatformat:2 }} more to get free shipping!
                     </div>
                     {% endif %}
                 </div>
@@ -122,11 +90,83 @@
                 <a href="{% url 'view_cart' %}" class="btn btn-outline-dark">
                     Back to Cart
                 </a>
-                <button type="submit" form="checkout-form" class="btn btn-dark">
-                    Payment
+                <button type="submit" form="checkout-form" class="btn btn-dark" id="submit-button">
+                    Complete Order
                 </button>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Stripe JS -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripePublicKey = '{{ stripe_public_key }}';
+    var clientSecret = '{{ client_secret }}';
+    var stripe = Stripe(stripePublicKey);
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    // Handle realtime validation errors on the card element
+    card.addEventListener('change', function (event) {
+        var errorDiv = document.getElementById('card-errors');
+        if (event.error) {
+            errorDiv.textContent = event.error.message;
+        } else {
+            errorDiv.textContent = '';
+        }
+    });
+
+    // Handle form submit
+    var form = document.getElementById('checkout-form');
+    form.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+        card.update({ 'disabled': true});
+        document.getElementById('submit-button').disabled = true;
+        
+        // Create payment method and confirm payment intent
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: form.full_name.value,
+                    email: form.email.value,
+                    phone: form.phone_number.value,
+                    address:{
+                        line1: form.street_address.value,
+                        line2: form.apartment.value,
+                        city: form.city.value,
+                        country: form.country.value,
+                        postal_code: form.postal_code.value,
+                    }
+                }
+            },
+            shipping: {
+                name: form.full_name.value,
+                phone: form.phone_number.value,
+                address: {
+                    line1: form.street_address.value,
+                    line2: form.apartment.value,
+                    city: form.city.value,
+                    country: form.country.value,
+                    postal_code: form.postal_code.value,
+                }
+            },
+        }).then(function(result) {
+            if (result.error) {
+                var errorDiv = document.getElementById('card-errors');
+                errorDiv.textContent = result.error.message;
+                card.update({ 'disabled': false});
+                document.getElementById('submit-button').disabled = false;
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
