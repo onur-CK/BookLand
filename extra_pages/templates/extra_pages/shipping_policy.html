@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Shipping Policy</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <h4>Shipping Methods</h4>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5>Standard Shipping</h5>
+                    <p>
+                        <strong>Cost:</strong> $5.00 flat rate<br>
+                        <strong>Delivery Time:</strong> 3-5 business days<br>
+                        <strong>Availability:</strong> All United States locations
+                    </p>
+                </div>
+            </div>
+
+            <h4>Shipping Rates</h4>
+            <p>
+                We have a fixed $5 shipping cost.
+            </p>
+            <h4>International Shipping</h4>
+            <p>
+                We currently offer limited international shipping. International orders may incur additional shipping costs and longer delivery times. Please contact our customer support for specific international shipping details.
+            </p>
+
+            <h4>Order Processing</h4>
+            <p>
+                Orders are typically processed within 1-2 business days. Once shipped, you will receive a confirmation email with tracking information. Please note that shipping times may be affected during peak seasons or unforeseen circumstances.
+            </p>
+
+            <h4>Shipping Restrictions</h4>
+            <ul>
+                <li>We cannot ship to P.O. Boxes</li>
+                <li>Some remote locations may have extended delivery times</li>
+                <li>All book shipments require an adult signature upon delivery</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

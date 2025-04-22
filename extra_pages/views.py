@@ -7,3 +7,7 @@ def contact_us(request):
 def faq(request):
     """Render the Frequently Asked Questions page"""
     return render(request, 'extra_pages/faq.html')
+
+def shipping_policy(request):
+    """Render the Shipping Policy page"""
+    return render(request, 'extra_pages/shipping_policy.html')
