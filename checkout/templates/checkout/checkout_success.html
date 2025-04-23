@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container">
+    <!-- Success header with confirmation message -->
     <div class="row">
         <div class="col-12 text-center mb-4">
             <h1>Thank You!</h1>
@@ -11,9 +12,12 @@
         </div>
     </div>
 
+    <!-- Order details card 
+         Card layout based on Bootstrap card component: https://getbootstrap.com/docs/5.3/components/card/ -->
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             <div class="card mb-4">
+                <!-- Order header with order number -->
                 <div class="card-header bg-light">
                     <div class="row">
                         <div class="col">
@@ -25,6 +29,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <!-- Order date section -->
                     <div class="row mb-3">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 text-muted">Order Date:</p>
@@ -34,6 +39,8 @@
                         </div>
                     </div>
 
+                    <!-- Order line items section - lists all purchased books
+                         Loop pattern based on Django template iteration: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#for -->
                     <div class="row mb-3">
                         <div class="col-12">
                             <h6>Order Details:</h6>
@@ -54,6 +61,7 @@
                         </div>
                     </div>
 
+                    <!-- Shipping address section -->
                     <div class="row mb-3">
                         <div class="col-12">
                             <h6>Delivering To:</h6>
@@ -69,6 +77,7 @@
                         </div>
                     </div>
 
+                    <!-- Contact information section -->
                     <div class="row mb-3">
                         <div class="col-12">
                             <h6>Contact Info:</h6>
@@ -79,6 +88,7 @@
                         </div>
                     </div>
 
+                    <!-- Order total and shipping cost summary -->
                     <div class="row">
                         <div class="col-12">
                             <h6>Billing Summary:</h6>
@@ -104,6 +114,7 @@
                 </div>
             </div>
 
+            <!-- Email confirmation message and continue shopping button -->
             <div class="text-center">
                 <p>
                     A confirmation email has been sent to <strong>{{ order.email }}</strong>.
