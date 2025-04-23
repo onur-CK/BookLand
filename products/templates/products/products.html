@@ -2,12 +2,16 @@
 {% load static %}
 
 {% block extra_css %}
+    <!-- Load product-specific CSS -->
     <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="container">
+    <!-- Page Header Section -->
     <div class="row">
         <div class="col">
+            <!-- Dynamic heading that changes based on category selection -->
             {% if active_category %}
                 <h2 class="text-center">{{ active_category.friendly_name|default:active_category.name }}</h2>
             {% else %}
@@ -16,13 +20,17 @@
         </div>
     </div>
     
-    <!-- Fixed Categories Bar -->
+    <!-- Category Navigation Bar 
+         Source: Bootstrap documentation on badges
+         https://getbootstrap.com/docs/5.0/components/badge/ -->
     <div class="row justify-content-center mb-4">
         <div class="col-12">
             <div class="categories-container d-flex flex-wrap justify-content-center">
+                <!-- All Books (default) category -->
                 <a href="{% url 'products' %}" class="category-badge {% if not active_category %}active{% endif %}">
                     All Books
                 </a>
+                <!-- Fixed category links to avoid duplication issues (see TESTING.md) -->
                 <a href="{% url 'products' %}?category=philosophy" 
                    class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
                     Philosophy
@@ -47,11 +55,14 @@
         </div>
     </div>
 
-    <!-- Search Bar -->
+    <!-- Search Bar 
+         Source: Bootstrap documentation on input groups
+         https://getbootstrap.com/docs/5.0/forms/input-group/ -->
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
+                    <!-- Search input that preserves previous search term -->
                     <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}"{% endif %}>
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi bi-search"></i>
@@ -61,20 +72,25 @@
         </div>
     </div>
 
-    <!-- Filters and Sorting Row -->
+    <!-- Active Filters Display Section -->
     <div class="row mb-4">
         <div class="col-12 col-md-6">
             {% if search_term or active_category %}
                 <div class="active-filters">
+                    <!-- Show active search term if present -->
                     {% if search_term %}
                         <p class="small">Search: <strong>{{ search_term }}</strong></p>
                     {% endif %}
+                    <!-- Show active category if present -->
                     {% if active_category %}
                         <p class="small">Category: <strong>{{ active_category.friendly_name|default:active_category.name }}</strong></p>
                     {% endif %}
                 </div>
             {% endif %}
         </div> 
+        <!-- Sort Selector 
+             Source: Django documentation on query string parameters
+             https://docs.djangoproject.com/en/5.1/ref/request-response/#querydict-objects -->
         <div class="col-12 col-md-6">
             <div class="sort-select-wrapper">
                 <select id="sort-selector" class="form-select form-select-sm">
@@ -89,11 +105,15 @@
         </div>
     </div>
     
-    <!-- Book Cards -->
+    <!-- Product Grid Display
+         Source: Bootstrap documentation on grid system
+         https://getbootstrap.com/docs/5.0/layout/grid/ -->
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for product in products %}
             <div class="col">
+                <!-- Individual Product Card -->
                 <div class="card h-100 book-card border">
+                    <!-- Product image with fallback for missing images -->
                     <a href="{% url 'product_detail' product.id %}">
                         {% if product.image %}
                             <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top p-2">
@@ -105,6 +125,7 @@
                             </div>
                         {% endif %}
                     </a>
+                    <!-- Product information -->
                     <div class="card-body p-2">
                         <h6 class="card-title text-truncate">{{ product.title }}</h6>
                         <p class="card-text text-muted small mb-1">{{ product.author }}</p>
@@ -115,16 +136,20 @@
                             {% endif %}
                         </div>
                     </div>
+                    <!-- Card actions: add to cart, view details, add to wishlist -->
                     <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
+                        <!-- Add to cart form -->
                         <form action="{% url 'add_to_cart' product.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             <button type="submit" class="btn btn-outline-dark btn-sm py-0 px-1">Add to cart</button>
                         </form>
+                        <!-- View details link -->
                         <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
                             <i class="bi bi-info-circle-fill"></i>
                         </a>
+                        <!-- Add to wishlist form -->
                         <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -136,13 +161,16 @@
                 </div>
             </div>
         {% empty %}
+            <!-- Empty state when no products match criteria -->
             <div class="col-12 text-center">
                 <p>No books found.</p>
             </div>
         {% endfor %}
     </div>
     
-    <!-- Pagination (for future implementation) -->
+    <!-- Pagination Section (for future implementation)
+         Source: Django documentation on pagination
+         https://docs.djangoproject.com/en/5.1/topics/pagination/ -->
     {% if products.has_other_pages %}
     <div class="row">
         <div class="col-12 d-flex justify-content-center mt-4">
@@ -171,12 +199,14 @@
     </div>
     {% endif %}
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
+<!-- Sort selector functionality using URLSearchParams
+     Source: MDN Web Docs on URLSearchParams
+     https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams -->
 <script>
-    // Sort selector functionality
+    // Add event listener to sort dropdown to reload page with sort parameters
     document.getElementById('sort-selector').addEventListener('change', function() {
         var selector = this;
         var currentUrl = new URL(window.location);
