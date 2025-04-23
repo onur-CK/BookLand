@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+<!-- Load the profile-specific CSS file -->
 <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
 {% endblock %}
 
@@ -14,7 +15,8 @@
         </div>
     </div>
     <div class="row">
-        <!-- Sidebar Nav -->
+        <!-- Sidebar Navigation with Bootstrap list-group component 
+             Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
          <div class="col-12 col-md-3">
             <div class="list-group">
                 <a href="{% url 'profile' %}" class="list-group-item active">
@@ -25,24 +27,32 @@
                 </a>
                 <a href="{% url 'wishlist' %}" class="list-group-item">
                     Wishlist
+                    <!-- Display wishlist count from context processor defined in profiles/contexts.py -->
                     <span class="badge bg-danger">{{ wishlist_count }}</span>
                 </a>
+                <!-- Button to trigger the delete account modal 
+                     Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
                 <button type="button" class="btn btn-outline-danger fw-semibold" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                 Delete Account
                 </button>
             </div>
          </div>
 
-         <!-- Main Content -->
+         <!-- Main Content Section -->
          <div class="col-12 col-md-9">
+            <!-- Personal Information Card 
+                 Source: https://getbootstrap.com/docs/5.3/components/card/ -->
             <div class="card">
                 <div class="card-header">
                     <h5>Personal Information</h5>
                 </div>
                 <div class="card-body">
+                    <!-- Form to update user information
+                         Django forms: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
                     <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
                         {% csrf_token %}
 
+                        <!-- First name and last name fields from Django User model -->
                         <div class="row mb-3">
                             <div class="col-12 col-md-6">
                                 <label for="id_first_name" class="form-label">First Name*</label>
@@ -54,16 +64,20 @@
                             </div>
                         </div>
                         
+                        <!-- Email field -->
                         <div class="mb-3">
                             <label for="id_email" class="form-label">Email Address*</label>
                             <input type="email" class="form-control" id="id_email" name="email" value="{{ request.user.email }}" required readonly>
                             <small class="text-muted">Email cannot be changed. Contact support if needed.</small>
                         </div>
 
+                        <!-- Date of Birth selector with dropdown menus
+                             Using Django template tags for loops: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#for -->
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="id_date_of_birth" class="form-label">Date of Birth*</label>
                                 <div class="row">
+                                    <!-- Month dropdown -->
                                     <div class="col-4">
                                         <select class="form-select" name="birth_month" id="birth_month">
                                             <option value="" selected disabled>MM</option>
@@ -72,6 +86,7 @@
                                             {% endfor %}
                                         </select>
                                     </div>
+                                    <!-- Day dropdown -->
                                     <div class="col-4">
                                         <select class="form-select" name="birth_day" id="birth_day">
                                             <option value="" selected disabled>DD</option>
@@ -80,6 +95,7 @@
                                             {% endfor %}
                                         </select>
                                     </div>
+                                    <!-- Year dropdown - uses year_range context variable from view -->
                                     <div class="col-4">
                                         <select class="form-select" name="birth_year" id="birth_year">
                                             <option value="" selected disabled>YYYY</option>
@@ -95,11 +111,14 @@
                 </div>
             </div>
 
+            <!-- Default Address Card -->
             <div class="card">
                 <div class="card-header">
                     <h5>Default Address</h5>
                 </div>
                 <div class="card-body">
+                    <!-- Form for updating shipping address
+                         Form fields match UserProfile model fields with default_ prefix -->
                     <form action="{% url 'profile' %}" method="POST" id="address-update-form">
                         {% csrf_token %}
 
@@ -144,7 +163,8 @@
     </div>
 </div>
 
-<!-- Delete Account Modal -->
+<!-- Delete Account Modal 
+     Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -166,8 +186,10 @@
 {% endblock %}
 
 {% block extra_js %}
+<!-- JavaScript to initialize date of birth fields from database value
+     Source: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#date -->
 <script>
-    // Initialize date of birth fields if value exists
+    // Initialize date of birth fields if value exists in the database
     {% if profile.date_of_birth %}
         const dateOfBirth = new Date("{{ profile.date_of_birth|date:'Y-m-d' }}");
         document.getElementById('birth_month').value = dateOfBirth.getMonth() + 1;
