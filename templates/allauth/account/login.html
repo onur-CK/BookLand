@@ -9,9 +9,13 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <h2 class="text-center">Sign In</h2>
+            <!-- Main login form using django-allauth's built-in URL
+                 Source: https://django-allauth.readthedocs.io/en/latest/forms.html -->
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
-
+                
+                <!-- Error handling section - displays form validation errors
+                     Source: https://docs.djangoproject.com/en/5.1/topics/forms/#rendering-form-error-messages -->
                 {% if form.errors %}
                 <div class="alert alert-danger">
                     <strong>Error:</strong> Please correct the errors below.
@@ -21,7 +25,9 @@
                 </div>
                 {% endif %}
 
-                <!-- Email -->
+                <!-- Email input field
+                     Note: django-allauth uses 'login' as the field name for email
+                     Source: https://django-allauth.readthedocs.io/en/latest/forms.html#login-authentication -->
                 <div class="mb-3">
                     <label for="id_login" class="form-label">Email*</label>
                     <input type="email" name="login" id="id_login" class="form-control" placeholder="E-mail address" required>
@@ -34,36 +40,40 @@
                     {% endif %}
                 </div>
 
-                <!-- Password -->
+                <!-- Password input field
+                     Source: https://getbootstrap.com/docs/5.3/forms/form-control/ -->
                 <div class="mb-3">
                     <label for="id_password" class="form-label">Password*</label>
                     <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
                     {% if form.login.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.login.errors %}
-                                {{ errors }}
+                                {{ error }}  
                             {% endfor %}
                         </div>
                     {% endif %}
                 </div>
 
-                <!-- Remember me -->
+                <!-- Remember me checkbox
+                     Source: https://getbootstrap.com/docs/5.3/forms/checks-radios/ -->
                 <div class="mb-3">
                     <input type="checkbox" name="remember" id="id_remember" class="form-check-input">
                     <label for="id_remember" class="form-check-label">Remember Me</label>
                 </div>
 
-                <!-- Django allauth redirection -->
+                <!-- Django allauth redirection handling
+                     Source: https://django-allauth.readthedocs.io/en/latest/advanced.html#redirects./ -->
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                 {% endif %}
 
-                <!-- Submit Button -->
+                <!-- Submit Button 
+                     Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <div class="mb-3">
                     <button type="submit" class="btn btn-dark w-100">Sign In</button>
                 </div>
 
-                <!-- Forgot Password -->
+                <!-- Password reset link -->
                 <div class="text-center">
                     <p>
                         <a href="{% url 'account_reset_password'%}">Forgot Password?</a>
