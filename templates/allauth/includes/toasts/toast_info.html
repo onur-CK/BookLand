@@ -1,11 +1,17 @@
-<div class="toast custom-toast rounded-0 border-top-0" data-autohide="false">
-    <div class="arrow-up arrow-info"></div>
-    <div class="w-100 toast-capper bg-info"></div>
-    <div class="toast-header bg-white text-dark">
-        <strong class="me-auto">Information</strong>
-        <button type="button" class="btn-close text-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+<!-- Information toast notification (blue)
+     Source: https://getbootstrap.com/docs/5.3/components/toasts/#custom-content -->
+     <div class="toast custom-toast rounded-0 border-top-0" data-autohide="false">
+        <!-- Custom arrow indicator for visual appeal -->
+        <div class="arrow-up arrow-info"></div>
+        <!-- Blue top border to visually indicate info type -->
+        <div class="w-100 toast-capper bg-info"></div>
+        <div class="toast-header bg-white text-dark">
+            <strong class="me-auto">Information</strong>
+            <!-- Close button (X) in the top right -->
+            <button type="button" class="btn-close text-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <!-- Toast body containing the actual info message from Django messages framework -->
+        <div class="toast-body bg-white">
+            {{ message }}
+        </div>
     </div>
-    <div class="toast-body bg-white">
-        {{ message }}
-    </div>
-</div>
