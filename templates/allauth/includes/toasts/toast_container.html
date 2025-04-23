@@ -1,17 +1,21 @@
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
-    {% if messages %}
-        {% for message in messages %}
-            {% with message.level as level %}
-                {% if level == 40 %}
-                    {% include 'includes/toasts/toast_error.html' %}
-                {% elif level == 30 %}
-                    {% include 'includes/toasts/toast_warning.html' %}
-                {% elif level == 25 %}
-                    {% include 'includes/toasts/toast_success.html' %}
-                {% else %}
-                    {% include 'includes/toasts/toast_info.html' %}
-                {% endif %}
-            {% endwith %}
-        {% endfor %}
-    {% endif %}
-</div>
+<!-- Toast Container for Bootstrap notifications
+     Source: https://getbootstrap.com/docs/5.3/components/toasts/#placement -->
+     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+        {% if messages %}
+            {% for message in messages %}
+                {% with message.level as level %}
+                    <!-- Decide which toast template to use based on Django message level
+                         Source: https://docs.djangoproject.com/en/5.1/ref/contrib/messages/#message-levels -->
+                    {% if level == 40 %}
+                        {% include 'includes/toasts/toast_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/toasts/toast_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/toasts/toast_success.html' %}
+                    {% else %}
+                        {% include 'includes/toasts/toast_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        {% endif %}
+    </div>
