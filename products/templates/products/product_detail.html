@@ -4,12 +4,15 @@
 {% block content %}
 <div class="container">
     <div class="row mt-5">
-        <!-- Book Image Column -->
+        <!-- Book Image Column - 5/12 of screen width on medium and larger devices -->
+        <!-- Source: Bootstrap grid system documentation - https://getbootstrap.com/docs/5.3/layout/grid/ -->
         <div class="col-md-5 mb-4">
             <div class="card border h-100">
                 {% if product.image %}
+                <!-- Show actual product image if available -->
                 <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top-3">
                 {% else %}
+                <!-- Display placeholder if no image exists -->
                 <div class="card-img-top p-3 text-center">
                     <div class="book-image-container">
                         <span class="book-image-placeholder">Book Image</span>
@@ -19,29 +22,37 @@
             </div>
         </div>
 
-        <!-- Book Info Column -->
+        <!-- Book Information Column - 7/12 of screen width on medium and larger devices -->
         <div class="col-md-7">
+            <!-- Book title and author -->
             <h1 class="book-title">{{ product.title }}</h1>
             <p class="text-muted">{{ product.author }}</p>
 
+            <!-- Rating display with badge - https://getbootstrap.com/docs/5.3/components/badge/ -->
             {% if product.rating %}
             <div class="rating mb-2">
                 <span class="badge">{{ product.rating }} / 5</span>
             </div>
             {% endif %}
 
+            <!-- Book price -->
             <h4 class="price">${{ product.price }}</h4>
 
+            <!-- Add to cart form - Uses Django POST to send data to cart view -->
+            <!-- Source: Django forms - https://docs.djangoproject.com/en/5.1/topics/forms/ -->
             <div class="d-flex mt-3 mb-4">
                 <form class="add-to-cart-form me-2" method="POST" action="{% url 'add_to_cart' product.id %}">
                     {% csrf_token %}
+                    <!-- Hidden field to redirect back to this page after adding to cart -->
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     <div class="input-group">
+                        <!-- Quantity selector - limited between 1 and 99 -->
                         <input type="number" name="quantity" value="1" min="1" max="99" class="form-control qty_input">
                         <button type="submit" class="btn btn-dark">Add to cart</button>
                     </div>
                 </form>
 
+                <!-- Add to wishlist form - Separate form for wishlist functionality -->
                 <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -51,28 +62,36 @@
                 </form>
             </div>
 
+            <!-- Book description section -->
             <h4 class="mt-4">Book Description</h4>
             <div class="book-description">
                 {{ product.description }}
             </div>
 
+            <!-- Book metadata (category, availability, inventory) -->
             <div class="mt-3">
                 {% if product.category %}
                 <p><strong>Category:</strong>
+                    <!-- Link to filtered products page for this category -->
+                    <!-- Source: Django URL template tags - https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#url -->
                     <a href="{% url 'products' %}?category={{ product.category.name }}">
                         {{ product.category.friendly_name|default:product.category.name }}
                     </a>
                 </p>
                 {% endif %}
+                <!-- Availability status - shows "In Stock" or "Out of Stock" -->
                 <p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}
                 </p>
+                <!-- Only show inventory count if there are items available -->
                 {% if product.inventory %}
                 <p><strong>Inventory:</strong> {{ product.inventory }} available</p>
                 {% endif %}
             </div>
         </div>
     </div>
-    <!-- Related Books Section -->
+    
+    <!-- Related Books Section - Shows books from the same category -->
+    <!-- Source: Bootstrap card layout - https://getbootstrap.com/docs/5.3/components/card/ -->
     {% if related_books %}
     <div class="row">
         <div class="col-12">
@@ -80,10 +99,12 @@
             <hr>
         </div>
 
+        <!-- Responsive grid layout that shows 2-4 cards per row depending on screen size -->
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
             {% for book in related_books %}
             <div class="col">
                 <div class="card h-100 book-card border">
+                    <!-- Book image with link to product detail page -->
                     <a href="{% url 'product_detail' book.id %}">
                         {% if book.image %}
                             <img src="{{ book.image.url }}" alt="{{ book.title }}" class="card-img-top p-2">
@@ -95,6 +116,7 @@
                             </div>
                         {% endif %}
                     </a>
+                    <!-- Book information - title, author, price and rating -->
                     <div class="card-body p-2">
                         <h6 class="card-title text-truncate">{{ book.title }}</h6>
                         <p class="card-text text-muted small mb-1">{{ book.author }}</p>
@@ -105,6 +127,8 @@
                             {% endif %}
                         </div>
                     </div>
+                    <!-- Card footer with action buttons -->
+                    <!-- Source: Bootstrap flexbox utilities - https://getbootstrap.com/docs/5.3/utilities/flex/ -->
                     <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
                         <button class="btn btn-outline-dark btn-sm py-0 px-1">Add to cart</button>
                         <a href="{% url 'product_detail' book.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
