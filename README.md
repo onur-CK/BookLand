@@ -4,6 +4,8 @@ BookLand is an online bookstore platform designed to provide book enthusiasts wi
 
 As avid readers ourselves, we understand the joy of finding the perfect book. BookLand was born out of our passion for literature and our desire to create a digital space where readers can easily browse, purchase, and manage their book orders without the hassle often associated with online shopping.
 
+![BookLand Logo/Hero Image](path-to-image)
+
 ## Our Target Customer
 
 BookLand caters to:
