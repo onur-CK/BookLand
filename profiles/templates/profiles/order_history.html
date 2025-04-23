@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block extra_css %}
+    <!-- Links the base CSS file for styling consistency across pages
+         Source: https://docs.djangoproject.com/en/5.1/howto/static-files/ -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
@@ -9,6 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                <!-- Page title -->
                 <h1>Order History</h1>
                 <hr>
             </div>
@@ -16,11 +19,13 @@
 
         <div class="row">
             <div class="12 col-md-3">    
-                <!-- Sidebar Nav -->
+                <!-- Sidebar Navigation - Uses Bootstrap list group component for profile section navigation
+                     Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
                 <div class="list-group">
                     <a href="{% url 'profile' %}" class="list-group-item">
                         Personal Information
                     </a>
+                    <!-- active class highlights the current page in the navigation -->
                     <a href="{% url 'order_history' %}" class="list-group-item active">
                     Order History
                     </a>
@@ -28,19 +33,24 @@
                     Wishlist
                     </a>
                 </div>
+                <!-- Return to products button - provides easy navigation back to shopping
+                     Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <a href="{% url 'products' %}" class="btn btn-outline-dark w-100 mt-5">
                     Continue Shopping
                 </a>
             </div>
 
-            <!-- Main Content -->
+            <!-- Main Content Area - Uses Bootstrap card component to display order information
+                 Source: https://getbootstrap.com/docs/5.3/components/card/ -->
             <div class="col-12 col-md-9">
                 <div class="card">
                     <div class="card-header">
                         <h5>Your Orders</h5>
                     </div>
                     <div class="card-body">
-                        
+                        <!-- This empty section will be populated with order history data from the user profile
+                             The view will pass the order history through the context variable 'profile'
+                             Source for handling order history: https://docs.djangoproject.com/en/5.1/topics/db/queries/ -->
                     </div>
                 </div>
             </div>
