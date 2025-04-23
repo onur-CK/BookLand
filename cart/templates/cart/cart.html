@@ -3,11 +3,13 @@
 {% load cart_tags %}
 
 {% block extra_css %}
+    <!-- Load cart-specific styles -->
     <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
+    <!-- Cart header section -->
     <div class="row">
         <div class="col-12">
             <h1>Your Shopping Cart</h1>
@@ -17,8 +19,10 @@
 
     {% if cart_items %}
     <div class="row">
+        <!-- Cart items table - left column on large screens -->
+        <!-- Source: https://getbootstrap.com/docs/5.3/content/tables/ -->
         <div class="col-12 col-lg-8">
-            <!-- Cart items table -->
+            <!-- Responsive table with horizontal scrolling on small screens -->
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <thead>
@@ -33,35 +37,44 @@
                     <tbody>
                         {% for item in cart_items %}
                         <tr>
+                            <!-- Product image and info cell -->
                             <td class="py-3">
                                 <div class="d-flex align-items-center">
+                                    <!-- Book image or placeholder -->
                                     <div class="cart-item-image me-3">
                                         {% if item.book.image %}
                                         <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}"
                                             class="img-fluid" style="max-width: 100px;">
                                         {% else %}
+                                        <!-- Placeholder for books without images -->
                                         <div class="book-image-container" style="width: 80px; height: 120px;">
                                             <span class="book-image-placeholder">Book Image</span>
                                         </div>
                                         {% endif %}
                                     </div>
+                                    <!-- Book title and author -->
                                     <div>
                                         <h6 class="mb-1">{{ item.book.title }}</h6>
                                         <p class="small text-muted mb-0">{{ item.book.author }}</p>
                                     </div>
                                 </div>
                             </td>
+                            <!-- Unit price cell -->
                             <td class="py-3">
                                 <p class="my-0 mt-5">${{ item.book.price }}</p>
                             </td>
+                            <!-- Quantity adjustment form -->
+                            <!-- Source: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
                             <td class="py-3">
                                 <form class="form update-form" method="POST"
                                     action="{% url 'adjust_cart' item.item_id %}">
                                     {% csrf_token %}
                                     <div class="input-group input-group-sm">
+                                        <!-- Quantity input with constraints -->
                                         <input title="Click on the arrows to increase or decrease the quantity." class="form-control form-control-sm qty_input mt-5" type="number"
                                             name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                        <!-- Update button with refresh icon -->
                                         <button class="btn btn-sm btn-outline-dark update-link mt-5"
                                             data-item_id="{{ item.item_id }}">
                                             <i class="bi bi-arrow-repeat" title="Click to save the changes."></i>
@@ -69,9 +82,12 @@
                                     </div>
                                 </form>
                             </td>
+                            <!-- Item total price cell -->
                             <td class="py-3">
                                 <p class="my-0 mt-5">${{ item.book.price | floatformat:2 }}</p>
                             </td>
+                            <!-- Remove item button -->
+                            <!-- Form for POST action -->
                             <td class="py-3">
                                 <form method="POST" action="{% url 'remove_from_cart' item.item_id %}">
                                     {% csrf_token %}
@@ -87,13 +103,15 @@
             </div>
         </div>
 
-        <!-- Cart Summary -->
+        <!-- Cart Summary - right column on large screens -->
+        <!-- Source: https://getbootstrap.com/docs/5.3/components/card/ -->
         <div class="col-12 col-lg-4">
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">Cart Summary</h5>
                 </div>
                 <div class="card-body">
+                    <!-- Shipping cost display -->
                     <div class="d-flex justify-content-between mb-2">
                         <p class="mb-0">Shipping:</p>
                         <p class="mb-0">
@@ -105,10 +123,14 @@
                         </p>
                     </div>
                     <hr>
+                    <!-- Order total display -->
                     <div class="d-flex justify-content-between fw-bold">
                         <p class="mb-0">Total:</p>
                         <p class="mb-0">${{ grand_total | floatformat:2 }}</p>
                     </div>
+                    <!-- Free shipping promotion message -->
+                    <!-- Custom template filter used to calculate remaining amount for free shipping -->
+                    <!-- Source: https://docs.djangoproject.com/en/5.1/howto/custom-template-tags/ -->
                     {% if total < 40 %}
                     <div class="alert alert-info mt-2 text-center small">
                         Add ${{ 40|subtract:total|floatformat:2 }} more to get free shipping!
@@ -116,10 +138,13 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- Action buttons -->
             <div class="mt-3">
-                <a href="{% url 'checkout' %}" class="btn btn-dark w-100 mb-2">
+                <!-- Checkout button (disabled in this version) -->
+                <button class="btn btn-dark w-100 mb-2" disabled title="">
                     Proceed to Checkout
-                </a>
+                </button>
+                <!-- Continue shopping button -->
                 <a href="{% url 'products' %}" class="btn btn-outline-dark w-100">
                     Continue Shopping
                 </a>
@@ -127,6 +152,7 @@
         </div>
     </div>
     {% else %}
+    <!-- Empty cart display -->
     <div class="row">
         <div class="col-12 text-center py-5">
             <i class="bi bi-cart-x fs-1 text-muted mb-3"></i>
