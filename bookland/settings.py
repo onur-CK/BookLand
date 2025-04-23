@@ -14,6 +14,8 @@ from pathlib import Path
 import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# This establishes the root directory of the project
+# Source: https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -101,6 +103,7 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# django-allauth configuration options
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
