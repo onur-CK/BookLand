@@ -1,14 +1,18 @@
-<script>
-    // Initialize all toasts
-    window.addEventListener('DOMContentLoaded', (event) => {
-        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-        var toastList = toastElList.map(function (toastEl) {
-            var toast = new bootstrap.Toast(toastEl, {
-                autohide: true,
-                delay: 5000
+<!-- JavaScript to initialize and display Bootstrap toasts
+     Source: https://getbootstrap.com/docs/5.3/components/toasts/#javascript -->
+     <script>
+        // Initialize all toasts when the DOM is fully loaded
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Find all toast elements in the document
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            // Initialize each toast with Bootstrap's Toast constructor
+            var toastList = toastElList.map(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, {
+                    autohide: true,  // Set toasts to automatically hide
+                    delay: 5000      // Hide after 5 seconds (5000ms)
+                });
+                toast.show();        // Show the toast immediately
+                return toast;
             });
-            toast.show();
-            return toast;
         });
-    });
-</script>
+    </script>
