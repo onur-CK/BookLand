@@ -3,20 +3,36 @@
 
 {% block content %}
 
-
-<!-- Main Content -->
+<!-- Main Homepage Content Container
+     Uses Bootstrap's container class for responsive padding and margins
+     Source: https://getbootstrap.com/docs/5.3/layout/containers/ -->
 <div class="container py-2">
-    <!-- Hero Image/Content Section -->
+    <!-- Hero Section - Main headline and introduction
+         Uses text-center for alignment and my-3 for vertical spacing 
+         Source: https://getbootstrap.com/docs/5.3/utilities/text/ -->
     <div class="text-center my-3">
         <h2>Discover Your Next Book</h2>
+        <!-- Lead paragraph with larger text for visual hierarchy
+             Source: https://getbootstrap.com/docs/5.3/content/typography/#lead -->
         <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
 
-        <!-- Search Bar -->
+        <!-- Search Bar Section
+             Uses Bootstrap's grid system with responsive breakpoints
+             Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
         <div class="row justify-content-center mt-3 mb-5">
+            <!-- Column sizing changes based on viewport width
+                 Source: https://getbootstrap.com/docs/5.3/layout/columns/ -->
             <div class="col-md-8 col-lg-6">
+                <!-- Search form using GET method to submit search queries
+                     Will redirect to search results when functionality is implemented
+                     Source: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
                 <form method="GET" action="#" class="search-form">
+                    <!-- Input group combines form controls and buttons
+                         Source: https://getbootstrap.com/docs/5.3/forms/input-group/ -->
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" placeholder="Search by title, author...">
+                        <!-- Search button with Bootstrap icon
+                             Source: https://icons.getbootstrap.com/icons/search/ -->
                         <button class="btn btn-outline-secondary" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
@@ -26,6 +42,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}
