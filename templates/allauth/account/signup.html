@@ -1,20 +1,33 @@
 {% extends "base.html" %}
+<!-- Extends the base template that contains the structure shared across all pages -->
 
 {% load i18n %}
+<!-- Loads Django's internationalization library for multi-language support
+     Source: https://docs.djangoproject.com/en/5.1/topics/i18n/translation/ -->
 
 {% block head_title %}{% trans "Sign Up" %}{% endblock %}
+<!-- Sets the page title in the browser tab to "Sign Up" with translation support -->
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
+        <!-- Centers the signup form using Bootstrap's grid system
+             Source: https://getbootstrap.com/docs/5.3/layout/grid/#horizontal-alignment -->
         <div class="col-12 col-md-8 col-lg-6">
+            <!-- Responsive column that's full width on mobile, 8/12 on medium screens, 6/12 on large screens -->
             <h2 class="text-center">Create Account</h2>
             
             <form action="{% url 'account_signup' %}" class="signup" id="signup_form" method="post">
+                <!-- Form submits to the signup URL provided by django-allauth -->
                 {% csrf_token %}
+                <!-- Adds CSRF protection token to prevent cross-site request forgery attacks
+                     Source: https://docs.djangoproject.com/en/5.1/ref/csrf/ -->
 
                 {% if form.errors %}
+                <!-- Error handling section: displays validation errors to the user -->
                 <div class="alert alert-danger">
+                    <!-- Bootstrap alert component for error messages
+                         Source: https://getbootstrap.com/docs/5.3/components/alerts/ -->
                     <strong>Error:</strong> Please correct the errors below.
                     {% for field in form %}
                         {% for error in field.errors %}
@@ -27,13 +40,18 @@
                 </div>
                 {% endif %}
 
-                <!-- Email Address -->
+                <!-- Email Address Field -->
                 <div class="mb-3">
+                    <!-- ^ Bootstrap spacing utility for bottom margin 
+                    Source: https://getbootstrap.com/docs/5.3/utilities/spacing/ -->
                     <label for="id_email" class="form-label">Email Adress*</label>
                     <input type="email" name="email" id="id_email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" 
                            placeholder="Email address" autocomplete="email" required value="{{ form.email.value|default:'' }}">
+                    <!-- Applies 'is-invalid' class if there are validation errors for email
+                         Source: https://getbootstrap.com/docs/5.3/forms/validation/ -->
                     {% if form.email.errors %}
                         <div class="invalid-feedback">
+                            <!-- Bootstrap component that shows when field has errors -->
                             {% for error in form.email.errors %}
                                 {{ error }}
                             {% endfor %}
@@ -41,7 +59,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Password -->
+                <!-- Password Field -->
                 <div class="mb-3">
                     <label for="id_password1" class="form-label">Password*</label>
                     <input type="password" name="password1" id="id_password1" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" required placeholder="Password">
@@ -54,10 +72,11 @@
                     {% endif %}    
                 </div>
 
-                <!-- Confirm Password -->
+                <!-- Confirm Password Field -->
                 <div class="mb-3">
                     <label for="id_password2" class="form-label">Password*</label>
                     <input type="password" name="password2" id="id_password2" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" required placeholder="Password (again)">
+                    <!-- Second password field for confirmation as per django-allauth requirements -->
                     {% if form.password2.errors %}
                         <div class="invalid-feedback">
                             {% for error in form.password2.errors %}
@@ -67,23 +86,27 @@
                     {% endif %}    
                 </div>
 
-                <!-- Terms and Conditions -->
+                <!-- Terms and Conditions Checkbox -->
                 <div class="mb-3">
                     <input type="checkbox" name="terms" id="id_terms" class="form-check-input" required>
+                    <!-- Bootstrap form check component for checkbox styling
+                         Source: https://getbootstrap.com/docs/5.3/forms/checks-radios/ -->
                     <label for="id_terms" class="form-check-label">I agree to the Terms and Conditions*</label>
                 </div>
 
-                <!-- Django allauth redirection -->
+                <!-- Redirect Field - Used by django-allauth for post-signup redirection -->
                  {% if redirect_field_value %}
                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                 {% endif %}
 
-                <!-- Submit button -->
+                <!-- Submit Button -->
                 <div class="mb-3">
                     <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+                    <!-- Bootstrap button that spans full width (w-100)
+                         Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 </div>
 
-                <!-- Login Link -->
+                <!-- Login Link - For users who already have an account -->
                 <p class="text-center">
                     Already have an account?<a href="{{ login_url }}">
                         <br>Login
