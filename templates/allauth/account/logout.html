@@ -1,28 +1,57 @@
 {% extends "base.html"%}
+<!-- Extends the base template to maintain consistent site layout and styling
+     Source: https://docs.djangoproject.com/en/5.1/ref/templates/language/#template-inheritance -->
 
 {% load i18n %}
+<!-- Loads internationalization tags for multi-language support
+     Source: https://docs.djangoproject.com/en/5.1/topics/i18n/translation/ -->
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
+<!-- Sets the page title that appears in the browser tab
+     The trans tag makes the text translatable if multiple languages are supported -->
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
+        <!-- Centers the card horizontally using Bootstrap grid system
+             Source: https://getbootstrap.com/docs/5.3/layout/grid/#horizontal-alignment -->
         <div class="col-12 col-md-8 col-lg-6">
+            <!-- Responsive column sizing that adapts to different screen sizes
+                 - Full width on mobile (col-12)
+                 - 8/12 width on medium screens (col-md-8)
+                 - 6/12 width on large screens (col-lg-6)
+                 Source: https://getbootstrap.com/docs/5.3/layout/breakpoints/ -->
             <div class="card">
+                <!-- Bootstrap card component for structured content display
+                     Source: 1- https://getbootstrap.com/docs/5.3/components/card/ 
+                     2- https://getbootstrap.com/docs/5.3/layout/columns/#how-they-work -->
                 <h2 class="text-center">Sign Out</h2>
+                <!-- Centered heading for the card -->
 
                 <p class="text-center">Are you sure you want to sign out?</p>
+                <!-- Confirmation message for the user -->
 
                 <form method="POST" action="{% url 'account_logout' %}">
+                    <!-- POST form that submits to the django-allauth logout view
+                         Source: https://docs.allauth.org/en/latest/account/configuration.html -->
                     {% csrf_token %}
+                    <!-- Django Cross Site Request Forgery protection token
+                         Required for all POST forms for security
+                         Source: https://docs.djangoproject.com/en/5.1/ref/csrf/ -->
 
                     {% if redirect_field_value %}
+                    <!-- Conditional check for redirect URL parameter, 
+                         provided by django-allauth to return user to previous page after logout -->
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                     {% endif %}
 
                     <div class="d-grid">
+                        <!-- Bootstrap d-grid creates a full-width button layout
+                             Source: https://getbootstrap.com/docs/5.3/utilities/display/#display-property -->
                         <button type="submit" class="btn btn-dark">Sign Out</button>
+                        <!-- Primary action button that submits the form -->
                         <a href="{% url 'home' %}" class="btn btn-outline-dark">Cancel</a>
+                        <!-- Secondary action that returns to homepage without logging out -->
                     </div>
                 </form>
             </div>
