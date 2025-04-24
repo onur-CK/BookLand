@@ -33,6 +33,10 @@ class Order(models.Model):
     shipping_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=5)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    
+    # Stripe payment intent ID
+    # Source: https://stripe.com/docs/payments/payment-intents
+    stripe_pid = models.CharField(max_length=254, null=True, blank=True, default='')
 
     def _generate_order_number(self):
         """
