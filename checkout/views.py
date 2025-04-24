@@ -153,3 +153,51 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Handle successful checkouts and display order confirmation
+    """
+    # Get the order from the database
+    order = get_object_or_404(Order, order_number=order_number)
+    
+    # Save user profile information if user checked "save-info" box
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+        
+        # Save the user's info
+        if 'save_info' in request.session:
+            # Get the shipping info from order
+            shipping_data = {
+                'default_phone_number': order.phone_number,
+                'default_street_address': order.street_address,
+                'default_apartment': order.apartment,
+                'default_city': order.city,
+                'default_postal_code': order.postal_code,
+                'default_country': order.country,
+            }
+            # Update the user profile with shipping info
+            user_profile_form = UserProfileForm(shipping_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
+    
+    # Display success message
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+    
+    # Clear the shopping cart from the session
+    if 'cart' in request.session:
+        del request.session['cart']
+    
+    # Render checkout success template with order info
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+    }
+    
+    return render(request, template, context)
