@@ -70,9 +70,17 @@ def checkout(request):
             order = order_form.save(commit=False)
             
             # Get payment intent ID from client secret if it exists
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
-            
+            client_secret = request.POST.get('client_secret')
+            if client_secret and '_secret' in client_secret:
+                pid = client_secret.split('_secret')[0]
+                order.stripe_pid = pid
+            else:
+                # Handle missing or malformed client_secret gracefully
+                # Still create the order but log the issue
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(f"Order created without Stripe PID: client_secret was {client_secret}")
+
             # Calculate total and shipping
             current_cart = cart_contents(request)
             total = current_cart['total']
