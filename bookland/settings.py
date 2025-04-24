@@ -183,3 +183,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Stripe Settings
+# Source: https://stripe.com/docs/keys
+STRIPE_CURRENCY = 'usd'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')  # Get from environment variables
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')  # Get from environment variables
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')    # Get from environment variables
+
+# Email Settings for order confirmations
+# Source: https://docs.djangoproject.com/en/5.1/topics/email/
+if 'DEVELOPMENT' in os.environ:
+    # Use console backend for development
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'cpkonr@gmail.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'  # Change this to email provider later !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
