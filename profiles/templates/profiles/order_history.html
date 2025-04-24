@@ -48,9 +48,32 @@
                         <h5>Your Orders</h5>
                     </div>
                     <div class="card-body">
-                        <!-- This empty section will be populated with order history data from the user profile
-                             The view will pass the order history through the context variable 'profile'
-                             Source for handling order history: https://docs.djangoproject.com/en/5.1/topics/db/queries/ -->
+                        {% if orders %}
+                            {% for order in orders %}
+                                <div class="order-item mb-3">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <p class="mb-0"><strong>Order Number:</strong> {{ order.order_number }}</p>
+                                            <p class="mb-0"><strong>Date:</strong> {{ order.date }}</p>
+                                        </div>
+                                        <div class="col-12 col-md-6 text-md-end">
+                                            <p class="mb-0"><strong>Total:</strong> ${{ order.grand_total }}</p>
+                                            <a href="{% url 'checkout_success' order.order_number %}" class="btn btn-sm btn-outline-dark mt-2">
+                                                View Order Details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if not forloop.last %}
+                                    <hr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-center">You haven't placed any orders yet.</p>
+                            <div class="text-center mt-3">
+                                <a href="{% url 'products' %}" class="btn btn-dark">Start Shopping</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

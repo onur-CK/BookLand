@@ -35,10 +35,14 @@ def profile(request):
 def order_history(request):
     """ Display the user's order history """
     profile = get_object_or_404(UserProfile, user=request.user)
+    
+    # Get all orders for this user, ordered by date (newest first)
+    orders = profile.orders.all().order_by('-date')
 
     template = 'profiles/order_history.html'
     context = {
         'profile': profile,
+        'orders': orders,  # Pass orders to the template
     }
 
     return render(request, template, context)
