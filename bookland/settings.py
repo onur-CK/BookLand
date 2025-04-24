@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'extra_pages',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

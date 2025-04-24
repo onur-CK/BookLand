@@ -4,11 +4,13 @@ from products.models import Book
 from profiles.models import UserProfile
 import uuid  # For generating unique order numbers
 from django.db.models import Sum
+from django_countries.fields import CountryField
+
 
 class Order(models.Model):
     # Unique order identifier - not editable by users
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    
+    country = CountryField(blank_label='Country *', null=False, blank=False)
     # Optional link to user profile - can be null for non-logged-in users
     # Source: https://docs.djangoproject.com/en/5.1/ref/models/fields/#django.db.models.ForeignKey
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, 

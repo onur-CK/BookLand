@@ -154,7 +154,6 @@ def checkout(request):
 
     return render(request, 'checkout/checkout.html', context)
 
-
 def checkout_success(request, order_number):
     """
     Handle successful checkouts and display order confirmation
