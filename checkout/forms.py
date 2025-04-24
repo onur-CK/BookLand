@@ -35,12 +35,6 @@ class OrderForm(forms.ModelForm):
         # Set autofocus on the first field
         self.fields['full_name'].widget.attrs['autofocus'] = True
         
-        # Add country widget styling
-        self.fields['country'].widget = CountrySelectWidget(attrs={
-            'class': 'form-select',
-            'placeholder': 'Country *'
-        })
-        
         # Loop through other fields for styling
         for field in self.fields:
             if field != 'country':  # Skip country as it has custom widget

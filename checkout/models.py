@@ -26,7 +26,7 @@ class Order(models.Model):
     apartment = models.CharField(max_length=80, null=True, blank=True)  # Optional field
     city = models.CharField(max_length=40, null=False, blank=False)
     postal_code = models.CharField(max_length=20, null=False, blank=False)
-    country = models.CharField(max_length=40, null=False, blank=False)
+    
     
     # Order timestamps
     date = models.DateTimeField(auto_now_add=True)  # Set when order is created
