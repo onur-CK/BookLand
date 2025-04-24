@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'checkout/css/email.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">BookLand</div>
+            <p>Thank you for your order!</p>
+        </div>
+        
+        <p>Hello {{ order.full_name }},</p>
+        
+        <p>This email is to confirm that your order has been received and is being processed.</p>
+        
+        <div class="order-info">
+            <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+            <p><strong>Order Date:</strong> {{ order.date }}</p>
+        </div>
+        
+        <h3>Order Details:</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.lineitems.all %}
+                <tr>
+                    <td>{{ item.book.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.lineitem_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>Shipping:</strong></td>
+                    <td>{% if order.shipping_cost == 0 %}Free{% else %}${{ order.shipping_cost }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Total:</strong></td>
+                    <td>${{ order.grand_total }}</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <h3>Shipping Information:</h3>
+        <p>
+            {{ order.full_name }}<br>
+            {{ order.street_address }}<br>
+            {% if order.apartment %}{{ order.apartment }}<br>{% endif %}
+            {{ order.city }}, {{ order.postal_code }}<br>
+            {{ order.country }}
+        </p>
+        
+        <p>If you have any questions about your order, please contact us at {{ contact_email }}.</p>
+        
+        <div class="footer">
+            <p>BookLand - Your favorite online bookstore</p>
+            <p>© {% now "Y" %} BookLand. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
