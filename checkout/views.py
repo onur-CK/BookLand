@@ -208,3 +208,20 @@ def checkout_success(request, order_number):
     }
     
     return render(request, template, context)
+
+
+def order_detail(request, order_number):
+    """
+    Display details of a specific order
+    """
+    # Get the order from the database
+    order = get_object_or_404(Order, order_number=order_number)
+    
+    # Render checkout success template with order info, but without messages
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+        'from_profile': True,  # Flag to indicate we're coming from profile page
+    }
+    
+    return render(request, template, context)

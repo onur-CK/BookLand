@@ -5,9 +5,14 @@
 <div class="container">
     <!-- Success header with confirmation message -->
     <div class="row">
-        <div class="col-12 text-center mb-4">
-            <h1>Thank You!</h1>
-            <p class="lead">Your order has been successfully processed.</p>
+        <div class="col-12">
+            <!-- Show title based on context -->
+            {% if from_profile %}
+                <h1>Order Details</h1>
+            {% else %}
+                <h1>Thank You!</h1>
+                <p class="lead">Your order has been successfully processed.</p>
+            {% endif %}
             <hr>
         </div>
     </div>
@@ -116,12 +121,18 @@
 
             <!-- Email confirmation message and continue shopping button -->
             <div class="text-center">
-                <p>
-                    A confirmation email has been sent to <strong>{{ order.email }}</strong>.
-                </p>
-                <a href="{% url 'products' %}" class="btn btn-dark">
-                    Continue Shopping
-                </a>
+                {% if from_profile %}
+                    <a href="{% url 'order_history' %}" class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left me-1"></i> Back to Order History
+                    </a>
+                {% else %}
+                    <p>
+                        A confirmation email has been sent to <strong>{{ order.email }}</strong>.
+                    </p>
+                    <a href="{% url 'products' %}" class="btn btn-dark">
+                        Continue Shopping
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

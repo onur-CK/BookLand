@@ -41,7 +41,7 @@ def profile(request):
             'profile_form': profile_form,
             'user_form': user_form,
             'profile': profile,
-            'on_profile_page': on_profile_page,  # Add this to context
+            'on_profile_page': on_profile_page,  
         }
     )
 
@@ -111,3 +111,4 @@ def remove_from_wishlist(request, book_id):
 
     # Redirection to wishlist page
     return redirect('wishlist')
+    

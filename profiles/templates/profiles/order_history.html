@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block extra_css %}
-    <!-- Links the base CSS file for styling consistency across pages
-         Source: https://docs.djangoproject.com/en/5.1/howto/static-files/ -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
@@ -11,7 +9,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <!-- Page title -->
                 <h1>Order History</h1>
                 <hr>
             </div>
@@ -19,13 +16,11 @@
 
         <div class="row">
             <div class="12 col-md-3">    
-                <!-- Sidebar Navigation - Uses Bootstrap list group component for profile section navigation
-                     Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
+                <!-- Sidebar Navigation -->
                 <div class="list-group">
                     <a href="{% url 'profile' %}" class="list-group-item">
                         Personal Information
                     </a>
-                    <!-- active class highlights the current page in the navigation -->
                     <a href="{% url 'order_history' %}" class="list-group-item active">
                     Order History
                     </a>
@@ -33,15 +28,12 @@
                     Wishlist
                     </a>
                 </div>
-                <!-- Return to products button - provides easy navigation back to shopping
-                     Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <a href="{% url 'products' %}" class="btn btn-outline-dark w-100 mt-5">
                     Continue Shopping
                 </a>
             </div>
 
-            <!-- Main Content Area - Uses Bootstrap card component to display order information
-                 Source: https://getbootstrap.com/docs/5.3/components/card/ -->
+            <!-- Main Content Area -->
             <div class="col-12 col-md-9">
                 <div class="card">
                     <div class="card-header">
@@ -49,30 +41,42 @@
                     </div>
                     <div class="card-body">
                         {% if orders %}
-                            {% for order in orders %}
-                                <div class="order-item mb-3">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6">
-                                            <p class="mb-0"><strong>Order Number:</strong> {{ order.order_number }}</p>
-                                            <p class="mb-0"><strong>Date:</strong> {{ order.date }}</p>
-                                        </div>
-                                        <div class="col-12 col-md-6 text-md-end">
-                                            <p class="mb-0"><strong>Total:</strong> ${{ order.grand_total }}</p>
-                                            <a href="{% url 'checkout_success' order.order_number %}" class="btn btn-sm btn-outline-dark mt-2">
-                                                View Order Details
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% if not forloop.last %}
-                                    <hr>
-                                {% endif %}
-                            {% endfor %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Number</th>
+                                            <th>Date</th>
+                                            <th>Items</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{% url 'order_detail' order.order_number %}"
+                                                       title="{{ order.order_number }}">
+                                                        {{ order.order_number|truncatechars:6 }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ order.date }}</td>
+                                                <td>{{ order.lineitems.count }}</td>
+                                                <td>${{ order.grand_total }}</td>
+                                                <td>
+                                                    <a href="{% url 'order_detail' order.order_number %}" 
+                                                       class="btn btn-sm btn-outline-dark">
+                                                        View Details
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         {% else %}
                             <p class="text-center">You haven't placed any orders yet.</p>
-                            <div class="text-center mt-3">
-                                <a href="{% url 'products' %}" class="btn btn-dark">Start Shopping</a>
-                            </div>
                         {% endif %}
                     </div>
                 </div>

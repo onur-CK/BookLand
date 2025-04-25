@@ -16,4 +16,6 @@ urlpatterns = [
     
     # Stripe webhook endpoint - receives and processes webhook events from Stripe
     path('wh/', webhook, name='webhook'),
+
+    path('order_detail/<order_number>', views.order_detail, name='order_detail'),
 ]
