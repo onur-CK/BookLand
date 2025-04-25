@@ -7,40 +7,59 @@
      Uses Bootstrap's container class for responsive padding and margins
      Source: https://getbootstrap.com/docs/5.3/layout/containers/ -->
 <div class="container py-2">
-    <!-- Hero Section - Main headline and introduction
+     <!-- Hero Section - Main headline and introduction
          Uses text-center for alignment and my-3 for vertical spacing 
          Source: https://getbootstrap.com/docs/5.3/utilities/text/ -->
-    <div class="text-center my-3">
-        <h2>Discover Your Next Book</h2>
-        <!-- Lead paragraph with larger text for visual hierarchy
+     <div class="text-center my-3">
+          <h2>Discover Your Next Book</h2>
+          <!-- Lead paragraph with larger text for visual hierarchy
              Source: https://getbootstrap.com/docs/5.3/content/typography/#lead -->
-        <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
+          <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
 
-        <!-- Search Bar Section
+          <!-- Search Bar Section
              Uses Bootstrap's grid system with responsive breakpoints
              Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
-        <div class="row justify-content-center mt-3 mb-5">
-            <!-- Column sizing changes based on viewport width
+          <div class="row justify-content-center mt-3 mb-5">
+               <!-- Column sizing changes based on viewport width
                  Source: https://getbootstrap.com/docs/5.3/layout/columns/ -->
-            <div class="col-md-8 col-lg-6">
-                <!-- Search form using GET method to submit search queries
+               <div class="col-md-8 col-lg-6">
+                    <!-- Search form using GET method to submit search queries
                      Will redirect to search results when functionality is implemented
                      Source: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
-                <form method="GET" action="#" class="search-form">
-                    <!-- Input group combines form controls and buttons
+                    <form method="GET" action="#" class="search-form">
+                         <!-- Input group combines form controls and buttons
                          Source: https://getbootstrap.com/docs/5.3/forms/input-group/ -->
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Search by title, author...">
-                        <!-- Search button with Bootstrap icon
+                         <div class="input-group">
+                              <input type="text" class="form-control" name="q" placeholder="Search by title, author...">
+                              <!-- Search button with Bootstrap icon
                              Source: https://icons.getbootstrap.com/icons/search/ -->
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
+                              <button class="btn btn-outline-secondary" type="submit">
+                                   <i class="bi bi-search"></i>
+                              </button>
+                         </div>
+                    </form>
+               </div>
+
+               <!-- Promotional Banner -->
+               <div class="row justify-content-center mb-5">
+                    <div class="col-md-10 col-lg-8 mt-3">
+                              <div class="alert alert-info text-center py-3 mt-3">
+                              <i class="bi bi-truck me-2"></i>
+                              <strong>FREE SHIPPING</strong> on all orders over $40!
+                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
+               </div>   
+               
+               <!-- Call to Action Button -->
+               <div class="row justify-content-center mb-3">
+                    <div class="col-12 text-center">
+                    <a href="{% url 'products' %}" class="btn btn-dark btn-lg px-4 py-2">
+                         Start Shopping Now
+                    </a>
+                    </div>
+               </div>
+          </div>
+     </div>
 </div>
 
 {% endblock %}
