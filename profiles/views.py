@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, WishlistItem
-from .forms import UserProfileForm
+from .forms import UserProfileForm, UserForm
 from products.models import Book
 
 @login_required
@@ -11,23 +11,37 @@ def profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+        # Handle the profile form data
+        profile_form = UserProfileForm(request.POST, instance=profile)
+        
+        # Handle the user form data (first_name, last_name)
+        user_form = UserForm(request.POST, instance=request.user)
+        
+        # Save both forms if valid
+        if profile_form.is_valid() and user_form.is_valid():
+            user_form.save()  # Save User model data (first_name, last_name)
+            profile_form.save()  # Save UserProfile model data
             messages.success(request, 'Profile updated successfully')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            messages.error(request, 'Update failed. Please ensure all fields are valid.')
     else:
-        form = UserProfileForm(instance=profile)
+        # For GET requests, instantiate the forms with current data
+        profile_form = UserProfileForm(instance=profile)
+        user_form = UserForm(instance=request.user)
 
-    # Using the app and template format explicitly after the Template Path Resolution Bug(explained in TESTING.md)
+    # Set a context variable to indicate we're on the profile page
+    # This helps the toast template know not to show cart information
+    on_profile_page = True
+    
+    # Using the app and template format explicitly after the Template Path Resolution Bug
     return render(
         request,
         'profiles/profile.html',  # Explicit path format
         {
-            'form': form,
+            'profile_form': profile_form,
+            'user_form': user_form,
             'profile': profile,
-            'year_range': range(1940, 2006), # Context variable
+            'on_profile_page': on_profile_page,  # Add this to context
         }
     )
 
@@ -97,6 +111,3 @@ def remove_from_wishlist(request, book_id):
 
     # Redirection to wishlist page
     return redirect('wishlist')
-
-
-

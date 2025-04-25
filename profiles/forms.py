@@ -11,15 +11,14 @@ class CustomSignupForm(SignupForm):
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         return user
-    
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        exclude = ('user',)
+        exclude = ('user', 'date_of_birth')
         fields = ['default_phone_number', 'default_street_address',
                   'default_apartment', 'default_city',
-                  'default_postal_code', 'default_country', 'date_of_birth']
+                  'default_postal_code', 'default_country']
         
     def __init__(self, *args, **kwargs):
         """
@@ -34,7 +33,6 @@ class UserProfileForm(forms.ModelForm):
             'default_city': 'City',
             'default_postal_code': 'Postal Code',
             'default_country': 'Country',
-            'date_of_birth': 'Date of Birty (YYYY-MM-DD)',
         }
 
         for field in self.fields:
@@ -46,7 +44,6 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder    
             self.fields[field].label = False
             self.fields[field].widget.attrs['class'] = "form-control"
-                
 
 class UserForm(forms.ModelForm):
     class Meta:

@@ -18,8 +18,8 @@
                     <hr class="mt-1 mb-3">
                 </div>
             </div>
-            <!-- Special handling for cart notifications -->
-            {% if grand_total and not on_profile_page %}
+            <!-- Special handling for cart notifications - only show for cart-related actions -->
+            {% if grand_total and not on_profile_page and product_count %}
                 <p class="logo-font bg-white text-dark py-1">Your Cart ({{ product_count }})</p>
                 <div class="cart-notification-wrapper">
                     {% for item in cart_items %}
