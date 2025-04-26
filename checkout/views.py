@@ -11,6 +11,7 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from cart.contexts import cart_contents
 from decimal import Decimal
+from checkout.webhook_handler import StripeWH_Handler
 
 @require_POST
 def cache_checkout_data(request):
@@ -192,6 +193,10 @@ def checkout_success(request, order_number):
             if user_profile_form.is_valid():
                 user_profile_form.save()
     
+    # Send confirmation email
+    handler = StripeWH_Handler(request)
+    handler._send_confirmation_email(order)
+
     # Display success message
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
