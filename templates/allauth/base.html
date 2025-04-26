@@ -52,14 +52,15 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <!-- Simple newsletter signup form
                      Bootstrap form documentation: https://getbootstrap.com/docs/5.3/forms/overview/ -->
-                <form class="d-flex justify-content-center">
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Enter your email">
-                            <button type="submit" class="btn btn-dark">Subscribe</button>
+                     <form action="{% url 'newsletter_subscribe' %}" method="POST" class="d-flex justify-content-center">
+                        {% csrf_token %}
+                        <div class="w-100">
+                            <div class="input-group">
+                                <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                                <button type="submit" class="btn btn-dark">Subscribe</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
             </div>
         </div>
     </div>

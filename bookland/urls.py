@@ -30,6 +30,8 @@ urlpatterns = [
     
     # Extra pages like FAQ, contact, policies, etc.
     path('extra_pages/', include('extra_pages.urls')),
+
+    path('newsletter/', include('newsletter.urls')),
     
 # Static/media file serving for development (not for production use)
 # Source: https://docs.djangoproject.com/en/5.1/howto/static-files/
