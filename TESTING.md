@@ -554,3 +554,98 @@ Resolving this bug was critical for the core functionality of our e-commerce pla
 4. Order data is still properly recorded even in edge cases where Stripe integration has issues
 
 These improvements directly support our business goals by reducing cart abandonment and creating a smoother purchasing experience, which is essential for customer satisfaction and retention.
+
+
+# Order History Detail View Success Message Bug
+
+## Bug Description
+When users viewed the details of a previous order from their order history page, they were incorrectly presented with a success message stating "Order successfully processed! Your order number is [order number]. A confirmation email will be sent to [email]." This message is appropriate for newly completed orders but confusing when viewing order history, as it gives the impression that a new order was just placed.
+
+## Error Manifestation
+The bug manifested when a user clicked the "View Order Details" button on their order history page. Instead of simply displaying the order information, the system showed a success toast notification and included text suggesting the order was just completed and that a confirmation email would be sent.
+
+![Order History Detail Message Bug](media/bugs_and_fixes/view%20orders%20message%20bug.png)
+
+## Root Cause
+The root cause was that both the initial order confirmation (post-checkout) and the order history detail view were using the same view function and template:
+
+1. **Shared View Function**: The `checkout_success` view function was being used both for redirecting users after a successful checkout and for displaying previous order details from the order history.
+
+2. **Unconditional Success Messaging**: The view function always displayed success messages regardless of the context in which it was called.
+
+3. **Navigation Context**: The template had no way to distinguish between a newly completed order and viewing a historical order.
+
+This happened because when initially building the checkout flow, the `checkout_success` view was designed solely for the post-payment confirmation. Later, when the order history feature was implemented, the same view was reused without adapting it for the different context.
+
+## Solution Implemented
+We resolved the issue by creating a dedicated view function for viewing order details from the order history:
+
+1. **Created a New View Function**:
+```python
+def order_detail(request, order_number):
+    """
+    Display details of a specific order
+    """
+    # Get the order from the database
+    order = get_object_or_404(Order, order_number=order_number)
+    
+    # Render checkout success template with order info, but without messages
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+        'from_profile': True,  # Flag to indicate we're coming from profile page
+    }
+    
+    return render(request, template, context)
+```
+
+2. **Added New URL Pattern**:
+```python
+path('order_detail/<order_number>', views.order_detail, name='order_detail'),
+```
+
+3. **Updated the Order History Template**:
+```html
+<a href="{% url 'order_detail' order.order_number %}" 
+   class="btn btn-sm btn-outline-dark">
+    View Details
+</a>
+```
+
+4. **Modified the Order Detail Template** to conditionally display content based on context:
+```html
+{% if from_profile %}
+    <h1>Order Details</h1>
+{% else %}
+    <h1>Thank You!</h1>
+    <p class="lead">Your order has been successfully processed.</p>
+{% endif %}
+
+<!-- Bottom of the template -->
+{% if from_profile %}
+    <a href="{% url 'order_history' %}" class="btn btn-outline-dark">
+        <i class="bi bi-arrow-left me-1"></i> Back to Order History
+    </a>
+{% else %}
+    <p>
+        A confirmation email has been sent to <strong>{{ order.email }}</strong>.
+    </p>
+    <a href="{% url 'products' %}" class="btn btn-dark">
+        Continue Shopping
+    </a>
+{% endif %}
+```
+
+## Lessons Learned
+This bug highlights several important considerations for web application development:
+
+1. **Context-Aware Views**: Views should be designed with awareness of the different contexts in which they might be used. In this case, viewing a past order is a different user journey than completing a new order.
+
+2. **Context Flags**: Using flags in the context dictionary (such as `from_profile`) allows templates to render appropriately based on how they're being accessed.
+
+3. **Message Appropriateness**: Success messages should only be displayed when an action has been successfully completed, not when simply viewing information.
+
+4. **User Journey Consideration**: It's important to consider the full user journey when reusing components. What makes sense in one part of the journey may be confusing in another.
+
+## Impact on BookLand
+Resolving this bug improved the user experience by providing clear context-appropriate messaging when viewing order details. Users now receive confirmation messages only when actually placing orders, eliminating confusion about whether viewing past orders might have triggered new purchases. This change contributes to our goal of providing a transparent and trustworthy shopping experience.
