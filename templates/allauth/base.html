@@ -13,7 +13,7 @@
     {% endblock %}
 
     <!-- Page title with fallback to site name -->
-    <title>{% block head_title %}BookLand{% endblock %}</title>
+    <title>{% block head_title %}BookLand | Your Curated Online Bookstore for Philosophy, Psychology & More{% endblock %}</title>
     
     <!-- Core CSS - Bootstrap, icons, and base styles 
          Source: https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
@@ -30,6 +30,10 @@
     <!-- Page-specific additional CSS -->
     {% block extra_css %}
     {% endblock %}
+
+    <meta name="description" content="BookLand - Your one-stop online bookstore offering a curated collection of books across philosophy, psychology, literature, biographies, and self-development. Shop with free shipping on orders over $40, easy returns, and secure checkout. Join our community of book lovers today!">
+
+    <meta name="keywords" content="online bookstore, buy books online, philosophy books, psychology books, literature classics, biographies, self-development books, free shipping, book delivery, book shopping, wishlist, book categories, book catalog, secure checkout, book recommendations, reading community, bookshop, affordable books, book orders, book collection, new releases, popular authors, book lovers, reading materials, gift books, bestsellers">
 </head>
 
 <body>
@@ -52,14 +56,14 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <!-- Simple newsletter signup form
                      Bootstrap form documentation: https://getbootstrap.com/docs/5.3/forms/overview/ -->
-                     <form action="{% url 'newsletter_subscribe' %}" method="POST" class="d-flex justify-content-center">
-                        {% csrf_token %}
+                     <form id="newsletter-form" class="d-flex justify-content-center">
                         <div class="w-100">
                             <div class="input-group">
-                                <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
-                                <button type="submit" class="btn btn-dark">Subscribe</button>
+                                <input type="email" id="newsletter-email" class="form-control" placeholder="Enter your email">
+                                <button type="submit" id="newsletter-submit" class="btn btn-dark">Subscribe</button>
                             </div>
                         </div>
+                        <div id="newsletter-message" class="mt-2 text-center"></div>
                     </form>
             </div>
         </div>
