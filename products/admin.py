@@ -25,10 +25,10 @@ class BookAdmin(admin.ModelAdmin):
             'fields': ('title', 'author', 'description', 'category', 'image')
         }),
         ('Pricing & Inventory', {
-            'fields': ('price', 'inventory', 'available')
+            'fields': ('price', 'inventory', 'available', 'rating')
         }),
         ('Metadata', {
-            'fields': ('rating', 'created_at', 'updated_at'),
+            'fields': ('created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
     )
