@@ -1,0 +1,61 @@
+/* Styles specific to product detail page */
+
+/* Product image container - no border, centered content */
+.product-image-container {
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+/* Actual book image - limit size to 60% */
+.card-img-top-3 {
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Book image placeholder container */
+.book-image-container {
+    width: 60% !important;
+    margin: 0 auto;
+}
+
+/* Make sure the border is removed from the card */
+.border {
+    border: none !important;
+}
+
+/* Center image column vertically */
+.col-md-5.mb-4 {
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure the card takes up the full height for vertical centering */
+.col-md-5.mb-4 .card {
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-image-container {
+        max-width: 80%;
+    }
+    
+    .card-img-top-3 {
+        max-width: 80%;
+    }
+}
