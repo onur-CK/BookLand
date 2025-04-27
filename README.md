@@ -6,6 +6,47 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
 
 ![BookLand Logo/Hero Image](path-to-image)
 
+[View live site here](link-to-deployed-site)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [User Experience (UX)](#user-experience-ux)
+  - [Project Goals](#project-goals)
+  - [Target Audience](#target-audience)
+  - [User Stories](#user-stories)
+- [Business Model](#business-model)
+  - [Marketing Strategy](#marketing-strategy)
+- [Design](#design)
+  - [Color Scheme](#color-scheme)
+  - [Typography](#typography)
+  - [Imagery](#imagery)
+  - [Wireframes](#wireframes)
+- [Database Schema](#database-schema)
+  - [Entity Relationship Diagram](#entity-relationship-diagram)
+  - [Database Models](#database-models)
+- [Features](#features)
+  - [Navigation](#navigation)
+  - [Homepage](#homepage)
+  - [Books Catalog](#books-catalog)
+  - [Product Details](#product-details)
+  - [Shopping Cart](#shopping-cart)
+  - [Checkout](#checkout)
+  - [User Profile](#user-profile)
+  - [Admin Features](#admin-features)
+  - [Future Features](#future-features)
+- [Search Engine Optimization (SEO)](#search-engine-optimization-seo)
+- [Web Marketing](#web-marketing)
+- [Technologies Used](#technologies-used)
+  - [Languages](#languages)
+  - [Frameworks and Libraries](#frameworks-and-libraries)
+  - [Tools and Platforms](#tools-and-platforms)
+- [Credits](#credits)
+  - [Code](#code)
+  - [Content](#content)
+  - [Media](#media)
+  - [Acknowledgements](#acknowledgements)
+
 ## Our Target Customer
 
 BookLand caters to:

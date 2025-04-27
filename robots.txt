@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /admin/
+Disallow: /accounts/
+Allow: /
+
+Sitemap: https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/sitemap.xml
