@@ -197,8 +197,6 @@ if 'USE_AWS' in os.environ:
         'CacheControl': 'max-age=94608000',
     }
     
-    AWS_LOCATION = 'static'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'bookland-e-commerce'
     AWS_S3_REGION_NAME = 'eu-central-1'
