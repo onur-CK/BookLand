@@ -55,6 +55,48 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Book preview feature
 - Advanced analytics
 
+# BookLand Project - Epics and User Stories
+
+## Epic Template
+
+# Epic: [Epic Name]
+
+## Description
+[Brief description of the epic and its overall purpose]
+
+## Business Value
+[Explanation of why this epic is important to the business/project]
+
+## Acceptance Criteria
+- [Criteria 1]
+- [Criteria 2]
+- [Criteria n]
+
+## Related User Stories
+- [Link to user story 1]
+- [Link to user story 2]
+- [Link to user story n]
+
+## User Story Template
+
+# User Story: [User Story Title]
+
+## Story
+As a [user type], I want [action] so that [benefit].
+
+## Acceptance Criteria
+- [ ] [Criteria 1]
+- [ ] [Criteria 2]
+- [ ] [Criteria n]
+
+## Tasks
+- [ ] [Task 1]
+- [ ] [Task 2]
+- [ ] [Task n]
+
+## Priority
+[Must Have/Should Have/Could Have]
+
 ## Epics
 
 ### Epic 1: User Management
@@ -69,6 +111,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Password reset functionality works as expected 
 - Email notifications for account actions are sent appropriately
 
+**Related User Stories**:
+- User Registration
+- User Login
+- User Profile Management
+- Password Reset
+- Social Login Integration
+
 ### Epic 2: Book Catalog
 
 **Description**: This epic encompasses all functionality related to displaying, organizing, and managing the book inventory.
@@ -81,6 +130,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Search and filter functionality works efficiently
 - Sorting options are available and functional
 - Admin can manage the book catalog effectively
+
+**Related User Stories**:
+- Book Browsing by Category
+- Book Search and Filtering
+- Book Detail View
+- Book Sorting
+- Admin Book Management
 
 ### Epic 3: Shopping Experience
 
@@ -95,6 +151,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Order confirmation is provided
 - Order history is accessible to users
 
+**Related User Stories**:
+- Shopping Cart Management
+- Wishlist Functionality
+- Checkout Process
+- Payment Processing
+- Order History and Tracking
+
 ### Epic 4: Admin Features
 
 **Description**: This epic encompasses all administrative functionality needed to manage the BookLand platform.
@@ -106,6 +169,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Orders can be processed and tracked
 - Customer information can be accessed and managed
 - Categories can be created and modified
+
+**Related User Stories**:
+- Admin Dashboard
+- Inventory Management
+- Order Management
+- Customer Management
+- Category Management
 
 ### Epic 5: Technical Infrastructure
 
@@ -119,6 +189,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Security measures protect user data
 - Deployment pipeline is efficient
 - Error handling provides good user experience
+
+**Related User Stories**:
+- Responsive Design Implementation
+- Performance Optimization
+- Security Implementation
+- Deployment Setup
+- Error Handling and Logging
 
 ## User Stories
 
@@ -135,6 +212,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] User receives welcome email upon successful registration
 - [x] Duplicate email addresses are not allowed
 
+**Tasks**:
+- [x] Design registration form
+- [x] Implement form validation
+- [X] Create user model in database
+- [X] Set up email verification system
+- [X] Design and implement welcome email template
+
 **Priority**: Must Have
 
 #### User Story 2: User Login
@@ -144,12 +228,36 @@ We used the MoSCoW method to prioritize features throughout the development proc
 **Acceptance Criteria**:
 - [x] Login form accepts email/username and password
 - [x] "Remember me" functionality is available
-- [x] Password reset option is accessible from login form
 - [x] User session persists appropriately
+
+**Tasks**:
+- [x] Design login form
+- [x] Implement authentication logic
+- [x] Create session management
 
 **Priority**: Must Have
 
-#### User Story 3: User Profile Management
+#### User Story 3: Social Login Integration
+
+**Story**: As a new visitor, I want to register and login using my social media accounts so that I can quickly access the platform without creating a new password.
+
+**Acceptance Criteria**:
+- [ ] Google login option is available
+- [ ] Facebook login option is available
+- [ ] First-time social login creates a new account
+- [ ] Subsequent social logins authenticate to existing account
+- [ ] User profile displays which social accounts are connected
+
+**Tasks**:
+- [ ] Set up OAuth integration for Google
+- [ ] Set up OAuth integration for Facebook
+- [ ] Implement account linking logic
+- [ ] Design social login buttons and flow
+- [ ] Test social login across devices
+
+**Priority**: Should Have
+
+#### User Story 4: User Profile Management
 
 **Story**: As a logged-in user, I want to view and edit my profile information so that my account reflects my current details.
 
@@ -159,6 +267,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] User can add/edit shipping addresses
 - [x] Changes are saved immediately upon submission
 - [x] User receives confirmation of significant changes
+
+**Tasks**:
+- [x] Design profile management interface
+- [x] Implement forms for editing different profile sections
+- [x] Create validation for profile changes
+- [x] Set up email notifications for sensitive changes
+- [x] Implement address management functionality
 
 **Priority**: Should Have
 
@@ -174,6 +289,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Books display cover image, title, author, and price
 - [x] Category view is paginated appropriately
 
+**Tasks**:
+- [X] Design category display on homepage
+- [X] Implement category filtering logic
+- [X] Create book card components
+- [X] Set up pagination for category views
+- [X] Test with large number of books
+
 **Priority**: Must Have
 
 #### User Story 6: Book Search and Filtering
@@ -186,6 +308,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Search results can be filtered by category
 - [x] No results state provides helpful suggestions
 
+**Tasks**
+- [X] Design search component
+- [X] Implement search algorithm
+- [X] Create filter components
+- [X] Set up dynamic results updating
+- [X] Design and implement empty state
+
 **Priority**: Must Have
 
 #### User Story 7: Book Detail View
@@ -197,6 +326,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Inventory status is clearly displayed
 - [x] "Add to cart" and "Add to wishlist" buttons are prominent
 - [x] Related books in same category are suggested
+
+**Tasks**:
+- [X] Design book detail page layout
+- [X] Implement book detail data retrieval
+- [X] Create action buttons functionality
+- [X] Set up related books algorithm
+- [X] Design review display component
 
 **Priority**: Must Have
 
@@ -214,6 +350,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Items can be removed from cart
 - [x] Cart contents persist between sessions
 
+**Tasks**:
+- [X] Design cart icon and counter
+- [X] Implement "Add to cart" functionality
+- [X] Create cart management page
+- [X] Set up session-based cart storage
+- [X] Implement cart total calculation
+
 **Priority**: Must Have
 
 #### User Story 9: Wishlist Functionality
@@ -226,6 +369,13 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Items can be moved from wishlist to cart
 - [x] Items can be removed from wishlist
 - [x] Wishlist is saved to user account
+
+## Tasks
+- [X] Design wishlist icon and interface
+- [X] Implement "Add to wishlist" functionality
+- [X] Create wishlist management page
+- [X] Set up database storage for wishlist items
+- [X] Implement wishlist-to-cart functionality
 
 **Priority**: Should Have
 
@@ -241,6 +391,11 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Confirmation is required before final submission
 - [x] Order confirmation is displayed after successful checkout
 
+**Tasks**
+- [X] Implement address collection form
+- [X] Create order summary component
+- [X] Implement order confirmation page
+
 **Priority**: Must Have
 
 #### User Story 11: Payment Processing
@@ -254,231 +409,193 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - [x] Successful payments trigger order processing
 - [x] Checkout confirmation is emailed after successful payment
 
+**Tasks**:
+- [X] Set up Stripe integration
+- [X] Implement payment form with validation
+- [X] Create error handling for payment issues
+- [X] Set up order processing workflow
+- [X] Design and implement email receipt template
+
 **Priority**: Must Have
 
-#### User Story 12
+#### User Story 12: Order History and Tracking
 
-# User Story: Order History and Tracking
+**Story**: As a customer, I want to view my order history and track current orders so that I can monitor my purchases.
 
-## Story
-As a customer, I want to view my order history and track current orders so that I can monitor my purchases.
+**Acceptance Criteria**:
+- [x] Order history page shows all past orders
+- [x] Order detail view displays complete order information
+- [x] Order details can be accessed from profile
+- [x] Order confirmation is sent via email
 
-## Acceptance Criteria
-- [ ] Order history page shows all past orders
-- [ ] Order detail view displays complete order information
-- [ ] Current order status is clearly indicated
-- [ ] Order history is sortable by date and status
-- [ ] Order details can be printed or saved as PDF
+**Tasks**:
+- [X] Design order history page
+- [X] Implement order detail view
 
-## Tasks
-- [ ] Design order history page
-- [ ] Implement order detail view
-- [ ] Create order status indicators
-- [ ] Set up sorting functionality
-- [ ] Implement print/save functionality
-
-## Priority
-Should Have
+**Priority**: Should Have
 
 ### Admin Features User Stories
 
-#### User Story 13
+#### User Story 13: Admin Dashboard
 
-# User Story: Admin Dashboard
+**Story**: As an admin, I want a comprehensive dashboard so that I can quickly access key metrics and platform management functions.
 
-## Story
-As an admin, I want a comprehensive dashboard so that I can quickly access key metrics and platform management functions.
+**Acceptance Criteria**:
+- [x] Dashboard displays sales summary
+- [x] Recent orders are listed with status
+- [x] Low inventory items are highlighted
+- [x] Quick access links to management functions are provided
+- [x] Customer data can be easily accessed
 
-## Acceptance Criteria
-- [ ] Dashboard displays sales summary
-- [ ] Recent orders are listed with status
-- [ ] Low inventory items are highlighted
-- [ ] Quick access links to management functions are provided
-- [ ] Key metrics are visualized with charts
-
-## Tasks
-- [ ] Design dashboard layout
+**Tasks**
+- [X] Design dashboard layout
 - [ ] Implement sales summary component
 - [ ] Create recent orders list
 - [ ] Set up inventory alerts
-- [ ] Implement data visualization components
+- [X] Implement data visualization components
 
-## Priority
-Should Have
+**Priority**: Should Have
 
-#### User Story 14
+#### User Story 14: Admin Book Management
 
-# User Story: Admin Book Management
+**Story**: As an admin, I want to add, edit, and remove books from the catalog so that I can keep the inventory up to date.
 
-## Story
-As an admin, I want to add, edit, and remove books from the catalog so that I can keep the inventory up to date.
+**Acceptance Criteria**:
+- [x] Book creation form includes all necessary fields
+- [x] Existing books can be edited
+- [x] Books can be marked as out of stock
+- [x] Books can be permanently removed
+- [x] Book categories can be managed
 
-## Acceptance Criteria
-- [ ] Book creation form includes all necessary fields
-- [ ] Existing books can be edited
-- [ ] Books can be marked as out of stock
-- [ ] Books can be permanently removed
-- [ ] Bulk actions are available for efficiency
+**Tasks**
+- [X] Design book management interface
+- [X] Implement book CRUD operations
+- [X] Create image upload functionality
+- [X] Set up inventory status management
+- [X] Implement bulk action functionality
 
-## Tasks
-- [ ] Design book management interface
-- [ ] Implement book CRUD operations
-- [ ] Create image upload functionality
-- [ ] Set up inventory status management
-- [ ] Implement bulk action functionality
+**Priority**: Must Have
 
-## Priority
-Must Have
+#### User Story 15: Order Management
 
-#### User Story 15
+**Story**: As an admin, I want to view and process orders so that I can fulfill customer purchases efficiently.
 
-# User Story: Order Management
-
-## Story
-As an admin, I want to view and process orders so that I can fulfill customer purchases efficiently.
-
-## Acceptance Criteria
-- [ ] Orders list shows all orders with status and date
-- [ ] Orders can be filtered by status, date, and customer
-- [ ] Order details show complete purchase information
-- [ ] Order status can be updated (processing, shipped, delivered)
-- [ ] Order cancellation is supported with reason tracking
+**Acceptance Criteria**:
+- [x] Orders list shows all orders with status and date
+- [x] Orders can be filtered by status, date, and customer
+- [x] Order details show complete purchase information
+- [x] Order status can be updated (processing, shipped, delivered)
+- [x] Customer contact information is accessible
 
 ## Tasks
-- [ ] Design order list and detail views
-- [ ] Implement order filtering functionality
-- [ ] Create order status management
-- [ ] Set up order detail display
-- [ ] Implement order cancellation process
+- [X] Design order list and detail views
+- [X] Implement order filtering functionality
+- [X] Create order status management
+- [X] Set up order detail display
+- [X] Implement order cancellation process
 
-## Priority
-Must Have
+**Priority**: Must Have
 
-#### User Story 16
+#### User Story 16: Category Management
 
-# User Story: Category Management
+**Story**: As an admin, I want to create and manage book categories so that books are properly organized for customers.
 
-## Story
-As an admin, I want to create and manage book categories so that books are properly organized for customers.
+**Acceptance Criteria**:
+- [x] Categories can be created with name and description
+- [x] Categories can be edited and deleted
+- [x] Books can be assigned to categories
+- [x] Categories appear in navigation
+- [x] Books can be filtered by category
 
-## Acceptance Criteria
-- [ ] Categories can be created with name and description
-- [ ] Categories can be edited and deleted
-- [ ] Categories can be arranged in hierarchical structure
-- [ ] Books can be assigned to multiple categories
-- [ ] Category visibility can be toggled
+**Tasks**:
+- [x] Design category management interface
+- [x] Implement category CRUD operations
+- [x] Create hierarchical category structure
+- [x] Set up book-category relationship management
+- [x] Implement category visibility controls
 
-## Tasks
-- [ ] Design category management interface
-- [ ] Implement category CRUD operations
-- [ ] Create hierarchical category structure
-- [ ] Set up book-category relationship management
-- [ ] Implement category visibility controls
-
-## Priority
-Must Have
+**Priority**: Must Have
 
 ### Technical Infrastructure User Stories
 
-#### User Story 17
+#### User Story 17: Responsive Design Implementation
 
-# User Story: Responsive Design Implementation
+**Story**: As a user, I want the website to work well on all my devices so that I can shop for books anywhere.
 
-## Story
-As a user, I want the website to work well on all my devices so that I can shop for books anywhere.
+**Acceptance Criteria**:
+- [x] All pages function correctly on desktop, tablet, and mobile
+- [x] Navigation adapts to screen size
+- [x] Images and text are properly sized across devices
+- [x] Touch targets are appropriately sized on mobile
+- [x] Checkout process works seamlessly on all devices
 
-## Acceptance Criteria
-- [ ] All pages function correctly on desktop, tablet, and mobile
-- [ ] Navigation adapts to screen size
-- [ ] Images and text are properly sized across devices
-- [ ] Touch targets are appropriately sized on mobile
-- [ ] Performance is consistent across device types
+**Tasks**:
+- [X] Implement responsive grid system
+- [X] Create mobile navigation component
+- [X] Set up responsive image handling
+- [X] Test and optimize touch targets
+- [X] Perform cross-device testing
 
-## Tasks
-- [ ] Implement responsive grid system
-- [ ] Create mobile navigation component
-- [ ] Set up responsive image handling
-- [ ] Test and optimize touch targets
-- [ ] Perform cross-device testing
+**Priority**: Must Have
 
-## Priority
-Must Have
+#### User Story 18: Performance Optimization
 
-#### User Story 18
+**Story**: As a user, I want the website to load quickly and respond promptly so that I can shop efficiently.
 
-# User Story: Performance Optimization
-
-## Story
-As a user, I want the website to load quickly and respond promptly so that I can shop efficiently.
-
-## Acceptance Criteria
-- [ ] Pages load in under 3 seconds
-- [ ] Images are optimized for quick loading
-- [ ] Database queries are efficient
-- [ ] Client-side rendering is optimized
-- [ ] Core Web Vitals meet Google's requirements
+**Acceptance Criteria**:
+- [x] Pages load in under 3 seconds
+- [x] Images are optimized for quick loading
+- [x] Database queries are efficient
+- [x] Cart operations perform without delay
+- [x] Search results appear promptly
 
 ## Tasks
-- [ ] Implement image optimization
-- [ ] Set up database query monitoring
-- [ ] Optimize database indexes
-- [ ] Implement lazy loading for images
-- [ ] Set up performance monitoring
+- [X] Implement image optimization
+- [X] Set up database query monitoring
+- [X] Optimize database indexes
+- [X] Implement lazy loading for images
+- [X] Set up performance monitoring
 
-## Priority
-Should Have
+**Priority**: Should Have
 
-#### User Story 19
+#### User Story 19: Deployment Setup
 
-# User Story: Deployment Setup
+**Story**: As a developer, I want a streamlined deployment process so that I can efficiently update the live site.
 
-## Story
-As a developer, I want a streamlined deployment process so that I can efficiently update the live site.
-
-## Acceptance Criteria
-- [ ] Heroku deployment is configured
-- [ ] PostgreSQL database is properly set up
-- [ ] Static files are served via Whitenoise
-- [ ] Environment variables are properly managed
-- [ ] Deployment can be triggered from version control
+**Acceptance Criteria**:
+- [x] Heroku deployment is configured
+- [x] PostgreSQL database is properly set up
+- [x] Static files are managed effectively
+- [x] Environment variables are properly managed
+- [x] Deployment documentation is clear and comprehensive
 
 ## Tasks
-- [ ] Set up Heroku application
-- [ ] Configure PostgreSQL database connection
-- [ ] Implement Whitenoise for static file serving
-- [ ] Set up environment variable management
-- [ ] Configure CI/CD pipeline
+- [X] Set up Heroku application
+- [X] Configure PostgreSQL database connection
+- [X] Set up environment variable management
+- [X] Configure CI/CD pipeline
 
-## Priority
-Must Have
+**Priority**: Must Have
 
-#### User Story 20
+#### User Story 20: Error Handling and Logging
 
-# User Story: Error Handling and Logging
+**Story**: As a developer, I want comprehensive error handling and logging so that I can identify and fix issues quickly.
 
-## Story
-As a developer, I want comprehensive error handling and logging so that I can identify and fix issues quickly.
-
-## Acceptance Criteria
-- [ ] User-friendly error pages are implemented
-- [ ] Server errors are properly logged
-- [ ] Client-side errors are tracked
-- [ ] Critical errors trigger notifications
-- [ ] Logs are easily accessible and searchable
+**Acceptance Criteria**:
+- [x] User-friendly error pages are implemented
+- [x] Server errors are properly logged
+- [x] Payment processing errors are handled gracefully
+- [x] Form validation errors provide clear guidance to users
+- [x] Critical errors trigger appropriate messages
 
 ## Tasks
-- [ ] Design error pages
-- [ ] Set up server-side logging
-- [ ] Implement client-side error tracking
-- [ ] Configure error notifications
-- [ ] Set up log storage and search functionality
+- [X] Design error pages
+- [X] Set up server-side logging
+- [X] Implement client-side error tracking
+- [X] Configure error notifications
+- [X] Set up log storage and search functionality
 
-## Priority
-Should Have
-
-
-
-
+**Priority**: Should Have
 
 
 ## Sprint Notes
