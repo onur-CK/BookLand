@@ -18,6 +18,8 @@ Based on the nature of our BookLand online bookstore, we identified the followin
 - Book delivery
 - Discount books
 - New book releases
+- Book store near me
+- Books
 
 **Product-Related Keywords:**
 - Philosophy books
@@ -38,15 +40,17 @@ Using Wordtracker, we analyzed the search volume and competition for our top key
 
 | Keyword | Monthly Search Volume | Competition Level |
 |---------|----------------------|-------------------|
-| Buy books online | 18,100 | High |
+| Books | 410,000 | High |
+| book store near me | 430,000 | High |
+| Psychology books | 14,300 | High |
 | Online bookstore | 12,500 | High |
+| Buy books online | 3400 | Medium-Low |
+| Self-development books | 9,200 | Medium-High |
 | Philosophy books | 8,700 | Medium |
-| Psychology books | 14,300 | Medium |
-| Self-development books | 9,200 | Medium |
 | Book recommendations | 7,600 | Medium |
-| Discount books | 6,400 | Medium-High |
-| Book gift ideas | 5,200 | Medium |
-| Biography books | 4,800 | Medium |
+| Discount books | 6,400 | Medium |
+| Book gift ideas | 5,200 | Medium-Low |
+| Biography books | 4,800 | Medium-Low |
 | New book releases | 3,900 | Medium-Low |
 
 Based on the keyword research, we prioritized a mix of high-volume keywords and more targeted, medium-competition terms that align with our specific book catalog and user intent.
@@ -113,7 +117,7 @@ We have implemented the following SEO improvements in our HTML structure:
 
 3. **Meta Keywords:** While less important for modern SEO, we've included relevant keywords:
    ```html
-   <meta name="keywords" content="online bookstore, buy books online, philosophy books, psychology books, literature classics, biographies, self-development books, free shipping, book delivery, book shopping, wishlist, book categories, book catalog, secure checkout, book recommendations, reading community, bookshop, affordable books, book orders, book collection, new releases, popular authors, book lovers, reading materials, gift books, bestsellers">
+   <meta name="keywords" content="bookstore near me, books, book, online bookstore, buy books online, philosophy books, psychology books, literature classics, biographies, self-development books, free shipping, book delivery, book shopping, wishlist, book categories, book catalog, secure checkout, book recommendations, reading community, bookshop, affordable books, book orders, book collection, new releases, popular authors, book lovers, reading materials, gift books, bestsellers">
    ```
 
 4. **Canonical URLs:** To prevent duplicate content issues:
@@ -126,14 +130,8 @@ We've employed semantic HTML5 elements throughout the site for better SEO:
 
 1. **Proper Heading Hierarchy:** Using H1-H6 tags in appropriate order
 2. **Semantic Elements:** Using `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>` appropriately
-3. **Descriptive Alt Tags:** All images include descriptive alt text:
+3. **Descriptive Alt Tags:** All images include descriptive alt text.
   
-    Check this part later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-4. **Structured Data:** Implementing Schema.org markup for books and products 
-
-        Check this part later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 ### Technical SEO
 1. **Sitemap.xml:** A comprehensive sitemap has been created for the website
 2. **Robots.txt:** Configured to allow search engines to crawl important pages while restricting access to cart and checkout
@@ -217,10 +215,10 @@ We've created a Facebook Business Page for BookLand that includes:
 - Regular posts featuring new books
 - Content calendar for consistent posting
 
-![BookLand Facebook Page Screenshot](/media/)
+![BookLand Facebook Page Screenshot](/media/) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ### 4. Newsletter Subscription
-A newsletter subscription feature has been implemented using ???????????:
+A newsletter subscription feature has been implemented using mailchimp.
 - Sign-up form in the footer of every page
 - Consent checkbox and privacy information
 
@@ -240,8 +238,6 @@ A comprehensive Privacy Policy has been created and is accessible via the footer
 - GDPR compliance information
 
 The Privacy Policy was generated using [Privacy Policy Generator](https://www.privacypolicygenerator.info/) and customized for BookLand's specific needs. 
-
-Check this one later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ---
 
