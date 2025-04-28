@@ -1,3 +1,50 @@
+# **Manual Testing**
+
+## **Table of Contents**
+
+* [**Manual Testing**](#manual-testing)
+  * [**Bugs and Fixes During the Development Process**](#bugs-and-fixes-during-the-development-process)
+  * [**Testing (post development phase)**](#testing-post-development-phase)
+    * [**Validation**](#validation)
+      * [**HTML**](#html)
+      * [**CSS**](#css)
+      * [**JavaScript**](#javascript)
+      * [**Python - PEP8**](#python---pep8)
+    * [**Wave Accessibility Checker**](#wave-accessibility-checker)
+    * [**Lighthouse Scores**](#lighthouse-scores)
+      * [**Home Page**](#home-page)
+        * [**Desktop**](#desktop)
+        * [**Mobile**](#mobile)
+      * [**Products Page**](#products-page)
+        * [**Desktop**](#desktop-1)
+        * [**Mobile**](#mobile-1)
+      * [**Product Details Page**](#product-details-page)
+        * [**Desktop**](#desktop-2)
+        * [**Mobile**](#mobile-2)
+      * [**Shopping Cart**](#shopping-cart)
+        * [**Desktop**](#desktop-3)
+        * [**Mobile**](#mobile-3)
+      * [**Checkout Page**](#checkout-page)
+        * [**Desktop**](#desktop-4)
+        * [**Mobile**](#mobile-4)
+      * [**Profile Page**](#profile-page)
+        * [**Desktop**](#desktop-5)
+        * [**Mobile**](#mobile-5)
+      * [**Wishlist Page**](#wishlist-page)
+        * [**Desktop**](#desktop-6)
+        * [**Mobile**](#mobile-6)
+    * [**Manual Testing of User Stories**](#manual-testing-of-user-stories)
+      * [**EPIC 1: User Management**](#epic-1-user-management)
+      * [**EPIC 2: Book Catalog**](#epic-2-book-catalog)
+      * [**EPIC 3: Shopping Experience**](#epic-3-shopping-experience)
+      * [**EPIC 4: Admin Features**](#epic-4-admin-features)
+      * [**EPIC 5: Technical Infrastructure**](#epic-5-technical-infrastructure)
+
+## **Bugs and Fixes During the Development Process**
+
+The bugs and fixes encountered during development are documented in detail in the TESTING.md file. Each bug includes a description of the issue, error manifestation, root cause, solution implemented, lessons learned, and the impact on the BookLand project. For detailed information about specific bugs, please refer to the individual bug documentation in that file.
+
+
 # Template Path Resolution Bug
 
 ## Bug Description
@@ -649,3 +696,346 @@ This bug highlights several important considerations for web application develop
 
 ## Impact on BookLand
 Resolving this bug improved the user experience by providing clear context-appropriate messaging when viewing order details. Users now receive confirmation messages only when actually placing orders, eliminating confusion about whether viewing past orders might have triggered new purchases. This change contributes to our goal of providing a transparent and trustworthy shopping experience.
+
+
+## **Testing (post development phase)**
+
+### **Validation**
+
+#### **HTML**
+
+All HTML was validated using the [W3C HTML Validator](https://validator.w3.org/). The validation was performed by entering the URLs of the deployed pages into the validator.
+
+| Page | Result | Notes |
+|------|--------|-------|
+| Home | Pass | No errors |
+| Products | Pass | No errors |
+| Product Details | Pass | No errors |
+| Shopping Cart | Pass | No errors |
+| Checkout | Pass | No errors |
+| Profile | Pass | No errors |
+| Wishlist | Pass | No errors |
+| FAQ | Pass | No errors |
+| Contact Us | Pass | No errors |
+| Privacy Policy | Pass | No errors |
+| Shipping Policy | Pass | No errors |
+| Returns | Pass | No errors |
+| Register | Pass | No errors |
+| Login | Pass | No errors |
+| Logout | Pass | No errors |
+
+#### **CSS**
+
+All CSS files were validated using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) by direct input. No errors were found.
+
+| CSS File | Result | Notes |
+|----------|--------|-------|
+| base.css | Pass | No errors |
+| products.css | Pass | No errors |
+| product_detail.css | Pass | No errors |
+| cart.css | Pass | No errors |
+| checkout.css | Pass | No errors |
+| profiles.css | Pass | No errors |
+| email.css | Pass | No errors |
+| extra_pages.css | Pass | No errors |
+
+#### **JavaScript**
+
+All JavaScript files were validated using [JSHint](https://jshint.com/).
+
+| JS File | Result | Notes |
+|---------|--------|-------|
+| toast_handler.js | Pass | No errors |
+| stripe_elements.js | Pass | Warnings about undefined 'Stripe' variable - this is expected as it's imported via the Stripe CDN |
+
+#### **Python - PEP8**
+
+Python code was checked for PEP8 compliance using the pycodestyle tool !!!!!!!!!!!!!!!!!!!!!!!! check this part. The command `pycodestyle --first <-appname->` was used to check all files in the directories and subdirectories of each app.
+
+| App | Result | Notes |
+|-----|--------|-------|
+| bookland | Pass | No Errors |
+| home | Pass | No errors |
+| products | Pass | No errors |
+| profiles | Pass | No errors |
+| cart | Pass | No errors |
+| checkout | Pass | No errors |
+| extra_pages | Pass | No errors |
+
+Migration files were excluded from PEP8 checking as they are auto-generated by Django.
+
+### **Wave Accessibility Checker**
+
+The [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) was used to ensure the website meets accessibility standards.
+
+| Page | Result | Notes |
+|------|--------|-------|
+| Home | Pass | Minor contrast issues in the newsletter form from Mailchimp code |
+| Products | Pass | No errors |
+| Product Details | Pass | No errors |
+| Shopping Cart | Pass | No errors |
+| Checkout | Pass | No errors |
+| Profile | Pass | No errors |
+| Wishlist | Pass | No errors |
+
+The main accessibility issues found were related to:
+- Low contrast in the newsletter subscription form in the footer (from Mailchimp code)
+- Some hidden form labels used for screen readers (sr-only class) which are standard accessibility practices and should not be changed
+
+### **Lighthouse Scores**
+
+#### **Home Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Products Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Product Details Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Shopping Cart**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Checkout Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Profile Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+#### **Wishlist Page**
+
+##### **Desktop**
+
+
+##### **Mobile**
+
+
+Performance on mobile devices was generally lower than on desktop, but still within acceptable ranges. SEO scores were slightly lower for pages with paths disallowed in robots.txt, which is expected.
+
+### **Manual Testing of User Stories**
+
+This section details the manual testing conducted for user stories defined in our Agile development process. Each user story has been thoroughly tested to ensure the implemented features meet the acceptance criteria.
+
+#### **EPIC 1: User Management**
+
+|Passed | **User Registration** - As a new visitor, I want to create an account so that I can track my orders and save my preferences.|
+|:---:|:---|
+|&check;| Registration form includes fields for name, email, and password.|
+|&check;| Email verification process works correctly.|
+|&check;| Password strength requirements are enforced.|
+|&check;| Duplicate email addresses are not allowed.|
+|&check;| Account creation success message displays after registration.|
+
+|Passed | **User Login** - As a registered user, I want to securely log in to my account so that I can access my personal information and order history.|
+|:---:|:---|
+|&check;| Login form accepts email/username and password.|
+|&check;| "Remember me" functionality keeps users logged in between sessions.|
+|&check;| Appropriate error messages display for invalid credentials.|
+|&check;| Redirect to intended page after successful login works correctly.|
+|&check;| Success message confirms successful login.|
+
+|Passed | **User Profile Management** - As a logged-in user, I want to view and edit my profile information so that my account reflects my current details.|
+|:---:|:---|
+|&check;| Profile page displays all current user information.|
+|&check;| User can edit name, email, and contact information.|
+|&check;| User can add/edit default shipping addresses.|
+|&check;| Changes are saved immediately upon submission.|
+|&check;| Validation prevents invalid data submission.|
+
+|Not Implemented | **Social Login Integration** - As a new visitor, I want to register and login using my social media accounts.|
+|:---:|:---|
+|❌| This feature was designated as a "Should Have" in our MoSCoW prioritization but was not implemented in the current version. It will be considered for future releases.|
+
+#### **EPIC 2: Book Catalog**
+
+|Passed | **Book Browsing by Category** - As a customer, I want to browse books by category so that I can easily find books in genres I'm interested in.|
+|:---:|:---|
+|&check;| Categories are clearly displayed in navigation menu and on main product page.|
+|&check;| Clicking a category shows all books within that category.|
+|&check;| Books display cover image, title, author, and price.|
+|&check;| Active category is highlighted to show current filter.|
+|&check;| Category selection persists during sorting and pagination.|
+
+|Passed | **Book Search and Filtering** - As a customer, I want to search for books and filter results so that I can quickly find specific titles or authors.|
+|:---:|:---|
+|&check;| Search bar is prominently displayed across the site.|
+|&check;| Search works by title, author, and description.|
+|&check;| Search results display with relevant information.|
+|&check;| Empty search results provide helpful messaging.|
+|&check;| Search term is retained and displayed with results.|
+
+|Passed | **Book Detail View** - As a customer, I want to view detailed information about a book so that I can make an informed purchase decision.|
+|:---:|:---|
+|&check;| Detail page shows cover image, title, author, price, description, and rating.|
+|&check;| Inventory status is clearly displayed.|
+|&check;| "Add to cart" and "Add to wishlist" buttons are prominently displayed.|
+|&check;| Related books in the same category are suggested.|
+|&check;| Quantity selector functions correctly with validation.|
+
+#### **EPIC 3: Shopping Experience**
+
+|Passed | **Shopping Cart Management** - As a customer, I want to add books to my cart and manage cart contents so that I can prepare for checkout.|
+|:---:|:---|
+|&check;| Books can be added to cart from product details and listing pages.|
+|&check;| Cart icon shows current number of items.|
+|&check;| Cart page displays all items with images, titles, and prices.|
+|&check;| Quantities can be adjusted with immediate total updates.|
+|&check;| Items can be removed from cart with the trash icon.|
+|&check;| Cart contents persist between sessions.|
+
+|Passed | **Wishlist Functionality** - As a customer, I want to save books to my wishlist so that I can keep track of books I'm interested in but not ready to purchase.|
+|:---:|:---|
+|&check;| Books can be added to wishlist from product details and listing pages.|
+|&check;| Wishlist is accessible from user profile.|
+|&check;| Items can be moved from wishlist to cart.|
+|&check;| Items can be removed from wishlist.|
+|&check;| Wishlist is saved to user account.|
+|&check;| Wishlist count updates in real-time in the navigation bar.|
+
+|Passed | **Checkout Process** - As a customer, I want a streamlined checkout process so that I can complete my purchase quickly and securely.|
+|:---:|:---|
+|&check;| Checkout page collects shipping address information.|
+|&check;| Checkout page collects payment information securely.|
+|&check;| Order summary is displayed for review before payment.|
+|&check;| Form validation provides clear feedback for errors.|
+|&check;| User can save delivery information for future orders.|
+|&check;| Order confirmation is displayed after successful checkout.|
+
+|Passed | **Payment Processing** - As a customer, I want secure payment processing so that I can confidently complete my purchase.|
+|:---:|:---|
+|&check;| Stripe integration for credit card processing works properly.|
+|&check;| Payment information is securely handled.|
+|&check;| Payment errors are clearly communicated.|
+|&check;| Successful payments trigger order processing and confirmation.|
+|&check;| Loading overlay displays during payment processing.|
+|&check;| Checkout confirmation email is sent after successful payment.|
+
+|Passed | **Order History and Tracking** - As a customer, I want to view my order history and track current orders so that I can monitor my purchases.|
+|:---:|:---|
+|&check;| Order history page displays all past orders with dates and totals.|
+|&check;| Order detail view shows complete order information.|
+|&check;| Order details can be accessed from profile.|
+|&check;| Order confirmation is sent via email with relevant details.|
+|&check;| Previous orders can be viewed without triggering new confirmation messages.|
+
+#### **EPIC 4: Admin Features**
+
+|Passed | **Admin Dashboard** - As an admin, I want a comprehensive dashboard so that I can quickly access key metrics and platform management functions.|
+|:---:|:---|
+|&check;| Django admin dashboard is accessible to administrators.|
+|&check;| Dashboard displays key information in an organized manner.|
+|&check;| Quick access to books, orders, users, and other management functions.|
+|&check;| Admin can filter and search for specific information.|
+
+|Passed | **Admin Book Management** - As an admin, I want to add, edit, and remove books from the catalog so that I can keep the inventory up to date.|
+|:---:|:---|
+|&check;| Book creation form includes all necessary fields.|
+|&check;| Existing books can be edited with all fields updatable.|
+|&check;| Books can be marked as out of stock or available.|
+|&check;| Books can be permanently removed from the catalog.|
+|&check;| Image upload functionality works correctly.|
+|&check;| Book details are immediately reflected on the frontend after updates.|
+
+|Passed | **Order Management** - As an admin, I want to view and process orders so that I can fulfill customer purchases efficiently.|
+|:---:|:---|
+|&check;| Orders list shows all orders with status and date.|
+|&check;| Orders can be filtered by various criteria.|
+|&check;| Order details show complete purchase information.|
+|&check;| Customer contact information is accessible for fulfillment needs.|
+|&check;| Order line items are clearly displayed with quantities and prices.|
+
+|Passed | **Category Management** - As an admin, I want to create and manage book categories so that books are properly organized for customers.|
+|:---:|:---|
+|&check;| Categories can be created with name and description.|
+|&check;| Categories can be edited and deleted.|
+|&check;| Books can be assigned to categories.|
+|&check;| Categories appear correctly in navigation.|
+|&check;| Books can be filtered by category on the frontend.|
+
+#### **EPIC 5: Technical Infrastructure**
+
+|Passed | **Responsive Design Implementation** - As a user, I want the website to work well on all my devices so that I can shop for books anywhere.|
+|:---:|:---|
+|&check;| All pages function correctly on desktop, tablet, and mobile devices.|
+|&check;| Navigation adapts to screen size with hamburger menu on mobile.|
+|&check;| Images and text are properly sized across devices.|
+|&check;| Touch targets are appropriately sized on mobile.|
+|&check;| Forms and interactive elements work properly on all devices.|
+|&check;| Layout adjusts appropriately at different breakpoints.|
+
+|Passed | **Performance Optimization** - As a user, I want the website to load quickly and respond promptly so that I can shop efficiently.|
+|:---:|:---|
+|&check;| Pages load within acceptable timeframes.|
+|&check;| Images are optimized for web display.|
+|&check;| Database queries are efficient.|
+|&check;| Cart operations perform without noticeable delay.|
+|&check;| Search results appear promptly.|
+|&check;| Lighthouse performance scores meet acceptable standards.|
+
+|Passed | **Deployment Setup** - As a developer, I want a streamlined deployment process so that I can efficiently update the live site.|
+|:---:|:---|
+|&check;| Heroku deployment is configured correctly.|
+|&check;| PostgreSQL database is properly set up.|
+|&check;| Static files are managed effectively through AWS S3.|
+|&check;| Environment variables are properly managed.|
+|&check;| Deployment documentation is clear and comprehensive.|
+
+|Passed | **Error Handling and Logging** - As a developer, I want comprehensive error handling and logging so that I can identify and fix issues quickly.|
+|:---:|:---|
+|&check;| User-friendly error pages are implemented (404, 500).|
+|&check;| Form validation errors provide clear guidance to users.|
+|&check;| Payment processing errors are handled gracefully.|
+|&check;| Template errors are properly caught and managed.|
+|&check;| Critical errors trigger appropriate messaging for users.|
+
+#### **Additional Features**
+
+|Passed | **Newsletter Signup** - As a user, I want to subscribe to a newsletter so that I can receive updates and offers.|
+|:---:|:---|
+|&check;| Newsletter signup form appears in the footer across all pages.|
+|&check;| Form submits successfully to Mailchimp service.|
+|&check;| Validation prevents invalid email submissions.|
+|&check;| Success message confirms subscription.|
+|&check;| Error handling for failed subscriptions works correctly.|
+
+|Passed | **Contact and Information Pages** - As a user, I want to access information about the store policies and contact options.|
+|:---:|:---|
+|&check;| Contact form is accessible and functions correctly.|
+|&check;| Privacy policy page contains comprehensive information.|
+|&check;| Shipping policy information is clearly presented.|
+|&check;| Returns policy information is detailed and accessible.|
+|&check;| FAQ page addresses common customer questions.|
+|&check;| All information pages are accessible from the footer.|
+
+The testing shows that the vast majority of planned features have been successfully implemented and function as intended. The only exception is the Social Login Integration feature, which was designated as a "Should Have" in our MoSCoW prioritization but was not implemented in the current version due to time constraints. This feature will be considered for future development.
+
