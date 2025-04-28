@@ -33,3 +33,6 @@ urlpatterns = [
 # Static/media file serving for development (not for production use)
 # Source: https://docs.djangoproject.com/en/5.1/howto/static-files/
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

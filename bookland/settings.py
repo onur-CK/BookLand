@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os 
 import dj_database_url
+from dotenv import load_dotenv
 if os.path.isfile('env.py'):
     import env
 
 from pathlib import Path
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # This establishes the root directory of the project
@@ -58,10 +61,13 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_countries',
     'storages',
+    'cloudinary_storage',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -170,31 +176,20 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Cloudinary configuration
-if 'CLOUDINARY_URL' in os.environ:
-    # Add Cloudinary libraries to INSTALLED_APPS
-    INSTALLED_APPS += [
-        'cloudinary_storage',
-        'cloudinary',
-    ]
-
-    # Use Cloudinary for static and media files storage when not in development
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    
-    # Set media and static file URLs
-    STATIC_URL = '/static/'
-    MEDIA_URL = '/media/'
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-# Base static settings
+# Static files settings
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+if 'CLOUDINARY_URL' in os.environ:
+    # Use Cloudinary for static and media files in production
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    # Use Whitenoise in development and production
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -234,25 +229,4 @@ else:
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['bookland-e-commerce-2e2b1a60109c.herokuapp.com', 'localhost', '127.0.0.1', '127.0.0.1:8000']
-
-# Mailchimp Settings
-MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '')
-MAILCHIMP_DATA_CENTER = os.environ.get('MAILCHIMP_DATA_CENTER', '')
-MAILCHIMP_EMAIL_LIST_ID = os.environ.get('MAILCHIMP_EMAIL_LIST_ID', '')
-
-# Email Settings for order confirmations
-# Source: https://docs.djangoproject.com/en/5.1/topics/email/
-if 'DEVELOPMENT' in os.environ:
-    # Use console backend for development
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'bookland@example.com'
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
-
 
