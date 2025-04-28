@@ -35,8 +35,6 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [User Profile](#user-profile)
   - [Admin Features](#admin-features)
   - [Future Features](#future-features)
-- [Search Engine Optimization (SEO)](#search-engine-optimization-seo)
-- [Web Marketing](#web-marketing)
 - [Technologies Used](#technologies-used)
   - [Languages](#languages)
   - [Frameworks and Libraries](#frameworks-and-libraries)
