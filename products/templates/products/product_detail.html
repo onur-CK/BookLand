@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/product_detail.css' %}">
-{% endblock %}
-
 {% block content %}
 <div class="container">
     <div class="row mt-5">
         <!-- Book Image Column - 5/12 of screen width on medium and larger devices -->
         <!-- Source: Bootstrap grid system documentation - https://getbootstrap.com/docs/5.3/layout/grid/ -->
         <div class="col-md-5 mb-4">
-            <div class="card border h-100">
+            <div class="product-detail-image">
                 {% if product.image %}
-                <!-- Show actual product image if available -->
-                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top-3">
+                    <!-- Show actual product image if available -->
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid">
                 {% else %}
-                <!-- Display placeholder if no image exists -->
-                <div class="card-img-top p-3 text-center">
+                    <!-- Display placeholder if no image exists -->
                     <div class="book-image-container">
                         <span class="book-image-placeholder">Book Image</span>
                     </div>
-                </div>
                 {% endif %}
             </div>
         </div>
@@ -104,46 +98,43 @@
         </div>
 
         <!-- Responsive grid layout that shows 2-4 cards per row depending on screen size -->
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
-            {% for book in related_books %}
-            <div class="col">
-                <div class="card h-100 book-card border">
-                    <!-- Book image with link to product detail page -->
-                    <a href="{% url 'product_detail' book.id %}">
-                        {% if book.image %}
-                            <img src="{{ book.image.url }}" alt="{{ book.title }}" class="card-img-top p-2">
-                        {% else %}
-                            <div class="card-img-top p-2 text-center">
-                                <div class="book-image-container">
-                                    <span class="book-image-placeholder">Book Image</span>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </a>
-                    <!-- Book information - title, author, price and rating -->
-                    <div class="card-body p-2">
-                        <h6 class="card-title text-truncate">{{ book.title }}</h6>
-                        <p class="card-text text-muted small mb-1">{{ book.author }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="price-tag fw-bold">${{ book.price }}</span>
-                            {% if book.rating %}
-                                <span class="badge bg-secondary">{{ book.rating }}</span>
-                            {% endif %}
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+        {% for book in related_books %}
+        <div class="col">
+            <div class="card h-100 book-card border">
+                <!-- Book image with link to product detail page - updated structure -->
+                <a href="{% url 'product_detail' book.id %}" class="card-img-top">
+                    {% if book.image %}
+                        <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                    {% else %}
+                        <div class="book-image-container">
+                            <span class="book-image-placeholder">Book Image</span>
                         </div>
-                    </div>
-                    <!-- Card footer with action buttons -->
-                    <!-- Source: Bootstrap flexbox utilities - https://getbootstrap.com/docs/5.3/utilities/flex/ -->
-                    <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
-                        <button class="btn btn-outline-dark btn-sm py-0 px-1">Add to cart</button>
-                        <a href="{% url 'product_detail' book.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
-                            <i class="bi bi-info-circle-fill"></i>
-                        </a>
+                    {% endif %}
+                </a>
+                <!-- Rest of card content remains the same -->
+                <div class="card-body p-2">
+                    <h6 class="card-title text-truncate">{{ book.title }}</h6>
+                    <p class="card-text text-muted small mb-1">{{ book.author }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="price-tag fw-bold">${{ book.price }}</span>
+                        {% if book.rating %}
+                            <span class="badge bg-secondary">{{ book.rating }}</span>
+                        {% endif %}
                     </div>
                 </div>
+                <!-- Card footer with action buttons -->
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
+                    <button class="btn btn-outline-dark btn-sm py-0 px-1">Add to cart</button>
+                    <a href="{% url 'product_detail' book.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </a>
+                </div>
             </div>
-            {% endfor %}
         </div>
-      </div>
-      {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
     </div>
     {% endblock %}

@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
-{% endblock %}
-
 {% block content %}
 <div class="container">
     <!-- Page Header Section -->
@@ -107,20 +103,19 @@
     <!-- Product Grid Display
          Source: Bootstrap documentation on grid system
          https://getbootstrap.com/docs/5.0/layout/grid/ -->
+    <!-- Product Grid Display -->
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for product in products %}
             <div class="col">
                 <!-- Individual Product Card -->
                 <div class="card h-100 book-card border">
                     <!-- Product image with fallback for missing images -->
-                    <a href="{% url 'product_detail' product.id %}">
+                    <a href="{% url 'product_detail' product.id %}" class="card-img-top">
                         {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="card-img-top p-2">
+                            <img src="{{ product.image.url }}" alt="{{ product.title }}">
                         {% else %}
-                            <div class="card-img-top p-2 text-center">
-                                <div class="book-image-container">
-                                    <span class="book-image-placeholder">Book Image</span>
-                                </div>
+                            <div class="book-image-container">
+                                <span class="book-image-placeholder">Book Image</span>
                             </div>
                         {% endif %}
                     </a>
