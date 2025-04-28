@@ -97,7 +97,7 @@
             <hr>
         </div>
 
-        <!-- Responsive grid layout that shows 2-4 cards per row depending on screen size -->
+    <!-- Responsive grid layout that shows 2-4 cards per row depending on screen size -->
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for book in related_books %}
         <div class="col">
@@ -129,6 +129,9 @@
                     <a href="{% url 'product_detail' book.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
                         <i class="bi bi-info-circle-fill"></i>
                     </a>
+                    <button class="btn btn-outline-danger btn-sm wishlist-btn">
+                        <i class="bi bi-heart-fill"></i>
+                    </button>
                 </div>
             </div>
         </div>

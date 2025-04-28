@@ -30,15 +30,12 @@
                          Source: https://getbootstrap.com/docs/5.3/components/card/ -->
                     <div class="card h-100 book-card border">
                         <!-- Link to product detail page -->
-                        <a href="{% url 'product_detail' item.book.id %}">
+                        <a href="{% url 'product_detail' item.book.id %}" class="card-img-top">
                             {% if item.book.image %}
-                                <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="card-img-top p-2">
+                                <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
                             {% else %}
-                                <!-- Placeholder for books without images -->
-                                <div class="card-img-top p-2 text-center">
-                                    <div class="book-image-container">
-                                        <span class="book-image-placeholder">Book Image</span>
-                                    </div>
+                                <div class="book-image-container">
+                                    <span class="book-image-placeholder">Book Image</span>
                                 </div>
                             {% endif %}
                         </a>

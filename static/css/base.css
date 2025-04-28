@@ -1,16 +1,11 @@
 /* Global styles */
 
-/* Base structure and typography */
+/* Orange accent color variable */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #ecf0f1;
-    --accent-color: #e74c3c;
-    --text-color: #333333;
-    --light-text: #6c757d;
-    --light-bg: #f8f9fa;
-    --border-color: #e9ecef;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --orange-accent: #ff7b00;
+    --orange-light: #ffad66;
+    --orange-dark: #cc6200;
+    --orange-very-light: #fff1e6;
 }
 
 body {
@@ -56,8 +51,10 @@ a:hover {
 
 .navbar-brand {
     color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+}
+
+.navbar-brand span.orange-text {
+    color: var(--orange-accent);
 }
 
 /* Buttons */
@@ -151,12 +148,29 @@ footer {
     border-bottom: 8px solid #17a2b8;
 }
 
-/* Newsletter section */
+/* Newsletter Section Styling */
 .newsletter-section {
-    background-color: var(--light-bg);
+    background-color: var(--orange-very-light);
     padding: 2rem 0;
-    margin-top: 3rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
 }
+
+#newsletter-submit {
+    background-color: orangered;
+    border-color: orangered;
+}
+
+.newsletter-section h4 {
+    color: var(--orange-dark);
+    margin-bottom: 1rem;
+}
+
+#newsletter-submit:hover {
+    background-color: var(--orange-dark);
+    border-color: var(--orange-dark);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 767.98px) {
@@ -182,8 +196,7 @@ footer {
     padding-bottom: 150%; /* Creates a consistent aspect ratio (2:3 for books) */
     position: relative;
     overflow: hidden;
-    background-color: #f8f9fa;
-  }
+    }
 
 .book-card:hover {
     transform: translateY(-5px);
@@ -379,6 +392,27 @@ footer {
     margin-top: 2rem;
 }
 
+/* Book image placeholder styles */
+.book-image-container {
+    width: 60% !important;
+    aspect-ratio: 2/3;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.col-md-5.mb-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
 .product-image-container {
     border-radius: 0.5rem;
     overflow: hidden;
@@ -421,12 +455,6 @@ footer {
 
 .rating {
     margin-bottom: 1rem;
-}
-
-.rating .badge {
-    background-color: #f39c12;
-    padding: 0.35rem 0.75rem;
-    font-weight: 500;
 }
 
 .add-to-cart-form .btn {
@@ -492,21 +520,24 @@ footer {
     margin: 0 auto;
 }
 
-/* Book image placeholder container */
-.book-image-container {
+/* Book image placeholder styling */
+.product-detail-image .book-image-container {
     width: 60% !important;
+    max-width: 300px;
+    aspect-ratio: 2/3;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
 }
 
-/* Make sure the border is removed from the card */
-.border {
-    border: none !important;
-}
-
-/* Center image column vertically */
+/* Center the image column vertically */
 .col-md-5.mb-4 {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 /* Ensure the card takes up the full height for vertical centering */
@@ -522,11 +553,179 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .product-image-container {
-        max-width: 80%;
+    .product-detail-image img {
+        width: 80%;
+        max-width: 250px;
     }
+    
+    .product-detail-image .book-image-container {
+        width: 80% !important;
+        max-width: 250px;
+    }
+}
 
-    .card-img-top-3 {
-        max-width: 80%;
+
+/* Product Detail Page Specific Styles */
+
+/* Book Image Container */
+.product-detail-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Actual Book Image */
+.product-detail-image img {
+    max-height: 350px;
+    max-width: 250px;
+    object-fit: contain;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* Book Image Placeholder for when no image is available */
+.book-image-container {
+    height: 350px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-image-placeholder {
+    color: #6c757d;
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Book Information Styling */
+.book-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    line-height: 1.3;
+}
+
+.book-description {
+    margin-top: 1.5rem;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Price and Rating */
+.price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1rem 0;
+}
+
+.rating {
+    margin-bottom: 1rem;
+}
+
+.rating .badge {
+    background-color: #f39c12;
+    padding: 0.35rem 0.75rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Apply orange background to all rating badges */
+.badge.bg-secondary {
+    background-color: #f39c12 !important; /* Using the same orange color as on product detail page */
+}
+
+/* Add to Cart and Wishlist Forms */
+.add-to-cart-form {
+    margin-right: 1rem;
+}
+
+.add-to-cart-form .btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+}
+
+.qty_input {
+    width: 70px;
+    text-align: center;
+}
+
+.wishlist-btn {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #f8d7da;
+    transition: all 0.2s ease;
+}
+
+.wishlist-btn:hover {
+    background-color: #f8d7da;
+}
+
+/* Book Metadata (category, availability, inventory) */
+.book-metadata {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.book-metadata p {
+    margin-bottom: 0.5rem;
+}
+
+/* Related Books Section */
+.related-books-title {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+    .product-detail-image {
+        height: 300px;
     }
+    
+    .product-detail-image img {
+        max-height: 250px;
+        max-width: 180px;
+    }
+    
+    .book-image-container {
+        height: 250px;
+        width: 180px;
+    }
+    
+    .book-title {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .price {
+        font-size: 1.25rem;
+    }
+}
+
+.text-orange {
+    color: orangered; 
 }
