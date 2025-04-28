@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os 
 import dj_database_url
 from dotenv import load_dotenv
-if os.path.isfile('env.py'):
-    import env
-
 from pathlib import Path
 
 load_dotenv()
@@ -33,10 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -183,13 +179,21 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+
 if 'CLOUDINARY_URL' in os.environ:
-    # Use Cloudinary for static and media files in production
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-else:
-    # Use Whitenoise in development and production
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    try:
+        # Use Cloudinary for static and media files
+        STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        
+        # Try to import the storage class to check if it's working
+        from cloudinary_storage.storage import StaticHashedCloudinaryStorage
+        test_storage = StaticHashedCloudinaryStorage()
+        print("Cloudinary storage initialized successfully")
+    except Exception as e:
+        print(f"Error initializing Cloudinary storage: {e}")
+        # Fall back to local storage
+        STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -229,4 +233,3 @@ else:
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['bookland-e-commerce-2e2b1a60109c.herokuapp.com', 'localhost', '127.0.0.1', '127.0.0.1:8000']
-

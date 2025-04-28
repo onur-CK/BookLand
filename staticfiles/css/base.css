@@ -193,7 +193,7 @@ footer {
 /* Product cards */
 .book-card .card-img-top {
     height: 0;
-    padding-bottom: 150%; /* Creates a consistent aspect ratio (2:3 for books) */
+    padding-bottom: 150%; 
     position: relative;
     overflow: hidden;
     }
@@ -222,7 +222,7 @@ footer {
 
 /* Book image placeholder */
 .book-image-container {
-    aspect-ratio: 2/3; /* Standard book aspect ratio */
+    aspect-ratio: 2/3; 
     width: 100%;
     display: flex;
     align-items: center;
@@ -728,4 +728,8 @@ footer {
 
 .text-orange {
     color: orangered; 
+}
+
+.bi-search {
+    color: rgba(0, 0, 0, 0.8); 
 }
