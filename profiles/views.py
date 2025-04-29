@@ -139,4 +139,26 @@ def testimonials(request):
     }
     
     return render(request, template, context)
+
+
+@login_required
+def edit_testimonial(request, testimonial_id):
+    """ Edit a specific testimonial """
+    testimonial = get_object_or_404(Testimonial, pk=testimonial_id, user=request.user)
     
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, instance=testimonial)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Testimonial updated successfully!')
+            return redirect('testimonials')
+    else:
+        form = TestimonialForm(instance=testimonial)
+    
+    template = 'profiles/edit_testimonial.html'
+    context = {
+        'form': form,
+        'testimonial': testimonial,
+    }
+    
+    return render(request, template, context)
