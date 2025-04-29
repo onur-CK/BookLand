@@ -162,3 +162,20 @@ def edit_testimonial(request, testimonial_id):
     }
     
     return render(request, template, context)
+
+
+def delete_testimonial(request, testimonial_id):
+    """ Delete a specific testimonial """
+    testimonial = get_object_or_404(Testimonial, pk=testimonial_id, user=request.user)
+    
+    if request.method == 'POST':
+        testimonial.delete()
+        messages.success(request, 'Testimonial deleted successfully!')
+        return redirect('testimonials')
+    
+    template = 'profiles/delete_testimonial.html'
+    context = {
+        'testimonial': testimonial,
+    }
+    
+    return render(request, template, context)

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
 from .models import UserProfile
+from .models import Testimonial
 
 class CustomSignupForm(SignupForm):
     """
@@ -54,3 +55,31 @@ class UserForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ['title', 'content', 'rating']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 5}),
+            'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+        }
+        
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes to form fields
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'title': 'Title for your testimonial',
+            'content': 'Share your experience with BookLand...',
+            'rating': 'Rate your experience (1-5)',
+        }
+        
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'form-control'
+            if field == 'rating':
+                self.fields[field].help_text = 'Rate your experience from 1 to 5 stars'
