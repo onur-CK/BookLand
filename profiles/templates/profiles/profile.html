@@ -17,29 +17,27 @@
     <div class="row">
         <!-- Sidebar Navigation with Bootstrap list-group component 
              Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
-         <div class="col-12 col-md-3">
-            <div class="list-group">
-                <a href="{% url 'profile' %}" class="list-group-item active">
-                    Personal Information
-                </a>
-                <a href="{% url 'order_history' %}" class="list-group-item">
-                    Order History
-                </a>
-                <a href="{% url 'wishlist' %}" class="list-group-item">
-                    Wishlist
-                    <!-- Display wishlist count from context processor defined in profiles/contexts.py -->
-                    <span class="badge">{{ wishlist_count }}</span>
-                </a>
-                <a href="{% url 'testimonials' %}" class="list-group-item">
-                    Testimonials
-                </a>
-                <!-- Button to trigger the delete account modal 
-                     Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
-                <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                Delete Account
-                </button>
+             <div class="col-12 col-md-3">
+                <div class="list-group">
+                    <a href="{% url 'profile' %}" class="list-group-item active">
+                        Personal Information
+                    </a>
+                    <a href="{% url 'order_history' %}" class="list-group-item">
+                        Order History
+                    </a>
+                    <a href="{% url 'wishlist' %}" class="list-group-item">
+                        Wishlist
+                        <span class="badge">{{ wishlist_count }}</span>
+                    </a>
+                    <a href="{% url 'testimonials' %}" class="list-group-item">
+                        Testimonials
+                    </a>
+                    <!-- Button to trigger the delete account modal -->
+                    <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                        Delete Account
+                    </button>
+                </div>
             </div>
-         </div>
 
          <!-- Main Content Section -->
          <div class="col-12 col-md-9">

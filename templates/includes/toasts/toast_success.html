@@ -15,11 +15,16 @@
             <div class="row">
                 <div class="col">
                     {{ message }}
-                    <hr class="mt-1 mb-3">
+                    <!-- Only show horizontal rule if we have cart items to display below or it's a removal message -->
+                    {% if grand_total and not on_profile_page and product_count or 'removed' in message|lower %}
+                        <hr class="mt-1 mb-3">
+                    {% endif %}
                 </div>
             </div>
-            <!-- Special handling for cart notifications - only show for cart-related actions -->
-            {% if grand_total and not on_profile_page and product_count %}
+            <!-- Special handling for cart notifications - only show for cart-related actions 
+             Also include messages related to cart removals by checking for "removed" keyword -->
+            {% if grand_total and not on_profile_page and product_count or 'removed' in message|lower %}
+                <!-- Shopping cart content -->
                 <p class="logo-font bg-white text-dark py-1">Your Cart ({{ product_count }})</p>
                 <div class="cart-notification-wrapper">
                     {% for item in cart_items %}
