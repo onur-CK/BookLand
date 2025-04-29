@@ -33,8 +33,8 @@ Below are the steps taken to deploy the BookLand site to Heroku and any console 
 1. Create a virtual environment on your machine (Can be skipped if using gitpod):
     * ```python -m venv venv```
 1. To ensure the virtual environment is not tracked by version control, add venv to the .gitignore file.
-1. Install Django with version 5.1.6:
-    * ```pip install django==5.1.6```
+1. Install Django with version 5.1.7:
+    * ```pip install django==5.1.7```
 1. Install gunicorn for handling HTTP requests:
     * ```pip install gunicorn```
 1. Install supporting libraries:
@@ -87,7 +87,7 @@ The below works on the assumption that you already have an account with [AWS](ht
     * Click "Services" in the top left-hand corner of the landing page, click on "Storage" then click "S3."
     * Click "Create bucket."
     * Give the bucket a unique name:
-        * For this project, I called the S3 bucket "bookland-store-files"
+        * For this project, I called the S3 bucket "bookland-e-commerce"
     * Select the nearest location:
         * For me, this was EU (Ireland) eu-west-1.
     * Under the "Object Ownership" section, select "ACLS enabled"
@@ -427,13 +427,13 @@ The below works on the assumption that you already have an account with [AWS](ht
 
 ### **Forking the Repository**
 
-1. Navigate to the [GitHub Repository](https://github.com/yourusername/bookland)
+1. Navigate to the [GitHub Repository](https://github.com/onur-CK/BookLand)
 2. Click on the "Fork" button at the top right of the page
 3. You will now have a copy of the repository in your GitHub account
 
 ### **Cloning the Repository**
 
-1. Navigate to the [GitHub Repository](https://github.com/yourusername/bookland)
+1. Navigate to the [GitHub Repository](https://github.com/onur-CK/BookLand)
 2. Click on the "Code" button
 3. Copy the URL provided (either HTTPS or SSH)
 4. Open a terminal window on your local machine
