@@ -698,6 +698,125 @@ This bug highlights several important considerations for web application develop
 Resolving this bug improved the user experience by providing clear context-appropriate messaging when viewing order details. Users now receive confirmation messages only when actually placing orders, eliminating confusion about whether viewing past orders might have triggered new purchases. This change contributes to our goal of providing a transparent and trustworthy shopping experience.
 
 
+# AWS S3 Integration Django Version Compatibility Bug
+
+## Bug Description
+During deployment of BookLand to Heroku with AWS S3 for static and media file hosting, we encountered persistent issues where static files were not being properly served despite successful collection. The integration was based on a tutorial from 2020 using an older Django==3.2.25, while our project used Django 5. Despite following the tutorial steps and confirming that static files were being collected, AWS S3 was not correctly serving these files to our application.
+
+## Error Manifestation
+The main symptoms of this issue included:
+- CSS and JavaScript not loading on the deployed site
+- Missing images and styling throughout the application
+- Developer console showing 404 errors for static resources
+- Static files were successfully collected using `python manage.py collectstatic` 
+- Files appeared to be uploaded to the S3 bucket but were not accessible
+- No clear error messages in the application logs indicating the source of the problem
+
+![No static folder on aws](media/bugs_and_fixes/aws.png)
+
+## Root Cause
+After extensive investigation and consultation with tutor support, we identified several root causes:
+
+1. **Django Version Compatibility**: The walkthrough tutorial used Django 3.2, which had different storage handling mechanics compared to Django 5. Most critically, the `STATICFILES_STORAGE` and `DEFAULT_FILE_STORAGE` settings format had changed between versions.
+
+2. **AWS S3 Configuration**: Despite trying multiple permission configurations (bucket policies, user permissions, ACL settings, and CORS configurations), the files were not being properly served due to mismatched configuration expectations between Django versions.
+
+3. **Storage Backend Implementation**: The custom storage classes from the tutorial were not fully compatible with Django 5.3's storage handling expectations.
+
+4. **Deployment Environment Variables**: Some environment variables were not being recognized correctly in the newer Django context.
+
+The critical difference was in how Django 5.3 handles storage backends. In Django 5.3, the `STORAGES` dictionary setting is used instead of the previous `STATICFILES_STORAGE` and `DEFAULT_FILE_STORAGE` settings.
+
+## Solution Implemented
+After consulting with tutor support, we completely reworked the AWS S3 integration code block, aligning it with Django 5.3's expected configuration format:
+
+### Original Configuration (Django 3.2 - Not Working):
+```python
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'bookland-e-commerce'
+    AWS_S3_REGION_NAME = 'us-east-1'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+```
+
+### Updated Configuration (Django 5. - Working):
+```python
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'bookland-e-commerce'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STORAGES = {
+        "default": {
+            "BACKEND": "custom_storages.MediaStorage",
+        },
+        "staticfiles": {"BACKEND": "custom_storages.StaticStorage"},
+    }
+    STATICFILES_LOCATION = 'static'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+```
+
+Additionally, we:
+
+1- Updated our custom storage classes to ensure they were compatible with Django 5.3
+2- Verified all environment variables were properly set in Heroku
+3- Confirmed appropriate bucket permissions and policies
+4- Cleared browser caches and tested across multiple browsers to ensure consistent functionality
+
+Lessons Learned
+This bug highlights several important considerations for deployment with Django and AWS:
+
+1- Django Version Awareness: Always check the Django version referenced in tutorials against your project's version, and consult the migration/upgrade guides for changes in configuration patterns.
+2- Documentation First: When encountering deployment issues, prioritize official documentation over tutorials, especially for critical infrastructure components.
+3- Environment Testing: Test deployment configurations in a staging environment before attempting production deployment.
+4- Configuration Verification: Use Django's management commands (python manage.py check --deploy) to verify configurations before deployment.
+5- Storage Backend Understanding: Develop a deeper understanding of how Django's storage backends work to better troubleshoot issues related to static and media files.
+6- Version Migration Strategy: When upgrading Django versions, create a comprehensive checklist of configuration changes needed between versions.
+
+Impact on BookLand
+Resolving this issue was critical for the proper functioning of our site. Without correctly serving static files, the application had no styling, JavaScript functionality, or images - rendering it effectively unusable. With the configuration properly updated for Django 5.3, all static assets are now correctly served from AWS S3, providing:
+
+1- Proper styling and layout throughout the site
+2- Functional JavaScript components (cart management, search, etc.)
+3- Responsive image loading and improved performance
+4- More reliable operation in production
+5- Proper separation of concerns between the application server and static content delivery
+
+This fix ensures that users experience BookLand as intended, with full styling, interactivity, and visual assets, rather than as a broken, unstyled application.
+
+
+
 ## **Testing (post development phase)**
 
 ### **Validation**
