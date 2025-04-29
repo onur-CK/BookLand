@@ -1,3 +1,7 @@
+body {
+    background-color: red;
+}
+
 /* Product detail page styles */
 .product-detail {
     margin-top: 2rem;
