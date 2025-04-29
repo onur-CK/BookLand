@@ -179,6 +179,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 if 'CLOUDINARY_URL' in os.environ:
     try:
