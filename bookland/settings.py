@@ -221,9 +221,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Stripe Settings
 # Source: https://stripe.com/docs/keys
 STRIPE_CURRENCY = 'usd'
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')  # Get from environment variables
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')  # Get from environment variables
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')    # Get from environment variables
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')  
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')  
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')    
 
 # Email Settings for order confirmations
 # Source: https://docs.djangoproject.com/en/5.1/topics/email/
