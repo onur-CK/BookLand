@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, WishlistItem
-from .forms import UserProfileForm, UserForm
+from .models import UserProfile, WishlistItem, Testimonial
+from .forms import UserProfileForm, UserForm, TestimonialForm
 from products.models import Book
 
 @login_required
@@ -111,4 +111,32 @@ def remove_from_wishlist(request, book_id):
 
     # Redirection to wishlist page
     return redirect('wishlist')
+
+
+@login_required
+def testimonials(request):
+    """ Display and manage user testimonials """
+    # Get user testimonials
+    testimonials = Testimonial.objects.filter(user=request.user)
+    
+    if request.method == 'POST':
+        # Handle new testimonial submission
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            testimonial = form.save(commit=False)
+            testimonial.user = request.user
+            testimonial.save()
+            messages.success(request, 'Testimonial submitted successfully! It will be reviewed before being published.')
+            return redirect('testimonials')
+    else:
+        # Display empty form for GET request
+        form = TestimonialForm()
+    
+    template = 'profiles/testimonials.html'
+    context = {
+        'testimonials': testimonials,
+        'form': form,
+    }
+    
+    return render(request, template, context)
     
