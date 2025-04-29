@@ -30,6 +30,11 @@
                     <!-- Display wishlist count from context processor defined in profiles/contexts.py -->
                     <span class="badge">{{ wishlist_count }}</span>
                 </a>
+                <a href="{% url 'wishlist' %}" class="list-group-item">
+                    Testimonials
+                    <!-- Display wishlist count from context processor defined in profiles/contexts.py -->
+                    <span class="badge">{{ wishlist_count }}</span>
+                </a>
                 <!-- Button to trigger the delete account modal 
                      Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
                 <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from products.models import Book
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class UserProfile(models.Model):
     """
@@ -51,4 +52,27 @@ class WishlistItem(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s wishlist item: {self.book.title}"
+    
+
+class Testimonial(models.Model):
+    """
+    Model for storing user testimonials
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='testimonials')
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        help_text="Rating from 1 to 5 stars"
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_approved = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-date_updated']
+        verbose_name_plural = 'Testimonials'
+    
+    def __str__(self):
+        return f"{self.user.username}'s testimonial: {self.title}"
 
