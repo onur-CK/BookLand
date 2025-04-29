@@ -8,6 +8,7 @@
     * [**Create Repository**](#create-repository)
     * [**Setting up the Workspace**](#setting-up-the-workspace-to-be-done-locally-via-the-console-of-your-chosen-editor)
     * [**Create Heroku App**](#create-heroku-app)
+    * [**AWS S3 Bucket Configuration**](#aws-s3-bucket-configuration) 
     * [**Creating Environmental Variables Locally**](#creating-environmental-variables-locally)
     * [**Setting up settings.py File**](#setting-up-settingspy-file)
     * [**Set up Heroku for Use via Console**](#set-up-heroku-for-use-via-console)
@@ -77,6 +78,121 @@ The below works on the assumption that you already have an account with [Heroku]
 1. From your editor, go to your project's settings.py file and copy the SECRET_KEY variable. Add this to the same name variable under the Heroku App's config vars.
     * Variable KEY = SECRET_KEY
     * Variable VALUE = Value copied from settings.py in project.
+
+### **AWS S3 Bucket Configuration**
+
+The below works on the assumption that you already have an account with [AWS](https://aws.amazon.com/) and are already signed in.
+
+1. Create a new S3 bucket:
+    * Click "Services" in the top left-hand corner of the landing page, click on "Storage" then click "S3."
+    * Click "Create bucket."
+    * Give the bucket a unique name:
+        * For this project, I called the S3 bucket "bookland-store-files"
+    * Select the nearest location:
+        * For me, this was EU (Ireland) eu-west-1.
+    * Under the "Object Ownership" section, select "ACLS enabled"
+    * Under the "Block Public Access settings for this bucket" section, untick "Block all public access" and tick the box to acknowledge that this will make the bucket public.
+    * Click "Create bucket."
+1. Amend Bucket settings:
+    * Bucket Properties:
+       * Click on the bucket name to open the bucket.
+       * Click on the "Properties" tab.
+       * Under the "Static website hosting" section, click "Edit."
+       * Under the "Static website hosting" section select "Enable".
+       * Under the "Hosting type" section ensure "Host a static website" is selected.
+       * Under the "Index document" section enter "index.html".
+       * Click "Save changes."
+    * Bucket Permissions:
+       * Click on the "Permissions" tab.
+       * Scroll down to the "CORS configuration" section and click edit.
+       * Enter the following snippet into the text box:
+
+       ```JSON
+            [
+                {
+                    "AllowedHeaders": [
+                    "Authorization"
+                    ],
+                    "AllowedMethods": [
+                    "GET"
+                    ],
+                    "AllowedOrigins": [
+                    "*"
+                    ],
+                    "ExposeHeaders": []
+                }
+            ]
+        ```
+
+       * Click "Save changes."
+       * Scroll back up to the "Bucket Policy" section and click "Edit."
+       * Take note of the "Bucket ARN" click on the "Policy Generator" button to open the AWS policy generator in a new tab.
+       * In the newly opened tab under Step 1 "Select Policy Type" select "S3 Bucket Policy." from the drop down menu.
+       * Under Step 2 "Add Statement(s)" enter " * " in the "Principal" text box.
+       * From the "s3:Action" drop down menu select "s3:GetObject".
+       * Enter the "ARN" noted from the bucket policy page into the "Amazon Resource Name (ARN)" text box.
+       * Click "Add Statement."
+       * Under Step 3 "Generate Policy" click "Generate Policy."
+       * Copy the resultant policy and paste it into the bucket policy text box on the previous tab.
+       * In the same text box add "/*" to the end of the resource key to allow access to all resources in this bucket.
+       * Click "Save changes."
+       * When back on the bucket's permissions tab, scroll down to the "Access Control List" section and click "Edit."
+       * Enable "List" for "Everyone (public access)", tick the box to accept that "I understand the effects of these changes on my objects and buckets."  and click "Save changes."
+
+1. Create AWS static files User and assign to S3 Bucket:
+    * Create "User Group":
+        * Click "Services" in the top left-hand corner of the landing page, from the left side of the menu click on "Security, Identity, & Compliance" and select "IAM" from the right side of the menu.
+        * Under "Access management" click "User Groups."
+        * Click "Create Group."
+        * Enter a user name (for this project, I called the user group "manage-bookland-files").
+        * Scroll to the bottom of the page and click "Create Group."
+    * Create permissions policy for the new user group:
+        * Click "Policies" in the left-hand menu.
+        * Click "Create Policy."
+        * Click "Import managed policy."
+        * Search for "AmazonS3FullAccess", select this policy, and click "Import".
+        * Click "JSON" under "Policy Document" to see the imported policy
+        * Copy the bucket ARN from the bucket policy page and paste it into the "Resource" section of the JSON snippet. Be sure to remove the default value of the resource key ("*") and replace it with the bucket ARN.
+        * Copy the bucket ARN a second time into the "Resource" section of the JSON snippet. This time, add "/*" to the end of the ARN to allow access to all resources in this bucket.
+        * Click "Next: Tags."
+        * Click "Next: Review."
+        * Click "Review Policy."
+        * Enter a name for the policy (for this project, I called the policy "bookland-s3-policy").
+        * Enter a description for the policy.
+        * Click "Create Policy."
+    * Attach Policy to User Group:
+        * Click "User Groups" in the left-hand menu.
+        * Click on the user group name created during the above step.
+        * Select the "Permissions" tab.
+        * click "Attach Policy."
+        * Search for the policy created during the above step, and select it.
+        * Click "Attach Policy."
+    * Create User:
+        * Click "Users" in the left-hand menu.
+        * Click "Add user."
+        * Enter a "User name" (for this project, I called the user "bookland-staticfiles-user").
+        * Select "Programmatic access" and "AWS Management Console access."
+        * Click "Next: Permissions."
+        * Select "Add user to group."
+        * Select the user group created during the above step.
+        * Click "Next: Tags."
+        * Click "Next: Review."
+        * Click "Create user."
+        * Take note of the "Access key ID" and "Secret access key" as these will be needed to connect to the S3 bucket.
+        * Click "Download .csv" to download the credentials.
+        * Click "Close."
+1. Install required packages to use AWS S3 Bucket in Django:
+    * ```pip install boto3```
+    * ```pip install django-storages```
+1. Add 'storages' to the bottom of the installed apps section of settings.py file:
+
+   ```python
+    INSTALLED_APPS = [
+    …,
+        'storages'
+    …,
+   ]
+   ```
 
 ### **Creating Environmental Variables Locally**
 
@@ -189,6 +305,34 @@ The below works on the assumption that you already have an account with [Heroku]
       ]
    ```
 
+1. Link S3 Bucket to Django Project by adding the following to the settings.py file:
+
+    ``` python
+        # AWS S3 configuration
+        if 'USE_AWS' in os.environ:
+            # Cache control
+            AWS_S3_OBJECT_PARAMETERS = {
+               'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+               'CacheControl': 'max-age=94608000',
+            }
+            # Bucket config
+            AWS_STORAGE_BUCKET_NAME = 'bookland-store-files'
+            AWS_S3_REGION_NAME = 'eu-west-1'
+            AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+            AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+            AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+            # Static and media files
+            STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+            STATICFILES_LOCATION = 'static'
+            DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+            MEDIAFILES_LOCATION = 'media'
+
+            # Override static and media URLs in production
+            STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+            MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    ```
+
 1. Configure WhiteNoise for static files in production:
    ```python
    MIDDLEWARE = [
@@ -227,12 +371,25 @@ The below works on the assumption that you already have an account with [Heroku]
     * ```git commit -m "Initial deployment"```
     * ```git push```
 
+1. Create a file called "custom_storages.py" in the root of the project and add the following code:
 
+    ```python
+        # This file tells Django where to store static and media files in production
+        from django.conf import settings
+        from storages.backends.s3boto3 import S3Boto3Storage
+
+        class StaticStorage(S3Boto3Storage):
+            location = settings.STATICFILES_LOCATION
+
+        class MediaStorage(S3Boto3Storage):
+            location = settings.MEDIAFILES_LOCATION
     ```
 
 ### **Set up Heroku for Use via Console**
 
 1. Set up the necessary Heroku config vars:
+   * AWS_ACCESS_KEY_ID: Your AWS access key
+   * AWS_SECRET_ACCESS_KEY: Your AWS secret access key
    * DATABASE_URL: This will be automatically set up by the Postgres add-on
    * EMAIL_HOST_PASSWORD: Your email host password
    * EMAIL_HOST_USER: Your email host user
@@ -240,6 +397,7 @@ The below works on the assumption that you already have an account with [Heroku]
    * STRIPE_PUBLIC_KEY: Your Stripe public key
    * STRIPE_SECRET_KEY: Your Stripe secret key
    * STRIPE_WH_SECRET: Your Stripe webhook secret
+   * USE_AWS: Set to True
 
 1. Click on Account Settings (under the avatar menu)
 1. Scroll down to the API Key section and click Reveal. Copy the API key.
