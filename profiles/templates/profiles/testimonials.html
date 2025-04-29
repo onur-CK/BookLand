@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>My Testimonials</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar Navigation -->
+        <div class="col-12 col-md-3">
+            <div class="list-group">
+                <a href="{% url 'profile' %}" class="list-group-item">
+                    Personal Information
+                </a>
+                <a href="{% url 'order_history' %}" class="list-group-item">
+                    Order History
+                </a>
+                <a href="{% url 'wishlist' %}" class="list-group-item">
+                    Wishlist
+                </a>
+                <a href="{% url 'testimonials' %}" class="list-group-item active">
+                    Testimonials
+                </a>
+                <a href="{% url 'profile' %}" class="btn btn-dark mt-3">
+                    <i class="bi bi-person-fill"></i> Go Back to My Profile
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-12 col-md-9">
+            <!-- Add New Testimonial Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Share Your Experience</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'testimonials' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_title" class="form-label">Title</label>
+                            {{ form.title }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_content" class="form-label">Your Testimonial</label>
+                            {{ form.content }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_rating" class="form-label">Rating (1-5 stars)</label>
+                            {{ form.rating }}
+                            <small class="text-muted">{{ form.rating.help_text }}</small>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark">Submit Testimonial</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Existing Testimonials -->
+            <h4>Your Testimonials</h4>
+            <hr>
+            
+            {% if testimonials %}
+                {% for testimonial in testimonials %}
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-0">{{ testimonial.title }}</h5>
+                                <div class="text-muted small">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= testimonial.rating %}
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        {% else %}
+                                            <i class="bi bi-star text-warning"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge {% if testimonial.is_approved %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if testimonial.is_approved %}Approved{% else %}Awaiting Approval{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ testimonial.content }}</p>
+                            <div class="small text-muted">
+                                Last updated: {{ testimonial.date_updated|date:"F j, Y, g:i a" }}
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <a href="{% url 'edit_testimonial' testimonial.id %}" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="bi bi-chat-quote fs-1 text-muted mb-3"></i>
+                    <h3>You haven't shared any testimonials yet</h3>
+                    <p class="text-muted">We'd love to hear about your experience with BookLand!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
