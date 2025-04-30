@@ -82,44 +82,72 @@
     color: #155724;
 }
 
-/* Wishlist */
-.wishlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
-
-.wishlist-item {
+/* Wishlist styling */
+/* Book card specific styles for wishlist page */
+.book-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border: 1px solid #e9ecef;
     border-radius: 0.5rem;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.wishlist-item:hover {
+.book-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.wishlist-item .card-footer {
-    background-color: white;
-    border-top: 1px solid #f1f1f1;
+.book-card .card-img-top {
+    height: 0;
+    padding-bottom: 150%; 
+    position: relative;
+    overflow: hidden;
 }
 
-.wishlist-empty {
-    text-align: center;
-    padding: 3rem 0;
+.book-card .card-img-top img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
 }
 
-.wishlist-empty i {
-    font-size: 3rem;
-    color: #e9ecef;
-    margin-bottom: 1rem;
+.book-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
 }
 
+/* Book image placeholder */
+.book-image-container {
+    aspect-ratio: 2/3; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.book-image-placeholder {
+    color: #6c757d;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.price-tag {
+    font-size: 0.9rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Wishlist button */
 .wishlist-btn {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -132,6 +160,34 @@
 
 .wishlist-btn:hover {
     background-color: #f8d7da;
+}
+
+.wishlist-btn i {
+    font-size: 0.9rem;
+    color: #dc3545;
+}
+
+/* Info icon */
+.info-icon {
+    color: #3498db;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.info-icon:hover {
+    color: #2980b9;
+}
+
+/* Empty wishlist message */
+.wishlist-empty {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.wishlist-empty i {
+    font-size: 3rem;
+    color: #e9ecef;
+    margin-bottom: 1rem;
 }
 
 /* Delete account button */
@@ -153,8 +209,13 @@
         margin-bottom: 2rem;
         position: static;
     }
-
-    .wishlist-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    
+    .book-card .card-img-top {
+        height: auto;
+        padding-bottom: 150%;
+    }
+    
+    .book-card .card-title {
+        font-size: 0.85rem;
     }
 }

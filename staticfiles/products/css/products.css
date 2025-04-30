@@ -1,3 +1,385 @@
-body {
-    background-color: red;
+/* Styles for product listings and product details */
+
+/* Product cards */
+.book-card .card-img-top {
+    height: 0;
+    padding-bottom: 150%; 
+    position: relative;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.book-card .card-img-top img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+/* Book image placeholder */
+.book-image-container {
+    aspect-ratio: 2/3; 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.book-image-placeholder {
+    color: #6c757d;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.price-tag {
+    font-size: 0.9rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Wishlist button */
+.wishlist-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #f8d7da;
+    transition: all 0.2s ease;
+}
+
+.wishlist-btn:hover {
+    background-color: #f8d7da;
+}
+
+.wishlist-btn i {
+    font-size: 0.9rem;
+    color: #dc3545;
+}
+
+/* Info icon */
+.info-icon {
+    color: #3498db;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.info-icon:hover {
+    color: #2980b9;
+}
+
+/* Category badges and filtering */
+.categories-container {
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #495057;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-badge:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+.category-badge.active {
+    background-color: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+
+/* Search form */
+.search-form .input-group {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-form .form-control {
+    border-radius: 50px 0 0 50px;
+    border-right: none;
+    padding-left: 1.25rem;
+}
+
+.search-form .btn {
+    border-radius: 0 50px 50px 0;
+    background-color: white;
+    border-left: none;
+    color: #6c757d;
+}
+
+.search-form .btn:hover {
+    color: #2c3e50;
+}
+
+/* Active filters section */
+.active-filters {
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.active-filters p {
+    margin-bottom: 0.25rem;
+}
+
+.active-filters strong {
+    color: #2c3e50;
+}
+
+/* Sort selector styling */
+.sort-select-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.form-select {
+    border: 1px solid #e9ecef;
+    padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    background-color: #fff;
+    font-size: 0.875rem;
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 2rem;
+}
+
+.pagination .page-link {
+    color: #2c3e50;
+    border: 1px solid #e9ecef;
+    margin: 0 0.125rem;
+    min-width: 2.25rem;
+    text-align: center;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+}
+
+/* Apply orange background to all rating badges */
+.badge.bg-secondary {
+    background-color: #f39c12 !important; /* Using the same orange color as on product detail page */
+}
+
+/* Product Detail Page Specific Styles */
+
+/* Book Image Container */
+.product-detail-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Actual Book Image */
+.product-detail-image img {
+    max-height: 350px;
+    max-width: 250px;
+    object-fit: contain;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* Product image container - no border, centered content */
+.product-image-container {
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+/* Book image placeholder styling */
+.product-detail-image .book-image-container {
+    width: 60% !important;
+    max-width: 300px;
+    aspect-ratio: 2/3;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Center the image column vertically */
+.col-md-5.mb-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+/* Ensure the card takes up the full height for vertical centering */
+.col-md-5.mb-4 .card {
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Book Information Styling */
+.book-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    line-height: 1.3;
+}
+
+.book-description {
+    margin-top: 1.5rem;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Price and Rating */
+.price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1rem 0;
+}
+
+.rating {
+    margin-bottom: 1rem;
+}
+
+.rating .badge {
+    background-color: #f39c12;
+    padding: 0.35rem 0.75rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Add to Cart and Wishlist Forms */
+.add-to-cart-form {
+    margin-right: 1rem;
+}
+
+.add-to-cart-form .btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+}
+
+.qty_input {
+    width: 70px;
+    text-align: center;
+}
+
+/* Book Metadata (category, availability, inventory) */
+.book-metadata {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.book-metadata p {
+    margin-bottom: 0.5rem;
+}
+
+/* Related Books Section */
+.related-books-title {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .book-card .card-title {
+        font-size: 0.85rem;
+    }
+
+    .book-card .card-img-top {
+        height: 150px;
+    }
+
+    .sort-select-wrapper {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+
+    .product-detail-image {
+        height: 300px;
+    }
+    
+    .product-detail-image img {
+        max-height: 250px;
+        max-width: 180px;
+    }
+    
+    .book-image-container {
+        height: 250px;
+        width: 180px;
+    }
+
+    .product-detail-image .book-image-container {
+        width: 80% !important;
+        max-width: 250px;
+    }
+    
+    .book-title {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .price {
+        font-size: 1.25rem;
+    }
 }

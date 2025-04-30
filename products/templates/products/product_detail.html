@@ -50,7 +50,8 @@
                     <div class="input-group">
                         <!-- Quantity selector - limited between 1 and 99 -->
                         <input type="number" name="quantity" value="1" min="1" max="99" class="form-control qty_input">
-                        <button type="submit" class="btn btn-dark">Add to cart</button>
+                        <button type="submit" class="btn" style="background-color: orangered; color: white;"><i class="bi bi-cart-plus fs-6"></i>
+                        </button>
                     </div>
                 </form>
 
@@ -126,9 +127,10 @@
                 </div>
                 <!-- Card footer with action buttons -->
                 <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
-                    <button class="btn btn-outline-dark btn-sm py-0 px-1">Add to cart</button>
+                    <button type="submit" class="btn" style="background-color: orangered; color: white;"><i class="bi bi-cart-plus fs-6"></i>
+                    </button>
                     <a href="{% url 'product_detail' book.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
-                        <i class="bi bi-info-circle-fill"></i>
+                        <i class="bi bi-info-circle-fill fs-5"></i>
                     </a>
                     <button class="btn btn-outline-danger btn-sm wishlist-btn">
                         <i class="bi bi-heart-fill"></i>
