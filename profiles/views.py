@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile, WishlistItem, Testimonial
 from .forms import UserProfileForm, UserForm, TestimonialForm
 from products.models import Book
+from django.contrib.auth import logout
 
 @login_required
 def profile(request):
@@ -33,7 +34,7 @@ def profile(request):
     # This helps the toast template know not to show cart information
     on_profile_page = True
     
-    # Using the app and template format explicitly after the Template Path Resolution Bug
+    # Using the app and template format explicitly after the Template Path Resolution Bug(TESTING.md)
     return render(
         request,
         'profiles/profile.html',  # Explicit path format
@@ -44,6 +45,24 @@ def profile(request):
             'on_profile_page': on_profile_page,  
         }
     )
+
+@login_required
+def delete_account(request):
+    """
+    Handle account deletion - requires confirmation
+    """
+    if request.method == 'POST':
+        user = request.user
+        # Log the user out
+        logout(request)
+        # Delete the user account
+        user.delete()
+        messages.success(request, 'Your account has been successfully deleted.')
+        return redirect('home')
+    
+    # If not POST request, render the confirmation page
+    return render(request, 'profiles/delete_account.html')
+
 
 @login_required
 def order_history(request):

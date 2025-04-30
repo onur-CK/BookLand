@@ -1,4 +1,5 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello from BookLand!
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Hello from BookLand!
 
 You're receiving this email because you recently created an account on {{ site_name }}.
 
@@ -8,6 +9,6 @@ To confirm your email address, please click the link below:
 If you did not sign up for this account, you can safely ignore this email.
 
 Thank you for choosing BookLand!
-The BookLand Team
+The BookLand Support Team
 {{ site_domain }}
 {% endblocktrans %}{% endautoescape %}

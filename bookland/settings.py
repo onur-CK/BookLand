@@ -107,7 +107,7 @@ SITE_ID = 1
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 ACCOUNT_LOGIN_METHODS = {'email'}
@@ -222,7 +222,6 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')  
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')  
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')   
-
 
 
 # Email Settings for order confirmations
