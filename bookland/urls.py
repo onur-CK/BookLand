@@ -36,3 +36,9 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Register custom error handlers
+# Source: https://docs.djangoproject.com/en/5.1/topics/http/views/#customizing-error-views
+handler403 = 'bookland.handlers.handler403'
+handler404 = 'bookland.handlers.handler404'
+handler500 = 'bookland.handlers.handler500'

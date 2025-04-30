@@ -7,21 +7,21 @@
          Source: https://getbootstrap.com/docs/5.3/components/navbar/#brand -->
     <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">Book<span class="text-orange">Land</span></a>
 
-    <!-- Only show cart and wishlist icons on mobile for logged in users -->
-    {% if request.user.is_authenticated %}
-      <!-- Shopping Cart for Mobile (visible on small screens only)
+    <!-- Shopping Cart for Mobile (visible on small screens only)
            Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
-      <div class="d-lg-none order-lg-3 ms-auto me-3">
-        <a href="{% url 'view_cart' %}" class="text-dark position-relative">
-          <i class="bi bi-cart2 fs-4"></i>
-          <!-- Badge for cart item count
-               Bootstrap badges: https://getbootstrap.com/docs/5.3/components/badge/ -->
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ product_count }}
-          </span>
-        </a>
-      </div>
+    <div class="d-lg-none order-lg-3 ms-auto me-3">
+      <a href="{% url 'view_cart' %}" class="text-dark position-relative">
+        <i class="bi bi-cart2 fs-4"></i>
+        <!-- Badge for cart item count
+             Bootstrap badges: https://getbootstrap.com/docs/5.3/components/badge/ -->
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{ product_count|default:"0" }}
+        </span>
+      </a>
+    </div>
 
+    <!-- Only show wishlist icon on mobile for logged in users -->
+    {% if request.user.is_authenticated %}
       <!-- Wishlist for Mobile (visible on small screen only) -->
       <div class="d-lg-none order-lg-3 me-4">
         <a href="{% url 'wishlist' %}" class="text-danger position-relative">
@@ -102,18 +102,19 @@
         </li>
       </ul>
 
-      {% if request.user.is_authenticated %}
-        <!-- Shopping Cart for Desktop (hidden on small screens)
-             Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
-        <div class="d-none d-lg-block me-3">
-          <a href="{% url 'view_cart' %}" class="text-dark position-relative">
-            <i class="bi bi-cart2 fs-4"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ product_count }}
-            </span>
-          </a>
-        </div>
+      <!-- Shopping Cart for Desktop (hidden on small screens)
+           Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
+      <div class="d-none d-lg-block me-3">
+        <a href="{% url 'view_cart' %}" class="text-dark position-relative">
+          <i class="bi bi-cart2 fs-4"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ product_count|default:"0" }}
+          </span>
+        </a>
+      </div>
 
+      <!-- Only show wishlist icon on desktop for logged in users -->
+      {% if request.user.is_authenticated %}
         <!-- Wishlist for Desktop (hidden on small screens) -->
         <div class="d-none d-lg-block me-3">
           <a href="{% url 'wishlist' %}" class="text-danger position-relative">

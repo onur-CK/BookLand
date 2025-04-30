@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 text-center">
+            <div class="mt-5 mb-4">
+                <i class="bi bi-shield-exclamation text-danger" style="font-size: 5rem;"></i>
+            </div>
+            <h1 class="display-4">403 - Access Denied</h1>
+            <p class="lead mb-4">Sorry, you don't have permission to access this page.</p>
+            <p class="mb-5">This might be because you need to log in or you don't have the necessary permissions.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{% url 'home' %}" class="btn btn-dark">Return to Homepage</a>
+                <a href="{% url 'products' %}" class="btn btn-outline-dark">Browse Books</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

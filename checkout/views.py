@@ -193,15 +193,6 @@ def checkout_success(request, order_number):
             if user_profile_form.is_valid():
                 user_profile_form.save()
     
-    # Send confirmation email
-    handler = StripeWH_Handler(request)
-    handler._send_confirmation_email(order)
-
-    # Display success message
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
-    
     # Clear the shopping cart from the session
     if 'cart' in request.session:
         del request.session['cart']
