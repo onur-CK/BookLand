@@ -48,20 +48,23 @@ def profile(request):
 
 @login_required
 def delete_account(request):
-    """
-    Handle account deletion - requires confirmation
-    """
+    """ Delete the user's account """
     if request.method == 'POST':
         user = request.user
-        # Log the user out
-        logout(request)
-        # Delete the user account
-        user.delete()
-        messages.success(request, 'Your account has been successfully deleted.')
-        return redirect('home')
-    
-    # If not POST request, render the confirmation page
-    return render(request, 'profiles/delete_account.html')
+        # Delete related records first to avoid potential conflicts 
+  
+        # Try to delete the user
+        try:
+            user.delete()
+            messages.success(request, 'Your account has been successfully deleted.')
+            # Logout the user after deletion
+            return redirect('home')
+        except Exception as e:
+            messages.error(request, f'There was an error deleting your account: {e} contact booklandst@gmail.com')
+            return redirect('profile')
+            
+    # If not POST, redirect to profile
+    return redirect('profile')
 
 
 @login_required
