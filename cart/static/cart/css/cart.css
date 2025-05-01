@@ -162,3 +162,162 @@
         padding: 0.75rem 0.5rem;
     }
 }
+
+/* Cart notification styling */
+.cart-notification-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 5px;
+}
+
+/* Scrollbar styling for cart notification */
+.cart-notification-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cart-notification-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.cart-notification-wrapper::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.cart-notification-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Cart item row styling */
+.cart-notification-wrapper .row {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f1f1f1;
+    transition: all 0.2s ease;
+}
+
+.cart-notification-wrapper .row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.cart-notification-wrapper .row:hover {
+    background-color: #f8f9fa;
+    transform: translateX(3px);
+}
+
+/* Cart item image styling */
+.cart-notification-wrapper img {
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.cart-notification-wrapper img:hover {
+    transform: scale(1.05);
+}
+
+/* Cart item text styling */
+.cart-notification-wrapper p.my-0 strong {
+    color: #2c3e50;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* Quantity info styling */
+.cart-notification-wrapper p.small {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+/* "Go To Secure Checkout" button sliding animation  */
+.toast .btn-dark {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.toast .btn-dark:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: -2;
+}
+
+.toast .btn-dark:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+.toast .btn-dark:hover:before {
+    width: 100%;
+}
+
+/* Emphasize the price tag */
+.toast p.mt-3.mb-1.text-dark {
+    font-size: 1.1rem;
+}
+
+.toast p.mt-3.mb-1.text-dark .float-end {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Style the toast heading section */
+.toast .toast-header {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+}
+
+.toast .toast-header strong {
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+/* Toast animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.show {
+    animation: slideIn 0.3s forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .cart-notification-wrapper p.my-0 strong {
+        max-width: 150px;
+    }
+    
+    .toast {
+        max-width: 90%;
+        margin-right: 5%;
+    }
+}
+
