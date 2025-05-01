@@ -1,8 +1,9 @@
 import json
 import time
 from django.http import HttpResponse
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.conf import settings
 from .models import Order, OrderLineItem
 from products.models import Book
@@ -19,25 +20,26 @@ class StripeWH_Handler:
         self.request = request
 
     def _send_confirmation_email(self, order):
-        """
-        Send the user a confirmation email
-        Source: https://docs.djangoproject.com/en/5.1/topics/email/
-        """
+        """Send the user a confirmation email"""
         customer_email = order.email
         subject = f'BookLand - Order Confirmation {order.order_number}'
         
         # Render email templates to strings
-        body = render_to_string(
+        html_message = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.html',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL}
         )
         
+        # Create plain text version
+        plain_message = strip_tags(html_message)
+        
         # Send email
         send_mail(
             subject,
-            body,
+            plain_message,
             settings.DEFAULT_FROM_EMAIL,
-            [customer_email]
+            [customer_email],
+            html_message=html_message
         )
 
     def handle_event(self, event):
@@ -167,3 +169,5 @@ class StripeWH_Handler:
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
+    
+

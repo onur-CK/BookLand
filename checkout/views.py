@@ -170,6 +170,10 @@ def checkout_success(request, order_number):
     # Get the order from the database
     order = get_object_or_404(Order, order_number=order_number)
     
+    # Send confirmation email
+    handler = StripeWH_Handler(request)
+    handler._send_confirmation_email(order)
+    
     # Save user profile information if user checked "save-info" box
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)

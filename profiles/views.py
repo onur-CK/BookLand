@@ -52,21 +52,12 @@ def delete_account(request):
     if request.method == 'POST':
         user = request.user
         
-        # Try to delete the user, with error handling for potential database inconsistencies
-        try:
-            # Log the user out first
-            logout(request)
-            # Then delete the user - Django will cascade delete related objects
-            user.delete()
-            messages.success(request, 'Your account has been successfully deleted.')
-            return redirect('home')
-        except Exception as e:
-            # Log the specific error for debugging
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.error(f"Error deleting user account: {str(e)}")
-            messages.error(request, f'There was an error deleting your account: {str(e)}. Please contact customer support.')
-            return redirect('profile')
+        # Log the user out first
+        logout(request)
+        # Then delete the user - Django will cascade delete related objects
+        user.delete()
+        messages.success(request, 'Your account has been successfully deleted.')
+        return redirect('home')
             
     # If not POST, redirect to profile
     return redirect('profile')
