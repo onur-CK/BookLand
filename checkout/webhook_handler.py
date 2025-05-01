@@ -24,23 +24,30 @@ class StripeWH_Handler:
         customer_email = order.email
         subject = f'BookLand - Order Confirmation {order.order_number}'
         
-        # Render email templates to strings
+        # Create context for the email template
+        context = {
+            'order': order, 
+            'contact_email': settings.DEFAULT_FROM_EMAIL
+        }
+        
+        # Render HTML email
         html_message = render_to_string(
-            'checkout/confirmation_email/confirmation_email_body.html',
-            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL}
+            'checkout/confirmation_emails/confirmation_email_body.html',
+            context
         )
         
         # Create plain text version
         plain_message = strip_tags(html_message)
         
-        # Send email
-        send_mail(
+        # Send email with both HTML and text versions
+        msg = EmailMultiAlternatives(
             subject,
             plain_message,
             settings.DEFAULT_FROM_EMAIL,
-            [customer_email],
-            html_message=html_message
+            [customer_email]
         )
+        msg.attach_alternative(html_message, "text/html")
+        msg.send()
 
     def handle_event(self, event):
         """
