@@ -61,8 +61,11 @@ def delete_account(request):
             messages.success(request, 'Your account has been successfully deleted.')
             return redirect('home')
         except Exception as e:
-            # More robust error handling
-            messages.error(request, 'There was an error deleting your account. Please contact customer support.')
+            # Log the specific error for debugging
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error deleting user account: {str(e)}")
+            messages.error(request, f'There was an error deleting your account: {str(e)}. Please contact customer support.')
             return redirect('profile')
             
     # If not POST, redirect to profile
