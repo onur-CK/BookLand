@@ -61,10 +61,9 @@
         <div class="col-12 col-md-8 col-lg-6">
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
-                    <!-- Search input that preserves previous search term -->
                     <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}"{% endif %}>
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi bi-search"></i>
+                    <button class="btn" style="background-color: orangered;" type="submit">
+                        <i class="bi bi-search" style="color: white;"></i>
                     </button>
                 </div>
             </form>
@@ -134,28 +133,21 @@
                             {% endif %}
                         </div>
                     </div>
-                    <!-- Card actions: add to cart, view details, add to wishlist -->
+                    <!-- Card actions: add to car and view details -->
                     <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
                         <!-- Add to cart form -->
                         <form action="{% url 'add_to_cart' product.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <button type="submit" class="btn" style="background-color: orangered; color: white;"><i class="bi bi-cart-plus fs-6"></i>
+                            <button type="submit" class="btn" style="background-color: orangered; color: white;">
+                                <i class="bi bi-cart-plus fs-6"></i>
                             </button>
                         </form>
                         <!-- View details link -->
-                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" data-bs-toggle="tooltip" title="View details">
-                            <i class="bi bi-info-circle-fill fs-5"></i>
+                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon">
+                            <i class="bi bi-info-circle-fill fs-4"></i>
                         </a>
-                        <!-- Add to wishlist form -->
-                        <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <button type="submit" class="btn {% if product.id in wishlist_ids %}btn-danger{% else %}btn-outline-danger{% endif %} btn-sm wishlist-btn">
-                                <i class="bi {% if product.id in wishlist_ids %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

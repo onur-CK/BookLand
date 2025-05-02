@@ -15,11 +15,6 @@ def all_products(request):
     direction = None
     current_sorting = None
     active_category = None
-    wishlist_ids = []
-
-    if request.user.is_authenticated:
-        wishlist_items = WishlistItem.objects.filter(user=request.user)
-        wishlist_ids = [item.book.id for item in wishlist_items]  
 
     if request.GET:
         # Handle categories filter
@@ -57,10 +52,10 @@ def all_products(request):
         'products': products,
         'search_term': query,
         'active_category': active_category,
-        'wishlist_ids': wishlist_ids,
     }
 
     return render(request, 'products/products.html', context)
+
 
 def product_detail(request, product_id):
     """A view to show individual product details"""

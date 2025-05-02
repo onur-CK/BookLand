@@ -119,6 +119,7 @@ def add_to_wishlist(request, book_id):
 def remove_from_wishlist(request, book_id):
     """ Remove a book from the user's wishlist """
     book = get_object_or_404(Book, pk=book_id)
+    redirect_url = request.POST.get('redirect_url')
 
     try:
         wishlist_item = WishlistItem.objects.get(user=request.user, book=book)
@@ -127,8 +128,12 @@ def remove_from_wishlist(request, book_id):
     except WishlistItem.DoesNotExist:
         messages.error(request, f'{book.title} was not in your wishlist')
 
-    # Redirection to wishlist page
-    return redirect('wishlist')
+    # Redirection to page they came from
+    if redirect_url:
+        return redirect(redirect_url)
+
+    # If no redirection URL, go to product detail page
+    return redirect('product_detail', book_id)
 
 
 @login_required
