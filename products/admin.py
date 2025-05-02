@@ -25,8 +25,7 @@ class BookAdmin(admin.ModelAdmin):
             'fields': ('title', 'author', 'description', 'category')
         }),
         ('Image', {
-            'fields': ('image', 'image_alt'),
-            'description': 'Upload an image and provide alternative text for accessibility and SEO'
+            'fields': ('image',)
         }),
         ('Pricing & Inventory', {
             'fields': ('price', 'inventory', 'available', 'rating')
