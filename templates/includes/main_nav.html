@@ -36,8 +36,8 @@
 
     <!-- Hamburger Menu Button for mobile navigation
          Source: https://getbootstrap.com/docs/5.3/components/navbar/#toggler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -105,7 +105,7 @@
       <!-- Shopping Cart for Desktop (hidden on small screens)
            Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
       <div class="d-none d-lg-block me-3">
-        <a href="{% url 'view_cart' %}" class="text-dark position-relative">
+        <a href="{% url 'view_cart' %}" class="text-dark position-relative" aria-label="View shopping cart">
           <i class="bi bi-cart2 fs-4"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ product_count|default:"0" }}
@@ -117,7 +117,7 @@
       {% if request.user.is_authenticated %}
         <!-- Wishlist for Desktop (hidden on small screens) -->
         <div class="d-none d-lg-block me-3">
-          <a href="{% url 'wishlist' %}" class="text-danger position-relative">
+          <a href="{% url 'wishlist' %}" class="text-danger position-relative" aria-label="View wishlist">
             <i class="bi bi-heart fs-4"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               {{ wishlist_count|default:"0" }}

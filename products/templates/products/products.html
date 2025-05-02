@@ -62,7 +62,7 @@
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}"{% endif %}>
-                    <button class="btn" style="background-color: orangered;" type="submit">
+                    <button class="btn" style="background-color: orangered;" type="submit" aria-label="Search books">
                         <i class="bi bi-search" style="color: white;"></i>
                     </button>
                 </div>
@@ -138,14 +138,14 @@
                         <!-- Add to cart form -->
                         <form action="{% url 'add_to_cart' product.id %}" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="quantity" value="1" aria-label="Product quantity">
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <button type="submit" class="btn" style="background-color: orangered; color: white;">
+                            <button type="submit" class="btn" style="background-color: orangered; color: white;" aria-label="Add to cart" aria-label="Add to cart">
                                 <i class="bi bi-cart-plus fs-6"></i>
                             </button>
                         </form>
                         <!-- View details link -->
-                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon">
+                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" aria-label="View book details">
                             <i class="bi bi-info-circle-fill fs-4"></i>
                         </a>
                     </div>

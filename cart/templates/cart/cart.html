@@ -75,10 +75,9 @@
                                             name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                         <!-- Update button with refresh icon -->
-                                        <button class="btn btn-sm btn-outline-dark update-link mt-5"
-                                            data-item_id="{{ item.item_id }}">
+                                        <button class="btn btn-sm btn-outline-dark update-link mt-5" data-item_id="{{ item.item_id }}" aria-label="Update quantity">
                                             <i class="bi bi-arrow-repeat" title="Click to save the changes."></i>
-                                        </button>
+                                          </button>
                                     </div>
                                 </form>
                             </td>
@@ -91,9 +90,9 @@
                             <td class="py-3">
                                 <form method="POST" action="{% url 'remove_from_cart' item.item_id %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-link text-danger p-0 mt-5">
+                                    <button type="submit" class="btn btn-link text-danger p-0 mt-5" aria-label="Remove item from cart">
                                         <i class="bi bi-trash"></i>
-                                    </button>
+                                      </button>
                                 </form>
                             </td>
                         </tr>

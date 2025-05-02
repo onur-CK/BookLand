@@ -199,7 +199,7 @@
 
 /* Apply orange background to all rating badges */
 .badge.bg-secondary {
-    background-color: #f39c12 !important; /* Using the same orange color as on product detail page */
+    background-color: #f39c12 !important;
 }
 
 /* Product Detail Page Specific Styles */
