@@ -1,13 +1,16 @@
 {% extends "account/email/base_message.txt" %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this email because you or someone else tried to signup for an
-account using email address:
+{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this email because you or someone else tried to create an account using this email address:
 
 {{ email }}
 
-However, an account using that email address already exists.  In case you have
-forgotten about this, please use the password forgotten procedure to recover
-your account:
+However, an account with this email address already exists at BookLand. If you've forgotten your password, please use our password reset feature to recover your account by clicking the link below:
 
-{{ password_reset_url }}{% endblocktrans %}{% endautoescape %}{% endblock content %}
+{{ password_reset_url }}
+
+If you need any assistance with your BookLand account, our customer support team is available to help at booklandst@gmail.com.
+
+Happy reading!
+The BookLand Team
+{% endblocktrans %}{% endautoescape %}{% endblock content %}

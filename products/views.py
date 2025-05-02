@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import reverse, redirect, get_object_or_404, render
 from django.db.models.functions import Lower
+from profiles.models import WishlistItem
 
 def all_products(request):
     """A view to show all products"""
@@ -14,6 +15,11 @@ def all_products(request):
     direction = None
     current_sorting = None
     active_category = None
+    wishlist_ids = []
+
+    if request.user.is_authenticated:
+        wishlist_items = WishlistItem.objects.filter(user=request.user)
+        wishlist_ids = [item.book.id for item in wishlist_items]  
 
     if request.GET:
         # Handle categories filter
@@ -51,24 +57,35 @@ def all_products(request):
         'products': products,
         'search_term': query,
         'active_category': active_category,
+        'wishlist_ids': wishlist_ids,
     }
 
     return render(request, 'products/products.html', context)
 
 def product_detail(request, product_id):
-    """A veiw to show individual product deatails"""
+    """A view to show individual product details"""
     product = get_object_or_404(Book, pk=product_id)
+    
+    # Check if product is in user's wishlist
+    in_wishlist = False
+    if request.user.is_authenticated:
+        # Check if this product is in the user's wishlist
+        in_wishlist = WishlistItem.objects.filter(
+            user=request.user, 
+            book=product
+        ).exists()
 
-    # Get related books (same cateogory)
+    # Get related books (same category)
     related_books = []
     if product.category:
         related_books = Book.objects.filter(
             category=product.category
-        ).exclude(id=product.id)[:4] # Limit to 4 related books
+        ).exclude(id=product.id)[:4]  # Limit to 4 related books
 
     context = {
         'product': product,
         'related_books': related_books,
+        'in_wishlist': in_wishlist,
     }
 
     return render(request, 'products/product_detail.html', context)
