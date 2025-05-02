@@ -90,8 +90,8 @@
              Source: Django documentation on query string parameters
              https://docs.djangoproject.com/en/5.1/ref/request-response/#querydict-objects -->
         <div class="col-12 col-md-6">
-            <div class="sort-select-wrapper">
-                <select id="sort-selector" class="form-select form-select-sm">
+            <div class="sort-select-wrapper d-flex justify-content-md-end">
+                <select id="sort-selector" class="form-select form-select-sm w-auto">
                     <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                     <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
