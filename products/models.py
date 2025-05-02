@@ -23,6 +23,8 @@ class Book(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True,
                                  validators=[MinValueValidator(0), MaxValueValidator(5)])
     image = models.ImageField(null=True, blank=True)
+    image_alt = models.CharField(max_length=255, null=True, blank=True, 
+                               help_text="Alternative text for image (important for SEO and accessibility)")
     inventory = models.IntegerField(default=0)
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

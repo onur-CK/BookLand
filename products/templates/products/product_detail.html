@@ -14,7 +14,7 @@
             <div class="product-detail-image">
                 {% if product.image %}
                 <!-- Show actual product image if available -->
-                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid">
+                <img src="{{ product.image.url }}" alt="{{ product.image_alt|default:product.title }}" class="img-fluid">
                 {% else %}
                 <!-- Display placeholder if no image exists -->
                 <div class="book-image-container">

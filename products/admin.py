@@ -22,7 +22,11 @@ class BookAdmin(admin.ModelAdmin):
     # Add fieldsets to organize the admin form better
     fieldsets = (
         ('Book Information', {
-            'fields': ('title', 'author', 'description', 'category', 'image')
+            'fields': ('title', 'author', 'description', 'category')
+        }),
+        ('Image', {
+            'fields': ('image', 'image_alt'),
+            'description': 'Upload an image and provide alternative text for accessibility and SEO'
         }),
         ('Pricing & Inventory', {
             'fields': ('price', 'inventory', 'available', 'rating')
