@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>About BookLand</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12 col-md-6">
+            <h3>Our Story</h3>
+            <p>
+                Welcome to BookLand, an online bookstore born from a passion for literature and a desire to create a 
+                digital space where readers can easily discover their next favorite book.
+            </p>
+            <p>
+                Established in 2025, BookLand was founded by a small group of book enthusiasts who believe that 
+                finding the perfect book should be a joyful and seamless experience. We understand the excitement 
+                of discovering a new author, diving into a compelling narrative, or gaining fresh insights from 
+                thoughtfully curated books.
+            </p>
+            <p>
+                Our mission is to connect readers with books that inspire, educate, and entertain, while providing 
+                an exceptional shopping experience from browse to delivery.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column justify-content-center p-4">
+                    <blockquote class="blockquote mb-0">
+                        <p>
+                            "Books are a uniquely portable magic. BookLand exists to share that magic with readers everywhere."
+                        </p>
+                        <footer class="blockquote-footer">The BookLand Team</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3>What Sets Us Apart</h3>
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-book text-orange mb-3" style="font-size: 2.5rem;"></i>
+                            <h4>Curated Selection</h4>
+                            <p>
+                                Rather than overwhelming you with millions of titles, we carefully select books across 
+                                philosophy, psychology, literature, biographies, and self-development to ensure quality 
+                                over quantity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-truck text-orange mb-3" style="font-size: 2.5rem;"></i>
+                            <h4>Free Shipping</h4>
+                            <p>
+                                We believe that shipping costs shouldn't stand between you and your next great read. 
+                                That's why we offer free shipping on all orders over $40.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-people text-orange mb-3" style="font-size: 2.5rem;"></i>
+                            <h4>Community Focus</h4>
+                            <p>
+                                BookLand is more than just an online store – we're building a community of readers who 
+                                share our passion for books and ideas. Join us through our newsletter, testimonials, 
+                                and upcoming events.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12 col-md-6 order-md-2">
+            <h3>Our Vision</h3>
+            <p>
+                At BookLand, we envision a world where everyone has access to books that can transform their 
+                thinking, expand their horizons, and bring joy to their lives. We believe that the right book 
+                at the right time can be a powerful catalyst for personal growth and understanding.
+            </p>
+            <p>
+                Looking ahead, we plan to expand our offerings to include e-books, author events, and a 
+                subscription service that brings carefully selected books to your doorstep each month. We're 
+                committed to growing our community while maintaining the personalized touch that makes 
+                BookLand special.
+            </p>
+            <p>
+                Thank you for being part of our journey. We look forward to helping you discover your next 
+                great read!
+            </p>
+        </div>
+        <div class="col-12 col-md-6 order-md-1 mb-4 mb-md-0">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="mb-3">Meet The Team</h4>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <h5 class="mb-1">Emma Richardson</h5>
+                            <p class="text-muted mb-0">Founder & Chief Book Curator</p>
+                        </li>
+                        <li class="mb-3">
+                            <h5 class="mb-1">Michael Chen</h5>
+                            <p class="text-muted mb-0">Customer Experience Manager</p>
+                        </li>
+                        <li class="mb-3">
+                            <h5 class="mb-1">Sophia Martinez</h5>
+                            <p class="text-muted mb-0">Literature Specialist</p>
+                        </li>
+                        <li>
+                            <h5 class="mb-1">James Wilson</h5>
+                            <p class="text-muted mb-0">Technical Director</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h3 class="mb-4">Start Your Reading Journey</h3>
+            <a href="{% url 'products' %}" class="btn btn-dark btn-lg">Browse Our Collection</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

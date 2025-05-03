@@ -43,3 +43,7 @@ def returns(request):
 def privacy_policy(request):
     """Render the Privacy Policy page"""
     return render(request, 'extra_pages/privacy_policy.html')
+
+def about_us(request):
+    """Render the About Us page"""
+    return render(request, 'extra_pages/about_us.html')
