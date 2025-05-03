@@ -1,4 +1,21 @@
 {% extends "base.html" %}
+
+{% block meta %}
+    {{ block.super }}
+    <meta name="description" content="{{ product.title }} by {{ product.author }}. {{ product.description|truncatechars:120 }} Shop now at BookLand with free shipping over $40.">
+    
+    <!-- Product-specific Open Graph tags -->
+    <meta property="og:title" content="{{ product.title }} by {{ product.author }} | BookLand">
+    <meta property="og:description" content="{{ product.description|truncatechars:200 }}">
+    {% if product.image %}
+        <meta property="og:image" content="{{ product.image.url }}">
+    {% endif %}
+    <meta property="og:type" content="product">
+    <meta property="og:price:amount" content="{{ product.price }}">
+    <meta property="og:price:currency" content="USD">
+    <meta property="og:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+{% endblock %}
+
 {% load static %}
 
 {% block extra_css %}
@@ -14,7 +31,7 @@
             <div class="product-detail-image">
                 {% if product.image %}
                 <!-- Show actual product image if available -->
-                <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }}" class="img-fluid">
+                <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand" class="img-fluid">
                 {% else %}
                 <!-- Display placeholder if no image exists -->
                 <div class="book-image-container">
@@ -27,7 +44,7 @@
         <!-- Book Information Column - 7/12 of screen width on medium and larger devices -->
         <div class="col-md-7">
             <!-- Book title and author -->
-            <h1 class="book-title">{{ product.title }}</h1>
+            <h1 class="book-title">{{ product.title }} <span class="text-muted">by {{ product.author }}</span></h1>
             <p class="text-muted">{{ product.author }}</p>
 
             <!-- Rating display with badge - https://getbootstrap.com/docs/5.3/components/badge/ -->
@@ -90,7 +107,7 @@
                 <p><strong>Category:</strong>
                     <!-- Link to filtered products page for this category -->
                     <!-- Source: Django URL template tags - https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#url -->
-                    <a href="{% url 'products' %}?category={{ product.category.name }}">
+                    <a href="{% url 'products' %}?category={{ product.category.name }}" class="text-decoration-underline">
                         {{ product.category.friendly_name|default:product.category.name }}
                     </a>
                 </p>
@@ -123,7 +140,7 @@
                     <!-- Book image with link to product detail page - updated structure -->
                     <a href="{% url 'product_detail' book.id %}" class="card-img-top">
                         {% if book.image %}
-                        <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                        <img src="{{ book.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand">
                         {% else %}
                         <div class="book-image-container">
                             <span class="book-image-placeholder">Book Image</span>

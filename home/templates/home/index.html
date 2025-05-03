@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+
+{% block meta %}
+    {{ block.super }}
+    <meta name="description" content="Discover your next favorite book at BookLand, your curated online bookstore for philosophy, psychology, and self-development books with free shipping over $40.">
+{% endblock %}
+
+{% block head_title %}BookLand | Your Curated Online Bookstore for Philosophy, Psychology & Self-Development{% endblock %}
+
 {% load static %}
 
 {% block content %}
@@ -6,58 +14,46 @@
 <!-- Main Homepage Content Container
      Uses Bootstrap's container class for responsive padding and margins
      Source: https://getbootstrap.com/docs/5.3/layout/containers/ -->
-<div class="container py-2">
+     <main class="container py-2">
      <!-- Hero Section - Main headline and introduction
          Uses text-center for alignment and my-3 for vertical spacing 
          Source: https://getbootstrap.com/docs/5.3/utilities/text/ -->
      <div class="text-center my-3">
-          <h2>Discover Your Next Book</h2>
-          <!-- Lead paragraph with larger text for visual hierarchy
-             Source: https://getbootstrap.com/docs/5.3/content/typography/#lead -->
-          <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
-
-          <!-- Search Bar Section
-             Uses Bootstrap's grid system with responsive breakpoints
-             Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
-          <div class="row justify-content-center mt-3 mb-5">
-               <!-- Column sizing changes based on viewport width
-                 Source: https://getbootstrap.com/docs/5.3/layout/columns/ -->
-               <div class="col-md-8 col-lg-6">
-                    <!-- Search form using GET method to submit search queries
-                     Will redirect to search results when functionality is implemented
-                     Source: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
-                    <form method="GET" action="{% url 'products' %}" class="search-form">
-                         <!-- Input group combines form controls and buttons
-                         Source: https://getbootstrap.com/docs/5.3/forms/input-group/ -->
-                         <div class="input-group">
-                              <input type="text" class="form-control" name="q" placeholder="Search by title, author...">
-                              <!-- Search button with Bootstrap icon
-                             Source: https://icons.getbootstrap.com/icons/search/ -->
-                             <button class="btn" style="background-color: orangered;" type="submit">
-                              <i class="bi bi-search" style="color: white;"></i>
-                             </button>
-                         </div>
-                    </form>
-               </div>
+        <header class="text-center my-3">
+            <h1>Discover Your Next Book</h1>
+            <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
+        </header>
+        <section class="search-section row justify-content-center mt-3 mb-5">
+            <div class="col-md-8 col-lg-6">
+                <form method="GET" action="{% url 'products' %}" class="search-form" aria-label="Search books">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Search by title, author..." aria-label="Search terms">
+                        <button class="btn" style="background-color: orangered;" type="submit" aria-label="Search">
+                            <i class="bi bi-search" style="color: white;"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
                <!-- Promotional Banner -->
-               <div class="row justify-content-center mb-5">
-                    <div class="col-md-10 col-lg-8 mt-3">
-                              <div class="alert text-center py-3 mt-3">
-                              <i class="bi bi-truck me-2"></i>
-                              <em>FREE SHIPPING</em> on all orders over $40!
-                         </div>
+               <section class="promotional-banner row justify-content-center mb-5">
+                <div class="col-md-10 col-lg-8 mt-3">
+                    <div class="alert text-center py-3 mt-3">
+                        <i class="bi bi-truck me-2" aria-hidden="true"></i>
+                        <strong><em>FREE SHIPPING</em> on all orders over $40!</strong>
                     </div>
-               </div>   
+                </div>
+                </section>   
                
-               <!-- Call to Action Button -->
-               <div class="row justify-content-center mb-3">
+                <section class="cta-section row justify-content-center mb-3">
                     <div class="col-12 text-center">
-                    <a href="{% url 'products' %}" class="btn btn-dark btn-lg px-4 py-2">
-                         Start Shopping Now
-                    </a>
+                        <a href="{% url 'products' %}" class="btn btn-dark btn-lg px-4 py-2">
+                            Start Shopping Now
+                        </a>
                     </div>
-               </div>
+                </section>
+            </main>
                <!-- How to Choose a Book Section -->
 <div class="container mt-5 mb-5">
      <div class="row justify-content-center">

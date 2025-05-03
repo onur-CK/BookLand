@@ -1,4 +1,16 @@
 {% extends "base.html" %}
+
+{% block meta %}
+    {{ block.super }}
+    {% if active_category %}
+        <meta name="description" content="Browse our collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Quality titles, curated selection, and free shipping on orders over $40.">
+    {% else %}
+        <meta name="description" content="Shop our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
+    {% endif %}
+{% endblock %}
+
+{% block head_title %}{{ product.title }} by {{ product.author }} | BookLand {% endblock %}
+
 {% load static %}
 
 {% block extra_css %}
@@ -8,16 +20,17 @@
 {% block content %}
 <div class="container">
     <!-- Page Header Section -->
-    <div class="row">
-        <div class="col">
-            <!-- Dynamic heading that changes based on category selection -->
-            {% if active_category %}
-                <h2 class="text-center">{{ active_category.friendly_name|default:active_category.name }}</h2>
-            {% else %}
-                <h2 class="text-center">All Books</h2>
-            {% endif %}
+    <header class="page-header">
+        <div class="row">
+            <div class="col">
+                {% if active_category %}
+                    <h1 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h1>
+                {% else %}
+                    <h1 class="text-center">All Books</h1>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    </header>
     
     <!-- Category Navigation Bar 
          Source: Bootstrap documentation on badges
@@ -115,7 +128,7 @@
                     <!-- Product image with fallback for missing images -->
                     <a href="{% url 'product_detail' product.id %}" class="card-img-top">
                         {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }}">
+                            <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}">
                         {% else %}
                             <div class="book-image-container">
                                 <span class="book-image-placeholder">Book Image</span>
