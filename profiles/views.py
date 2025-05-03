@@ -202,3 +202,16 @@ def delete_testimonial(request, testimonial_id):
     }
     
     return render(request, template, context)
+
+
+def public_testimonials(request):
+    """Display all approved testimonials to all users"""
+    # Get all approved testimonials, ordered by date (newest first!)
+    approved_testimonials = Testimonial.objects.filter(is_approved=True).order_by('-date_created')
+    
+    template = 'profiles/public_testimonials.html'
+    context = {
+        'testimonials': approved_testimonials,
+    }
+    
+    return render(request, template, context)
