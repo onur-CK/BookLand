@@ -23,6 +23,7 @@
         <!-- Bootstrap responsive grid layout for wishlist items
              Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
             <section class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+                {% for item in wishlist_items %}
                 <article class="col">
                     <!-- Card component for each wishlist item 
                          Source: https://getbootstrap.com/docs/5.3/components/card/ -->

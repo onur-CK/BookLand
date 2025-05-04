@@ -29,7 +29,7 @@
             
             <address class="contact-info">
                 <h3>Customer Support</h3>
-                <p><i class="bi bi-envelope-fill me-2"></i><a href="mailto:support@bookland.com">support@bookland.com</a></p>
+                <p><i class="bi bi-envelope-fill me-2"></i><a href="mailto:booklandst@gmail.com">booklandst@gmail.com</a></p>
                 <p><i class="bi bi-telephone-fill me-2"></i><a href="tel:+123456789">+123 456-789</a></p>
                 
                 <h3 class="mt-4">Business Hours</h3>
@@ -51,15 +51,15 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="name" class="form-label">Your Name*</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required autocomplete="name">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email Address*</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required autocomplete="email">
                 </div>
                 <div class="mb-3">
                     <label for="subject" class="form-label">Subject*</label>
-                    <select class="form-select" id="subject" name="subject" required>
+                    <select class="form-select" id="subject" name="subject" required autocomplete="off">
                         <option value="">Select a subject</option>
                         <option value="general">General Inquiry</option>
                         <option value="order">Order Support</option>
