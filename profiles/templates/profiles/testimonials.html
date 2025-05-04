@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<main class="container">
+    <header class="row">
         <div class="col-12">
             <h1>My Testimonials</h1>
             <hr>
         </div>
-    </div>
+    </header>
 
     <div class="row">
         <!-- Sidebar Navigation -->
-        <div class="col-12 col-md-3">
+        <nav class="col-12 col-md-3">
             <div class="list-group">
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
@@ -34,15 +34,15 @@
                     <i class="bi bi-person-fill"></i> Go Back to My Profile
                 </a>
             </div>
-        </div>
+        </nav>
 
         <!-- Main Content Area -->
-        <div class="col-12 col-md-9">
+        <section class="col-12 col-md-9">
             <!-- Add New Testimonial Card -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>Share Your Experience</h5>
-                </div>
+            <article class="card mb-4">
+                <header class="card-header">
+                    <h2 class="h5">Share Your Experience</h2>
+                </header>
                 <div class="card-body">
                     <form method="POST" action="{% url 'testimonials' %}">
                         {% csrf_token %}
@@ -64,58 +64,60 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </article>
 
             <!-- Existing Testimonials -->
-            <h4>Your Testimonials</h4>
-            <hr>
-            
-            {% if testimonials %}
-                {% for testimonial in testimonials %}
-                    <div class="card mb-3">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-0">{{ testimonial.title }}</h5>
-                                <div class="text-muted small">
-                                    {% for i in "12345" %}
-                                        {% if forloop.counter <= testimonial.rating %}
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        {% else %}
-                                            <i class="bi bi-star text-warning"></i>
-                                        {% endif %}
-                                    {% endfor %}
+            <section>
+                <h2 class="h4">Your Testimonials</h2>
+                <hr>
+                
+                {% if testimonials %}
+                    {% for testimonial in testimonials %}
+                        <article class="card mb-3">
+                            <header class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="h5 mb-0">{{ testimonial.title }}</h3>
+                                    <div class="text-muted small">
+                                        {% for i in "12345" %}
+                                            {% if forloop.counter <= testimonial.rating %}
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            {% else %}
+                                                <i class="bi bi-star text-warning"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
+                                <div>
+                                    <span class="badge {% if testimonial.is_approved %}bg-success{% else %}bg-secondary{% endif %}">
+                                        {% if testimonial.is_approved %}Approved{% else %}Awaiting Approval{% endif %}
+                                    </span>
+                                </div>
+                            </header>
+                            <div class="card-body">
+                                <p>{{ testimonial.content }}</p>
+                                <footer class="small text-muted">
+                                    Last updated: <time datetime="{{ testimonial.date_updated|date:'Y-m-d H:i' }}">{{ testimonial.date_updated|date:"F j, Y, g:i a" }}</time>
+                                </footer>
                             </div>
-                            <div>
-                                <span class="badge {% if testimonial.is_approved %}bg-success{% else %}bg-secondary{% endif %}">
-                                    {% if testimonial.is_approved %}Approved{% else %}Awaiting Approval{% endif %}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p>{{ testimonial.content }}</p>
-                            <div class="small text-muted">
-                                Last updated: {{ testimonial.date_updated|date:"F j, Y, g:i a" }}
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end">
-                            <a href="{% url 'edit_testimonial' testimonial.id %}" class="btn btn-outline-primary btn-sm me-2">
-                                <i class="bi bi-pencil"></i> Edit
-                            </a>
-                            <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-outline-danger btn-sm">
-                                <i class="bi bi-trash"></i> Delete
-                            </a>
-                        </div>
+                            <footer class="card-footer d-flex justify-content-end">
+                                <a href="{% url 'edit_testimonial' testimonial.id %}" class="btn btn-outline-primary btn-sm me-2">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                                <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </footer>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-chat-quote fs-1 text-muted mb-3"></i>
+                        <h3>You haven't shared any testimonials yet</h3>
+                        <p class="text-muted">We'd love to hear about your experience with BookLand!</p>
                     </div>
-                {% endfor %}
-            {% else %}
-                <div class="text-center py-5">
-                    <i class="bi bi-chat-quote fs-1 text-muted mb-3"></i>
-                    <h3>You haven't shared any testimonials yet</h3>
-                    <p class="text-muted">We'd love to hear about your experience with BookLand!</p>
-                </div>
-            {% endif %}
-        </div>
+                {% endif %}
+            </section>
+        </section>
     </div>
-</div>
+</main>
 {% endblock %}

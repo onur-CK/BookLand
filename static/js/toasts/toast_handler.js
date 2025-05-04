@@ -1,8 +1,23 @@
-// Toast notification initialization script 
-// Source: https://getbootstrap.com/docs/5.3/components/toasts/#javascript
-
+// Toast notification initialization script for Bootstrap 5
 document.addEventListener("DOMContentLoaded", function () {
-    // Show all toasts when the page loads
-    // Uses jQuery selector to find all toast elements and trigger their show method
-    $('.toast').toast('show');
+    // Find all toast elements
+    const toastElList = document.querySelectorAll('.toast');
+    
+    // Initialize each toast and show it
+    toastElList.forEach(function (toastEl) {
+        const toast = new bootstrap.Toast(toastEl, {
+            autohide: true,
+            delay: 5000
+        });
+        toast.show();
+    });
+    
+    // Add click event listeners to all checkout buttons inside toasts
+    const checkoutButtons = document.querySelectorAll('.toast .btn-dark');
+    checkoutButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = this.getAttribute('href');
+        });
+    });
 });

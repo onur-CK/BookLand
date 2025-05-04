@@ -15,42 +15,40 @@
             <hr>
         </div>
     </header>
+    
     <div class="row">
-        <!-- Sidebar Navigation with Bootstrap list-group component 
-             Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
-             <aside class="col-12 col-md-3">
-                <nav class="list-group">
-                    <a href="{% url 'profile' %}" class="list-group-item active">
-                        Personal Information
-                    </a>
-                    <a href="{% url 'order_history' %}" class="list-group-item">
-                        Order History
-                    </a>
-                    <a href="{% url 'wishlist' %}" class="list-group-item">
-                        Wishlist
-                        <span class="badge">{{ wishlist_count }}</span>
-                    </a>
-                    <a href="{% url 'testimonials' %}" class="list-group-item">
-                        Testimonials
-                    </a>
-                    <!-- Button to trigger the delete account modal -->
-                    <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                        Delete Account
-                    </button>
-                </nav>
-            </aside>
+        <!-- Sidebar Navigation with Bootstrap list-group component -->
+        <nav class="col-12 col-md-3">
+            <div class="list-group">
+                <a href="{% url 'profile' %}" class="list-group-item active">
+                    Personal Information
+                </a>
+                <a href="{% url 'order_history' %}" class="list-group-item">
+                    Order History
+                </a>
+                <a href="{% url 'wishlist' %}" class="list-group-item">
+                    Wishlist
+                    <span class="badge">{{ wishlist_count }}</span>
+                </a>
+                <a href="{% url 'testimonials' %}" class="list-group-item">
+                    Testimonials
+                </a>
+                <!-- Button to trigger the delete account modal -->
+                <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                    Delete Account
+                </button>
+            </div>
+        </nav>
 
          <!-- Main Content Section -->
          <section class="col-12 col-md-9">
-            <!-- Personal Information Card 
-                 Source: https://getbootstrap.com/docs/5.3/components/card/ -->
-                 <article class="card mb-4">
-                    <header class="card-header">
-                        <h2 class="h5">Personal Information</h2>
-                    </header>
+            <!-- Personal Information Card -->
+            <article class="card mb-4">
+                <header class="card-header">
+                    <h2 class="h5">Personal Information</h2>
+                </header>
                 <div class="card-body">
-                    <!-- Form to update user information
-                         Django forms: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
+                    <!-- Form to update user information -->
                     <form action="{% url 'profile' %}" method="POST" id="personal-info-form">
                         {% csrf_token %}
 
@@ -73,40 +71,42 @@
                             <small class="text-muted">Email cannot be changed. Contact support if needed.</small>
                         </div>
 
-                        <!-- Default Address fields - moved from previous address card -->
-                        <h5 class="mt-4">Default Address</h5>
-                        <hr>
+                        <!-- Default Address fields -->
+                        <fieldset>
+                            <legend class="h5 mt-4">Default Address</legend>
+                            <hr>
 
-                        <div class="mb-3">
-                            <label for="id_default_street_address" class="form-label">Street Address*</label>
-                            <input type="text" class="form-control" id="id_default_street_address" name="default_street_address" value="{{ profile.default_street_address|default:'' }}" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="id_default_apartment" class="form-label">Apartment, suite etc. (optional)</label>
-                            <input type="text" class="form-control" id="id_default_apartment" name="default_apartment" value="{{ profile.default_apartment|default:'' }}">
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-12 col-md-6">
-                                <label for="id_default_city" class="form-label">City*</label>
-                                <input type="text" class="form-control" id="id_default_city" name="default_city" value="{{ profile.default_city|default:'' }}" required>
+                            <div class="mb-3">
+                                <label for="id_default_street_address" class="form-label">Street Address*</label>
+                                <input type="text" class="form-control" id="id_default_street_address" name="default_street_address" value="{{ profile.default_street_address|default:'' }}" required>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <label for="id_default_postal_code" class="form-label">Postal Code*</label>
-                                <input type="text" class="form-control" id="id_default_postal_code" name="default_postal_code" value="{{ profile.default_postal_code|default:'' }}" required>
+                            
+                            <div class="mb-3">
+                                <label for="id_default_apartment" class="form-label">Apartment, suite etc. (optional)</label>
+                                <input type="text" class="form-control" id="id_default_apartment" name="default_apartment" value="{{ profile.default_apartment|default:'' }}">
                             </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="id_default_country" class="form-label">Country*</label>
-                            <input type="text" class="form-control" id="id_default_country" name="default_country" value="{{ profile.default_country|default:'' }}" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="id_default_phone_number" class="form-label">Phone Number*</label>
-                            <input type="tel" class="form-control" id="id_default_phone_number" name="default_phone_number" value="{{ profile.default_phone_number|default:'' }}" required>
-                        </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-6">
+                                    <label for="id_default_city" class="form-label">City*</label>
+                                    <input type="text" class="form-control" id="id_default_city" name="default_city" value="{{ profile.default_city|default:'' }}" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="id_default_postal_code" class="form-label">Postal Code*</label>
+                                    <input type="text" class="form-control" id="id_default_postal_code" name="default_postal_code" value="{{ profile.default_postal_code|default:'' }}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="id_default_country" class="form-label">Country*</label>
+                                <input type="text" class="form-control" id="id_default_country" name="default_country" value="{{ profile.default_country|default:'' }}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="id_default_phone_number" class="form-label">Phone Number*</label>
+                                <input type="tel" class="form-control" id="id_default_phone_number" name="default_phone_number" value="{{ profile.default_phone_number|default:'' }}" required>
+                            </div>
+                        </fieldset>
                         
                         <div class="text-center">
                             <button type="submit" class="btn btn-dark mt-3 px-5">Save Changes</button>
@@ -114,30 +114,29 @@
                     </form>
                 </div>
             </article>
-        </section>
+         </section>
     </div>
 </main>
 
-<!-- Delete Account Modal 
-     Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
+<!-- Delete Account Modal -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+            <header class="modal-header">
+                <h2 class="modal-title h5" id="deleteAccountModalLabel">Confirm Account Deletion</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </header>
             <div class="modal-body">
                 <p class="text-danger">Warning: This action cannot be undone. All your data, including order history and saved addresses will be permanently deleted.</p>
                 <p>Are you sure you want to delete your account?</p>
             </div>
-            <div class="modal-footer">
+            <footer class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <form method="POST" action="{% url 'delete_account' %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete Account</button>
                 </form>
-            </div>
+            </footer>
         </div>
     </div>
 </div>

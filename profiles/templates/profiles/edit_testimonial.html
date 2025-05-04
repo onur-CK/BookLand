@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<main class="container">
+    <header class="row">
         <div class="col-12">
             <h1>Edit Testimonial</h1>
             <hr>
         </div>
-    </div>
+    </header>
 
     <div class="row">
         <!-- Sidebar Navigation -->
-        <div class="col-12 col-md-3">
+        <nav class="col-12 col-md-3">
             <div class="list-group">
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
@@ -31,14 +31,14 @@
                     Testimonials
                 </a>
             </div>
-        </div>
+        </nav>
 
         <!-- Main Content Area -->
-        <div class="col-12 col-md-9">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Edit Your Testimonial</h5>
-                </div>
+        <section class="col-12 col-md-9">
+            <article class="card">
+                <header class="card-header">
+                    <h2 class="h5">Edit Your Testimonial</h2>
+                </header>
                 <div class="card-body">
                     <form method="POST" action="{% url 'edit_testimonial' testimonial.id %}">
                         {% csrf_token %}
@@ -65,8 +65,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+            </article>
+        </section>
     </div>
-</div>
+</main>
 {% endblock %}

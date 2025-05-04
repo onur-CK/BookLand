@@ -6,84 +6,84 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Order History</h1>
-                <a href="{% url 'profile' %}" class="btn btn-dark">
-                    <i class="bi bi-person-fill"></i> Go Back to My Profile
-                </a>
-                <hr>
-            </div>
+<main class="container">
+    <header class="row">
+        <div class="col-12">
+            <h1>Order History</h1>
+            <a href="{% url 'profile' %}" class="btn btn-dark">
+                <i class="bi bi-person-fill"></i> Go Back to My Profile
+            </a>
+            <hr>
         </div>
+    </header>
 
-        <div class="row">
-            <div class="12 col-md-3">    
-                <!-- Sidebar Navigation -->
-                <div class="list-group">
-                    <a href="{% url 'profile' %}" class="list-group-item">
-                        Personal Information
-                    </a>
-                    <a href="{% url 'order_history' %}" class="list-group-item active">
+    <div class="row">
+        <nav class="col-12 col-md-3">    
+            <!-- Sidebar Navigation -->
+            <div class="list-group">
+                <a href="{% url 'profile' %}" class="list-group-item">
+                    Personal Information
+                </a>
+                <a href="{% url 'order_history' %}" class="list-group-item active">
                     Order History
-                    </a>
-                    <a href="{% url 'wishlist' %}" class="list-group-item">
+                </a>
+                <a href="{% url 'wishlist' %}" class="list-group-item">
                     Wishlist
-                    </a>
-                </div>
-                <a href="{% url 'products' %}" class="btn btn-outline-dark w-100 mt-5">
-                    Continue Shopping
                 </a>
             </div>
+            <a href="{% url 'products' %}" class="btn btn-outline-dark w-100 mt-5">
+                Continue Shopping
+            </a>
+        </nav>
 
-            <!-- Main Content Area -->
-            <div class="col-12 col-md-9">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Your Orders</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if orders %}
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+        <!-- Main Content Area -->
+        <section class="col-12 col-md-9">
+            <article class="card">
+                <header class="card-header">
+                    <h2 class="h5">Your Orders</h2>
+                </header>
+                <div class="card-body">
+                    {% if orders %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
                                         <tr>
-                                            <th>Order Number</th>
-                                            <th>Date</th>
-                                            <th>Items</th>
-                                            <th>Total</th>
-                                            <th></th>
+                                            <td>
+                                                <a href="{% url 'order_detail' order.order_number %}"
+                                                   title="{{ order.order_number }}">
+                                                    {{ order.order_number|truncatechars:6 }}
+                                                </a>
+                                            </td>
+                                            <td>{{ order.date }}</td>
+                                            <td>{{ order.lineitems.count }}</td>
+                                            <td>${{ order.grand_total }}</td>
+                                            <td>
+                                                <a href="{% url 'order_detail' order.order_number %}" 
+                                                   class="btn btn-sm btn-outline-dark">
+                                                    View Details
+                                                </a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for order in orders %}
-                                            <tr>
-                                                <td>
-                                                    <a href="{% url 'order_detail' order.order_number %}"
-                                                       title="{{ order.order_number }}">
-                                                        {{ order.order_number|truncatechars:6 }}
-                                                    </a>
-                                                </td>
-                                                <td>{{ order.date }}</td>
-                                                <td>{{ order.lineitems.count }}</td>
-                                                <td>${{ order.grand_total }}</td>
-                                                <td>
-                                                    <a href="{% url 'order_detail' order.order_number %}" 
-                                                       class="btn btn-sm btn-outline-dark">
-                                                        View Details
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        {% else %}
-                            <p class="text-center">You haven't placed any orders yet.</p>
-                        {% endif %}
-                    </div>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center">You haven't placed any orders yet.</p>
+                    {% endif %}
                 </div>
-            </div>
-        </div>
+            </article>
+        </section>
     </div>
+</main>
 {% endblock %}
