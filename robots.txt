@@ -1,9 +1,39 @@
+# BookLand robots.txt
+# Updated: May 2025
+
+# Global rules
 User-agent: *
 Disallow: /cart/
 Disallow: /checkout/
 Disallow: /profile/
 Disallow: /admin/
 Disallow: /accounts/
+Disallow: /checkout_success/
+Disallow: /order_detail/
+Disallow: /delete_testimonial/
+Disallow: /edit_testimonial/
+Disallow: /*?*  # Block URLs with query parameters
 Allow: /
 
+# Googlebot specific rules
+User-agent: Googlebot
+Crawl-delay: 10
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /checkout_success/
+
+# Bing specific rules
+User-agent: Bingbot
+Crawl-delay: 10
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /checkout_success/
+
+# Sitemap location
 Sitemap: https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/sitemap.xml

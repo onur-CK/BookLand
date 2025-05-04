@@ -3,11 +3,9 @@
 {% block meta %}
 {{ block.super }}
 {% if active_category %}
-<meta name="description"
-    content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
+    <meta name="description" content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
 {% else %}
-<meta name="description"
-    content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
+    <meta name="description" content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
 {% endif %}
 {% endblock %}
 
@@ -20,6 +18,7 @@ Browse All Books | BookLand Online Bookstore
 {% endblock %}
 
 {% load static %}
+{% load product_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
@@ -32,7 +31,7 @@ Browse All Books | BookLand Online Bookstore
         <div class="row">
             <div class="col">
                 {% if active_category %}
-                <h1 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h1>
+                <h2 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h2>
                 {% else %}
                 <h1 class="text-center">All Books</h1>
                 {% endif %}
@@ -112,7 +111,8 @@ Browse All Books | BookLand Online Bookstore
              https://docs.djangoproject.com/en/5.1/ref/request-response/#querydict-objects -->
         <div class="col-12 col-md-6">
             <div class="sort-select-wrapper d-flex justify-content-md-end">
-                <select id="sort-selector" class="form-select form-select-sm w-auto">
+                <label for="sort-selector" class="visually-hidden">Sort products by</label>
+                <select id="sort-selector" class="form-select form-select-sm w-auto" aria-label="Sort products">
                     <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                     <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
@@ -136,9 +136,10 @@ Browse All Books | BookLand Online Bookstore
                 <!-- Product image with fallback for missing images -->
                 <a href="{% url 'product_detail' product.id %}" class="card-img-top">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" loading="lazy" 
-                        alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}"
-                        itemprop="image">
+                    <picture>
+                        <source srcset="{{ product.image.url|webp_image_url }}" type="image/webp">
+                        <img src="{{ product.image.url }}" width="250" height="350" alt="{{ product.title }}">
+                      </picture>
                     {% else %}
                     <figure class="book-image-container">
                         <figcaption class="book-image-placeholder">Book Image</figcaption>
@@ -147,7 +148,7 @@ Browse All Books | BookLand Online Bookstore
                 </a>
                 <!-- Product information -->
                 <div class="card-body p-2">
-                    <h2 class="h6 card-title text-truncate" itemprop="name">{{ product.title }}</h2>
+                    <h3 class="h6 card-title text-truncate" itemprop="name">{{ product.title }}</h3>
                     <p class="card-text text-muted small mb-1" itemprop="author">{{ product.author }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="price-tag fw-bold" itemprop="price" content="{{ product.price }}">${{ product.price }}</span>
@@ -194,27 +195,12 @@ Browse All Books | BookLand Online Bookstore
         <div class="col-12 d-flex justify-content-center mt-4">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    {% if products.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                    <li class="page-item"><a class="page-link"
-                            href="?page={{ products.previous_page_number }}">Previous</a></li>
-                    {% endif %}
-
                     {% for num in products.paginator.page_range %}
-                    {% if products.number == num %}
-                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
+                      <li class="page-item{% if products.number == num %} active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                      </li>
                     {% endfor %}
-
-                    {% if products.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last
-                            &raquo;</a></li>
-                    {% endif %}
-                </ul>
+                  </ul>
             </nav>
         </div>
     </nav>

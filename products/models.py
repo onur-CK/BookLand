@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from PIL import Image
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -27,6 +28,18 @@ class Book(models.Model):
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            # Save original image
+            super().save(*args, **kwargs)
+            
+            # Create WebP version
+            img = Image.open(self.image.path)
+            webp_path = f"{self.image.path.split('.')[0]}.webp"
+            img.save(webp_path, 'WEBP', quality=85)
+        else:
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} by {self.author}"

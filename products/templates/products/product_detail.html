@@ -19,6 +19,7 @@
 {% block head_title %}{{ product.title }} by {{ product.author }} | BookLand Online Bookstore{% endblock %}
 
 {% load static %}
+{% load product_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
@@ -33,7 +34,10 @@
             <div class="product-detail-image">
                 {% if product.image %}
                 <!-- Show actual product image if available -->
-                <img src="{{ product.image.url }}" width="250" height="350" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand" class="img-fluid" itemprop="image">
+                <picture>
+                    <source srcset="{{ product.image.url|webp_image_url }}" type="image/webp">
+                    <img src="{{ product.image.url }}" width="250" height="350" alt="{{ product.title }}">
+                </picture>
                 {% else %}
                 <!-- Display placeholder if no image exists -->
                 <div class="book-image-container">

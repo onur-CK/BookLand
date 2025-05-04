@@ -12,6 +12,7 @@ def categories_processor(request):
 
     return context
 
+@register.filter
 def webp_image_url(image_url):
     """Convert image URL to WebP format"""
     if not image_url:

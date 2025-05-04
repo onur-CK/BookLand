@@ -5,6 +5,10 @@ from django.shortcuts import reverse, redirect, get_object_or_404, render
 from django.db.models.functions import Lower
 from profiles.models import WishlistItem
 from django.core.paginator import Paginator
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
 
 
 def all_products(request):
@@ -90,5 +94,18 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+def resize_image(image, size=(300, 450)):
+    img = Image.open(image)
+    img = img.convert('RGB')
+    img.thumbnail(size)
+    output = BytesIO()
+    img.save(output, format='JPEG', quality=80)
+    output.seek(0)
+    return InMemoryUploadedFile(output, 'ImageField', 
+                               f"{image.name.split('.')[0]}.jpg", 
+                               'image/jpeg', 
+                               output.getbuffer().nbytes, None)
 
 
