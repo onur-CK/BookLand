@@ -11,7 +11,7 @@
 
 ## Keyword Research
 
-[Keyword Research Doc](media/seo_marketing/Keyword%20Research%20Doc.png)
+[Keyword Research Doc](media/seo_marketing/Seo_and_Marketing_Doc.png)
 
 ### Initial Keyword Brainstorming
 Based on the nature of our BookLand online bookstore, we identified the following potential keywords(Due to the two-word limitation imposed by Wordtracker, we conducted a broader keyword research using Google.):

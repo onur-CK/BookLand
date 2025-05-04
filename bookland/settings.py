@@ -91,6 +91,7 @@ TEMPLATES = [
                 'profiles.contexts.wishlist_count',
                 'products.contexts.categories_processor',
                 'cart.contexts.cart_contents',
+                'bookland.message_processor.categorize_messages',
             ],
         },
     },

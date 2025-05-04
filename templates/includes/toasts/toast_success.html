@@ -1,63 +1,20 @@
-<!-- Success toast notification (green)
-     Source: https://getbootstrap.com/docs/5.3/components/toasts/#custom-content -->
-     <div class="toast custom-toast rounded-0 border-top-0" data-autohide="false">
-        <!-- Custom arrow indicator for visual appeal -->
-        <div class="arrow-up arrow-success"></div>
-        <!-- Green top border to visually indicate success type -->
-        <div class="w-100 toast-capper bg-success"></div>
-        <div class="toast-header bg-white text-dark">
-            <strong class="me-auto">Success!</strong>
-            <!-- Close button (X) in the top right -->
-            <button type="button" class="btn-close text-dark" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <!-- Toast body containing success message and potentially cart information -->
-        <div class="toast-body bg-white">
-            <div class="row">
-                <div class="col">
-                    {{ message }}
-                    <!-- Only show horizontal rule if we have cart items to display below or it's a removal message -->
-                    {% if grand_total and not on_profile_page and product_count or 'removed' in message|lower %}
-                        <hr class="mt-1 mb-3">
-                    {% endif %}
-                </div>
+<!-- Success toast notification (green) for non-shopping messages -->
+<div class="toast custom-toast rounded-0 border-top-0" data-autohide="false">
+    <!-- Custom arrow indicator for visual appeal -->
+    <div class="arrow-up arrow-success"></div>
+    <!-- Green top border to visually indicate success type -->
+    <div class="w-100 toast-capper bg-success"></div>
+    <div class="toast-header bg-white text-dark">
+        <strong class="me-auto">Success!</strong>
+        <!-- Close button (X) in the top right -->
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <!-- Toast body containing success message -->
+    <div class="toast-body bg-white">
+        <div class="row">
+            <div class="col">
+                {{ message }}
             </div>
-            <!-- Special handling for cart notifications - only show for cart-related actions 
-             Also include messages related to cart removals by checking for "removed" keyword -->
-            {% if grand_total and not on_profile_page and product_count or 'removed' in message|lower %}
-                <!-- Shopping cart content -->
-                <p class="logo-font bg-white text-dark py-1">Your Cart ({{ product_count }})</p>
-                <div class="cart-notification-wrapper">
-                    {% for item in cart_items %}
-                        <div class="row">
-                            <div class="col-3 my-1">
-                                {% if item.book.image %}
-                                    <img class="w-100" src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
-                                {% else %}
-                                    <img class="w-100" src="{{ MEDIA_URL }}placeholder.png" alt="{{ item.book.title }}">
-                                {% endif %}
-                            </div>
-                            <div class="col-9">
-                                <p class="my-0"><strong>{{ item.book.title }}</strong></p>
-                                <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <!-- Checkout section showing cart totals -->
-                <div class="row">
-                    <div class="col">
-                        <strong><p class="mt-3 mb-1 text-dark">
-                            Total{% if shipping %} (Exc. shipping){% endif %}: 
-                            <span class="float-end">${{ total|floatformat:2 }}</span>
-                        </p></strong>
-                        <a href="{% url 'view_cart' %}" class="btn btn-dark btn-block rounded-0">
-                            <span class="text-uppercase">Go To Secure Checkout</span>
-                            <span class="icon">
-                                <i class="bi bi-lock"></i>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            {% endif %}
         </div>
     </div>
+</div>

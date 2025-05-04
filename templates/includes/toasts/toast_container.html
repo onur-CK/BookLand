@@ -1,21 +1,28 @@
-<!-- Toast Container for Bootstrap notifications
-     Source: https://getbootstrap.com/docs/5.3/components/toasts/#placement -->
-     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
-        {% if messages %}
-            {% for message in messages %}
-                {% with message.level as level %}
-                    <!-- Decide which toast template to use based on Django message level
-                         Source: https://docs.djangoproject.com/en/5.1/ref/contrib/messages/#message-levels -->
-                    {% if level == 40 %}
-                        {% include 'includes/toasts/toast_error.html' %}
-                    {% elif level == 30 %}
-                        {% include 'includes/toasts/toast_warning.html' %}
-                    {% elif level == 25 %}
-                        {% include 'includes/toasts/toast_success.html' %}
-                    {% else %}
-                        {% include 'includes/toasts/toast_info.html' %}
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
+<!-- Toast container that uses message categorization -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <!-- Shopping-related success messages with cart preview -->
+    {% for message in shopping_messages %}
+        {% if message.level == 25 %}
+            {% include 'includes/toasts/toast_success_shopping.html' %}
+        {% elif message.level == 40 %}
+            {% include 'includes/toasts/toast_error.html' %}
+        {% elif message.level == 30 %}
+            {% include 'includes/toasts/toast_warning.html' %}
+        {% else %}
+            {% include 'includes/toasts/toast_info.html' %}
         {% endif %}
-    </div>
+    {% endfor %}
+    
+    <!-- Other success messages (regular toasts) -->
+    {% for message in other_messages %}
+        {% if message.level == 40 %}
+            {% include 'includes/toasts/toast_error.html' %}
+        {% elif message.level == 30 %}
+            {% include 'includes/toasts/toast_warning.html' %}
+        {% elif message.level == 25 %}
+            {% include 'includes/toasts/toast_success.html' %}
+        {% else %}
+            {% include 'includes/toasts/toast_info.html' %}
+        {% endif %}
+    {% endfor %}
+</div>
