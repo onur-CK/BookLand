@@ -1,6 +1,6 @@
 # BookLand - SEO and Marketing Documentation
 
-[Seo and Marketing DOC](media/seo_marketing/Seo%20and%20Marketing%20Doc.png)
+![Seo and Marketing DOC](media/seo_marketing/Seo%20and%20Marketing%20Doc.png)
 
 ## Table of Contents
 1. [Keyword Research](#keyword-research)
@@ -11,7 +11,7 @@
 
 ## Keyword Research
 
-[Keyword Research Doc](media/seo_marketing/Seo_and_Marketing_Doc.png)
+![Keyword Research Doc](media/seo_marketing/Seo_and_Marketing_Doc.png)
 
 ### Initial Keyword Brainstorming
 Based on the nature of our BookLand online bookstore, we identified the following potential keywords(Due to the two-word limitation imposed by Wordtracker, we conducted a broader keyword research using Google.):
@@ -480,7 +480,7 @@ We've researched several successful online and physical bookstores to understand
 
 ## SEO Improvements
 
-[SEO Improvements Doc](media/seo_marketing/SEO%20Improvements%20Doc.png)
+![SEO Improvements Doc](media/seo_marketing/SEO%20Improvements%20Doc.png)
 
 ### Meta Tags Implementation
 We have implemented the following SEO improvements in our HTML structure:
@@ -521,7 +521,7 @@ We've employed semantic HTML5 elements throughout the site for better SEO:
 
 ## Marketing Strategies
 
-[Marketing Strategies Doc](media/seo_marketing/Marketing%20Strategies%20Doc.png)
+![Marketing Strategies Doc](media/seo_marketing/Marketing%20Strategies%20Doc.png)
 
 Based on our business model and target audience, we've selected the following marketing strategies:
 
@@ -678,7 +678,7 @@ GDPR compliance isn't just a legal requirement for serving European customers—
 
 ## Implementation Guide
 
-[Other Things to Remember Doc](media/seo_marketing/Other%20things%20to%20remember%20doc.png)
+![Other Things to Remember Doc](media/seo_marketing/Other%20things%20to%20remember%20doc.png)
 
 ### 1. Creating a Sitemap.xml
 A sitemap has been implemented at the root directory of the project. This sitemap includes:
@@ -881,7 +881,7 @@ The newsletter will be sent bi-weekly and include:
 - Exclusive discounts
 - Reading tips and articles
 
-[Newsletter Sub](media/seo_marketing/Newsletter%20Sub.png)
+![Newsletter Sub](media/seo_marketing/Newsletter%20Sub.png)
 
 ### 6. Privacy Policy
 A comprehensive Privacy Policy has been created and is accessible via the footer of every page. The policy includes:
