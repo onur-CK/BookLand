@@ -1,16 +1,6 @@
 from .models import Category
+from django.template.defaultfilters import register
 
-def categories_processor(request):
-    """
-    Context processor to add all categories to all templates
-    """
-    all_categories = Category.objects.all().order_by('name')
-
-    context = {
-        'all_categories': all_categories,
-    }
-
-    return context
 
 @register.filter
 def webp_image_url(image_url):
