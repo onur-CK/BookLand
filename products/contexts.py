@@ -19,7 +19,6 @@ def categories_processor(request):
 
     context = {
         'all_categories': all_categories,
-        'webp_image_url': webp_image_url,
     }
 
     return context

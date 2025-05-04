@@ -907,21 +907,21 @@ The main accessibility issues found were related to:
 
 ##### **Desktop**
 
-![Home Page Desktop](media/lighhouse_tests/Main%20Page%20Desktop.png)
+![Home Page](media/lighhouse_tests/Main%20Page%20Desktop.png)
 
 ##### **Mobile**
 
-![Home Page Mobile](media/lighhouse_tests/Main%20Page%20Mobile.png)
+![Home Page M](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 #### **Products Page**
 
 ##### **Desktop**
 
-![Home Page Desktop](media/lighhouse_tests/Main%20Page%20Mobile.png)
+![Home Page D](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 ##### **Mobile**
 
-![Home Page Mobile](media/lighhouse_tests/Main%20Page%20Mobile.png)
+![Home Page M](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 #### **Product Details Page**
 
@@ -961,6 +961,19 @@ The main accessibility issues found were related to:
 
 
 ##### **Mobile**
+
+#### **Order History**
+
+##### **Desktop**
+
+![Order History D](media/lighhouse_tests/Order%20History%20Desktop.png)
+
+##### **Mobile**
+
+![Order History M](media/lighhouse_tests/Order%20History%20Mobile.png)
+
+
+
 
 
 Performance on mobile devices was generally lower than on desktop, but still within acceptable ranges. SEO scores were slightly lower for pages with paths disallowed in robots.txt, which is expected.
