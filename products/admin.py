@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category, Book
-from .views import optimize_image
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'friendly_name')
@@ -46,9 +46,3 @@ class BookAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Book, BookAdmin)
 
-
-
-def save_model(self, request, obj, form, change):
-    if form.cleaned_data.get('image'):
-        obj.image = optimize_image(form.cleaned_data['image'])
-    super().save_model(request, obj, form, change)

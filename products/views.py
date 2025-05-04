@@ -4,11 +4,8 @@ from django.db.models import Q
 from django.shortcuts import reverse, redirect, get_object_or_404, render
 from django.db.models.functions import Lower
 from profiles.models import WishlistItem
-from PIL import Image
-from io import BytesIO
-from django.core.files.uploadedfile import InMemoryUploadedFile
-import sys
 from django.core.paginator import Paginator
+
 
 def all_products(request):
     """A view to show all products"""
@@ -95,32 +92,3 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
-def optimize_image(image):
-    """Optimize image size for web display"""
-    if not image:
-        return None
-    
-    # Open the image
-    img = Image.open(image)
-    
-    # Calculate new size while maintaining aspect ratio
-    max_size = (600, 900)  # Define maximum dimensions for book covers
-    img.thumbnail(max_size, Image.LANCZOS)
-    
-    # Convert to RGB if image has transparency
-    if img.mode == 'RGBA':
-        img = img.convert('RGB')
-    
-    # Save image to buffer
-    output = BytesIO()
-    img.save(output, format='JPEG', quality=85, optimize=True)
-    output.seek(0)
-    
-    # Return the optimized image
-    return InMemoryUploadedFile(
-        output, 'ImageField',
-        f"{image.name.split('.')[0]}.jpg",
-        'image/jpeg',
-        sys.getsizeof(output),
-        None
-    )

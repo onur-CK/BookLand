@@ -102,11 +102,10 @@ Browse All Books | BookLand Online Bookstore
                 {% endif %}
                 <!-- Show active category if present -->
                 {% if active_category %}
-                <p class="small">Category: <strong>{{ active_category.friendly_name|default:active_category.name
-                        }}</strong></p>
+                <p class="small">Category: <strong>{% if active_category.friendly_name %}{{ active_category.friendly_name }}{% else %}{{ active_category.name }}{% endif %}</strong></p>
                 {% endif %}
-            </div>
-            {% endif %}
+                </div>
+                {% endif %}
         </div>
         <!-- Sort Selector 
              Source: Django documentation on query string parameters

@@ -185,7 +185,6 @@
 }
 
 .pagination .page-link {
-    color: #2c3e50;
     border: 1px solid #e9ecef;
     margin: 0 0.125rem;
     min-width: 2.25rem;
@@ -193,7 +192,6 @@
 }
 
 .pagination .page-item.active .page-link {
-    background-color: #2c3e50;
     border-color: #2c3e50;
 }
 
