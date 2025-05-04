@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<main class="container">
+<div class="container">
     <!-- Page header section -->
-    <header class="row">
+    <div class="row">
         <div class="col-12">
             <h1>My Wishlist</h1>
             <a href="{% url 'profile' %}" class="btn btn-dark">
@@ -17,14 +17,14 @@
             </a>
             <hr>
         </div>
-    </header>
+    </div>
 
     {% if wishlist_items %}
         <!-- Bootstrap responsive grid layout for wishlist items
              Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
-            <section class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
-                {% for item in wishlist_items %}
-                <article class="col">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+            {% for item in wishlist_items %}
+                <div class="col">
                     <!-- Card component for each wishlist item 
                          Source: https://getbootstrap.com/docs/5.3/components/card/ -->
                     <div class="card h-100 book-card border">
@@ -33,14 +33,14 @@
                             {% if item.book.image %}
                                 <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
                             {% else %}
-                                <figure class="book-image-container">
-                                    <figcaption class="book-image-placeholder">Book Image</figcaption>
-                                </figure>
+                                <div class="book-image-container">
+                                    <span class="book-image-placeholder">Book Image</span>
+                                </div>
                             {% endif %}
                         </a>
                         <!-- Book information section -->
                         <div class="card-body p-2">
-                            <h2 class="card-title h6 text-truncate">{{ item.book.title }}</h2>
+                            <h6 class="card-title text-truncate">{{ item.book.title }}</h6>
                             <p class="card-text text-muted small mb-1">{{ item.book.author }}</p>
                             <!-- Price and rating display using Bootstrap flex layout
                                  Source: https://getbootstrap.com/docs/5.3/utilities/flex/ -->
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <!-- Action buttons footer -->
-                        <footer class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
+                        <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
                             <!-- Add to cart form - using POST for security
                                  Source: https://docs.djangoproject.com/en/5.0/topics/forms/ -->
                             <form action="{% url 'add_to_cart' item.book.id %}" method="POST">
@@ -73,24 +73,20 @@
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
                             </form>
-                        </footer>
+                        </div>
                     </div>
-                </article>
+                </div>
             {% endfor %}
-        </section>
+        </div>
     {% else %}
         <!-- Empty wishlist message with call-to-action
              Similar pattern to empty cart display in cart.html -->
-             <section class="text-center py-5">
-                <figure>
-                    <i class="bi bi-heart fs-1 text-muted mb-3"></i>
-                    <figcaption>
-                        <h2 class="h3">Your wishlist is empty</h2>
-                        <p class="text-muted">Save items you'd like to purchase later by clicking the heart icon on product pages.</p>
-                        <a href="{% url 'products' %}" class="btn btn-dark mt-3">Browse Books</a>
-                    </figcaption>
-                </figure>
-            </section>
+        <div class="text-center py-5">
+            <i class="bi bi-heart fs-1 text-muted mb-3"></i>
+            <h3>Your wishlist is empty</h3>
+            <p class="text-muted">Save items you'd like to purchase later by clicking the heart icon on product pages.</p>
+            <a href="{% url 'products' %}" class="btn btn-dark mt-3">Browse Books</a>
+        </div>
     {% endif %}
-</main>
+</div>
 {% endblock %}

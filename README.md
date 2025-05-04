@@ -33,6 +33,8 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [Shopping Cart](#shopping-cart)
   - [Checkout](#checkout)
   - [User Profile](#user-profile)
+  - [Testimonials](#testimonials)
+  - [Wishlist](#wishlist)
   - [Admin Features](#admin-features)
   - [Future Features](#future-features)
 - [Technologies Used](#technologies-used)

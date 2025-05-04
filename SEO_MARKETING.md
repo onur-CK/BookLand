@@ -1,5 +1,7 @@
 # BookLand - SEO and Marketing Documentation
 
+[Seo and Marketing DOC](media/seo_marketing/Seo%20and%20Marketing%20Doc.png)
+
 ## Table of Contents
 1. [Keyword Research](#keyword-research)
 2. [Research of Similar Businesses](#research-of-similar-businesses)
@@ -8,6 +10,8 @@
 5. [Implementation Guide](#implementation-guide)
 
 ## Keyword Research
+
+[Keyword Research Doc](media/seo_marketing/Keyword%20Research%20Doc.png)
 
 ### Initial Keyword Brainstorming
 Based on the nature of our BookLand online bookstore, we identified the following potential keywords(Due to the two-word limitation imposed by Wordtracker, we conducted a broader keyword research using Google.):
@@ -476,6 +480,8 @@ We've researched several successful online and physical bookstores to understand
 
 ## SEO Improvements
 
+[SEO Improvements Doc](media/seo_marketing/SEO%20Improvements%20Doc.png)
+
 ### Meta Tags Implementation
 We have implemented the following SEO improvements in our HTML structure:
 
@@ -514,6 +520,8 @@ We've employed semantic HTML5 elements throughout the site for better SEO:
 5. **URL Structure:** Clean, descriptive URLs (e.g., `/products/philosophy/` rather than `/products?category=4`)
 
 ## Marketing Strategies
+
+[Marketing Strategies Doc](media/seo_marketing/Marketing%20Strategies%20Doc.png)
 
 Based on our business model and target audience, we've selected the following marketing strategies:
 
@@ -670,13 +678,19 @@ GDPR compliance isn't just a legal requirement for serving European customers—
 
 ## Implementation Guide
 
+[Other Things to Remember Doc](media/seo_marketing/Other%20things%20to%20remember%20doc.png)
+
 ### 1. Creating a Sitemap.xml
 A sitemap has been implemented at the root directory of the project. This sitemap includes:
-- Homepage
-- Product listing pages
-- Category pages
-- Static pages (About, Contact, etc.)
-- Individual product pages
+- Homepage URL with highest priority (1.00)
+- Main section pages (cart, category pages, products) with high priority (0.80)
+- Individual product pages with medium priority (0.64)
+- Information pages (FAQ, shipping policy, etc.) with appropriate priority
+
+The sitemap follows the proper XML format and includes:
+- URL locations
+- Last modification dates
+- Priority values
 
 [XML-Sitemaps.com](https://www.xml-sitemaps.com/) - django-sitemap check this part !!!!!!!!!!!!!!!!!!
 
@@ -688,6 +702,8 @@ User-agent: *
 Disallow: /cart/
 Disallow: /checkout/
 Disallow: /profile/
+Disallow: /admin/
+Disallow: /accounts/
 Allow: /
 
 Sitemap: https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/sitemap.xml
@@ -695,16 +711,166 @@ Sitemap: https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/sitemap.xml
 
 This configuration allows search engines to crawl most pages while protecting user-specific data.
 
-### 3. Facebook Business Page
+### 3. Meta Tags and Appropriate/Semantic HTML tags(Examples of the usages from Bookland project)
+
+- base.html 
+
+```html
+<meta name="description" content="BookLand - Your curated online bookstore for philosophy, psychology, and self-development books. Free shipping over $40, thoughtful recommendations, and a community of book lovers. Find your next great read today!">
+```
+
+- product_detail.html
+
+```html
+<meta name="description" content="{{ product.title }} by {{ product.author }}. {{ product.description|truncatechars:120 }} Shop now at BookLand with free shipping over $40.">
+```
+
+- products.html
+
+```html
+{% if active_category %}
+    <meta name="description" content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
+{% else %}
+    <meta name="description" content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
+{% endif %}
+```
+
+- base.html
+
+```html
+<meta name="keywords" content="buy books online, psychology books, philosophy books, self-development books, where to buy books online not amazon, online bookstore, book recommendations, book gift ideas, biography books, new book releases, book delivery, curated book collection, free shipping books">
+```
+
+```html
+<meta name="description" content="BookLand - Your curated online bookstore for philosophy, psychology, and self-development books. Free shipping over $40, thoughtful recommendations, and a community of book lovers. Find your next great read today!">
+```
+
+- Open Graph tags for social sharing
+
+```html
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{% block og_title %}BookLand | Your Curated Online Bookstore{% endblock %}">
+<meta property="og:description" content="{% block og_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
+<meta property="og:image" content="{% block og_image %}https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/bookland-og-image.jpg{% endblock %}">
+```
+
+- Twitter Card tags
+
+```html
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% block twitter_title %}BookLand | Curated Online Bookstore{% endblock %}">
+<meta name="twitter:description" content="{% block twitter_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
+```
+
+- product_detail.html
+
+```html
+<p><strong>Category:</strong>
+    <a href="{% url 'products' %}?category={{ product.category.name }}" class="text-decoration-underline">
+        {{ product.category.friendly_name|default:product.category.name }}
+    </a>
+</p>
+<p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}</p>
+```
+
+- checkout_success.html
+
+```html
+<p>
+    A confirmation email has been sent to <strong>{{ order.email }}</strong>.
+</p>
+```
+
+- products.html
+
+```html
+{% if active_category %}
+    <h1 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h1>
+{% else %}
+    <h1 class="text-center">All Books</h1>
+{% endif %}
+```
+
+- Semantic Layout Tags
+
+```html
+<header class="row">
+    <div class="col-12">
+        <h1>Your Shopping Cart</h1>
+        <hr>
+    </div>
+</header>
+
+<section class="row">
+    <!-- Content here -->
+</section>
+
+<aside class="col-12 col-lg-4">
+    <!-- Sidebar content -->
+</aside>
+
+<footer class="bg-white border-top py-4 mt-4" itemscope itemtype="https://schema.org/WPFooter">
+    <!-- Footer content -->
+</footer>
+```
+
+- Schema.org Structured Data Markup
+
+```html
+<main class="container" itemscope itemtype="https://schema.org/Product">
+    <article class="row mt-5">
+        <!-- Product content with appropriate itemprop attributes -->
+        <h1 class="book-title" itemprop="name">{{ product.title }}</h1>
+        <p class="text-muted" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            by <span itemprop="name">{{ product.author }}</span>
+        </p>
+        <div class="rating mb-2" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <span itemprop="ratingValue">{{ product.rating }}</span>
+        </div>
+    </article>
+</main>
+```
+
+- returns.html
+
+```html
+<h2>Return Conditions</h2>
+<ul>
+    <li>Books must be returned within 30 days of purchase</li>
+    <li>Items must be in new, unread condition</li>
+    <li>Original packaging and receipt are required</li>
+    <li>Protective plastic covers must remain intact</li>
+</ul>
+
+<h2>How to Initiate a Return</h2>
+<ol>
+    <li>Log into your BookLand account</li>
+    <li>Navigate to your order history</li>
+    <li>Select the item you wish to return</li>
+    <li>Follow the online return request process</li>
+    <li>Print the provided return shipping label</li>
+</ol>
+```
+
+- Descriptive Alt Text for Images
+
+```html
+<img src="{{ item.book.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand" class="img-fluid" itemprop="image">
+```
+
+These implementations demonstrate excellent SEO practices throughout our BookLand project. The combination of descriptive meta tags, proper semantic HTML structure, Schema.org markup, and keyword emphasis with appropriate tags creates a solid foundation for search engine visibility. Our approach strikes a good balance between technical SEO requirements and creating a readable, accessible codebase.
+
+### 4. Facebook Business Page
 We've created a Facebook Business Page for BookLand that includes:
 - Professional cover and profile images featuring the BookLand logo
 - Complete "About" section with business description and link to website
 - Regular posts featuring new books
 - Content calendar for consistent posting
 
-![BookLand Facebook Page Screenshot](/media/) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[Facebook Page](https://www.facebook.com/profile.php?id=61575641435990)
 
-### 4. Newsletter Subscription
+### 5. Newsletter Subscription
 A newsletter subscription feature has been implemented using mailchimp.
 - Sign-up form in the footer of every page
 - Consent checkbox and privacy information
@@ -715,7 +881,9 @@ The newsletter will be sent bi-weekly and include:
 - Exclusive discounts
 - Reading tips and articles
 
-### 5. Privacy Policy
+[Newsletter Sub](media/seo_marketing/Newsletter%20Sub.png)
+
+### 6. Privacy Policy
 A comprehensive Privacy Policy has been created and is accessible via the footer of every page. The policy includes:
 - Types of data collected
 - How data is used
@@ -726,7 +894,8 @@ A comprehensive Privacy Policy has been created and is accessible via the footer
 
 The Privacy Policy was generated using [Privacy Policy Generator](https://www.privacypolicygenerator.info/) and customized for BookLand's specific needs. 
 
----
+[Privacy and Policy](https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/extra_pages/privacy_policy/)
+
 
 ## Additional Marketing Considerations
 

@@ -8,27 +8,25 @@
 {% block head_title %}BookLand | Independent Online Bookstore for Philosophy, Psychology & Self-Development{% endblock %}
 
 {% load static %}
-
+<!DOCTYPE html>
+<html lang="en">
 {% block content %}
 
-<!-- Main Homepage Content Container
-     Uses Bootstrap's container class for responsive padding and margins
-     Source: https://getbootstrap.com/docs/5.3/layout/containers/ -->
-     <main class="container py-2">
-     <!-- Hero Section - Main headline and introduction
-         Uses text-center for alignment and my-3 for vertical spacing 
-         Source: https://getbootstrap.com/docs/5.3/utilities/text/ -->
-     <div class="text-center my-3">
+<!-- Main Homepage Content Container -->
+<main class="container py-2">
+    <!-- Hero Section - Main headline and introduction -->
+    <div class="text-center my-3">
         <header class="text-center my-3">
             <h1>Discover Your Next Book</h1>
             <p class="lead mb-4 fs-5">Explore our carefully curated collection of books from various genres.</p>
         </header>
         <section class="search-section row justify-content-center mt-3 mb-5">
             <div class="col-md-8 col-lg-6">
-                <form method="GET" action="{% url 'products' %}" class="search-form" aria-label="Search books">
+                <form method="GET" action="{% url 'products' %}" class="search-form">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Search by title, author..." aria-label="Search terms">
-                        <button class="btn" style="background-color: orangered;" type="submit" aria-label="Search">
+                        <label for="search-input" class="visually-hidden">Search for books</label>
+                        <input type="text" id="search-input" class="form-control" name="q" placeholder="Search by title, author...">
+                        <button class="btn" style="background-color: #e34c26; color: white;" type="submit" aria-label="Search">
                             <i class="bi bi-search" style="color: white;" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -36,86 +34,93 @@
             </div>
         </section>
 
-               <!-- Promotional Banner -->
-               <section class="promotional-banner row justify-content-center mb-5">
-                <div class="col-md-10 col-lg-8 mt-3">
-                    <div class="alert text-center py-3 mt-3">
-                        <i class="bi bi-truck me-2" aria-hidden="true"></i>
-                        <strong><em>FREE SHIPPING</em> on all orders over $40!</strong>
-                    </div>
+        <!-- Promotional Banner -->
+        <section class="promotional-banner row justify-content-center mb-5">
+            <div class="col-md-10 col-lg-8 mt-3">
+                <div class="alert text-center py-3 mt-3">
+                    <i class="bi bi-truck me-2" aria-hidden="true"></i>
+                    <strong><span class="visually-hidden">Promotion:</span> FREE SHIPPING on all orders over $40!</strong>
                 </div>
-                </section>   
-               
-                <!-- Call to Action -->
-                <section class="cta-section row justify-content-center mb-3">
-                    <div class="col-12 text-center">
-                        <a href="{% url 'products' %}" class="btn btn-dark btn-lg px-4 py-2">
-                            Start Shopping Now
+            </div>
+        </section>   
+           
+        <!-- Call to Action -->
+        <section class="cta-section row justify-content-center mb-3">
+            <div class="col-12 text-center">
+                <a href="{% url 'products' %}" class="btn btn-dark btn-lg px-4 py-2" tabindex="0">
+                    Start Shopping Now
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- How to Choose a Book Section -->
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4">
+            <h2>How to Choose a Book</h2>
+            <p class="text-muted">Find your perfect next read based on what you're looking for</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-2">
+            <!-- Card 1: Find your Purpose -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-journal-bookmark fs-1 mb-3 text-orange" aria-hidden="true"></i>
+                        <h3 class="card-title h5">Find your Purpose</h3>
+                        <p class="card-text">Discover books based on topics you're passionate about</p>
+                        <a href="https://themeaningmovement.com/best-books-finding-purpose/" class="btn" style="background-color: #e34c26; color: white;" target="_blank" rel="noopener">
+                            Explore Purpose Books
                         </a>
                     </div>
-                </section>
-            </main>
-               <!-- How to Choose a Book Section -->
-<div class="container mt-5 mb-5">
-     <div class="row justify-content-center">
-         <div class="col-12 text-center mb-4">
-             <h2>How to Choose a Book</h2>
-             <p class="text-muted">Find your perfect next read based on what you're looking for</p>
-         </div>
-         
-         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-2">
-             <!-- Card 1: Find your Purpose -->
-             <div class="col">
-                 <div class="card h-100 border-0 shadow-sm">
-                     <div class="card-body text-center">
-                         <i class="bi bi-journal-bookmark fs-1 mb-3 text-orange"></i>
-                         <h5 class="card-title">Find your Purpose</h5>
-                         <p class="card-text">Discover books based on topics you're passionate about</p>
-                         <a href="https://themeaningmovement.com/best-books-finding-purpose/" class="btn" style="background-color: orangered; color: white;" target="_blank" rel="noopener" aria-label="Start exploring books to help find your purpose on The Meaning Movement website">Start Exploring</a>
-                     </div>
-                 </div>
-             </div>
-             
-             <!-- Card 2: General Reader -->
-             <div class="col">
-                 <div class="card h-100 border-0 shadow-sm">
-                     <div class="card-body text-center">
-                         <i class="bi bi-emoji-smile fs-1 mb-3 text-orange"></i>
-                         <h5 class="card-title">General Reader</h5>
-                         <p class="card-text">Find the perfect book to match your state of mind</p>
-                         <a href="https://www.wikihow.com/Choose-a-Good-Book" class="btn" style="background-color: orangered; color: white;" target="_blank" rel="noopener" aria-label="Find a good book that matches your current mood on WikiHow">Match Your Mood</a>
-                     </div>
-                 </div>
-             </div>
-             
-             <!-- Card 3: By Author -->
-             <div class="col">
-                 <div class="card h-100 border-0 shadow-sm">
-                     <div class="card-body text-center">
-                         <i class="bi bi-person-circle fs-1 mb-3 text-orange"></i>
-                         <h5 class="card-title">By Author</h5>
-                         <p class="card-text">Choose Your Favourite Author in Three Steps</p>
-                         <a href="https://weneedtotalkaboutbooks.com/2023/06/20/how-to-choose-your-favourite-author-in-three-steps/" class="btn" style="background-color: orangered; color: white;" target="_blank" rel="noopener" aria-label="Learn how to choose your favourite author in three steps on the We Need to Talk About Books website">Find Favourite Authors</a>
-                     </div>
-                 </div>
-             </div>
-             
-             <!-- Card 4: Still Not Sure -->
-             <div class="col">
-                 <div class="card h-100 border-0 shadow-sm">
-                     <div class="card-body text-center">
-                         <i class="bi bi-star fs-1 mb-3 text-orange"></i>
-                         <h5 class="card-title">Still not sure?</h5>
-                         <p class="card-text">Fun quiz to find your favorite book genre!</p>
-                         <a href="https://www.proprofs.com/quiz-school/story.php?title=what-book-genre-is-right-you" class="btn" style="background-color: orangered; color: white;" target="_blank" rel="noopener" aria-label="Take a fun quiz to discover which book genre is right for you on ProProfs">Jump to Quiz</a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
-          </div>
-     </div>
+                </div>
+            </div>
+            
+            <!-- Card 2: General Reader -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-emoji-smile fs-1 mb-3 text-orange" aria-hidden="true"></i>
+                        <h3 class="card-title h5">General Reader</h3>
+                        <p class="card-text">Find the perfect book to match your state of mind</p>
+                        <a href="https://www.wikihow.com/Choose-a-Good-Book" class="btn" style="background-color: #e34c26; color: white;" target="_blank" rel="noopener">
+                            Find Mood-Based Books
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3: By Author -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle fs-1 mb-3 text-orange" aria-hidden="true"></i>
+                        <h3 class="card-title h5">By Author</h3>
+                        <p class="card-text">Choose Your Favourite Author in Three Steps</p>
+                        <a href="https://weneedtotalkaboutbooks.com/2023/06/20/how-to-choose-your-favourite-author-in-three-steps/" class="btn" style="background-color: #e34c26; color: white;" target="_blank" rel="noopener">
+                            Find Author Guides
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4: Still Not Sure -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-star fs-1 mb-3 text-orange" aria-hidden="true"></i>
+                        <h3 class="card-title h5">Still not sure?</h3>
+                        <p class="card-text">Fun quiz to find your favorite book genre!</p>
+                        <a href="https://www.proprofs.com/quiz-school/story.php?title=what-book-genre-is-right-you" class="btn" style="background-color: #e34c26; color: white;" target="_blank" rel="noopener">
+                            Take Genre Quiz
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
