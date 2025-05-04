@@ -2,46 +2,51 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<main class="container">
+    <header class="row">
         <div class="col-12">
             <h1>Contact Us</h1>
             <hr>
         </div>
-    </div>
+    </header>
 
     {% if contact_success %}
-    <div class="row mb-4">
+    <section class="row mb-4">
         <div class="col-12">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Thank you, {{ contact_name }}!</strong> Your message has been sent successfully. We'll get back to you soon.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
-    </div>
+    </section>
     {% endif %}
 
     <div class="row">
         <!-- Contact Information -->
-        <div class="col-md-6">
-            <h4>Get in Touch</h4>
+        <section class="col-md-6">
+            <h2>Get in Touch</h2>
             <p>We're here to help and answer any questions you might have. We look forward to hearing from you!</p>
             
-            <div class="contact-info">
-                <h5>Customer Support</h5>
-                <p><i class="bi bi-envelope-fill me-2"></i>support@bookland.com</p>
-                <p><i class="bi bi-telephone-fill me-2"></i>+123 456-789</p>
+            <address class="contact-info">
+                <h3>Customer Support</h3>
+                <p><i class="bi bi-envelope-fill me-2"></i><a href="mailto:support@bookland.com">support@bookland.com</a></p>
+                <p><i class="bi bi-telephone-fill me-2"></i><a href="tel:+123456789">+123 456-789</a></p>
                 
-                <h5 class="mt-4">Business Hours</h5>
-                <p>Monday - Friday: 9:00 AM - 5:00 PM EST</p>
-                <p>Saturday: 10:00 AM - 2:00 PM EST</p>
-                <p>Sunday: Closed</p>
-            </div>
-        </div>
+                <h3 class="mt-4">Business Hours</h3>
+                <dl>
+                    <dt>Monday - Friday:</dt>
+                    <dd>9:00 AM - 5:00 PM EST</dd>
+                    <dt>Saturday:</dt>
+                    <dd>10:00 AM - 2:00 PM EST</dd>
+                    <dt>Sunday:</dt>
+                    <dd>Closed</dd>
+                </dl>
+            </address>
+        </section>
 
         <!-- Contact Form -->
-        <div class="col-md-6">
-            <h4>Send Us a Message</h4>
+        <section class="col-md-6">
+            <h2>Send Us a Message</h2>
             <form method="POST" action="{% url 'contact_us' %}">
                 {% csrf_token %}
                 <div class="mb-3">
@@ -68,7 +73,7 @@
                 </div>
                 <button type="submit" class="btn btn-dark w-100">Send Message</button>
             </form>
-        </div>
+        </section>
     </div>
-</div>
+</main>
 {% endblock %}
