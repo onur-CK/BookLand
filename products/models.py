@@ -31,13 +31,36 @@ class Book(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image:
-            # Save original image
+            # Save original image first
             super().save(*args, **kwargs)
             
-            # Create WebP version
+            # Create optimized versions in multiple sizes
             img = Image.open(self.image.path)
-            webp_path = f"{self.image.path.split('.')[0]}.webp"
-            img.save(webp_path, 'WEBP', quality=85)
+            
+            # Define image sizes (thumbnail, small, medium)
+            sizes = {
+                'thumbnail': (150, 225),  # For cart/small components
+                'small': (250, 375),      # For product cards
+                'medium': (400, 600)      # For product detail
+            }
+            
+            # Create optimized JPG and WebP versions for each size
+            img_name = self.image.name.split('.')[0]
+            img_path = self.image.path.split('.')[0]
+            
+            for size_name, dimensions in sizes.items():
+                # Create sized version
+                sized_img = img.copy()
+                sized_img.thumbnail(dimensions, Image.LANCZOS)
+                
+                # Save WebP version (better compression)
+                webp_path = f"{img_path}_{size_name}.webp"
+                sized_img.save(webp_path, 'WEBP', quality=85)
+                
+                # Save JPG version (fallback)
+                jpg_path = f"{img_path}_{size_name}.jpg"
+                sized_img = sized_img.convert('RGB')
+                sized_img.save(jpg_path, 'JPEG', quality=85, optimize=True)
         else:
             super().save(*args, **kwargs)
 

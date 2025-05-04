@@ -1,8 +1,5 @@
 from .models import Category
-from django.template.defaultfilters import register
 
-
-@register.filter
 def webp_image_url(image_url):
     """Convert image URL to WebP format"""
     if not image_url:
@@ -14,7 +11,6 @@ def webp_image_url(image_url):
     
     return webp_url
 
-# Then update context processor
 def categories_processor(request):
     """
     Context processor to add all categories to all templates
