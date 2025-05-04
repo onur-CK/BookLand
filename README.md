@@ -28,7 +28,7 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
 - [Features](#features)
   - [Navigation](#navigation)
   - [Homepage](#homepage)
-  - [Books Catalog](#books-catalog)
+  - [Search Bar](#search-bar)
   - [Product Details](#product-details)
   - [Shopping Cart](#shopping-cart)
   - [Checkout](#checkout)

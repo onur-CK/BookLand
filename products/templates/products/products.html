@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 
 {% block meta %}
-    {{ block.super }}
-    {% if active_category %}
-        <meta name="description" content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
-    {% else %}
-        <meta name="description" content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
-    {% endif %}
+{{ block.super }}
+{% if active_category %}
+<meta name="description"
+    content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
+{% else %}
+<meta name="description"
+    content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
+{% endif %}
 {% endblock %}
 
 {% block head_title %}
-    {% if active_category %}
-        {{ active_category.friendly_name|default:active_category.name|title }} Books | BookLand
-    {% else %}
-        Browse All Books | BookLand Online Bookstore
-    {% endif %}
+{% if active_category %}
+{{ active_category.friendly_name|default:active_category.name|title }} Books | BookLand
+{% else %}
+Browse All Books | BookLand Online Bookstore
+{% endif %}
 {% endblock %}
 
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -30,14 +32,14 @@
         <div class="row">
             <div class="col">
                 {% if active_category %}
-                    <h1 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h1>
+                <h1 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h1>
                 {% else %}
-                    <h1 class="text-center">All Books</h1>
+                <h1 class="text-center">All Books</h1>
                 {% endif %}
             </div>
         </div>
     </header>
-    
+
     <!-- Category Navigation Bar 
          Source: Bootstrap documentation on badges
          https://getbootstrap.com/docs/5.0/components/badge/ -->
@@ -49,24 +51,24 @@
                     All Books
                 </a>
                 <!-- Fixed category links to avoid duplication issues (see TESTING.md) -->
-                <a href="{% url 'products' %}?category=philosophy" 
-                   class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
+                <a href="{% url 'products' %}?category=philosophy"
+                    class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
                     Philosophy
                 </a>
-                <a href="{% url 'products' %}?category=psychology" 
-                   class="category-badge {% if active_category and active_category.name == 'psychology' %}active{% endif %}">
+                <a href="{% url 'products' %}?category=psychology"
+                    class="category-badge {% if active_category and active_category.name == 'psychology' %}active{% endif %}">
                     Psychology
                 </a>
-                <a href="{% url 'products' %}?category=self_development" 
-                   class="category-badge {% if active_category and active_category.name == 'self_development' %}active{% endif %}">
+                <a href="{% url 'products' %}?category=self_development"
+                    class="category-badge {% if active_category and active_category.name == 'self_development' %}active{% endif %}">
                     Self Development
                 </a>
-                <a href="{% url 'products' %}?category=literature" 
-                   class="category-badge {% if active_category and active_category.name == 'literature' %}active{% endif %}">
+                <a href="{% url 'products' %}?category=literature"
+                    class="category-badge {% if active_category and active_category.name == 'literature' %}active{% endif %}">
                     Literature
                 </a>
-                <a href="{% url 'products' %}?category=biography" 
-                   class="category-badge {% if active_category and active_category.name == 'biography' %}active{% endif %}">
+                <a href="{% url 'products' %}?category=biography"
+                    class="category-badge {% if active_category and active_category.name == 'biography' %}active{% endif %}">
                     Biography
                 </a>
             </div>
@@ -80,7 +82,7 @@
         <div class="col-12 col-md-8 col-lg-6">
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}"{% endif %}>
+                    <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}" {% endif %}>
                     <button class="btn" style="background-color: orangered;" type="submit" aria-label="Search books">
                         <i class="bi bi-search" style="color: white;"></i>
                     </button>
@@ -93,18 +95,19 @@
     <section class="row mb-4">
         <div class="col-12 col-md-6">
             {% if search_term or active_category %}
-                <div class="active-filters">
-                    <!-- Show active search term if present -->
-                    {% if search_term %}
-                        <p class="small">Search: <strong>{{ search_term }}</strong></p>
-                    {% endif %}
-                    <!-- Show active category if present -->
-                    {% if active_category %}
-                        <p class="small">Category: <strong>{{ active_category.friendly_name|default:active_category.name }}</strong></p>
-                    {% endif %}
-                </div>
+            <div class="active-filters">
+                <!-- Show active search term if present -->
+                {% if search_term %}
+                <p class="small">Search: <strong>{{ search_term }}</strong></p>
+                {% endif %}
+                <!-- Show active category if present -->
+                {% if active_category %}
+                <p class="small">Category: <strong>{{ active_category.friendly_name|default:active_category.name
+                        }}</strong></p>
+                {% endif %}
+            </div>
             {% endif %}
-        </div> 
+        </div>
         <!-- Sort Selector 
              Source: Django documentation on query string parameters
              https://docs.djangoproject.com/en/5.1/ref/request-response/#querydict-objects -->
@@ -121,65 +124,69 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Product Grid Display
          Source: Bootstrap documentation on grid system
          https://getbootstrap.com/docs/5.0/layout/grid/ -->
     <!-- Product Grid Display -->
     <section class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for product in products %}
-            <article class="col">
-                <!-- Individual Product Card -->
-                <div class="card h-100 book-card border" itemscope itemtype="https://schema.org/Book">
-                    <!-- Product image with fallback for missing images -->
-                    <a href="{% url 'product_detail' product.id %}" class="card-img-top">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}" itemprop="image">
-                        {% else %}
-                            <figure class="book-image-container">
-                                <figcaption class="book-image-placeholder">Book Image</figcaption>
-                            </figure>
+        <article class="col">
+            <!-- Individual Product Card -->
+            <div class="card h-100 book-card border" itemscope itemtype="https://schema.org/Book">
+                <!-- Product image with fallback for missing images -->
+                <a href="{% url 'product_detail' product.id %}" class="card-img-top">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" loading="lazy" 
+                        alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}"
+                        itemprop="image">
+                    {% else %}
+                    <figure class="book-image-container">
+                        <figcaption class="book-image-placeholder">Book Image</figcaption>
+                    </figure>
+                    {% endif %}
+                </a>
+                <!-- Product information -->
+                <div class="card-body p-2">
+                    <h2 class="h6 card-title text-truncate" itemprop="name">{{ product.title }}</h2>
+                    <p class="card-text text-muted small mb-1" itemprop="author">{{ product.author }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="price-tag fw-bold" itemprop="price" content="{{ product.price }}">${{ product.price }}</span>
+                        {% if product.rating %}
+                        <span class="badge bg-warning text-dark" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                            <span itemprop="ratingValue">{{ product.rating }}</span>
+                        </span>
                         {% endif %}
-                    </a>
-                    <!-- Product information -->
-                    <div class="card-body p-2">
-                        <h2 class="h6 card-title text-truncate" itemprop="name">{{ product.title }}</h2>
-                        <p class="card-text text-muted small mb-1" itemprop="author">{{ product.author }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="price-tag fw-bold" itemprop="price" content="{{ product.price }}">${{ product.price }}</span>
-                            {% if product.rating %}
-                            <span class="badge bg-warning text-dark" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                                <span itemprop="ratingValue">{{ product.rating }}</span>
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <!-- Card actions: add to car and view details -->
-                    <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
-                        <!-- Add to cart form -->
-                        <form action="{% url 'add_to_cart' product.id %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="quantity" value="1" aria-label="Product quantity">
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            <button type="submit" class="btn" style="background-color: orangered; color: white;" aria-label="Add to cart" aria-label="Add to cart">
-                                <i class="bi bi-cart-plus fs-6"></i>
-                            </button>
-                        </form>
-                        <!-- View details link -->
-                        <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon" aria-label="View book details">
-                            <i class="bi bi-info-circle-fill fs-4"></i>
-                        </a>
                     </div>
                 </div>
-            </article>
-        {% empty %}
-            <!-- Empty state when no products match criteria -->
-            <div class="col-12 text-center">
-                <p>No books found.</p>
+                <!-- Card actions: add to car and view details -->
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center p-2">
+                    <!-- Add to cart form -->
+                    <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1" aria-label="Product quantity">
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        <button type="submit" class="btn" style="background-color: orangered; color: white;"
+                            aria-label="Add to cart" aria-label="Add to cart">
+                            <i class="bi bi-cart-plus fs-6"></i>
+                        </button>
+                    </form>
+                    <!-- View details link -->
+                    <a href="{% url 'product_detail' product.id %}" class="text-primary info-icon"
+                        aria-label="View book details">
+                        <i class="bi bi-info-circle-fill fs-4"></i>
+                    </a>
+                </div>
             </div>
+        </article>
+        {% empty %}
+        <!-- Empty state when no products match criteria -->
+        <div class="col-12 text-center">
+            <p>No books found.</p>
+        </div>
         {% endfor %}
     </section>
-    
+
     <!-- Pagination Section (for future implementation)
          Source: Django documentation on pagination
          https://docs.djangoproject.com/en/5.1/topics/pagination/ -->
@@ -189,21 +196,24 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     {% if products.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                        <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{ products.previous_page_number }}">Previous</a></li>
                     {% endif %}
-                    
+
                     {% for num in products.paginator.page_range %}
-                        {% if products.number == num %}
-                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                        {% else %}
-                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                        {% endif %}
+                    {% if products.number == num %}
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
                     {% endfor %}
-                    
+
                     {% if products.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
-                        <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last &raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last
+                            &raquo;</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -214,5 +224,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'products/js/products.js' %}"></script>
+<script src="{% static 'products/js/products.js' %}"></script>
 {% endblock %}

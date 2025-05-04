@@ -199,7 +199,9 @@
 
 /* Apply orange background to all rating badges */
 .badge.bg-secondary {
-    background-color: #f39c12 !important;
+    background-color: #e67e00 !important; 
+    color: #000000; /* Black text for maximum contrast */
+    font-weight: 600; 
 }
 
 /* Product Detail Page Specific Styles */

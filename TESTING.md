@@ -907,17 +907,21 @@ The main accessibility issues found were related to:
 
 ##### **Desktop**
 
+![Home Page Desktop](media/lighhouse_tests/Main%20Page%20Desktop.png)
 
 ##### **Mobile**
 
+![Home Page Mobile](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 #### **Products Page**
 
 ##### **Desktop**
 
+![Home Page Desktop](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 ##### **Mobile**
 
+![Home Page Mobile](media/lighhouse_tests/Main%20Page%20Mobile.png)
 
 #### **Product Details Page**
 
