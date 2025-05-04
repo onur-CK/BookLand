@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<main class="container">
     <!-- Cart header section -->
-    <div class="row">
+    <header class="row">
         <div class="col-12">
             <h1>Your Shopping Cart</h1>
             <hr>
         </div>
-    </div>
+    </header>
 
     {% if cart_items %}
-    <div class="row">
+    <section class="row">
         <!-- Cart items table - left column on large screens -->
         <!-- Source: https://getbootstrap.com/docs/5.3/content/tables/ -->
         <div class="col-12 col-lg-8">
@@ -105,11 +105,11 @@
 
         <!-- Cart Summary - right column on large screens -->
         <!-- Source: https://getbootstrap.com/docs/5.3/components/card/ -->
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Cart Summary</h5>
-                </div>
+        <aside class="col-12 col-lg-4">
+            <article class="card">
+                <header class="card-header">
+                    <h2 class="h5 mb-0">Order Summary</h2>
+                </header>
                 <div class="card-body">
                     <!-- Shipping cost display -->
                     <div class="d-flex justify-content-between mb-2">
@@ -137,7 +137,7 @@
                     </div>
                     {% endif %}
                 </div>
-            </div>
+            </article>            
             <!-- Action buttons -->
             <div class="mt-3">
                 <!-- Checkout button -->
@@ -149,18 +149,18 @@
                     Continue Shopping
                 </a>
             </div>
-        </div>
+        </aside>
     </div>
     {% else %}
     <!-- Empty cart display -->
-    <div class="row">
-        <div class="col-12 text-center py-5">
+    <section class="empty-cart">
+        <figure>
             <i class="bi bi-cart-x fs-1 text-muted mb-3"></i>
-            <h3>Your cart is empty</h3>
+        </figure>
+        <h2>Your cart is empty</h2>
             <p class="text-muted">Looks like you haven't added any books to your cart yet.</p>
             <a href="{% url 'products' %}" class="btn btn-dark mt-3">Browse Books</a>
-        </div>
-    </div>
+    </section>
     {% endif %}
-</div>
+</main>
 {% endblock %}

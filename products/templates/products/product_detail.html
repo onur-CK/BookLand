@@ -16,6 +16,8 @@
     <meta property="og:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
 {% endblock %}
 
+{% block head_title %}{{ product.title }} by {{ product.author }} | BookLand Online Bookstore{% endblock %}
+
 {% load static %}
 
 {% block extra_css %}
@@ -23,7 +25,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" itemscope itemtype="https://schema.org/Product">
     <div class="row mt-5">
         <!-- Book Image Column - 5/12 of screen width on medium and larger devices -->
         <!-- Source: Bootstrap grid system documentation - https://getbootstrap.com/docs/5.3/layout/grid/ -->
@@ -31,7 +33,7 @@
             <div class="product-detail-image">
                 {% if product.image %}
                 <!-- Show actual product image if available -->
-                <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand" class="img-fluid">
+                <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }} at BookLand" class="img-fluid" itemprop="image">
                 {% else %}
                 <!-- Display placeholder if no image exists -->
                 <div class="book-image-container">
@@ -44,18 +46,23 @@
         <!-- Book Information Column - 7/12 of screen width on medium and larger devices -->
         <div class="col-md-7">
             <!-- Book title and author -->
-            <h1 class="book-title">{{ product.title }} <span class="text-muted">by {{ product.author }}</span></h1>
-            <p class="text-muted">{{ product.author }}</p>
+            <h1 class="book-title" itemprop="name">{{ product.title }}</h1>
+            <p class="text-muted" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                by <span itemprop="name">{{ product.author }}</span>
+            </p>
 
             <!-- Rating display with badge - https://getbootstrap.com/docs/5.3/components/badge/ -->
             {% if product.rating %}
-            <div class="rating mb-2">
-                <span class="badge">{{ product.rating }} / 5</span>
+            <div class="rating mb-2" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <span class="badge"><span itemprop="ratingValue">{{ product.rating }}</span> / 5</span>
             </div>
             {% endif %}
 
             <!-- Book price -->
-            <h4 class="price">${{ product.price }}</h4>
+            <h4 class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <span itemprop="priceCurrency" content="USD">$</span><span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
+                <link itemprop="availability" href="https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}" />
+            </h4>
 
             <!-- Add to cart form - Uses Django POST to send data to cart view -->
             <!-- Source: Django forms - https://docs.djangoproject.com/en/5.1/topics/forms/ -->
@@ -97,7 +104,7 @@
 
             <!-- Book description section -->
             <h4 class="mt-4">Book Description</h4>
-            <div class="book-description">
+            <div class="book-description" itemprop="description">
                 {{ product.description }}
             </div>
 

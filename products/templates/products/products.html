@@ -3,13 +3,19 @@
 {% block meta %}
     {{ block.super }}
     {% if active_category %}
-        <meta name="description" content="Browse our collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Quality titles, curated selection, and free shipping on orders over $40.">
+        <meta name="description" content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
     {% else %}
-        <meta name="description" content="Shop our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
+        <meta name="description" content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
     {% endif %}
 {% endblock %}
 
-{% block head_title %}{{ product.title }} by {{ product.author }} | BookLand {% endblock %}
+{% block head_title %}
+    {% if active_category %}
+        {{ active_category.friendly_name|default:active_category.name|title }} Books | BookLand
+    {% else %}
+        Browse All Books | BookLand Online Bookstore
+    {% endif %}
+{% endblock %}
 
 {% load static %}
 
@@ -124,11 +130,11 @@
         {% for product in products %}
             <div class="col">
                 <!-- Individual Product Card -->
-                <div class="card h-100 book-card border">
+                <div class="card h-100 book-card border" itemscope itemtype="https://schema.org/Book">
                     <!-- Product image with fallback for missing images -->
                     <a href="{% url 'product_detail' product.id %}" class="card-img-top">
                         {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}">
+                            <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}" itemprop="image">
                         {% else %}
                             <div class="book-image-container">
                                 <span class="book-image-placeholder">Book Image</span>
@@ -137,12 +143,14 @@
                     </a>
                     <!-- Product information -->
                     <div class="card-body p-2">
-                        <h6 class="card-title text-truncate">{{ product.title }}</h6>
-                        <p class="card-text text-muted small mb-1">{{ product.author }}</p>
+                        <h6 class="card-title text-truncate" itemprop="name">{{ product.title }}</h6>
+                        <p class="card-text text-muted small mb-1" itemprop="author">{{ product.author }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="price-tag fw-bold">${{ product.price }}</span>
+                            <span class="price-tag fw-bold" itemprop="price" content="{{ product.price }}">${{ product.price }}</span>
                             {% if product.rating %}
-                                <span class="badge bg-warning text-dark">{{ product.rating }}</span>
+                            <span class="badge bg-warning text-dark" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                                <span itemprop="ratingValue">{{ product.rating }}</span>
+                            </span>
                             {% endif %}
                         </div>
                     </div>

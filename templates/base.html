@@ -6,20 +6,26 @@
     <!-- Meta tags -->
     {% block meta %}
         <!-- Technical meta tags -->
+         <!-- https://ahrefs.com/blog/open-graph-meta-tags/ -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- SEO meta tags -->
         <meta name="description" content="BookLand - Your curated online bookstore for philosophy, psychology, and self-development books. Free shipping over $40, thoughtful recommendations, and a community of book lovers. Find your next great read today!">
         <meta name="keywords" content="buy books online, psychology books, philosophy books, self-development books, where to buy books online not amazon, online bookstore, book recommendations, book gift ideas, biography books, new book releases, book delivery, curated book collection, free shipping books">
+        <meta name="author" content="BookLand">
         
-        <!-- Open Graph tags for social sharing -->
+        <!-- Open Graph Tags (Facebook, LinkedIn) -->
         <!-- Source: https://ogp.me/ -->
-        <meta property="og:title" content="{% block og_title %}BookLand | Curated Online Bookstore{% endblock %}">
-        <meta property="og:description" content="{% block og_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ request.build_absolute_uri }}">
+        <meta property="og:title" content="{% block og_title %}BookLand | Your Curated Online Bookstore{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
         <meta property="og:image" content="{% block og_image %}https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/bookland-og-image.jpg{% endblock %}">
+        <meta property="og:site_name" content="BookLand">
+        <meta property="og:locale:alternate" content="en_US">
+        <meta property="fb:app_id" content="">
+        <meta property="article:publisher" content="https://www.facebook.com/profile.php?id=61575641435990">
         
         <!-- Twitter Card tags -->
         <!-- Source: https://developer.x.com/en/docs/x-for-websites/cards/overview/markup -->
@@ -27,18 +33,18 @@
         <meta name="twitter:title" content="{% block twitter_title %}BookLand | Curated Online Bookstore{% endblock %}">
         <meta name="twitter:description" content="{% block twitter_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
         <meta name="twitter:image" content="{% block twitter_image %}https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/bookland-og-image.jpg{% endblock %}">
-        
-        <!-- Facebook and General Open Graph tags -->
-        <!-- https://ahrefs.com/blog/open-graph-meta-tags/ -->
-        <meta property="og:site_name" content="BookLand">
-        <meta property="og:locale:alternate" content="en_US">
-        <meta property="article:publisher" content="https://www.facebook.com/profile.php?id=61575641435990">
-        <meta property="fb:app_id" content="">
+        <meta name="twitter:site" content="@BookLand">
         
         <!-- WhatsApp specific meta tags -->
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
         
+        <!-- Additional SEO Meta Tags -->
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="English">
+        <meta name="revisit-after" content="7 days">
+        <meta name="theme-color" content="#ff7b00">
+
         <!-- Favicon -->
         <link rel="icon" href="https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/favicon-32x32_zcf51t.png" type="image/png">
         <link rel="apple-touch-icon" href="https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/apple-touch-icon.png">
@@ -137,14 +143,14 @@
     {% endblock %}
 
     <!-- Footer section - consistent across all pages -->
-    <footer class="bg-white border-top py-4 mt-4">
+    <footer class="bg-white border-top py-4 mt-4" itemscope itemtype="https://schema.org/WPFooter">
         <div class="container">
             <div class="row">
                 <!-- Brand and Description -->
                  <div class="col-md-4">
                     <h5>Bookland</h5>
                     <hr>
-                    <p>
+                    <p itemprop="description">
                         BookLand is more than just an online bookstore. We're a community of book lovers dedicated to connecting readers with their next great adventure.
                     </p>
                  </div>
@@ -184,7 +190,7 @@
             <div class="row mt-4">
                 <div class="col text-center">
                     <hr>
-                    <p class="small">© 2025 BookLand. All rights reserved.</p>
+                    <p class="small"><span itemprop="copyrightYear">@ 2025</span> <span itemprop="copyrightHolder">BookLand</span>. All rights reserved.</p>
                 </div>
             </div> 
         </div>

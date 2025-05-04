@@ -8,18 +8,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<main class="container">
+    <header class="row">
         <div class="col-12">
             <h1>My Profile</h1>
             <hr>
         </div>
-    </div>
+    </header>
     <div class="row">
         <!-- Sidebar Navigation with Bootstrap list-group component 
              Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
-             <div class="col-12 col-md-3">
-                <div class="list-group">
+             <aside class="col-12 col-md-3">
+                <nav class="list-group">
                     <a href="{% url 'profile' %}" class="list-group-item active">
                         Personal Information
                     </a>
@@ -37,17 +37,17 @@
                     <button type="button" class="btn btn-outline-danger fw-semibold mt-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                         Delete Account
                     </button>
-                </div>
-            </div>
+                </nav>
+            </aside>
 
          <!-- Main Content Section -->
-         <div class="col-12 col-md-9">
+         <section class="col-12 col-md-9">
             <!-- Personal Information Card 
                  Source: https://getbootstrap.com/docs/5.3/components/card/ -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>Personal Information</h5>
-                </div>
+                 <article class="card mb-4">
+                    <header class="card-header">
+                        <h2 class="h5">Personal Information</h2>
+                    </header>
                 <div class="card-body">
                     <!-- Form to update user information
                          Django forms: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
@@ -113,10 +113,10 @@
                         </div>
                     </form>
                 </div>
-            </div>
-         </div>
+            </article>
+        </section>
     </div>
-</div>
+</main>
 
 <!-- Delete Account Modal 
      Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
