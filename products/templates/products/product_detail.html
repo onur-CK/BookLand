@@ -36,7 +36,7 @@
                 <!-- Show actual product image if available -->
                 <picture>
                     <source srcset="{{ product.image.url|webp_image_url }}" type="image/webp">
-                    <img src="{{ product.image.url }}" width="250" height="350" alt="{{ product.title }}">
+                    <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}" class="img-fluid">
                 </picture>
                 {% else %}
                 <!-- Display placeholder if no image exists -->

@@ -138,8 +138,8 @@ Browse All Books | BookLand Online Bookstore
                     {% if product.image %}
                     <picture>
                         <source srcset="{{ product.image.url|webp_image_url }}" type="image/webp">
-                        <img src="{{ product.image.url }}" width="250" height="350" alt="{{ product.title }}">
-                      </picture>
+                        <img src="{{ product.image.url }}" alt="{{ product.title }} by {{ product.author }} - {{ product.category.friendly_name|default:product.category.name|default:'Book' }}" class="img-fluid">
+                    </picture>
                     {% else %}
                     <figure class="book-image-container">
                         <figcaption class="book-image-placeholder">Book Image</figcaption>
