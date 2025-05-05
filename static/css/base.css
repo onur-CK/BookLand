@@ -26,12 +26,6 @@ h6 {
     margin-bottom: 1rem;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
 a:hover {
     color: var(--accent-color);
 }
@@ -130,7 +124,6 @@ footer {
 
 #newsletter-submit {
     background-color: orangered;
-    border-color: orangered;
 }
 
 .newsletter-section h4 {

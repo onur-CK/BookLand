@@ -1,5 +1,7 @@
+/* jshint esversion: 6 */
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Initialize all toasts with the Bootstrap toast method
+   
     var toastElements = document.querySelectorAll('.toast');
     
     // Convert NodeList to Array and create Toast instances

@@ -851,12 +851,29 @@ All CSS files were validated using the [W3C CSS Validator](https://jigsaw.w3.org
 |----------|--------|-------|
 | base.css | Pass | No errors |
 | products.css | Pass | No errors |
-| product_detail.css | Pass | No errors |
 | cart.css | Pass | No errors |
 | checkout.css | Pass | No errors |
 | profiles.css | Pass | No errors |
-| email.css | Pass | No errors |
-| extra_pages.css | Pass | No errors |
+
+##### **base.css**
+
+![base.css](media/css_validator/base%20css.png)
+
+##### **profiles.css**
+
+![profiles.css](media/css_validator/profiles%20css.png)
+
+##### **products.css**
+
+![products.css](media/css_validator/products%20css.png)
+
+##### **checkout.css**
+
+![checkout.css](media/css_validator/checkout%20css.png)
+
+##### **cart.css**
+
+![cart.css](media/css_validator/cart%20css.png)
 
 #### **JavaScript**
 
@@ -864,8 +881,31 @@ All JavaScript files were validated using [JSHint](https://jshint.com/).
 
 | JS File | Result | Notes |
 |---------|--------|-------|
-| toast_handler.js | Pass | No errors |
+| toast_handler.js | Pass | Warnings about undefined 'bootstrap' variable'  | 
 | stripe_elements.js | Pass | Warnings about undefined 'Stripe' variable - this is expected as it's imported via the Stripe CDN |
+| newsletter.js | Pass | No errors |
+| testimonials.js | Pass | No errors |
+| products.js | Pass | No errors |
+
+#### **newsletter.js**
+
+![newsletter.js](media/js_hint/newsletter%20js.png)
+
+#### **toast_handler.js**
+
+![toast_handler.js](media/js_hint/toast%20handler%20js.png)
+
+#### **testimonials.js**
+
+![testimonials.js](media/js_hint/testimonials%20js.png)
+
+#### **products.js**
+
+![products.js](media/js_hint/products.js.png)
+
+#### **stripe_elements.js**
+
+![stripe_elements.js](media/js_hint/stripe%20elements%20js.png)
 
 #### **Python - PEP8**
 

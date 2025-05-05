@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 // Wait for document to be ready
 document.addEventListener('DOMContentLoaded', function() {
     // Get the newsletter form
