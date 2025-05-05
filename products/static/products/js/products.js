@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 // Add event listener to sort dropdown to reload page with sort parameters
 document.getElementById('sort-selector').addEventListener('change', function() {
     var selector = this;

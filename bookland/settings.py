@@ -177,7 +177,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
+# Source: https://www.youtube.com/watch?v=r-HJv_MyOqw
+# Related walkthrough part: https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+EA101+7/courseware/eb05f06e62c64ac89823cc956fcd8191/40cc2543c48643fda09351da6fa90579/
 if 'USE_AWS' in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
@@ -192,6 +193,7 @@ if 'USE_AWS' in os.environ:
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and media files
+    # Source: Tutor Support(Tutor support shared this storages part for django 5)
     STORAGES = {
         "default": {
             "BACKEND": "custom_storages.MediaStorage",
