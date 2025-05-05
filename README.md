@@ -51,7 +51,6 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [Design Process Artifacts](#design-process-artifacts)
     - [Wireframes](#wireframes)
   - [Design Implementation Summary](#design-implementation-summary)
-
 - [Database Schema](#database-schema)
   - [Entity Relationship Diagram](#entity-relationship-diagram)
   - [Database Models](#database-models)
@@ -63,7 +62,14 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
     - [Order Model](#order-model)
     - [Order Line Item Model](#order-line-item-model)
     - [Newsletter Subscriber Model](#newsletter-subscriber-model)
-  
+  - [Database Relationships](#database-relationships)
+    - [One-to-One Relationships](#one-to-one-relationships)
+    - [One-to-Many Relationships](#one-to-many-relationships)
+    - [Many-to-Many Relationships](#many-to-many-relationships)
+- [Database Optimization](#database-optimization)
+- [Database Security](#database-security)
+- [Database Schema Evolution](#database-schema-evolution)
+- [Future Database Considerations](#future-database-considerations)  
 - [Features](#features)
   - [Navigation](#navigation)
     - [Main Menu](#main-menu)
@@ -510,3 +516,289 @@ The BookLand design implementation successfully created a cohesive, user-friendl
 5. Trust and Security: Professional design elements reinforce the security of the shopping experience
 
 The resulting design creates an atmosphere that encourages exploration and discovery, helping readers find their next great book in an enjoyable, frustration-free environment.
+
+
+## Database Schema
+
+### Entity Relationship Diagram
+
+The database schema for BookLand is designed to efficiently support all the core functionality while maintaining data integrity and optimal performance. Below is the entity relationship diagram showing how different models are interconnected:
+
+Created with [diagram io](https://dbdiagram.io/home)
+
+![Entity Relationship Diagram](media/readme/diagram.png)
+
+### Database Models
+
+The BookLand platform uses Django's ORM with the following models to organize and manage data efficiently:
+
+#### User Profile Model
+
+The UserProfile model extends Django's built-in User model to store additional customer information:
+
+```python
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    default_phone_number = models.CharField(max_length=20, null=True, blank=True)
+    default_street_address = models.CharField(max_length=80, null=True, blank=True)
+    default_apartment = models.CharField(max_length=80, null=True, blank=True)
+    default_city = models.CharField(max_length=40, null=True, blank=True)
+    default_postal_code = models.CharField(max_length=20, null=True, blank=True)
+    default_country = models.CharField(max_length=40, null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+```
+
+**Key features**:
+
+- One-to-one relationship with Django's User model
+- Stores default delivery information to streamline checkout
+- Optional fields allow flexibility in user data collection
+- Signal receivers automatically create/update profiles when users are created/modified
+
+#### Wishlist Item Model
+
+The WishlistItem model tracks books that users have saved for future consideration:
+
+```python
+class WishlistItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'book')
+        ordering = ['-date_added']
+```
+
+**Key features**:
+
+- Many-to-many relationship between users and books
+- Enforces uniqueness to prevent duplicate wishlist entries
+- Tracks when items were added for sorting purposes
+- Cascade deletion ensures data integrity when users or books are removed
+
+#### Testimonial Model
+
+The Testimonial model allows users to share their BookLand experiences:
+
+```python
+class Testimonial(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='testimonials')
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    rating = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        help_text="Rating from 1 to 5 stars"
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_approved = models.BooleanField(default=False)
+```
+
+**Key features**:
+
+- Foreign key to User model for author tracking
+- Rating field with validators to ensure values between 1-5
+- Moderation system through is_approved flag
+- Automatic timestamp tracking for creation and updates
+- Custom model ordering by most recent updates
+
+#### Book Model
+
+The Book model is central to the entire platform, storing all product information:
+
+```python
+class Book(models.Model):
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    rating = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True,
+                                validators=[MinValueValidator(0), MaxValueValidator(5)])
+    image = models.ImageField(null=True, blank=True)
+    inventory = models.IntegerField(default=0)
+    available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+```
+
+**Key features**:
+
+- Foreign key to Category with SET_NULL to preserve books if categories are deleted
+- Comprehensive product details including pricing and inventory status
+- Image field for book covers with automatic WebP conversion on save
+- Validation for ratings to ensure they stay within 0-5 range
+- Timestamps for tracking when books are added or updated
+
+#### Category Model
+
+The Category model organizes books into logical groupings:
+
+```python
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    friendly_name = models.CharField(max_length=100, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+```
+
+**Key features**:
+
+- Simple model with machine-readable name and human-friendly display name
+- Enforces uniqueness to prevent duplicate categories
+- Custom plural name for proper display in Django admin
+- Helper method for retrieving friendly name with fallback to standard name
+
+#### Order Model
+
+The Order model tracks customer purchases and delivery information:
+
+```python
+class Order(models.Model):
+    order_number = models.CharField(max_length=32, null=False, editable=False)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, 
+                                    null=True, blank=True, related_name='orders')
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    street_address = models.CharField(max_length=80, null=False, blank=False)
+    apartment = models.CharField(max_length=80, null=True, blank=True)
+    city = models.CharField(max_length=40, null=False, blank=False)
+    postal_code = models.CharField(max_length=20, null=False, blank=False)
+    country = models.CharField(max_length=40, null=False, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    shipping_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=5)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    stripe_pid = models.CharField(max_length=254, null=True, blank=True, default='')
+```
+
+**Key features**:
+
+- UUID-based unique order number generation
+- Foreign key to UserProfile with SET_NULL to preserve order history even if profiles are deleted
+- Comprehensive delivery details captured even for guest checkouts
+- Financial tracking fields for order totals, shipping costs, and grand totals
+- Stripe payment intent ID for reconciliation with payment processor
+- Custom save method to ensure order numbers are generated when needed
+- Update_total method to recalculate based on line items
+
+#### Order Line Item Model
+
+The OrderLineItem model represents individual books within an order:
+
+```python
+class OrderLineItem(models.Model):
+    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
+    book = models.ForeignKey(Book, null=False, blank=False, on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
+    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+```
+
+**Key features**:
+
+- Foreign keys to both Order and Book models
+- Automatic calculation of line item totals based on book price and quantity
+- Cascade deletion ensures line items are removed if the parent order is deleted
+- Custom save method to calculate lineitem_total before saving
+- Signal handlers to update order totals when line items change
+
+#### Newsletter Subscriber Model
+
+The NewsletterSubscriber model tracks email subscriptions:
+
+```python
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+```
+
+**Key features**:
+
+- Unique email field to prevent duplicate subscriptions
+- Timestamp for subscription date
+- Active flag for subscription management
+- Simple model design focused on primary newsletter functionality
+
+### Database Relationships
+
+The BookLand database schema incorporates several key relationships:
+
+#### One-to-One Relationships
+
+- User to UserProfile: Each Django User has exactly one UserProfile
+
+#### One-to-Many Relationships
+
+- Category to Book: Each Book belongs to one Category; Categories can have many Books
+- UserProfile to Order: Each Order is associated with one UserProfile; UserProfiles can have many Orders
+- Order to OrderLineItem: Each OrderLineItem belongs to one Order; Orders can have many OrderLineItems
+- Book to OrderLineItem: Each OrderLineItem references one Book; Books can appear in many OrderLineItems
+- User to Testimonial: Each Testimonial is written by one User; Users can write many Testimonials
+
+#### Many-to-Many Relationships
+
+- User to Book via WishlistItem: Users can wishlist many Books; Books can be wishlisted by many Users
+
+### Database Optimization
+
+Several optimization strategies were implemented in the database design:
+
+1. Indexing: Key lookup fields like order_number, email, and foreign keys are indexed for faster queries
+2. Query Optimization: Context processors are designed to minimize database hits
+3. Selective Related/Prefetch: Views use select_related and prefetch_related to reduce query count
+4. Data Denormalization: Strategic redundancy allows for fewer joins in common queries
+5. Cascade Deletion: Appropriate on_delete options maintain data integrity while minimizing orphaned records
+
+### Database Security
+
+To protect customer and business data, several security measures are implemented:
+
+1. Stripe Integration: Payment details are never stored in our database, only necessary references
+2. Field Validation: Strict validation on input fields to prevent injection attacks
+3. Parameterized Queries: Django's ORM handles safe query construction
+4. Permission Controls: Field-level permissions control what data is accessible to different user types
+5. Data Minimization: Only essential customer information is collected and stored
+
+### Database Schema Evolution
+
+The current schema evolved through several iterations during development:
+
+1. Initial Models: Basic User, Book, and Order models
+2. First Extension: Addition of Category and OrderLineItem models
+3. Feature Expansion: Introduction of WishlistItem and Testimonial models
+4. Refinement: Field adjustments and relationship optimizations based on real-world testing
+5. Final Iteration: Addition of newsletter functionality and optimization of existing models
+
+### Future Database Considerations
+
+For future development, the following database enhancements are planned:
+
+1. Caching Layer: Redis integration for frequent queries
+2. Read Replicas: Database replication for high-traffic scenarios
+3. Analytics Tables: Dedicated tables for business intelligence without affecting operational performance
+4. Full-Text Search: PostgreSQL full-text search capabilities for improved book discovery
+5. Internationalization: Language-specific fields for multi-language support
+
+The BookLand database schema balances complexity with performance, providing a solid foundation for the e-commerce platform while maintaining flexibility for future growth and feature expansion.
+
+
+## Features
+
+
+### Navigation
+
+
+#### Main Menu
+
+
+#### Homepage 
+
+
+#### Search Bar
+
+
+#### Filters & Sorting

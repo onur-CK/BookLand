@@ -13,6 +13,7 @@ from cart.contexts import cart_contents
 from decimal import Decimal
 from checkout.webhook_handler import StripeWH_Handler
 
+
 @require_POST
 def cache_checkout_data(request):
     """
@@ -38,7 +39,6 @@ def cache_checkout_data(request):
 def checkout(request):
     """
     Handle the checkout process and integrate with Stripe for payment
-    Source: https://stripe.com/docs/payments/accept-a-payment
     """
     # Set up Stripe keys from settings
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -51,6 +51,22 @@ def checkout(request):
     if not cart:
         messages.error(request, "There's nothing in your cart at the moment")
         return redirect(reverse('products'))
+
+    # Check inventory before proceeding
+    inventory_check_passed = True
+    for item_id, quantity in cart.items():
+        try:
+            book = Book.objects.get(id=item_id)
+            if quantity > book.inventory:
+                messages.error(request, f'Sorry, we only have {book.inventory} copies of "{book.title}" in stock.')
+                inventory_check_passed = False
+        except Book.DoesNotExist:
+            messages.error(request, f"One of the books in your cart wasn't found in our database.")
+            inventory_check_passed = False
+    
+    # If inventory check failed, redirect to cart
+    if not inventory_check_passed:
+        return redirect('view_cart')
 
     if request.method == 'POST':
         # Process the form data when form is submitted
@@ -105,6 +121,12 @@ def checkout(request):
                         quantity=quantity,
                     )
                     order_line_item.save()
+
+                    book.inventory -= quantity
+                    if book.inventory <= 0:
+                        book.inventory = 0
+                        book.available = False
+                    book.save()
                 except Book.DoesNotExist:
                     # Handle case where book isn't found
                     messages.error(request, "One of the books in your cart wasn't found in our database.")
@@ -199,7 +221,7 @@ def checkout_success(request, order_number):
     
     # Clear the shopping cart from the session
     if 'cart' in request.session:
-        del request.session['cart']
+        del request.session['cart']   
     
     # Render checkout success template with order info
     template = 'checkout/checkout_success.html'

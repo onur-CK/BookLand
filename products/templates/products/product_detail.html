@@ -127,12 +127,19 @@
                 </p>
                 {% endif %}
                 <!-- Availability status - shows "In Stock" or "Out of Stock" -->
-                <p><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}
+                <p><strong>Availability:</strong> 
+                    {% if product.available %}
+                        {% if product.inventory > 10 %}
+                            In Stock
+                        {% elif product.inventory > 0 %}
+                            Only {{ product.inventory }} left in stock!
+                        {% else %}
+                            Out of Stock
+                        {% endif %}
+                    {% else %}
+                        Out of Stock
+                    {% endif %}
                 </p>
-                <!-- Only show inventory count if there are items available -->
-                {% if product.inventory %}
-                <p><strong>Inventory:</strong> {{ product.inventory }} available</p>
-                {% endif %}
             </footer>
         </section>
     </article>

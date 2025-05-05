@@ -20,7 +20,7 @@ class BookAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     list_editable = ('price', 'available', 'inventory')
 
-    # Add fieldsets to organize the admin form better
+    # Fieldsets for organizing the admin form better
     fieldsets = (
         ('Book Information', {
             'fields': ('title', 'author', 'description', 'category')

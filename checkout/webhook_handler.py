@@ -153,6 +153,13 @@ class StripeWH_Handler:
                         quantity=quantity,
                     )
                     order_line_item.save()
+
+                    # Update inventory
+                    book.inventory -= quantity
+                    if book.inventory <= 0:
+                        book.inventory = 0
+                        book.available = False
+                    book.save()
             except Exception as e:
                 # If anything goes wrong, delete the order if it was created
                 if order:
