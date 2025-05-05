@@ -312,20 +312,25 @@ The below works on the assumption that you already have an account with [AWS](ht
         if 'USE_AWS' in os.environ:
             # Cache control
             AWS_S3_OBJECT_PARAMETERS = {
-               'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-               'CacheControl': 'max-age=94608000',
+                'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+                'CacheControl': 'max-age=94608000',
             }
-            # Bucket config
-            AWS_STORAGE_BUCKET_NAME = 'bookland-store-files'
-            AWS_S3_REGION_NAME = 'eu-west-1'
+
+            # Bucket Config
+            AWS_STORAGE_BUCKET_NAME = 'bookland-e-commerce'
             AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
             AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
             AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
             # Static and media files
-            STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+            # Source: Tutor Support(Tutor support shared this storages part for django 5)
+            STORAGES = {
+                "default": {
+                    "BACKEND": "custom_storages.MediaStorage",
+                },
+                "staticfiles": {"BACKEND": "custom_storages.StaticStorage"},
+            }
             STATICFILES_LOCATION = 'static'
-            DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
             MEDIAFILES_LOCATION = 'media'
 
             # Override static and media URLs in production
@@ -337,7 +342,7 @@ The below works on the assumption that you already have an account with [AWS](ht
    ```python
    MIDDLEWARE = [
        'django.middleware.security.SecurityMiddleware',
-       'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line after security middleware
+       'whitenoise.middleware.WhiteNoiseMiddleware',
        # Other middleware...
    ]
 
