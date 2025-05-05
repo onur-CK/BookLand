@@ -568,6 +568,7 @@ As a [user type], I want [action] so that [benefit].
 - [x] Static files are managed effectively
 - [x] Environment variables are properly managed
 - [x] Deployment documentation is clear and comprehensive
+- [x] AWS S3 bucket is created for storing static files and images
 
 ## Tasks
 - [X] Set up Heroku application
