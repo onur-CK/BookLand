@@ -69,6 +69,7 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
 - [Database Security](#database-security)
 - [Database Schema Evolution](#database-schema-evolution)
 - [Future Database Considerations](#future-database-considerations)  
+
 - [Features](#features)
   - [Navigation](#navigation)
     - [Main Menu](#main-menu)
@@ -85,9 +86,18 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [Testimonials](#testimonials)
   - [Wishlist](#wishlist)
   - [Admin Features](#admin-features)
-    - [Inventory Management](#inventory-management)
+    - [Book Management](#book-management)
+    - [Order Management](#order-management)
     - [User Management](#user-management)
+    - [Category Management](#category-management)
+  - [Additional Features](#additional-features)
+    - [Newsletter Subscription](#newsletter-subscription)
+    - [Error Pages](#error-pages)
+    - [Toast Notifications](#toast-notifications)
+    - [Security Features](#security-features)
+    - [Email Notifications](#email-notifications)
   - [Future Features](#future-features)
+
 - [Technologies Used](#technologies-used)
   - [Languages](#languages)
   - [Frameworks and Libraries](#frameworks-and-libraries)
@@ -1125,7 +1135,7 @@ BookLand includes a comprehensive admin interface for site management:
 ![Reset Password](media/readme/Reset%20Password.png)
 
 
-#### Future Features
+### Future Features
 
 While BookLand already offers a comprehensive shopping experience, several enhancements are planned for future development:
 
