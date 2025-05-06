@@ -25,7 +25,6 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
     - [Product Data](#product-data)
     - [Order History](#order-history)
   - [Future Enhancements](#future-enhancements)
-
 - [Design](#design)
   - [Design Philosophy](#design-philosophy)
   - [Color Scheme](#color-scheme)
@@ -472,36 +471,47 @@ The design process included multiple iterations and testing phases:
 The main entry point featuring category navigation and featured books
 [Home page medium+](media/wireframes/Home%20Page%20Medium%20Plus.png)
 
+
 Mobile-optimized version with adapted navigation pattern
 [Home page mobile](media/wireframes/Home%20Page%20Mobile.png)
+
 
 Streamlined form with order summary
 [Checkout page shipping](media/wireframes/Checkout%20Page%20Shipping%20info%20and%20order%20summary.png)
 
+
 Clear order details
 [Order confirmation](media/wireframes/Order%20Confirmation%20Page.png)
+
 
 Comprehensive book information with action buttons
 [Product details medium+](media/wireframes/Product%20Details%20Medium%20Plus.png)
 
+
 Streamlined mobile view with essential information
 [Product details mobile](media/wireframes/Product%20details%20mobile.png)
 
+
 User account settings and preferences
 [Profile management](media/wireframes/Profile%20Management.png)
+
 
 Cart management with item listing and summary
 (The order summary was repositioned from below to the right side of the shopping cart page to enhance usability by allowing users to view order details alongside the form simultaneously.)
 [Shopping cart page](media/wireframes/Shopping%20Cart%20Page.png) 
 
+
 User registration form
 [Sign up](media/wireframes/Sign%20up.png)
+
 
 Authentication form
 [Login/Sign-In](media/wireframes/Login.png)
 
+
 Saved items for future consideration
 [Wishlist](media/wireframes/Wishlist.png)
+
 
 In the final implementation, we made some refinements to the original wireframes. For instance, on the Shopping Cart page, we moved the cart summary from a left sidebar to a right-positioned card on larger screens to improve the visual balance and align with common e-commerce patterns users are familiar with. This adjustment enhanced usability while maintaining the essential functionality outlined in the wireframes. The "Add to Cart" button was replaced with a shopping cart icon to streamline the interface and improve the overall user experience.
 
@@ -526,7 +536,9 @@ The database schema for BookLand is designed to efficiently support all the core
 
 Created with [diagram io](https://dbdiagram.io/home)
 
+
 ![Entity Relationship Diagram](media/readme/diagram.png)
+
 
 ### Database Models
 
@@ -788,17 +800,342 @@ The BookLand database schema balances complexity with performance, providing a s
 
 ## Features
 
+BookLand provides a rich set of features designed to create an intuitive and enjoyable book shopping experience. This section outlines the key functionality available to users and administrators.
 
 ### Navigation
 
-
 #### Main Menu
 
+The main navigation bar provides easy access to all sections of the website:
+
+- Responsive Design: Transforms into a hamburger menu on mobile devices
+- Shopping Cart: Shows real-time item count with a badge indicator
+- Wishlist: Displays the number of saved items for logged-in users
+- User Authentication: Login/Signup/Logout options that change based on authentication status
+- Category Dropdown: Quick access to book categories
+- Profile Link: Direct access to user profile for authenticated users
+
+
+![Main Menu](media/readme/Main%20Menu.png)
 
 #### Homepage 
 
+The homepage serves as an inviting entry point to the BookLand experience:
 
-#### Search Bar
+- Hero Section: Clear value proposition and site introduction
+- Search Bar: Prominent search functionality for immediate book discovery
+- Free Shipping Banner: Highlights the $40 free shipping threshold
+- Book Discovery Section: "How to Choose a Book" with helpful resources for finding the perfect read
+- Call-to-Action: Clear button to start shopping
 
 
-#### Filters & Sorting
+![Home Page](media/readme/Home%20Page.png)
+
+### Search Bar
+
+The search functionality allows users to quickly find books:
+
+- Full-Text Search: Searches across titles, authors, and descriptions
+- Clean Interface: Minimalist design with search icon button
+- Instant Results: Quick feedback when search is submitted
+- Empty State Handling: Helpful messaging when no results are found
+- Search Term Persistence: Selected search term remains visible in results
+
+
+![Search Bar](media/readme/Search%20Bar.png)
+
+### Filters & Sorting
+
+BookLand provides multiple ways to refine the book browsing experience:
+
+- Category Filters: Visual badge system for filtering by book category
+- Sort Options: Multiple sorting options including:
+  - Price (low to high)
+  - Price (high to low)
+  - Rating (high to low)
+  - Title (A-Z)
+  - Title (Z-A)
+- Active Filter Indication: Clear visual feedback on which filters and sorts are active
+
+
+![Filters & Sorting](media/readme/Filters%20and%20Sorting.jpg)
+
+### Product Details
+
+Each book has a dedicated detail page providing comprehensive information:
+
+- High-Quality Images: Optimized book cover display with WebP format support
+- Book Information: Title, author, price, and category details
+- Rating Display: Visual representation of book ratings
+- Detailed Description: Full book description
+- Schema.org Markup: Rich structured data for improved SEO
+- Stock Status: Real-time availability information
+- Related Books: Suggestions for similar books in the same category
+
+
+![Product Details](media/readme/Product%20Details.png)
+
+### Add to Cart & Wishlist
+
+Books can be easily added to cart or saved for later:
+
+- Quantity Selection: Adjust quantity before adding to cart
+- Add to Cart: One-click addition with feedback
+- Add to Wishlist: Save books for future consideration
+- Toast Notifications: Visual feedback when actions are completed
+- Redirect Preservation: Returns users to their previous location
+
+
+![Add to cart, toast, quantity](media/readme/Add%20to%20cart%20and%20toast.png)
+
+### Shopping Cart
+
+The cart provides a comprehensive overview of selected items:
+
+- Item List: Complete details of each book in cart
+- Quantity Adjustment: Ability to change quantities directly in cart
+- Item Removal: One-click removal via trash icon
+- Price Calculations: Individual and total pricing clearly displayed
+- Free Shipping Indicator: Shows progress toward free shipping threshold
+- Order Summary: Clear breakdown of costs including shipping
+- Empty State: User-friendly message and CTA when cart is empty
+- Session Persistence: Cart contents maintained between sessions
+
+
+![Shopping Cart](media/readme/Shopping%20Cart.png)
+
+### Checkout
+
+The checkout process is streamlined for ease of use:
+
+- Order Summary: Clear breakdown of items and costs
+- Secure Payments: Stripe integration for safe credit card processing
+- Form Validation: Immediate feedback on input errors
+- Loading Overlay: Visual feedback during payment processing
+- Address Fields: Comprehensive address collection (optional apartment, suite etc.)
+- Phone Number Collection: For delivery coordination
+- Secure CSRF Protection: Security against cross-site request forgery
+
+
+![Checkout](media/readme/Checkout.png)
+
+### Order Confirmation
+
+After successful checkout, users receive confirmation of their order:
+
+- Order Details: Complete overview of the placed order
+- Order Number: Unique identifier for order tracking
+- Delivery Information: Confirmation of shipping details
+- Order Items: Itemized list of purchased books
+- Email Confirmation: Automatic email sent with order details
+- Order Date: Timestamp of when the order was placed
+- Call-to-Action: Button to continue shopping
+
+
+![Order Confirmation](media/readme/Order%20Confirmation.png)
+
+### User Profile
+
+Registered users have access to a personal profile area:
+
+- Personal Information: Name and contact details management
+- Sidebar Navigation: Easy access to different profile sections
+- Responsive Design: Optimized layout for all device sizes
+- Update Functionality: Simple form for updating personal details
+- Account Deletion: Option to permanently delete account with confirmation
+
+
+![User Profile](media/readme/User%20Profile.png)
+
+
+### Order History
+
+Users can review their previous purchases:
+
+- Order List: Chronological display of all past orders
+- Order Details: Ability to view complete information for any previous order
+- Context-Aware Display: Different messaging for viewing past orders vs. new order confirmations
+- Order Number: Abbreviated display with full details on click
+- Order Date: When each order was placed
+- Item Count: Number of items in each order
+- Order Total: Final amount paid
+
+
+![Order History](media/readme/Order%20History.png)
+
+![Order Details](media/readme/Order%20Details.png)
+
+
+### Testimonials
+
+Users can share their experiences with BookLand:
+
+- Testimonial Creation: Form to submit new testimonials
+- Rating System: 1-5 star rating capability
+- Testimonial Management: Edit and delete functionality for own testimonials
+- Approval System: Admin moderation before public display
+- Public Testimonials Page: Showcase of approved customer experiences
+- Responsive Design: Card-based layout adapts to all screen sizes
+- Modal View: Full testimonial display for longer content
+
+
+![My Testimonials](media/readme/My%20Testimonials.png)
+
+![Customer Testimonials](media/readme/Customer%20Testimonials.png)
+
+
+### Wishlist
+
+The wishlist feature allows users to save books for future consideration:
+
+- Add/Remove wishlist
+- Wishlist Management: Dedicated page to view all saved items
+- Move to Cart: One-click transfer from wishlist to shopping cart
+- Visual Feedback: Clear indication of which books are in wishlist
+- Counter Badge: Real-time count of wishlist items in navigation
+- Empty State: Helpful message when wishlist is empty
+
+
+![Wishlist](media/readme/Wishlist.png)
+
+
+### Admin Features
+
+BookLand includes a comprehensive admin interface for site management:
+
+#### Book Management
+
+- Book Creation: Add new books to the catalog with all relevant details
+- Book Editing: Update existing book information
+- Book Deletion: Remove books from the catalog
+- Image Upload: Add and manage book cover images
+- Inventory Tracking: Manage book stock levels
+- Category Assignment: Organize books into appropriate categories
+- Availability Toggle: Mark books as available or unavailable
+
+
+![Book Management](media/readme/Book%20Management.png)
+
+#### Order Management
+
+- Order Viewing: See all orders with essential details
+- Order Filtering: Filter by date, status, or customer
+- Order Details: Access complete information for any order
+- Line Item Inspection: View individual books within orders
+- Customer Information: Access delivery details for fulfillment
+
+
+![Order Management](media/readme/Order%20Management.png)
+
+![Individual Order](media/readme/Individual%20Order.png)
+
+#### User Management
+
+- User Account Overview: Manage registered users
+- Profile Information: View saved delivery information
+- Testimonial Moderation: Approve or reject user testimonials
+- Wishlist Visibility: See what books users are saving for later
+
+
+![User Management](media/readme/User%20Management.png)
+
+![Individual User](media/readme/Individual%20User.png)
+
+#### Category Management
+
+- Category Creation: Add new book categories
+- Category Editing: Update category names and display names
+- Category Assignment: Organize books into appropriate groupings
+
+
+![Category Management](media/readme/Category%20Management.png)
+
+
+### Additional Features
+
+#### Newsletter Subscription
+
+- Signup Form: Email collection in site footer
+- AJAX Submission: No page reload required
+- Success Feedback: Clear indication when signup is successful
+- Validation: Prevents duplicate or invalid emails
+- Welcome Email: Automatic email to new subscribers
+
+
+![Newsletter Subscription](media/readme/Sub%20News.png)
+
+![Newsletter Wellcome Message](media/readme/News%20Wellcome.png)
+
+
+#### Error Pages
+
+- 404 Page: Custom "Page Not Found" with navigation options
+- 403 Page: "Access Denied" for unauthorized access attempts
+- 500 Page: Server error handling with friendly messaging
+- Consistent Design: Error pages maintain site branding and navigation
+
+
+![403](media/readme/403%20error.png)
+
+![404](media/readme/404%20error.png)
+
+![500](media/readme/500%20error.png)
+
+
+ #### Toast Notifications
+
+- Success Messages: Green-accented confirmation messages
+- Error Messages: Red-accented error notifications
+- Info Messages: Blue-accented informational updates
+- Warning Messages: Yellow-accented caution notifications
+- Shopping Updates: Special toast with cart preview when adding items
+- Dismissible: Users can close notifications manually
+- Auto-dismiss: Notifications fade after appropriate timing
+
+
+![Success](media/readme/Success%20message.png)
+
+![Warning](media/readme/Warning.png)
+
+![Shopping Update](media/readme/Shopping%20Update.png)
+
+
+#### Security Features
+
+- CSRF Protection: Guards against cross-site request forgery
+- Secure Payments: Stripe integration with no card details stored
+- Password Requirements: Enforces strong password creation
+- Form Validation: Prevents submission of invalid data
+- Authenticated Actions: Protects sensitive operations
+- Access Control: Prevents unauthorized access to restricted pages
+
+
+#### Email Notifications
+
+- Order Confirmation: Details of successful purchases
+- Registration Confirmation: Welcome message upon account creation
+- Password Reset: Secure process for password recovery
+- Newsletter Welcome: First communication to newsletter subscribers
+
+
+![Newsletter Wellcome Email](media/readme/News%20Wellcome.png)
+
+![Checkout Success Email](media/readme/Checkout%20Success.png)
+
+![Reset Password](media/readme/Reset%20Password.png)
+
+
+#### Future Features
+
+While BookLand already offers a comprehensive shopping experience, several enhancements are planned for future development:
+
+- Social Login Integration: Registration and login via social media accounts
+- Advanced Recommendation Engine: Personalized book suggestions based on browsing history
+- Author Events: Virtual author readings and Q&A sessions
+- Book Club Functionality: Community spaces for discussion of selected books
+- Mobile App: Native applications for iOS and Android platforms
+- Enhanced Analytics: Advanced user behavior tracking for improved personalization
+- Subscription Service: Monthly curated book delivery service
+
+These planned enhancements will further improve the BookLand experience based on user feedback and evolving needs.
+

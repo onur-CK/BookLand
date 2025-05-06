@@ -53,6 +53,12 @@ def all_products(request):
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
+            
+            # Set current_sorting for template context
+            if direction:
+                current_sorting = f'{sort}_{direction}'
+            else:
+                current_sorting = f'{sort}_asc'  # Default to ascending if no direction
 
     paginator = Paginator(products, 10)  # Show 10 products per page
     page = request.GET.get('page')
@@ -62,6 +68,7 @@ def all_products(request):
         'products': products,
         'search_term': query,
         'active_category': active_category,
+        'current_sorting': current_sorting,  
     }
 
     return render(request, 'products/products.html', context)

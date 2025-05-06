@@ -12,12 +12,11 @@ document.getElementById('sort-selector').addEventListener('change', function() {
         
         currentUrl.searchParams.set("sort", sort);
         currentUrl.searchParams.set("direction", direction);
-
-        window.location.replace(currentUrl);
     } else {
         currentUrl.searchParams.delete("sort");
         currentUrl.searchParams.delete("direction");
-
-        window.location.replace(currentUrl);
     }
+    
+    // Preserve other parameters (like category, search term, page)
+    window.location.replace(currentUrl);
 });
