@@ -98,9 +98,33 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [Future Features](#future-features)
 - [Technologies Used](#technologies-used)
   - [Languages](#languages)
+    - [HTML5](#html5)
+    - [CSS3](#css3)
+    - [Javascript](#javascript)
+    - [Python](#python)
   - [Frameworks and Libraries](#frameworks-and-libraries)
+    - [Django](#django)
+    - [Bootstrap 5.3](#bootstrap-53)
+    - [JQuery](#jquery)
+    - [Django Extensions](#django-extensions)
+    - [Font Awesome Icons](#font-awesome-icons)
+    - [Bootstrap and Icons](#bootstrap-and-icons)
   - [Tools and Platforms](#tools-and-platforms)
+    - [Git & GitHub](#git--github)
+    - [Heroku](#heroku)
+    - [AWS S3](#aws-s3)
+    - [PostgreSQL](#postgresql)
+    - [SQLite](#sqlite)
+    - [Pillow](#pillow)
+    - [gunicorn](#gunicorn)
+    - [psycopg2](#psycopg2)
+    - [VSCode](#vscode)
+    - [Chrome DevTools](#chrome-devtools)
   - [Third-Party Services](#third-party-services)
+    - [Stripe](#stripe)
+    - [Gmail](#gmail)
+    - [AWS Identity and Access Management (IAM)](#aws-identity-and-access-management-iam)
+    - [Google Fonts](#google-fonts)
 - [Credits](#credits)
   - [Code](#code)
   - [Content](#content)
@@ -477,47 +501,58 @@ The design process included multiple iterations and testing phases:
 #### Wireframes
 
 The main entry point featuring category navigation and featured books
+
 [Home page medium+](media/wireframes/Home%20Page%20Medium%20Plus.png)
 
 
 Mobile-optimized version with adapted navigation pattern
+
 [Home page mobile](media/wireframes/Home%20Page%20Mobile.png)
 
 
 Streamlined form with order summary
+
 [Checkout page shipping](media/wireframes/Checkout%20Page%20Shipping%20info%20and%20order%20summary.png)
 
 
 Clear order details
+
 [Order confirmation](media/wireframes/Order%20Confirmation%20Page.png)
 
 
 Comprehensive book information with action buttons
+
 [Product details medium+](media/wireframes/Product%20Details%20Medium%20Plus.png)
 
 
 Streamlined mobile view with essential information
+
 [Product details mobile](media/wireframes/Product%20details%20mobile.png)
 
 
 User account settings and preferences
+
 [Profile management](media/wireframes/Profile%20Management.png)
 
 
 Cart management with item listing and summary
 (The order summary was repositioned from below to the right side of the shopping cart page to enhance usability by allowing users to view order details alongside the form simultaneously.)
+
 [Shopping cart page](media/wireframes/Shopping%20Cart%20Page.png) 
 
 
 User registration form
+
 [Sign up](media/wireframes/Sign%20up.png)
 
 
 Authentication form
+
 [Login/Sign-In](media/wireframes/Login.png)
 
 
 Saved items for future consideration
+
 [Wishlist](media/wireframes/Wishlist.png)
 
 
@@ -541,9 +576,6 @@ The resulting design creates an atmosphere that encourages exploration and disco
 ### Entity Relationship Diagram
 
 The database schema for BookLand is designed to efficiently support all the core functionality while maintaining data integrity and optimal performance. Below is the entity relationship diagram showing how different models are interconnected:
-
-Created with [diagram io](https://dbdiagram.io/home)
-
 
 ![Entity Relationship Diagram](media/readme/diagram.png)
 
@@ -1147,3 +1179,270 @@ While BookLand already offers a comprehensive shopping experience, several enhan
 
 These planned enhancements will further improve the BookLand experience based on user feedback and evolving needs.
 
+
+## Technologies Used
+
+The BookLand project utilizes a carefully selected stack of technologies, frameworks, libraries, and tools to create a robust, secure, and user-friendly online bookstore experience.
+
+### Languages
+#### HTML5
+
+- Used to create the structure and content of all web pages throughout the application
+- Semantic HTML5 elements (header, nav, main, section, article, footer) provide better structure and accessibility
+- Forms for user input including registration, login, checkout, and profile management
+
+#### CSS3
+
+- Applied for styling all visual elements across the site
+- Used for responsive design implementation with media queries
+- Custom properties for consistent color scheme and typography
+- Flexbox and Grid layouts for modern, responsive page structures
+- Transitions and animations for interactive elements
+
+#### Javascript
+
+- Client-side validation for forms to improve user experience
+- DOM manipulation for dynamic content updates
+- Event handling for interactive elements like cart management
+- AJAX for asynchronous operations like newsletter signup
+- Toast notifications for user feedback
+
+#### Python
+
+- Core backend language for server-side logic
+- View functions to handle HTTP requests and responses
+- Model definitions for database structure
+- Form handling and validation
+- Custom context processors for global template variables
+
+### Frameworks and Libraries
+#### Django
+
+- Main web framework providing the MTV (Model-Template-View) architecture
+- Django ORM for database interactions without raw SQL
+- Django Template Language for dynamic HTML rendering
+- Django Forms for input handling and validation
+- Django Admin for content management interface
+- Django Allauth for authentication and user management
+
+#### Bootstrap 5.3
+
+- Front-end framework providing responsive grid system
+- Pre-styled components like cards, forms, and navigation
+- JavaScript components for modals, toasts, and dropdowns
+- Utility classes for rapid styling and layout adjustments
+- Mobile-first approach ensuring responsive design
+
+#### JQuery
+
+- Used for simplified DOM manipulation
+- AJAX functionality for asynchronous operations
+- Event handling for interactive elements
+- Animation effects for enhanced user experience
+
+#### Django Extensions
+
+- Django Crispy Forms for enhanced form rendering and Bootstrap integration
+- Django Countries for country selection in address forms
+- Django Storages for AWS S3 integration
+- Pillow for image processing and manipulation
+
+#### Font Awesome Icons
+#### Bootstrap and Icons
+
+- Icon library providing consistent visual elements
+- Cart, wishlist, and user account icons
+- Navigation and action indicators
+- Status and notification symbols
+
+### Tools and Platforms
+#### Git & GitHub
+
+- Version control system for tracking code changes
+- Collaborative development workflow
+- Issue tracking and project management
+- Code storage and backup
+
+#### Heroku
+
+- Cloud platform for application deployment
+- PostgreSQL database hosting
+- Continuous deployment from GitHub repository
+- Environment variable management
+- Security and scaling capabilities
+
+#### AWS S3
+
+- Cloud storage for static files and media
+- Optimized delivery of images and stylesheets
+- Secure access control for uploaded content
+- Scalable storage solution for growing product catalog
+
+#### PostgreSQL
+
+- Production database for reliable data storage
+- Advanced querying capabilities
+- Robust data integrity features
+- Support for complex relationships between models
+
+#### SQLite
+
+- Development database for local testing
+- Lightweight and requires no configuration
+- Enables rapid development iterations
+- Seamless transition to PostgreSQL in production
+
+#### Pillow
+
+- Python imaging library for processing book cover images
+- Format conversion for WebP supprot
+- Thumbnail generation
+- Image optimization for web delivery
+
+#### gunicorn
+
+- WSGI HTTP Server for running Django in production
+- Handles multiple worker processes
+- Improves application performance and reliability
+- Integrates with Heroku for deployment
+
+#### psycopg2
+
+- PostgreSQL adapter for Python
+- Enables Django ORM to interact with PostgreSQL database
+- Handles data type conversions
+- Provides efficient database connectivity
+
+#### VSCode
+
+- Primary code editor for development
+- Extensions for Python, Django, and web development
+- Integrated terminal for command execution
+- Git integration for version control
+
+#### Chrome DevTools
+
+- Frontend debugging and testing
+- Responsive design testing across device sizes
+- Network request monitoring
+- JavaScript console for debugging client-side code
+
+### Third-Party Services
+#### Stripe
+
+- Secure payment processing integration
+- Credit card validation and charging
+- Webhook handling for asynchronous payment events
+- Developer-friendly API for custom checkout flow
+
+#### Gmail
+
+- Email service for sending transactional emails
+- Order confirmations
+- Password reset links
+- Newsletter communications
+- Account notifications
+
+#### AWS Identity and Access Management (IAM)
+
+- Security management for AWS resources
+- User and permission controls
+- Access policy implementation
+- Secure credential management
+
+#### Google Fonts
+
+- Web font implementation for consistent typography
+- Optimized font loading for performance
+- Wide selection of font options
+- Cross-browser compatibility
+
+These technologies work together to create a seamless, responsive, and secure online shopping experience for BookLand customers, while providing robust tools for content management and order processing for administrators.
+
+
+## Credits
+
+### Tutorials
+
+The tutorials and the source code links provided in html and py files were used for the purpose of learning and improving understanding, and no use was made of the code content in the tutorials/source code links. "The main structure was built based on the 'Boutique Ado' project from Code Institute."
+
+- Building an E-Commerce Platform "Project-Boutique" Ado by Code Institute
+- Introduction to Search Engine Optimization by Code Institute
+- Web Marketing by Code Institute
+
+Complete SEO Course for Beginners: Learn to Rank #1 in Google;
+- [Ahrefs](https://www.youtube.com/watch?v=xsVTqzratPs)
+
+- [MarkDown Guide](https://hackernoon.com/a-beginners-guide-to-markdown-everything-you-need-to-know-to-get-started)
+
+- [Django Authentication & User Management - Full Tutorial](https://www.youtube.com/watch?v=WuyKxdLcw3w)
+
+### Content
+
+- The Privacy and Policy page was generated with [Privacy Policy Generator](https://www.privacypolicygenerator.info/)
+
+- Entity Relationship Diagram was created with [dbdiagram io](https://dbdiagram.io/)
+
+- Wireframes were created with [diagrams.net](https://app.diagrams.net/)
+
+- Keywords research was made with [Word Tracker](https://www.wordtracker.com/)
+
+- Contents of the pages are created by using [chat gpt](https://chatgpt.com/)
+
+- Grammer corrections for Readme files was made with; 
+
+[chat gpt](https://chatgpt.com/) 
+
+[grammerly](https://www.grammarly.com/)
+
+[google translate](https://translate.google.com/?sl=tr&tl=en&op=translate)
+
+Note: Chatgpt is also used for brainstorming about the contents of the FAQ, Shipping Policy, Returns, About Us pages.
+
+Suggested AWS changes from Tutor Suport;
+
+[Tutor Support 1](media/readme/Tutor%20support%201.png)
+
+[Tutor Support 2](media/readme/Tutor%20support%202.png)
+
+### Media
+
+The book cover images, titles, author names, descriptions, prices, and ratings displayed on this website were sourced from [Amazon](https://www.amazon.com/) for demonstration and educational purposes only. All rights to the original content belong to their respective copyright holders.
+
+- [Favicon](https://favicon.io/favicon-generator/)
+
+- [Cloudinary](https://cloudinary.com/) Favicon image hosting
+
+- [Icons](https://fontawesome.com/)
+
+### Acknowledgements
+
+We would like to extend our sincere gratitude to the following individuals and groups for their invaluable contributions throughout the development of this project:
+
+David Bowers, mentor at Code Institute, provided consistent support and encouragement at every stage. His guidance was instrumental in reshaping the overall approach to documentation—particularly in relation to README files. What was once considered a basic user manual or technical reference is now regarded as a comprehensive personal knowledge base, significantly enhancing the documentation process and development perspective.
+
+Kay Welfare, facilitator at Code Institute, offered outstanding support across multiple aspects of the project. Her ability to generate practical solutions during challenging moments was essential to maintaining steady progress. Contributions included enriching README content, optimizing social media presence(Bookland Facebook Page), offering SEO and marketing insights, and providing assistance with deployment platforms such as Heroku and AWS. The process of managing these elements without such guidance would have been significantly more difficult.
+
+Special thanks are also due to the tutors within the Code Institute community, whose collaborative efforts and timely feedback played a critical role in identifying and resolving bugs during development.
+
+Their collective support has been a vital part of the project’s success.
+
+### Agile Methodology
+
+For more detailed information on this topic, please refer to the dedicated document: 
+[Agile_Methodology.md](Agile.md).
+
+### Deployment
+
+For more detailed information on this topic, please refer to the dedicated document: 
+[Deployment.md](Deployment.md).
+
+### Testing
+
+For more detailed information on this topic, please refer to the dedicated document: 
+[Testing.md](Testing.md).
+
+### SEO and Marketing
+
+For more detailed information on this topic, please refer to the dedicated document: 
+[SEO_and_Marketing.md](Seo_and_Marketing.md).
