@@ -5,6 +5,8 @@
     margin-top: 1.5rem;
 }
 
+/* Cart table header styling - maintains clean visual hierarchy
+   Source: https://getbootstrap.com/docs/5.3/content/tables/#table-head */
 .cart-table th {
     font-weight: 600;
     color: #2c3e50;
@@ -13,13 +15,16 @@
     padding: 1rem 0.75rem;
 }
 
+/* Cart table cells - adds vertical spacing for better readability
+   Source: https://getbootstrap.com/docs/5.3/content/tables/#vertical-alignment */
 .cart-table td {
     vertical-align: middle;
     padding: 1.25rem 0.75rem;
     border-bottom: 1px solid #f1f1f1;
 }
 
-/* Cart item */
+/* Cart item image container - creates consistent sizing for product images
+   Source: https://getbootstrap.com/docs/5.3/utilities/sizing/ */
 .cart-item-image {
     width: 80px;
     height: 120px;
@@ -37,13 +42,13 @@
     object-fit: contain;
 }
 
-/* Quantity input */
+/* Image within container - maintains aspect ratio while filling container */
 .qty_input {
     max-width: 70px;
     text-align: center;
 }
 
-/* Update and remove buttons */
+/* Update button styling - provides visual feedback on hover */
 .update-link {
     cursor: pointer;
     color: #6c757d;
@@ -54,6 +59,7 @@
     color: #2c3e50;
 }
 
+/* Remove item button - subtle styling with hover effect for better UX */
 .remove-item {
     cursor: pointer;
     font-size: 1.1rem;
@@ -64,7 +70,7 @@
     color: #dc3545 !important;
 }
 
-/* Cart summary card */
+/* Cart summary card - adds shadow and sticky positioning */
 .cart-summary {
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -82,7 +88,8 @@
     padding: 1.25rem;
 }
 
-/* Price displays */
+/* Price displays - flexbox layout for aligned price information
+   Source: https://getbootstrap.com/docs/5.3/utilities/flex/ */
 .price-row {
     display: flex;
     justify-content: space-between;
@@ -96,7 +103,7 @@
     border-top: 1px solid #f1f1f1;
 }
 
-/* Action buttons */
+/* Action buttons - consistent styling for cart actions */
 .cart-actions {
     margin-top: 1.5rem;
 }
@@ -118,7 +125,7 @@
     background-color: #1a252f;
 }
 
-/* Empty cart message */
+/* Empty cart message - provides clear user feedback when cart is empty */
 .empty-cart {
     text-align: center;
     padding: 3rem 0;
@@ -140,7 +147,8 @@
     margin-bottom: 1.5rem;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for mobile devices
+   Source: https://getbootstrap.com/docs/5.3/layout/breakpoints/ */
 @media (max-width: 767.98px) {
     .cart-item-image {
         width: 60px;
@@ -163,7 +171,8 @@
     }
 }
 
-/* Cart notification styling */
+/* Cart notification styling - for toast notifications when items are added/removed
+   Source: https://getbootstrap.com/docs/5.3/components/toasts/ */
 .cart-notification-wrapper {
     max-height: 300px;
     overflow-y: auto;
@@ -172,7 +181,7 @@
 }
 
 
-/* Cart item row styling */
+/* Cart item row styling in toast notifications */
 .cart-notification-wrapper .row {
     margin-bottom: 0.75rem;
     padding-bottom: 0.75rem;
@@ -190,7 +199,8 @@
     transform: translateX(3px);
 }
 
-/* Cart item image styling */
+/* Cart item image styling in toast notifications
+   Source: https://getbootstrap.com/docs/5.3/content/images/ */
 .cart-notification-wrapper img {
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -201,7 +211,7 @@
     transform: scale(1.05);
 }
 
-/* Cart item text styling */
+/* Cart item text styling for readability */
 .cart-notification-wrapper p.my-0 strong {
     color: #2c3e50;
     font-size: 0.95rem;
@@ -219,7 +229,8 @@
     font-size: 0.8rem;
 }
 
-/* "Go To Secure Checkout" button sliding animation  */
+/* "Go To Secure Checkout" button sliding animation for visual interest
+   Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations */
 .toast .btn-dark {
     transition: all 0.3s ease;
     position: relative;
@@ -227,7 +238,7 @@
     z-index: 1;
 }
 
-/* Emphasize the price tag */
+/* Emphasize the price tag for better visibility */
 .toast p.mt-3.mb-1.text-dark {
     font-size: 1.1rem;
 }
@@ -237,7 +248,7 @@
     font-weight: 700;
 }
 
-/* Style the toast heading section */
+/* Style the toast heading section for better visual hierarchy */
 .toast .toast-header {
     border-bottom: none;
     padding-bottom: 0.5rem;
@@ -248,7 +259,8 @@
     font-size: 1.1rem;
 }
 
-/* Toast animation */
+/* Toast animation for smoother appearance
+   Source: https://developer.mozilla.org/en-US/docs/Web/CSS/animation */
 @keyframes slideIn {
     from {
         transform: translateX(30px);
@@ -260,11 +272,8 @@
     }
 }
 
-.toast.show {
-    animation: slideIn 0.3s forwards;
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments for mobile devices
+   Source: https://getbootstrap.com/docs/5.3/layout/breakpoints/ */
 @media (max-width: 576px) {
     .cart-notification-wrapper p.my-0 strong {
         max-width: 150px;
@@ -276,8 +285,6 @@
     }
 }
 
-/* Toast stylings */
-
 /* Regular toast positioning (top-right) */
 .toast-container.position-fixed.top-0.end-0 {
     max-width: 350px;
@@ -287,5 +294,9 @@
 .toast-container .custom-toast.shopping-toast {
     border-left: 4px solid orangered;
     max-width: 400px; /* Make shopping toasts a bit wider */
+}
+
+.toast.show {
+    animation: slideIn 0.3s forwards;
 }
 

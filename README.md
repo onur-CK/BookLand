@@ -69,7 +69,6 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
 - [Database Security](#database-security)
 - [Database Schema Evolution](#database-schema-evolution)
 - [Future Database Considerations](#future-database-considerations)  
-
 - [Features](#features)
   - [Navigation](#navigation)
     - [Main Menu](#main-menu)
@@ -97,7 +96,6 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
     - [Security Features](#security-features)
     - [Email Notifications](#email-notifications)
   - [Future Features](#future-features)
-
 - [Technologies Used](#technologies-used)
   - [Languages](#languages)
   - [Frameworks and Libraries](#frameworks-and-libraries)
