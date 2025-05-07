@@ -216,7 +216,7 @@ This section details the manual testing conducted for user stories defined in ou
 
 |Passed | **Wishlist Functionality** - As a customer, I want to save books to my wishlist so that I can keep track of books I'm interested in but not ready to purchase.|
 |:---:|:---|
-|&check;| Books can be added to wishlist from product details and listing pages.|
+|&check;| Books can be added to wishlist from product detail page.|
 |&check;| Wishlist is accessible from user profile.|
 |&check;| Items can be moved from wishlist to cart.|
 |&check;| Items can be removed from wishlist.|
