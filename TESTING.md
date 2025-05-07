@@ -687,8 +687,33 @@ The responsive design testing confirmed that BookLand provides a consistent, int
 The mobile-first development approach ensured that the experience is optimized for smaller screens, with progressive enhancement for larger devices. The resulting responsive design allows users to shop for books comfortably regardless of their preferred device, supporting BookLand's goal of providing an accessible and user-friendly online bookstore experience.
 
 
+## Browser Compatibility Testing
 
+### Overview
 
+BookLand's browser compatibility testing was conducted to ensure the website functions correctly across various browsers and devices. This testing is critical for e-commerce platforms where inconsistent experiences could lead to lost sales.
+
+### Browser Compatibility Test Results
+
+| Browser  | Version (Desktop) | Desktop | Mobile      | Notes                                                    |
+|----------|-------------------|---------|-------------|----------------------------------------------------------|
+| Chrome   | 122.0 (Latest)    | ✅      | ✅          | Primary development browser, full functionality         |
+| Firefox  | 124.0 (Latest)    | ✅      | Not tested   | Minor styling differences in form elements              |
+| Safari   | 17.0 (Latest)     | ✅      | ✅          | Smooth performance on iOS devices                       |
+| Edge     | 122.0 (Latest)    | ✅      | Not tested  | Consistent with Chrome experience on desktop only       |
+| Opera    | 107.0 (Latest)    | ✅      | Not tested  | Consistent experience with other browsers on desktop    |
+
+### Testing Methodology
+
+Testing was conducted through a combination of:
+
+- Manual testing of core user flows (browsing, cart management, checkout)
+- Verification of responsive layouts
+- Functionality testing of interactive elements (forms, buttons, dropdowns)
+- Payment process testing using Stripe test cards
+
+While the website performs consistently across modern browsers, a few minor styling variations were observed in form elements on Firefox. These differences do not impact functionality and remain within acceptable visual parameters.
+All critical e-commerce functions—product browsing, cart management, checkout process, and user account features—work correctly across the tested browser environments, ensuring a seamless shopping experience for all BookLand users regardless of their preferred browser.
 
 
 
