@@ -1,3 +1,6 @@
+/* jshint esversion: 6 */
+/* global Stripe */
+
 /*
  * Core checkout functionality using Stripe Elements with simplified UI
  * Source: https://stripe.com/docs/payments/accept-a-payment

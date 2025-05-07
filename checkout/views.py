@@ -139,9 +139,29 @@ def checkout(request):
         else:
             # Form is invalid - show error message
             messages.error(request, 'There was an error with your form. Please double check your information.')
+    # For GET request - display form with user profile information if available
     else:
-        # GET request - display empty form
-        order_form = OrderForm()
+        # Try to prefill the form with any user profile information if user is authenticated
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                # Pre-fill the form with the user's profile data
+                order_form = OrderForm(initial={
+                    'full_name': request.user.get_full_name(),
+                    'email': request.user.email,
+                    'phone_number': profile.default_phone_number,
+                    'street_address': profile.default_street_address,
+                    'apartment': profile.default_apartment,
+                    'city': profile.default_city,
+                    'postal_code': profile.default_postal_code,
+                    'country': profile.default_country,
+                })
+            except UserProfile.DoesNotExist:
+                # If the user doesn't have a profile yet, just show an empty form
+                order_form = OrderForm()
+        else:
+            # If user is not authenticated, show an empty form
+            order_form = OrderForm()
 
     # Calculate cart contents and shipping for display
     current_cart = cart_contents(request)

@@ -1,13 +1,5 @@
 /* Global styles */
 
-/* Orange accent color variable */
-:root {
-    --orange-accent: #ff7b00;
-    --orange-light: #ffad66;
-    --orange-dark: #cc6200;
-    --orange-very-light: #fff1e6;
-}
-
 body {
     min-height: 100vh;
     display: flex;
@@ -34,12 +26,6 @@ h6 {
     margin-bottom: 1rem;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
 a:hover {
     color: var(--accent-color);
 }
@@ -57,26 +43,6 @@ a:hover {
     color: var(--orange-accent);
 }
 
-/* Buttons */
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: #1a252f;
-    border-color: #1a252f;
-}
-
-.btn-outline-primary {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
 
 /* Footer */
 footer {
@@ -158,7 +124,6 @@ footer {
 
 #newsletter-submit {
     background-color: orangered;
-    border-color: orangered;
 }
 
 .newsletter-section h4 {

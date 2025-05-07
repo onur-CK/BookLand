@@ -313,7 +313,7 @@ This section details the manual testing conducted for user stories defined in ou
 
 |Passed | **Error Handling and Logging** - As a developer, I want comprehensive error handling and logging so that I can identify and fix issues quickly.|
 |:---:|:---|
-|&check;| User-friendly error pages are implemented (404, 500).|
+|&check;| User-friendly error pages are implemented (403, 404, 500).|
 |&check;| Form validation errors provide clear guidance to users.|
 |&check;| Payment processing errors are handled gracefully.|
 |&check;| Template errors are properly caught and managed.|
@@ -1147,6 +1147,63 @@ Resolving this issue was critical for the proper functioning of our site. Withou
 5- Proper separation of concerns between the application server and static content delivery
 
 This fix ensures that users experience BookLand as intended, with full styling, interactivity, and visual assets, rather than as a broken, unstyled application.
+
+
+## Wishlist to Cart Transfer Error
+
+[Wishlist to Cart Bug](media/bugs_and_fixes/Wishlist%20to%20cart%20bug.png)
+
+### Bug Description
+During testing of BookLand's wishlist functionality, we encountered an error when attempting to add items from the wishlist to the shopping cart. While the system displayed a success message indicating the item was added to the cart, it simultaneously showed a "500 Method Not Allowed" error page, preventing users from completing the action successfully.
+
+### Error Manifestation
+The error occurred specifically when clicking the "Add to Cart" button on items in the wishlist view. The application would display a success toast notification briefly, but then immediately redirect to a 500 error page with the message "Method Not Allowed," disrupting the user experience and preventing the intended action from completing properly.
+
+### Root Cause
+After investigation, the root cause was identified in the wishlist template's form implementation for adding items to the cart:
+
+1. Missing Redirect URL Parameter: The "Add to Cart" form in the wishlist.html template was not including a redirect_url parameter, which the add_to_cart view function requires to know where to redirect after processing.
+2. Missing Quantity Parameter: The form also did not specify a default quantity, which is another required parameter for the add_to_cart view function.
+
+Without these parameters, the view function couldn't properly complete the request processing, resulting in the 500 error despite the initial success message.
+Solution Implemented
+The issue was resolved by modifying the form in the wishlist.html template to include the necessary hidden input fields:
+Original Implementation:
+
+<form action="{% url 'add_to_cart' item.book.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn" style="background-color: orangered; color: white;">
+        <i class="bi bi-cart-plus fs-6"></i>
+    </button>
+</form>
+
+Updated Implementation:
+
+<form action="{% url 'add_to_cart' item.book.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="redirect_url" value="{% url 'wishlist' %}"> This part added as fix with the line below.
+    <input type="hidden" name="quantity" value="1">                                ^^^^^^^
+    <button type="submit" class="btn" style="background-color: orangered; color: white;">
+        <i class="bi bi-cart-plus fs-6"></i>
+    </button>
+</form>
+
+This solution ensures that:
+
+1. The form includes a redirect_url parameter pointing back to the wishlist page
+2. A default quantity of 1 is set for the added item
+3. The view can successfully process the request and redirect the user appropriately
+
+### Lessons Learned
+This bug highlights several important considerations for form handling in Django applications:
+
+1. Parameter Consistency: Ensure that all forms submitting to the same view function include all required parameters, even if they're coming from different pages.
+2. Hidden Input Fields: When the same action can be performed from multiple contexts (like adding to cart from products page vs. wishlist), use hidden input fields to maintain context-specific behavior.
+3. Error Message Clarity: While the 500 error indicated a server issue, the actual problem was with the request parameters. This emphasizes the importance of thorough error handling that provides more descriptive feedback.
+4. Cross-Feature Testing: Features that interact with each other (like wishlist and cart) should be tested together to ensure smooth transitions between related functionality.
+
+### Impact on BookLand
+Resolving this bug significantly improved the user experience by allowing seamless movement of items between the wishlist and cart. This functionality is particularly important for our target user persona who may save books to their wishlist while browsing and later decide to purchase them. With this fix, users can now easily convert their saved items to actual purchases without encountering errors, supporting our business goal of maximizing conversion from browsing to completed sales.
 
 
 
