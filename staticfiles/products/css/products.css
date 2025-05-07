@@ -381,24 +381,6 @@
     .price {
         font-size: 1.25rem;
     }
-    .btn-outline-danger, 
-    .btn-danger {
-      padding: 0.25rem 0.5rem; /* Reduce padding to make button smaller */
-      font-size: 0.875rem;    /* Slightly smaller font size */
-      line-height: 1.2;       /* Tighter line height */
-    }
-    
-    /* Make the icon smaller on mobile */
-    .btn-outline-danger i,
-    .btn-danger i {
-      font-size: 0.875rem;
-    }
-    
-    /* If the button has text beside the icon, you might want to adjust spacing */
-    .btn-outline-danger i.me-1,
-    .btn-danger i.me-1 {
-      margin-right: 0.25rem !important;
-    }
 }
 
 /* Custom styling for sort dropdown */

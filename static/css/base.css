@@ -132,8 +132,8 @@ footer {
 }
 
 #newsletter-submit:hover {
-    background-color: var(--orange-dark);
-    border-color: var(--orange-dark);
+    background-color: #cc3300;
+    border-color: #cc3300;
 }
 
 /* Responsive adjustments */

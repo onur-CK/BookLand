@@ -1,19 +1,18 @@
 # BookLand Project - Agile Development Process
 
-## **Table of Contents**
+## Table of Contents
 
-* [Agile Methodology](#agile-methodology)
-  * [Overview](#overview)
-  * [MoSCoW Prioritization](#moscow-prioritization)
-  * [Epics](#epics)
-  * [User Stories](#user-stories)
-  * [Sprint Notes](#sprint-notes)
-    * [Sprint 1: Planning & Setup](#sprint-1-planning--setup)
-    * [Sprint 2: Core Features Development](#sprint-2-core-features-development)
-    * [Sprint 3: Shopping & Checkout](#sprint-3-shopping--checkout)
-    * [Sprint 4: Profile & Admin Features](#sprint-4-profile--admin-features) 
-    * [Sprint 5: Refinement & Additional Features](#sprint-5-refinement--additional-features)
-    * [Sprint 6: Testing & Deployment](#sprint-6-testing--deployment)
+- [Overview](#overview)
+- [MoSCoW Prioritization](#moscow-prioritization)
+- [Epics](#epics)
+- [User Stories](#user-stories)
+- [Sprint Notes](#sprint-notes)
+  - [Sprint 1: Planning & Setup](#sprint-1-planning--setup)
+  - [Sprint 2: Core Features Development](#sprint-2-core-features-development)
+  - [Sprint 3: Shopping & Checkout](#sprint-3-shopping--checkout)
+  - [Sprint 4: Profile & Admin Features](#sprint-4-profile--admin-features) 
+  - [Sprint 5: Refinement & Additional Features](#sprint-5-refinement--additional-features)
+  - [Sprint 6: Testing & Deployment](#sprint-6-testing--deployment)
 
 ## Overview
 
@@ -55,11 +54,11 @@ We used the MoSCoW method to prioritize features throughout the development proc
 - Book preview feature
 - Advanced analytics
 
-# BookLand Project - Epics and User Stories
+## BookLand Project - Epics and User Stories
 
-## Epic Template
+### Epic Template
 
-# Epic: [Epic Name]
+### Epic: [Epic Name]
 
 ## Description
 [Brief description of the epic and its overall purpose]
@@ -605,7 +604,7 @@ Below is a summary of work accomplished and lessons learned from each sprint.
 
 ### Sprint 1: Planning & Setup
 
-**Duration**: 1 week 
+**Duration**: 10 days 
 
 **Focus**: Project setup, initial structure, and environment configuration
 
@@ -629,7 +628,7 @@ Successfully completed initial setup ahead of schedule, allowing more time for f
 
 ### Sprint 2: Core Features Development
 
-**Duration**: 1 week 
+**Duration**: 10 days 
 
 **Focus**: Implement book catalog, category filtering, and search functionality
 
@@ -654,7 +653,7 @@ Core browsing and search functionality is now working well. Users can browse by 
 
 ### Sprint 3: Shopping & Checkout
 
-**Duration**: 1 week 
+**Duration**: 10 days
 
 **Focus**: Shopping cart, wishlist, and checkout process
 
@@ -679,7 +678,7 @@ Users can now add items to cart, move items between wishlist and cart, and compl
 
 ### Sprint 4: Profile & Admin Features
 
-**Duration**: 1 week 
+**Duration**: 10 days
 
 **Focus**: User profiles, order history, and admin features
 
@@ -705,7 +704,7 @@ Users can now manage their profiles, view order history, and save default delive
 
 ### Sprint 5: Refinement & Additional Features
 
-**Duration**: 1 week 
+**Duration**: 10 days 
 
 **Focus**: Extra pages, UI refinements, and additional features
 
@@ -731,7 +730,7 @@ The site now has a complete set of information pages and enhanced features that 
 
 ### Sprint 6: Testing & Deployment
 
-**Duration**: 1 week 
+**Duration**: 10 days 
 
 **Focus**: Testing, bug fixing, and deployment preparation
 
