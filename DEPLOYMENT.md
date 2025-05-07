@@ -293,3 +293,159 @@ python manage.py migrate
 2. For Heroku:
 heroku run python manage.py migrate
 
+## Static and Media Files (AWS S3)
+
+### AWS Account Setup
+
+1. Create an AWS account or log in at [AWS Console](https://aws.amazon.com/)
+2. Navigate to the S3 service
+
+### S3 Bucket Configuration
+
+1. Click "Create bucket"
+2. Name the bucket (e.g., "bookland-e-commerce")
+3. Select the region closest to your users
+4. Uncheck "Block all public access"
+5. Check "I acknowledge that the current settings might result in this bucket becoming public"
+6. Click "Create bucket"
+7. Click on the bucket name to open its settings
+8. Go to the "Properties" tab
+9. Scroll down to "Static website hosting" and click "Edit"
+10. Enable static website hosting
+11. Enter "index.html" for the Index document and "error.html" for the Error document
+12. Click "Save changes"
+13. Go to the "Permissions" tab
+14. Scroll down to "CORS configuration" and click "Edit"
+15. Enter the following CORS configuration:
+
+```json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "https://bookland-e-commerce-2e2b1a60109c.herokuapp.com",
+            "http://bookland-e-commerce-2e2b1a60109c.herokuapp.com"
+        ],
+        "ExposeHeaders": []
+    }
+]
+```
+16. Click "Save changes"
+17. Scroll down to "Bucket policy" and click "Edit"
+18. Click "Policy generator"
+19. For "Select Type of Policy", choose "S3 Bucket Policy"
+20. For "Effect", choose "Allow"
+21. For "Principal", enter an asterisk (*)
+22. For "Actions", select "GetObject"
+23. For "Amazon Resource Name (ARN)", enter "arn:aws:s3:::your-bucket-name/*"
+24. Click "Add Statement" then "Generate Policy"
+25. Copy the policy JSON
+26. Paste it into the Bucket policy editor and click "Save changes"
+
+
+### IAM Configuration
+
+1. Navigate to the IAM service
+2. Click "User groups" and then "Create group"
+3. Name the group (e.g., "bookland-management")
+4. Click "Create group"
+5. Click "Policies" and then "Create policy"
+6. Go to the JSON tab and paste this policy:
+
+```json 
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::your-bucket-name",
+                "arn:aws:s3:::your-bucket-name/*"
+            ]
+        }
+    ]
+}
+```
+7. Replace "your-bucket-name" with your actual bucket name
+8. Click "Next: Tags" then "Next: Review"
+9. Name the policy (e.g., "bookland-s3-policy")
+10. Click "Create policy"
+11. Go back to "User groups" and click on your group name
+12. Go to the "Permissions" tab
+13. Click "Add permissions" > "Attach policies"
+14. Find your policy and check the box
+15. Click "Add permissions"
+16. Click "Users" in the left sidebar
+17. Click "Add users"
+18. Enter a user name (e.g., "bookland-s3-access")
+19. Check "Access key - Programmatic access"
+20. Click "Next: Permissions"
+21. Select your user group
+22. Click through the next steps and then "Create user"
+23. IMPORTANT: Download the CSV file with the access key and secret access key or copy them somewhere safe. You won't be able to see the secret access key again.
+
+
+### Django AWS Configuration
+
+1. Install required packages:
+pip install boto3 django-storages
+
+2. Add 'storages' to INSTALLED_APPS in settings.py:
+```python
+INSTALLED_APPS = [
+    # other apps
+    'storages',
+]
+```
+
+3. Add the AWS configuration to settings.py:
+```python
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'bookland-e-commerce'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STORAGES = {
+        "default": {
+            "BACKEND": "custom_storages.MediaStorage",
+        },
+        "staticfiles": {"BACKEND": "custom_storages.StaticStorage"},
+    }
+    STATICFILES_LOCATION = 'static'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+```
+
+4. Create a custom_storages.py file in the project root:
+```python
+from django.conf import settings
+from storages.backends.s3boto3 import S3Boto3Storage
+
+class StaticStorage(S3Boto3Storage):
+    location = settings.STATICFILES_LOCATION
+
+class MediaStorage(S3Boto3Storage):
+    location = settings.MEDIAFILES_LOCATION
+```
+
