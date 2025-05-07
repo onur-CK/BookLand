@@ -59,8 +59,6 @@
 - [Automated Testing](#automated-testing)
   - [Unit Tests](#unit-tests)
   - [Integration Tests](#integration-tests)
-  - [System Tests](#system-tests)
-  - [Coverage Report](#coverage-report)
 
 - [Validation Testing](#validation-testing)
   - [HTML Validation](#html-validation)
@@ -68,14 +66,7 @@
   - [JavaScript Validation](#javascript-validation)
   - [Python (PEP8) Validation](#python-pep8-validation)
   - [Accessibility Testing (WCAG)](#accessibility-testing-wcag)
-  - [Performance Testing](#performance-testing)
-    - [Lighthouse Results](#lighthouse-results)
-    - [WebPageTest Results](#webpagetest-results)
-
-- [Database Testing](#database-testing)
-  - [Model Relationship Testing](#model-relationship-testing)
-  - [Data Integrity Testing](#data-integrity-testing)
-  - [Query Optimization Testing](#query-optimization-testing)
+  - [Lighthouse Results](#lighthouse-results)
 
 - [Security Testing](#security-testing)
   - [CSRF Protection](#csrf-protection)
@@ -83,11 +74,6 @@
   - [Authentication Testing](#authentication-testing)
   - [Authorization Testing](#authorization-testing)
   - [Data Protection](#data-protection)
-
-- [User Experience Testing](#user-experience-testing)
-  - [User Feedback Summary](#user-feedback-summary)
-  - [Usability Testing Results](#usability-testing-results)
-  - [User Journey Testing](#user-journey-testing)
 
 - [Bugs and Issues](#bugs-and-issues)
   - [Fixed Bugs](#fixed-bugs)
@@ -100,13 +86,6 @@
     - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
     - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
   - [Known Issues](#known-issues)
-
-- [Testing Procedures](#testing-procedures)
-  - [Deployment Testing Process](#deployment-testing-process)
-  - [Testing Schedule](#testing-schedule)
-  - [Regression Testing](#regression-testing)
-
-- [Conclusion](#conclusion)
 
 
 ## Introduction
@@ -921,6 +900,124 @@ CRUD (Create, Read, Update, Delete) functionality testing was conducted across a
 | Delete | Remove category | ✅ Pass |
 
 All CRUD operations were tested extensively across user roles (anonymous users, registered users, and administrators) to ensure proper authorization controls and data integrity throughout the application.
+
+
+## Automated Testing
+
+### Overview
+
+While the BookLand project primarily relied on manual testing for feature validation, some basic automated tests were implemented to verify core functionality. Due to time constraints and the project's scope, automated testing coverage was purposely kept minimal.
+
+### Unit Tests
+
+Basic unit tests were created for the following models:
+- `UserProfile`: Tests for profile creation and default value handling
+- `Category`: Tests for string representation methods
+- `Book`: Tests for price formatting and inventory status
+- `Order`: Tests for order number generation
+
+### Integration Tests
+
+Limited integration tests were implemented for:
+- User authentication flow
+- Cart session persistence
+- Order creation process
+- Basic form validations
+
+#### Future Testing Improvements
+
+For future development iterations, the following testing enhancements are planned:
+- Expanded test coverage for all model methods
+- View function tests for all CRUD operations
+- Template rendering tests for responsive design
+- End-to-end testing for complete user journeys
+- CI/CD pipeline integration with automated test execution
+
+While automated testing was not the primary focus in this phase, the project's modular structure ensures it can be easily expanded with comprehensive test suites in future iterations.
+
+
+
+
+
+
+
+
+
+VALIDATORS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+
+
+## Security Testing
+
+BookLand's security testing focused on protecting user data, preventing unauthorized access, and ensuring secure payment processing. This section outlines the key security tests performed.
+
+### CSRF Protection
+
+| Test Case | Description | Result |
+|-----------|-------------|--------|
+| Form CSRF Tokens | Verified all forms include Django's CSRF tokens | ✅ Pass |
+| CSRF Token Validation | Attempted form submission with invalid/missing CSRF token | ✅ Pass |
+| AJAX Requests | Tested CSRF handling in AJAX-based operations (newsletter signup) | ✅ Pass |
+
+### Form Validation Security
+
+| Test Case | Description | Result |
+|-----------|-------------|--------|
+| Data Type Validation | Verified input validation for correct data types | ✅ Pass |
+| Length Constraints | Tested fields with extreme length values | ✅ Pass |
+| Error Messages | Checked that error messages don't reveal sensitive information | ✅ Pass |
+
+### Authentication Testing
+
+| Test Case | Description | Result |
+|-----------|-------------|--------|
+| Password Requirements | Verified password strength requirements enforcement | ✅ Pass |
+| Session Management | Verified secure session handling | ✅ Pass |
+| Logout Functionality | Tested complete session termination on logout | ✅ Pass |
+
+### Authorization Testing
+
+| Test Case | Description | Result |
+|-----------|-------------|--------|
+| Resource Access Control | Attempted accessing protected pages when unauthorized | ✅ Pass |
+| Cross-Account Access | Attempted viewing/modifying another user's data | ✅ Pass |
+| Admin Access | Verified admin-only functions are properly restricted | ✅ Pass |
+| Order History Protection | Tested access control – other users' orders are not viewable. | ✅ Pass |
+
+### Data Protection
+
+| Test Case | Description | Result |
+|-----------|-------------|--------|
+| Sensitive Data Storage | Verified passwords are properly hashed, not stored in plaintext | ✅ Pass |
+| Payment Data Handling | Confirmed no card details are stored in database | ✅ Pass |
+| Error Handling | Confirmed errors don't expose sensitive information | ✅ Pass |
+
+BookLand's security testing confirmed that the application implements appropriate measures to protect user data and maintain secure operations throughout the shopping experience. Django's built-in security features provide a solid foundation, supplemented by careful implementation of payment processing through Stripe's secure API.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
