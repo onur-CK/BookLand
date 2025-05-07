@@ -48,6 +48,13 @@
     - [Key Findings and Observations](#key-findings-and-observations)
   - [Payment Processing Testing](#payment-processing-testing)
   - [CRUD Functionality Testing](#crud-functionality-testing)
+    - [User Profile CRUD](#user-profile-crud)
+    - [Book Management (Admin)](#book-management-admin)
+    - [Wishlist Management](#wishlist-management)
+    - [Shopping Cart Management](#shopping-cart-management)
+    - [Order Processing](#order-processing)
+    - [Testimonial Management](#testimonial-management)
+    - [Category Management (Admin)](#category-management-admin)
 
 - [Automated Testing](#automated-testing)
   - [Unit Tests](#unit-tests)
@@ -844,8 +851,76 @@ The payment processing functionality, implemented using Stripe, underwent extens
 The payment testing confirmed that BookLand's integration with Stripe provides a secure, reliable checkout experience with appropriate error handling and user feedback throughout the payment process.
 
 
+## CRUD Functionality Testing
 
+### Overview
 
+CRUD (Create, Read, Update, Delete) functionality testing was conducted across all major data entities in BookLand to ensure proper data management throughout the application lifecycle.
+
+### User Profile CRUD
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Register new user account | ✅ Pass |
+| Read | View profile information | ✅ Pass |
+| Update | Edit delivery information | ✅ Pass |
+| Delete | Use account deletion function | ✅ Pass |
+
+### Book Management (Admin)
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Add new book to catalog | ✅ Pass |
+| Read | View book details in admin | ✅ Pass |
+| Update | Modify book information | ✅ Pass |
+| Delete | Remove book from catalog | ✅ Pass |
+
+### Wishlist Management
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Add book to wishlist | ✅ Pass |
+| Read | View saved wishlist items | ✅ Pass |
+| Update | Not applicable | N/A |
+| Delete | Remove item from wishlist | ✅ Pass |
+
+### Shopping Cart Management
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Add book to cart | ✅ Pass |
+| Read | View cart contents | ✅ Pass |
+| Update | Adjust item quantity | ✅ Pass |
+| Delete | Remove item from cart | ✅ Pass |
+
+### Order Processing
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Complete checkout process | ✅ Pass |
+| Read | View order details/history | ✅ Pass |
+| Update | Not applicable (orders immutable) | N/A |
+| Delete | Not implemented (business logic) | N/A |
+
+### Testimonial Management
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Submit new testimonial | ✅ Pass |
+| Read | View personal testimonials | ✅ Pass |
+| Update | Edit existing testimonial | ✅ Pass |
+| Delete | Remove testimonial | ✅ Pass |
+
+### Category Management (Admin)
+
+| Operation | Test Performed | Result |
+|-----------|---------------|--------|
+| Create | Add new book category | ✅ Pass |
+| Read | View category in admin panel | ✅ Pass |
+| Update | Edit category name | ✅ Pass |
+| Delete | Remove category | ✅ Pass |
+
+All CRUD operations were tested extensively across user roles (anonymous users, registered users, and administrators) to ensure proper authorization controls and data integrity throughout the application.
 
 
 
