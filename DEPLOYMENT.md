@@ -119,3 +119,140 @@ USE_AWS=True
 AWS_ACCESS_KEY_ID=your_aws_access_key
 AWS_SECRET_ACCESS_KEY=your_aws_secret_key
 ```
+
+## Local Development Setup
+
+### Clone Repository
+
+1. Navigate to the [BookLand repository](https://github.com/onur-CK/BookLand)
+2. Click the "Code" button and copy the repository URL
+3. Open your terminal and run:
+git clone https://github.com/onur-CK/BookLand.git
+cd bookland
+
+### Virtual Environment Setup
+
+Creating a virtual environment isolates the project dependencies:
+
+**For Windows:**
+python -m venv venv
+venv\Scripts\activate
+
+**For macOS/Linux:**
+python3 -m venv venv
+source venv/bin/activate
+
+### Installing Dependencies
+
+Install all required packages:
+pip install -r requirements.txt
+
+The key dependencies include:
+- Django
+- dj-database-url
+- psycopg2-binary
+- django-allauth
+- Pillow
+- stripe
+- django-crispy-forms
+- django-countries
+- boto3
+- django-storages
+- gunicorn
+- whitenoise
+
+### Database Setup
+
+For local development, Django uses SQLite by default:
+
+1. Run migrations to set up the database:
+python manage.py makemigrations
+python manage.py migrate
+
+2. Create a superuser for admin access:
+python manage.py createsuperuser
+Follow the prompts to create your admin user.
+
+### Running the Development Server
+
+Start the Django development server:
+python manage.py runserver
+
+The application should now be running at `http://127.0.0.1:8000/`.
+
+## Heroku Deployment
+
+### Creating a Heroku App
+
+1. Log in to your [Heroku account](https://dashboard.heroku.com/)
+2. Click "New" > "Create new app"
+3. Enter a unique app name (e.g., "bookland-e-commerce")
+4. Select the region closest to you
+5. Click "Create app"
+
+### Configuring Resources
+
+Add a PostgreSQL database to your Heroku app:
+
+1. In the Heroku dashboard, go to the "Resources" tab
+2. In the "Add-ons" search field, type "postgres"
+3. Select "Heroku Postgres"
+4. Choose the "Hobby Dev - Free" plan
+5. Click "Submit Order Form"
+
+### Setting Environment Variables
+
+Configure environment variables in Heroku:
+
+1. Go to the "Settings" tab in your Heroku dashboard
+2. Click "Reveal Config Vars"
+3. Add the following variables:
+
+| Key | Value |
+|-----|-------|
+| SECRET_KEY | your_django_secret_key |
+| DEBUG | False |
+| EMAIL_HOST_USER | your_gmail_address |
+| EMAIL_HOST_PASSWORD | your_gmail_app_password |
+| STRIPE_PUBLIC_KEY | your_stripe_public_key |
+| STRIPE_SECRET_KEY | your_stripe_secret_key |
+| STRIPE_WH_SECRET | your_stripe_webhook_secret |
+| USE_AWS | True |
+| AWS_ACCESS_KEY_ID | your_aws_access_key |
+| AWS_SECRET_ACCESS_KEY | your_aws_secret_key |
+
+The `DATABASE_URL` should be automatically added when you provisioned the Postgres database.
+
+### Deployment Method Configuration
+
+You can deploy to Heroku using either the Heroku CLI or GitHub integration. We'll cover both methods:
+
+### Manual Deployment Steps
+
+1. Create a `Procfile` in your project root with the following content:
+web: gunicorn bookland.wsgi
+
+2. Ensure your `requirements.txt` is up to date:
+pip freeze > requirements.txt
+
+3. Log in to Heroku CLI:
+heroku login
+
+4. Add the Heroku remote to your Git repository:
+heroku git -a your-heroku-app-name
+
+5. Push to Heroku:
+git push heroku main
+
+6. Run migrations on Heroku:
+heroku run python manage.py migrate
+
+### Automatic Deployment Setup
+
+For automatic deployments from GitHub:
+
+1. Go to the "Deploy" tab in your Heroku dashboard
+2. In the "Deployment method" section, select "GitHub"
+3. Connect your GitHub repository
+4. Scroll down to "Automatic deploys" and select the branch to deploy
+5. Click "Enable Automatic Deploys"
