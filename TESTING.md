@@ -75,17 +75,16 @@
   - [Authorization Testing](#authorization-testing)
   - [Data Protection](#data-protection)
 
-- [Bugs and Issues](#bugs-and-issues)
-  - [Fixed Bugs](#fixed-bugs)
-    - [Template Path Resolution Bug](#template-path-resolution-bug)
-    - [Template Literal Display Bug in Wishlist Counter](#template-literal-display-bug-in-wishlist-counter)
-    - [Category Duplication in Navigation and Product Page](#category-duplication-in-navigation-and-product-page)
-    - [Cart Removal Button Not Working (X icon replaced with trash icon)](#cart-removal-button-not-working-x-icon-replaced-with-trash-icon)
-    - [Missing Subtract Filter Bug in Cart Template](#missing-subtract-filter-bug-in-cart-template)
-    - [Stripe Payment Processing 'NoneType' Error](#stripe-payment-processing-nonetype-error)
-    - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
-    - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
-  - [Known Issues](#known-issues)
+- [Bugs and Fixes](#bugs-and-fixes)
+  - [Template Path Resolution Bug](#template-path-resolution-bug)
+  - [Template Literal Display Bug in Wishlist Counter](#template-literal-display-bug-in-wishlist-counter)
+  - [Category Duplication in Navigation and Product Page](#category-duplication-in-navigation-and-product-page)
+  - [Cart Removal Button Not Working (X icon replaced with trash icon)](#cart-removal-button-not-working-x-icon-replaced-with-trash-icon)
+  - [Missing Subtract Filter Bug in Cart Template](#missing-subtract-filter-bug-in-cart-template)
+  - [Stripe Payment Processing 'NoneType' Error](#stripe-payment-processing-nonetype-error)
+  - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
+  - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
+  - [Wishlist to Cart Transfer Error](#wishlist-to-cart-transfer-error)
 
 
 ## Introduction
@@ -338,10 +337,7 @@ This section details the manual testing conducted for user stories defined in ou
 |&check;| FAQ page addresses common customer questions.|
 |&check;| All information pages are accessible from the footer.|
 
-
 The testing shows that the vast majority of planned features have been successfully implemented and function as intended. The only exception is the Social Login Integration feature, which was designated as a "Should Have" in our MoSCoW prioritization but was not implemented in the current version due to time constraints. This feature will be considered for future development.
-
-
 
 ## Feature Testing
 
@@ -796,8 +792,6 @@ Form validation testing followed a systematic approach:
 Form validation testing confirmed that BookLand's forms effectively ensure data integrity while providing users with clear guidance when errors occur. The combination of client-side and server-side validation creates a robust system that prevents invalid data entry while maintaining a positive user experience.
 
 
-I'll create a concise Payment Processing Testing section for your TESTING.md document that focuses on the core aspects of Stripe integration in BookLand.
-
 ## Payment Processing Testing
 
 The payment processing functionality, implemented using Stripe, underwent extensive testing to ensure a secure and reliable checkout experience:
@@ -1050,7 +1044,7 @@ BookLand's security testing confirmed that the application implements appropriat
 
 
 
-## Bugs and Fixes During the Development Process
+## Bugs and Fixes
 
 The bugs and fixes encountered during development are documented in detail in the TESTING.md file. Each bug includes a description of the issue, error manifestation, root cause, solution implemented, lessons learned, and the impact on the BookLand project. For detailed information about specific bugs, please refer to the individual bug documentation in that file.
 
@@ -1069,7 +1063,7 @@ C:\Users\cpkon\Documents\GitHub\BookLand\profiles\views.py, line 28, in profile
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-[TemplateDoesNotExist](media/bugs_and_fixes/profile%20page%20can%20not%20be%20displayed.png)
+![TemplateDoesNotExist](media/bugs_and_fixes/profile%20page%20can%20not%20be%20displayed.png)
 
 #### Root Cause
 The root cause of this issue was a context variable mismatch between the view function and the template. While the template directory structure was correct (`profiles/templates/profiles/profile.html`), the template was expecting a `year_range` variable in the context dictionary to populate the date of birth dropdown selector. Since this variable wasn't being passed from the view function, Django failed to render the template and raised the "TemplateDoesNotExist" error.
@@ -1128,11 +1122,11 @@ def profile(request):
     
     return render(
         request,
-        'profiles/profile.html', # -> Added this explicit path format 
+        'profiles/profile.html', # -> Added this explicit path format !!!!
         {
             'form': form,
             'profile': profile,
-            'year_range': range(1940, 2006),  # -> Added this required context variable --- !!!!
+            'year_range': range(1940, 2006),  # -> Added this required context variable !!!!
         }
     )
 ```
@@ -1159,15 +1153,15 @@ Resolving this bug ensured that users can successfully access and manage their p
 
 ### Template Literal Display Bug in Wishlist Counter
 
+![Wishlist Template Bug](media/bugs_and_fixes/wishlist%20counter%20bug.png)
+
+![Duplicating Wishlist Icon](media/bugs_and_fixes/double%20wishlist%20icon.png)
+
 #### Bug Description
 During development of BookLand's navigation bar, we encountered a visual bug where the raw Django template code `{{ wishlist_count|default:"0" }}` was being displayed as literal text next to the wishlist icon instead of being properly evaluated to show the numerical count. Additionally, at screen sizes below 991px (mobile view), there were two wishlist icons appearing side by side.
 
 #### Error Manifestation
 The navigation bar displayed the raw template code `{{ wishlist_count|default:"0" }}` instead of the actual count value from the context processor. This occurred in the wishlist badge element in the main navigation. On mobile devices, there was a duplication of the wishlist icon due to improper display class configuration.
-
-![Wishlist Template Bug](media/bugs_and_fixes/wishlist%20counter%20bug.png)
-
-![Duplicating Wishlist Icon](media/bugs_and_fixes/double%20wishlist%20icon.png)
 
 #### Root Cause
 The root cause was twofold:
@@ -1471,11 +1465,11 @@ We resolved the issue by creating a custom template filter in the cart app. This
    ```
 
 3. **Added the template tag loading statement** at the top of cart.html:
-   ```html
+
    {% extends "base.html" %}
    {% load static %}
    {% load cart_tags %}
-   ```
+
 
 4. **Kept the original template code** which could now successfully use the subtract filter:
    ```html
@@ -1561,12 +1555,12 @@ We improved the error handling in the JavaScript code to provide clearer feedbac
 if (result.error) {
     // If payment processing failed, show the error
     const errorDiv = document.getElementById('card-errors');
-    const html = `
+    const html = 
         <span role="alert">
             <i class="bi bi-exclamation-circle"></i>
             ${result.error.message}
         </span>
-    `;
+    ;
     errorDiv.innerHTML = html;
     
     // Hide loading overlay and re-enable form
@@ -1817,18 +1811,18 @@ This bug highlights several important considerations for deployment with Django 
 Impact on BookLand
 Resolving this issue was critical for the proper functioning of our site. Without correctly serving static files, the application had no styling, JavaScript functionality, or images - rendering it effectively unusable. With the configuration properly updated for Django 5.3, all static assets are now correctly served from AWS S3, providing:
 
-1- Proper styling and layout throughout the site
-2- Functional JavaScript components (cart management, search, etc.)
-3- Responsive image loading and improved performance
-4- More reliable operation in production
-5- Proper separation of concerns between the application server and static content delivery
+1. Proper styling and layout throughout the site
+2. Functional JavaScript components (cart management, search, etc.)
+3. Responsive image loading and improved performance
+4. More reliable operation in production
+5. Proper separation of concerns between the application server and static content delivery
 
 This fix ensures that users experience BookLand as intended, with full styling, interactivity, and visual assets, rather than as a broken, unstyled application.
 
 
 ## Wishlist to Cart Transfer Error
 
-[Wishlist to Cart Bug](media/bugs_and_fixes/Wishlist%20to%20cart%20bug.png)
+![Wishlist to Cart Bug](media/bugs_and_fixes/Wishlist%20to%20cart%20bug.png)
 
 ### Bug Description
 During testing of BookLand's wishlist functionality, we encountered an error when attempting to add items from the wishlist to the shopping cart. While the system displayed a success message indicating the item was added to the cart, it simultaneously showed a "500 Method Not Allowed" error page, preventing users from completing the action successfully.
@@ -1846,7 +1840,7 @@ Without these parameters, the view function couldn't properly complete the reque
 Solution Implemented
 The issue was resolved by modifying the form in the wishlist.html template to include the necessary hidden input fields:
 Original Implementation:
-
+```html
 <form action="{% url 'add_to_cart' item.book.id %}" method="POST">
     {% csrf_token %}
     <button type="submit" class="btn" style="background-color: orangered; color: white;">
@@ -1858,12 +1852,13 @@ Updated Implementation:
 
 <form action="{% url 'add_to_cart' item.book.id %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="redirect_url" value="{% url 'wishlist' %}"> This part added as fix with the line below.
-    <input type="hidden" name="quantity" value="1">                                ^^^^^^^
+    <input type="hidden" name="redirect_url" value="{% url 'wishlist' %}"> Added this and the line below
+    <input type="hidden" name="quantity" value="1">                             
     <button type="submit" class="btn" style="background-color: orangered; color: white;">
         <i class="bi bi-cart-plus fs-6"></i>
     </button>
 </form>
+```
 
 This solution ensures that:
 
