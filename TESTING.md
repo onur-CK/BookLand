@@ -8,6 +8,12 @@
 
 - [Manual Testing](#manual-testing)
   - [User Stories Testing](#user-stories-testing)
+    - [EPIC 1: User Management](#epic-1-user-management)
+    - [EPIC 2: Book Catalog](#epic-2-book-catalog)
+    - [EPIC 3: Shopping Experience](#epic-3-shopping-experience)
+    - [EPIC 4: Admin Features](#epic-4-admin-features)
+    - [EPIC 5: Technical Infrastructure](#epic-5-technical-infrastructure)
+
   - [Feature Testing](#feature-testing)
     - [Navigation & Core Functionality](#navigation--core-functionality)
     - [User Authentication](#user-authentication)
@@ -20,6 +26,9 @@
     - [Testimonials System](#testimonials-system)
     - [Admin Features](#admin-features)
     - [Newsletter Subscription](#newsletter-subscription)
+    - [Toast Notifications](#toast-notifications)
+    - [Error Pages](#error-pages)
+    - [SEO and Marketing Features](#seo-and-marketing-features)
   - [Responsive Design Testing](#responsive-design-testing)
     - [Mobile Testing](#mobile-testing)
     - [Tablet Testing](#tablet-testing)
@@ -64,15 +73,15 @@
 
 - [Bugs and Issues](#bugs-and-issues)
   - [Fixed Bugs](#fixed-bugs)
-    - [Navigation Bugs](#navigation-bugs)
-    - [Shopping Cart Bugs](#shopping-cart-bugs)
-    - [Checkout Bugs](#checkout-bugs)
-    - [User Authentication Bugs](#user-authentication-bugs)
-    - [Database Bugs](#database-bugs)
-    - [Responsive Design Bugs](#responsive-design-bugs)
-    - [API Integration Bugs](#api-integration-bugs)
+    - [Template Path Resolution Bug](#template-path-resolution-bug)
+    - [Template Literal Display Bug in Wishlist Counter](#template-literal-display-bug-in-wishlist-counter)
+    - [Category Duplication in Navigation and Product Page](#category-duplication-in-navigation-and-product-page)
+    - [Cart Removal Button Not Working (X icon replaced with trash icon)](#cart-removal-button-not-working-x-icon-replaced-with-trash-icon)
+    - [Missing Subtract Filter Bug in Cart Template](#missing-subtract-filter-bug-in-cart-template)
+    - [Stripe Payment Processing 'NoneType' Error](#stripe-payment-processing-nonetype-error)
+    - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
+    - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
   - [Known Issues](#known-issues)
-  - [Future Fixes](#future-fixes)
 
 - [Testing Procedures](#testing-procedures)
   - [Deployment Testing Process](#deployment-testing-process)
@@ -82,7 +91,54 @@
 - [Conclusion](#conclusion)
 
 
+## Introduction
 
+### Testing Overview
+
+The BookLand e-commerce project has undergone extensive testing to ensure functionality, usability, responsiveness, and security across all aspects of the application. This document provides a comprehensive overview of the testing methodologies employed, specific test cases performed, validation results, and bug fixes implemented throughout the development process.
+
+### Testing Approach
+
+Testing for BookLand followed a multi-layered strategy combining manual and automated approaches:
+
+1.Manual Testing: Systematic verification of user stories, feature functionality, responsive design, browser compatibility, and user experience across various devices and screen sizes.
+2. Validation Testing: Rigorous code validation using industry-standard tools to ensure HTML, CSS, JavaScript, and Python code meets best practices and standards.
+3. Accessibility Testing: Evaluation of the application against WCAG guidelines to ensure inclusivity for all users, including those using assistive technologies.
+4. Performance Testing: Analysis of application performance metrics including page load times, resource optimization, and overall responsiveness.
+5. Security Testing: Verification of authentication flows, authorization controls, data protection, and form validation to protect user data and prevent security vulnerabilities.
+6. User Experience Testing: Evaluation of the application from a user's perspective, including navigation flows, intuitive interaction, and consistent design patterns.
+
+### Testing Environment
+
+Testing was conducted across the following environments to ensure consistent behavior:
+
+Devices: 
+- Desktop computers (Windows, macOS)
+- Laptops (13", 15", 17" screens)
+- Tablets (iPad, Samsung Galaxy Tab)
+- Mobile devices (iPhone 12/13/14, Samsung Galaxy S21/S22)
+
+Browsers:
+
+- Google Chrome (latest version)
+- Mozilla Firefox (latest version)
+- Safari (latest version)
+- Microsoft Edge (latest version)
+
+Screen Resolutions:
+
+- Mobile: 320px - 480px
+- Tablets: 768px - 1024px
+- Laptops/Desktops: 1024px - 1920px+
+- Ultrawide Monitors: 34 inch/3440 x 1440px(gigabyte M34WQ) / 38 inch/3840 x 1600px(LG 38GN950P-B)
+
+Development and Production Environments
+
+Local development environment with SQLite database
+Production environment on Heroku with PostgreSQL database
+AWS S3 for static and media file storage
+
+This comprehensive testing approach has been essential in identifying and resolving issues throughout the development process, resulting in a robust, user-friendly, and reliable e-commerce platform. The following sections detail the specific tests performed, validation results, and bug fixes implemented to ensure BookLand meets high standards of quality and user experience.
 
 
 ## Manual Testing
@@ -283,6 +339,37 @@ This section details the manual testing conducted for user stories defined in ou
 |&check;| All information pages are accessible from the footer.|
 
 The testing shows that the vast majority of planned features have been successfully implemented and function as intended. The only exception is the Social Login Integration feature, which was designated as a "Should Have" in our MoSCoW prioritization but was not implemented in the current version due to time constraints. This feature will be considered for future development.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
