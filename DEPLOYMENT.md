@@ -39,7 +39,6 @@
   - [Testing Email Functionality](#testing-email-functionality)
 - [Final Deployment Checklist](#final-deployment-checklist)
 - [Post-Deployment Tasks](#post-deployment-tasks)
-  - [Adding Initial Data](#adding-initial-data)
   - [Admin Account Setup](#admin-account-setup)
   - [Security Checks](#security-checks)
 
@@ -476,3 +475,89 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 7. Add the webhook secret to your development environment (.env file):
 STRIPE_WH_SECRET=your_webhook_secret
 8. Add the same webhook secret to your Heroku Config Vars
+
+## Email Configuration
+
+### Gmail SMTP Setup
+
+1. Create a Gmail account or use an existing one
+2. Go to your Google Account > Security
+3. Enable 2-Step Verification if not already enabled
+4. Under "Signing in to Google", find "App passwords"
+5. Generate a new app password for "Mail" and "Other (Custom name)" - name it "BookLand"
+6. Copy the generated password
+7. Add the email settings to your development environment (.env file):
+EMAIL_HOST_USER=your_gmail_address
+EMAIL_HOST_PASSWORD=your_generated_app_password
+
+8. Add the same email settings to your Heroku Config Vars
+9. Configure email settings in settings.py:
+
+```python
+if 'DEVELOPMENT' in os.environ:
+    # Use console backend for development
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'booklandst@gmail.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+```
+
+### Testing Email Functionality
+
+To verify email functionality:
+1. For development: Check the console output for email content
+2. For production: Complete a test checkout or trigger a password reset to receive an actual email
+
+## Final Deployment Checklist
+
+Before final deployment, ensure the following:
+
+1. Debug mode is set to False in production
+```python
+DEBUG = False
+```
+
+2. ALLOWED_HOSTS is properly configured
+```python
+ALLOWED_HOSTS = ['bookland-e-commerce-2e2b1a60109c.herokuapp.com', 'localhost', '127.0.0.1']
+```
+
+3. Requirements file is up to date
+pip freeze > requirements.txt
+
+4. Procfile exists and is correctly configured
+web: gunicorn bookland.wsgi:application
+
+5. All environment variables are set in Heroku
+6. Static files and media setup is correctly configured
+7. Database migrations have been applied
+8. Stripe webhooks are correctly set up
+
+## Post-Deployment Tasks
+
+### Admin Account Setup
+
+Create a superuser for the admin interface:
+
+. For local development:
+python manage.py createsuperuser
+
+. For Heroku:
+heroku run python manage.py createsuperuser
+
+### Security Checks
+
+Perform the following security checks:
+
+1. Ensure SECRET_KEY is not exposed in public repositories
+2. Verify DEBUG is set to False in production
+3. Check that sensitive information is stored in environment variables
+4. Test all forms for proper validation
+5. Verify CSRF protection is working
+6. Check SSL/HTTPS is enforced for all pages
