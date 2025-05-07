@@ -256,3 +256,40 @@ For automatic deployments from GitHub:
 3. Connect your GitHub repository
 4. Scroll down to "Automatic deploys" and select the branch to deploy
 5. Click "Enable Automatic Deploys"
+
+
+## Database Configuration
+
+### Local SQLite Database
+
+For development, Django uses SQLite by default. This configuration is in `settings.py`:
+
+```python
+# settings.py
+if 'DATABASE_URL' in os.environ:
+ DATABASES = {
+     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+ }
+else: 
+ DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+```
+### Production PostgreSQL Database
+
+In production, the PostgreSQL database is used through the DATABASE_URL environment variable configured in Heroku.
+
+### Database Migrations
+
+Run migrations to set up the database schema:
+
+1. For local development:
+python manage.py makemigrations
+python manage.py migrate
+
+2. For Heroku:
+heroku run python manage.py migrate
+
