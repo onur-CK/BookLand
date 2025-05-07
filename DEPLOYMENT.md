@@ -449,3 +449,30 @@ class MediaStorage(S3Boto3Storage):
     location = settings.MEDIAFILES_LOCATION
 ```
 
+## Stripe Integration
+
+### Stripe Account Setup
+
+1. Create a [Stripe account](https://stripe.com/) or log in
+2. Go to the Developers section of the Stripe dashboard
+3. Note your API keys (Publishable key and Secret key)
+
+### API Keys Configuration
+
+1. Add the Stripe keys to your development environment (.env file):
+STRIPE_PUBLIC_KEY=your_stripe_public_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+
+2. Add the same keys to your Heroku Config Vars
+
+### Webhook Configuration
+
+1. In the Stripe dashboard, go to "Developers" > "Webhooks"
+2. Click "Add endpoint"
+3. For the endpoint URL, enter "https://your-heroku-app-name.herokuapp.com/checkout/wh/"
+4. Select events to listen to (at minimum: "payment_intent.succeeded" and "payment_intent.payment_failed")
+5. Click "Add endpoint"
+6. Reveal the Webhook signing secret
+7. Add the webhook secret to your development environment (.env file):
+STRIPE_WH_SECRET=your_webhook_secret
+8. Add the same webhook secret to your Heroku Config Vars
