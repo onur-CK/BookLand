@@ -1,3 +1,5 @@
+# Source: https://docs.djangoproject.com/en/5.1/topics/forms/
+# Django Countries docs: https://pypi.org/project/django-countries/
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django import forms
@@ -9,7 +11,8 @@ class OrderForm(forms.ModelForm):
         fields = ('full_name', 'email', 'phone_number',
                   'street_address', 'apartment', 'city',
                   'postal_code', 'country',)
-        
+        # Custom widget for country field to use Bootstrap styling
+        # Source: https://django-crispy-forms.readthedocs.io/en/latest/
         widgets = {
             'country': CountrySelectWidget(attrs={
                 'class': 'form-select',

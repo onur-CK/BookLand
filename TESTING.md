@@ -55,11 +55,6 @@
     - [Order Processing](#order-processing)
     - [Testimonial Management](#testimonial-management)
     - [Category Management (Admin)](#category-management-admin)
-
-- [Automated Testing](#automated-testing)
-  - [Unit Tests](#unit-tests)
-  - [Integration Tests](#integration-tests)
-
 - [Validation Testing](#validation-testing)
   - [HTML Validation](#html-validation)
   - [CSS Validation](#css-validation)
@@ -895,39 +890,6 @@ CRUD (Create, Read, Update, Delete) functionality testing was conducted across a
 
 All CRUD operations were tested extensively across user roles (anonymous users, registered users, and administrators) to ensure proper authorization controls and data integrity throughout the application.
 
-
-## Automated Testing
-
-### Overview
-
-While the BookLand project primarily relied on manual testing for feature validation, some basic automated tests were implemented to verify core functionality. Due to time constraints and the project's scope, automated testing coverage was purposely kept minimal.
-
-### Unit Tests
-
-Basic unit tests were created for the following models:
-- `UserProfile`: Tests for profile creation and default value handling
-- `Category`: Tests for string representation methods
-- `Book`: Tests for price formatting and inventory status
-- `Order`: Tests for order number generation
-
-### Integration Tests
-
-Limited integration tests were implemented for:
-- User authentication flow
-- Cart session persistence
-- Order creation process
-- Basic form validations
-
-#### Future Testing Improvements
-
-For future development iterations, the following testing enhancements are planned:
-- Expanded test coverage for all model methods
-- View function tests for all CRUD operations
-- Template rendering tests for responsive design
-- End-to-end testing for complete user journeys
-- CI/CD pipeline integration with automated test execution
-
-While automated testing was not the primary focus in this phase, the project's modular structure ensures it can be easily expanded with comprehensive test suites in future iterations.
 
 
 

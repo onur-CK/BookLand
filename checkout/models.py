@@ -23,7 +23,7 @@ class Order(models.Model):
     
     # Shipping address
     street_address = models.CharField(max_length=80, null=False, blank=False)
-    apartment = models.CharField(max_length=80, null=True, blank=True)  # Optional field
+    apartment = models.CharField(max_length=80, null=True, blank=True)  # Optional apartment field
     city = models.CharField(max_length=40, null=False, blank=False)
     postal_code = models.CharField(max_length=20, null=False, blank=False)
     

@@ -14,6 +14,7 @@ from decimal import Decimal
 from checkout.webhook_handler import StripeWH_Handler
 
 
+# Source: https://docs.djangoproject.com/en/5.1/topics/http/decorators/#django.views.decorators.http.require_POST
 @require_POST
 def cache_checkout_data(request):
     """
@@ -92,7 +93,7 @@ def checkout(request):
                 pid = client_secret.split('_secret')[0]
                 order.stripe_pid = pid
             else:
-                # Handle missing or malformed client_secret gracefully
+                # Handle missing or malformed client_secret
                 # Still create the order but log the issue
                 import logging
                 logger = logging.getLogger(__name__)
