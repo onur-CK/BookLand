@@ -57,6 +57,8 @@
                                  Source: https://docs.djangoproject.com/en/5.0/topics/forms/ -->
                             <form action="{% url 'add_to_cart' item.book.id %}" method="POST">
                                 {% csrf_token %}
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn" style="background-color: orangered; color: white;">
                                     <i class="bi bi-cart-plus fs-6"></i>
                                 </button>
