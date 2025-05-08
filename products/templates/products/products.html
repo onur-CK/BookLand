@@ -30,6 +30,7 @@ Browse All Books | BookLand Online Bookstore
     <header class="page-header">
         <div class="row">
             <div class="col">
+                <!-- Dynamic heading that changes based on category selection -->
                 {% if active_category %}
                 <h2 class="text-center">{{ active_category.friendly_name|default:active_category.name }} Books</h2>
                 {% else %}
@@ -49,7 +50,8 @@ Browse All Books | BookLand Online Bookstore
                 <a href="{% url 'products' %}" class="category-badge {% if not active_category %}active{% endif %}">
                     All Books
                 </a>
-                <!-- Fixed category links to avoid duplication issues (see TESTING.md) -->
+                <!-- Fixed category links to avoid duplication issues (see related TESTING.md part: 
+                 Bugs and Fixes. -> Category Duplication in Navigation and Product Page) -->
                 <a href="{% url 'products' %}?category=philosophy"
                     class="category-badge {% if active_category and active_category.name == 'philosophy' %}active{% endif %}">
                     Philosophy
@@ -127,7 +129,6 @@ Browse All Books | BookLand Online Bookstore
     <!-- Product Grid Display
          Source: Bootstrap documentation on grid system
          https://getbootstrap.com/docs/5.0/layout/grid/ -->
-    <!-- Product Grid Display -->
     <section class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
         {% for product in products %}
         <article class="col">
@@ -187,7 +188,7 @@ Browse All Books | BookLand Online Bookstore
         {% endfor %}
     </section>
 
-    <!-- Pagination Section (for future implementation)
+    <!-- Pagination Section
          Source: Django documentation on pagination
          https://docs.djangoproject.com/en/5.1/topics/pagination/ -->
     {% if products.has_other_pages %}
