@@ -18,6 +18,8 @@
         <!-- Sidebar Navigation -->
         <nav class="col-12 col-md-3">
             <div class="list-group">
+                <!-- Bootstrap list group for navigation
+                     Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
                 </a>
@@ -40,6 +42,8 @@
                     <h2 class="h5">Edit Your Testimonial</h2>
                 </header>
                 <div class="card-body">
+                    <!-- Edit testimonial form
+                         Source: https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#the-save-method -->
                     <form method="POST" action="{% url 'edit_testimonial' testimonial.id %}">
                         {% csrf_token %}
                         <div class="mb-3">

@@ -17,7 +17,8 @@
     </header>
     
     <div class="row">
-        <!-- Sidebar Navigation with Bootstrap list-group component -->
+        <!-- Sidebar Navigation with Bootstrap list-group component 
+             Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
         <nav class="col-12 col-md-3">
             <div class="list-group">
                 <a href="{% url 'profile' %}" class="list-group-item active">
@@ -42,17 +43,21 @@
 
          <!-- Main Content Section -->
          <section class="col-12 col-md-9">
-            <!-- Personal Information Card -->
+            <!-- Personal Information Card 
+                 Source: https://getbootstrap.com/docs/5.3/components/card/ -->
             <article class="card mb-4">
                 <header class="card-header">
                     <h2 class="h5">Personal Information</h2>
                 </header>
                 <div class="card-body">
-                    <!-- Form to update user information -->
+                    <!-- Form to update user information
+                         Django forms: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
                     <form action="{% url 'profile' %}" method="POST" id="personal-info-form">
                         {% csrf_token %}
+                        <!-- CSRF protection token to prevent cross-site request forgery 
+                             Source: https://docs.djangoproject.com/en/5.1/ref/csrf/ -->
 
-                        <!-- First name and last name fields from Django User model -->
+                        <!-- First name and last name fields -->
                         <div class="row mb-3">
                             <div class="col-12 col-md-6">
                                 <label for="id_first_name" class="form-label">First Name*</label>
@@ -71,7 +76,7 @@
                             <small class="text-muted">Email cannot be changed. Contact support if needed.</small>
                         </div>
 
-                        <!-- Default Address fields -->
+                        <!-- Default Address fields - (moved from previous address card after the optional and required field changes) -->
                         <fieldset>
                             <legend class="h5 mt-4">Default Address</legend>
                             <hr>
@@ -118,7 +123,8 @@
     </div>
 </main>
 
-<!-- Delete Account Modal -->
+<!-- Delete Account Modal 
+     Source: https://getbootstrap.com/docs/5.3/components/modal/ -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

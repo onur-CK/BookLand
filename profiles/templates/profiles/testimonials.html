@@ -18,6 +18,8 @@
         <!-- Sidebar Navigation -->
         <nav class="col-12 col-md-3">
             <div class="list-group">
+                <!-- Bootstrap list group component for navigation
+                     Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
                 </a>
@@ -44,6 +46,8 @@
                     <h2 class="h5">Share Your Experience</h2>
                 </header>
                 <div class="card-body">
+                    <!-- Form for adding new testimonial
+                         Source: https://docs.djangoproject.com/en/5.1/topics/forms/ -->
                     <form method="POST" action="{% url 'testimonials' %}">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -78,6 +82,9 @@
                                 <div>
                                     <h3 class="h5 mb-0">{{ testimonial.title }}</h3>
                                     <div class="text-muted small">
+                                        <!-- Dynamic star rating display with Bootstrap Icons
+                                         Source: https://icons.getbootstrap.com/ and 
+                                         https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#for -->
                                         {% for i in "12345" %}
                                             {% if forloop.counter <= testimonial.rating %}
                                                 <i class="bi bi-star-fill text-warning"></i>
@@ -88,6 +95,8 @@
                                     </div>
                                 </div>
                                 <div>
+                                    <!-- Bootstrap badge component for status display
+                                     Source: https://getbootstrap.com/docs/5.3/components/badge/ -->
                                     <span class="badge {% if testimonial.is_approved %}bg-success{% else %}bg-secondary{% endif %}">
                                         {% if testimonial.is_approved %}Approved{% else %}Awaiting Approval{% endif %}
                                     </span>
@@ -96,6 +105,8 @@
                             <div class="card-body">
                                 <p>{{ testimonial.content }}</p>
                                 <footer class="small text-muted">
+                                    <!-- Django date formatting filter
+                                     Source: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#date -->
                                     Last updated: <time datetime="{{ testimonial.date_updated|date:'Y-m-d H:i' }}">{{ testimonial.date_updated|date:"F j, Y, g:i a" }}</time>
                                 </footer>
                             </div>

@@ -21,6 +21,8 @@
         <nav class="col-12 col-md-3">    
             <!-- Sidebar Navigation -->
             <div class="list-group">
+                <!-- Bootstrap list group component for navigation
+                         Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
                 </a>
@@ -45,6 +47,8 @@
                 <div class="card-body">
                     {% if orders %}
                         <div class="table-responsive">
+                            <!-- Bootstrap table component for responsive tables
+                                     Source: https://getbootstrap.com/docs/5.3/content/tables/ -->
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -61,6 +65,8 @@
                                             <td>
                                                 <a href="{% url 'order_detail' order.order_number %}"
                                                    title="{{ order.order_number }}">
+                                                    <!-- Django template filter that cuts off text at a character limit
+                                                    Source: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#truncatechars -->
                                                     {{ order.order_number|truncatechars:6 }}
                                                 </a>
                                             </td>
