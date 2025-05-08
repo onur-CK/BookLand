@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.testimonial-content').forEach(function(content) {
         // If the scroll height is greater than the client height, it means content is overflowing
         if (content.scrollHeight > content.clientHeight) {
+            // Limit if the content is overflowing
             content.classList.add('truncated');
         } else {
             content.classList.remove('truncated');
