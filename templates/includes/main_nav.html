@@ -1,19 +1,19 @@
 {% load static %}
 <!-- Navigation Bar 
-     Bootstrap Navbar documentation: https://getbootstrap.com/docs/5.3/components/navbar/ -->
+Bootstrap Navbar documentation: https://getbootstrap.com/docs/5.3/components/navbar/ -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" itemscope itemtype="https://schema.org/SiteNavigationElement">
   <div class="container">
     <!-- Logo/Brand 
-         Source: https://getbootstrap.com/docs/5.3/components/navbar/#brand -->
+    Source: https://getbootstrap.com/docs/5.3/components/navbar/#brand -->
     <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}" itemprop="url">Book<span class="text-orange" itemprop="name">Land</span></a>
 
     <!-- Shopping Cart for Mobile (visible on small screens only)
-           Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
+    Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
     <div class="d-lg-none order-lg-3 ms-auto me-3">
       <a href="{% url 'view_cart' %}" class="text-dark position-relative" aria-label="View shopping cart">
         <i class="bi bi-cart2 fs-4"></i>
         <!-- Badge for cart item count
-             Bootstrap badges: https://getbootstrap.com/docs/5.3/components/badge/ -->
+        Bootstrap badges: https://getbootstrap.com/docs/5.3/components/badge/ -->
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           {{ product_count|default:"0" }}
         </span>
@@ -58,8 +58,8 @@
             Categories
           </a>
           <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <!-- Fixed Category list - Using hardcoded links instead of dynamic rendering to avoid duplicates
-                 Bootstrap dropdown: https://getbootstrap.com/docs/5.3/components/dropdowns/ -->
+            <!-- Fixed Category list - Using hardcoded links instead of dynamic rendering to avoid duplicates ( changed after trying to render the categories from the list created by admin)
+            Bootstrap dropdown: https://getbootstrap.com/docs/5.3/components/dropdowns/ -->
             <li>
               <a href="{% url 'products' %}?category=philosophy" class="dropdown-item">
                 Philosophy
@@ -108,7 +108,7 @@
       </ul>
 
       <!-- Shopping Cart for Desktop (hidden on small screens)
-           Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
+      Bootstrap display utilities: https://getbootstrap.com/docs/5.3/utilities/display/ -->
       <div class="d-none d-lg-block me-3">
         <a href="{% url 'view_cart' %}" class="text-dark position-relative" aria-label="View shopping cart">
           <i class="bi bi-cart2 fs-4"></i>

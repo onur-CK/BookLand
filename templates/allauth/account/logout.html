@@ -1,6 +1,5 @@
 {% extends "base.html"%}
-<!-- Extends the base template to maintain consistent site layout and styling
-     Source: https://docs.djangoproject.com/en/5.1/ref/templates/language/#template-inheritance -->
+<!-- Extends the base template to maintain consistent site layout and styling -->
 
 {% load i18n %}
 <!-- Loads internationalization tags for multi-language support
@@ -26,21 +25,16 @@
                      Source: 1- https://getbootstrap.com/docs/5.3/components/card/ 
                      2- https://getbootstrap.com/docs/5.3/layout/columns/#how-they-work -->
                 <h2 class="text-center">Sign Out</h2>
-                <!-- Centered heading for the card -->
-
                 <p class="text-center">Are you sure you want to sign out?</p>
-                <!-- Confirmation message for the user -->
-
                 <form method="POST" action="{% url 'account_logout' %}">
                     <!-- POST form that submits to the django-allauth logout view
                          Source: https://docs.allauth.org/en/latest/account/configuration.html -->
                     {% csrf_token %}
                     <!-- Django Cross Site Request Forgery protection token
-                         Required for all POST forms for security
                          Source: https://docs.djangoproject.com/en/5.1/ref/csrf/ -->
 
                     {% if redirect_field_value %}
-                    <!-- Conditional check for redirect URL parameter, 
+                    <!-- Conditional check for redirect URL parameter,
                          provided by django-allauth to return user to previous page after logout -->
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                     {% endif %}
@@ -51,7 +45,6 @@
                              <button type="submit" class="btn btn-outline-danger">Sign Out</button>
                         <!-- Primary action button that submits the form -->
                         <a href="{% url 'home' %}" class="btn btn-outline-secondary">Cancel</a>
-                        <!-- Secondary action that returns to homepage without logging out -->
                     </div>
                 </form>
             </div>

@@ -4,13 +4,13 @@
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
+<!-- Basic login template -->
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <h2 class="text-center">Sign In</h2>
-            <!-- Main login form using django-allauth's built-in URL
-                 Source: https://django-allauth.readthedocs.io/en/latest/forms.html -->
+            <!-- Main login form using django-allauth's built-in URL -->
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 
@@ -25,9 +25,7 @@
                 </div>
                 {% endif %}
 
-                <!-- Email input field
-                     Note: django-allauth uses 'login' as the field name for email
-                     Source: https://django-allauth.readthedocs.io/en/latest/forms.html#login-authentication -->
+                <!-- Email input field -->
                 <div class="mb-3">
                     <label for="id_login" class="form-label">Email*</label>
                     <input type="email" name="login" id="id_login" class="form-control" placeholder="E-mail address" required>
@@ -61,8 +59,7 @@
                     <label for="id_remember" class="form-check-label">Remember Me</label>
                 </div>
 
-                <!-- Django allauth redirection handling
-                     Source: https://django-allauth.readthedocs.io/en/latest/advanced.html#redirects./ -->
+                <!-- Django allauth redirection handling -->
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                 {% endif %}

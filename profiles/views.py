@@ -1,3 +1,7 @@
+# This file contains view functions for handling user profiles, account management, and related features
+# Views are responsible for processing requests and returning responses
+# Source: https://docs.djangoproject.com/en/5.1/topics/http/views/
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -9,6 +13,8 @@ from django.contrib.auth import logout
 @login_required
 def profile(request):
     """ Display the user's profile. """
+    # Fetch the user's profile or return 404 if not found
+    # Source: https://docs.djangoproject.com/en/5.1/topics/http/shortcuts/#get-object-or-404
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
@@ -16,12 +22,15 @@ def profile(request):
         profile_form = UserProfileForm(request.POST, instance=profile)
         
         # Handle the user form data (first_name, last_name)
+        # Source: https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/
         user_form = UserForm(request.POST, instance=request.user)
         
         # Save both forms if valid
         if profile_form.is_valid() and user_form.is_valid():
             user_form.save()  # Save User model data (first_name, last_name)
             profile_form.save()  # Save UserProfile model data
+            # Display success message using Django's messages framework
+            # Source: https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
             messages.success(request, 'Profile updated successfully')
         else:
             messages.error(request, 'Update failed. Please ensure all fields are valid.')
@@ -34,10 +43,11 @@ def profile(request):
     # This helps the toast template know not to show cart information
     on_profile_page = True
     
-    # Using the app and template format explicitly after the Template Path Resolution Bug(TESTING.md)
+    # Using the app and template format explicitly after the Template Path Resolution Bug(check TESTING.md for more information)
+    # Source: https://docs.djangoproject.com/en/5.1/topics/templates/#template-loading
     return render(
         request,
-        'profiles/profile.html',  # Explicit path format
+        'profiles/profile.html',  # Explicit path format 
         {
             'profile_form': profile_form,
             'user_form': user_form,
@@ -49,10 +59,13 @@ def profile(request):
 @login_required
 def delete_account(request):
     """ Delete the user's account """
+    # Only process account deletion on POST requests for security
+    # Source: https://docs.djangoproject.com/en/5.1/topics/http/decorators/#django.views.decorators.http.require_POST
     if request.method == 'POST':
         user = request.user
         
         # Log the user out first
+        # Source: https://docs.djangoproject.com/en/5.1/topics/auth/default/#how-to-log-a-user-out
         logout(request)
         # Then delete the user - Django will cascade delete related objects
         user.delete()
@@ -66,9 +79,12 @@ def delete_account(request):
 @login_required
 def order_history(request):
     """ Display the user's order history """
+    # Fetch the user's profile
     profile = get_object_or_404(UserProfile, user=request.user)
     
     # Get all orders for this user, ordered by date (newest first)
+    # Using the related_name 'orders' defined in the Order model's ForeignKey
+    # Source: https://docs.djangoproject.com/en/5.1/topics/db/queries/#following-relationships-backward
     orders = profile.orders.all().order_by('-date')
 
     template = 'profiles/order_history.html'
@@ -82,6 +98,8 @@ def order_history(request):
 @login_required
 def wishlist(request):
     """ Display the user's wishlist """
+    # Fetch all wishlist items for the current user
+    # Source: https://docs.djangoproject.com/en/5.1/topics/db/queries/#retrieving-specific-objects-with-filters
     wishlist_items = WishlistItem.objects.filter(user=request.user)
 
     template = 'profiles/wishlist.html'
@@ -97,6 +115,8 @@ def add_to_wishlist(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
 
     # Check if the item is already in the wishlist
+    # get_or_create returns a tuple (object, created) where created is a boolean
+    # Source: https://docs.djangoproject.com/en/5.1/ref/models/querysets/#get-or-create
     wishlist_item, created = WishlistItem.objects.get_or_create(
         user=request.user,
         book=book
@@ -144,6 +164,7 @@ def testimonials(request):
     
     if request.method == 'POST':
         # Handle new testimonial submission
+        # Source: https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#the-save-method
         form = TestimonialForm(request.POST)
         if form.is_valid():
             testimonial = form.save(commit=False)
@@ -167,6 +188,7 @@ def testimonials(request):
 @login_required
 def edit_testimonial(request, testimonial_id):
     """ Edit a specific testimonial """
+    # Get the testimonial object ensuring it belongs to the current user
     testimonial = get_object_or_404(Testimonial, pk=testimonial_id, user=request.user)
     
     if request.method == 'POST':
@@ -189,6 +211,7 @@ def edit_testimonial(request, testimonial_id):
 
 def delete_testimonial(request, testimonial_id):
     """ Delete a specific testimonial """
+    # Get the testimonial ensuring it belongs to the current user
     testimonial = get_object_or_404(Testimonial, pk=testimonial_id, user=request.user)
     
     if request.method == 'POST':

@@ -1,3 +1,6 @@
+# This file defines the data models for user profiles, wishlists, and testimonials
+# Source: https://docs.djangoproject.com/en/5.1/topics/db/models/
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -10,6 +13,8 @@ class UserProfile(models.Model):
     A user profile model for maintaining default
     delivery information and order history
     """
+    # One-to-one relationship with Django's built-in User model
+    # Source: https://docs.djangoproject.com/en/5.1/topics/db/examples/one_to_one/
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_street_address = models.CharField(max_length=80, null=True, blank=True)
@@ -26,6 +31,8 @@ class UserProfile(models.Model):
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Create or update the user profile
+    Signal handler to automatically create/update profile when User is saved
+    Source: https://docs.djangoproject.com/en/5.1/topics/signals/
     """
     if created:
         UserProfile.objects.create(user=instance)
@@ -42,11 +49,15 @@ class WishlistItem(models.Model):
     """
     A model to store wishlist items for users
     """
+    # ForeignKey creates a many-to-one relationship
+    # Source: https://docs.djangoproject.com/en/5.1/topics/db/examples/many_to_one/
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        # Ensures a user can't add the same book to their wishlist multiple times
+        # Source: https://docs.djangoproject.com/en/5.1/ref/models/options/#unique-together
         unique_together = ('user', 'book')
         ordering = ['-date_added']
 
@@ -61,6 +72,8 @@ class Testimonial(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='testimonials')
     title = models.CharField(max_length=100)
     content = models.TextField()
+    # Add validators to ensure rating is between 1 and 5
+    # Source: https://docs.djangoproject.com/en/5.1/ref/validators/
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)],
         help_text="Rating from 1 to 5 stars"

@@ -1,3 +1,7 @@
+# This file defines the forms used in the profiles app
+# Forms handle data validation and processing
+# Source: https://docs.djangoproject.com/en/5.1/topics/forms/
+
 from django import forms
 from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
@@ -8,12 +12,15 @@ class CustomSignupForm(SignupForm):
     """
     Custom signup form that extends the default allauth SignupForm.
     Currently doesn't add any additional fields, but can be extended in the future.
+    Source: https://django-allauth.readthedocs.io/en/latest/forms.html
     """
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         return user
 
 class UserProfileForm(forms.ModelForm):
+    # ModelForm provides a way to create a Form class from a Django model
+    # Source: https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/
     class Meta:
         model = UserProfile
         exclude = ('user', 'date_of_birth')
@@ -25,6 +32,7 @@ class UserProfileForm(forms.ModelForm):
         """
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field
+        Source: https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#overriding-the-default-fields
         """
         super().__init__(*args, **kwargs)
         placeholders = {
@@ -61,6 +69,8 @@ class TestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ['title', 'content', 'rating']
+        # Define custom widgets for form fields
+        # Source: https://docs.djangoproject.com/en/5.1/ref/forms/widgets/
         widgets = {
             'content': forms.Textarea(attrs={'rows': 5}),
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),

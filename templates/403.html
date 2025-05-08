@@ -6,12 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 text-center">
             <div class="mt-5 mb-4">
+                <!-- Icon for the error message using Bootstrap Icons
+                Source: https://icons.getbootstrap.com/icons/shield-exclamation/ -->
                 <i class="bi bi-shield-exclamation text-danger" style="font-size: 5rem;"></i>
             </div>
+            <!-- Error heading using Bootstrap display utility
+            Source: https://getbootstrap.com/docs/5.3/utilities/text/#font-size -->
             <h1 class="display-4">403 - Access Denied</h1>
             <p class="lead mb-4">Sorry, you don't have permission to access this page.</p>
             <p class="mb-5">This might be because you need to log in or you don't have the necessary permissions.</p>
+            <!-- Action buttons with Bootstrap's spacing
+            Source: https://getbootstrap.com/docs/5.3/utilities/spacing/ -->
             <div class="d-flex justify-content-center gap-3">
+                <!-- Link buttons to navigate away from error page
+                Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <a href="{% url 'home' %}" class="btn btn-dark">Return to Homepage</a>
                 <a href="{% url 'products' %}" class="btn btn-outline-dark">Browse Books</a>
             </div>

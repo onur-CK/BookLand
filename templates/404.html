@@ -6,12 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 text-center">
             <div class="mt-5 mb-4">
+                <!-- Book icon in site's orange color
+                Source: https://icons.getbootstrap.com/icons/book/ -->
                 <i class="bi bi-book text-orange" style="font-size: 5rem;"></i>
             </div>
+            <!-- Error heading using Bootstrap display utility
+            Source: https://getbootstrap.com/docs/5.3/utilities/text/#font-size -->
             <h1 class="display-4">404 - Page Not Found</h1>
             <p class="lead mb-4">Oops! We couldn't find the page you're looking for.</p>
             <p class="mb-5">The page may have been moved, deleted, or possibly never existed.</p>
+            <!-- Action buttons with flexbox for horizontal alignment
+            Source: https://getbootstrap.com/docs/5.3/utilities/flex/ -->
             <div class="d-flex justify-content-center gap-3">
+                <!-- Link buttons to navigate away from error page
+                Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <a href="{% url 'home' %}" class="btn btn-dark">Return to Homepage</a>
                 <a href="{% url 'products' %}" class="btn btn-outline-dark">Browse Books</a>
             </div>

@@ -6,12 +6,18 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 text-center">
             <div class="mt-5 mb-4">
+                <!-- Warning triangle icon for server error
+                Source: https://icons.getbootstrap.com/icons/exclamation-triangle/ -->
                 <i class="bi bi-exclamation-triangle text-warning" style="font-size: 5rem;"></i>
             </div>
+            <!-- Error heading using Bootstrap display utility
+            Source: https://getbootstrap.com/docs/5.3/utilities/text/#font-size -->
             <h1 class="display-4">500 - Method Not Allowed</h1>
             <p class="lead mb-4">Sorry, that action is not permitted.</p>
             <p class="mb-5">The request method used is not supported for this operation.</p>
             <div class="d-flex justify-content-center gap-3">
+                <!-- Link buttons to navigate away from error page
+                Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
                 <a href="{% url 'home' %}" class="btn btn-dark">Return to Homepage</a>
                 <a href="{% url 'products' %}" class="btn btn-outline-dark">Browse Books</a>
             </div>
