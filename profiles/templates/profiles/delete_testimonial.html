@@ -18,6 +18,8 @@
         <!-- Sidebar Navigation -->
         <nav class="col-12 col-md-3">
             <div class="list-group">
+                <!-- Bootstrap list group for consistent navigation
+                     Source: https://getbootstrap.com/docs/5.3/components/list-group/ -->
                 <a href="{% url 'profile' %}" class="list-group-item">
                     Personal Information
                 </a>
@@ -36,12 +38,16 @@
         <!-- Main Content Area -->
         <section class="col-12 col-md-9">
             <article class="card">
+                <!-- Bootstrap card with danger styling for delete confirmation
+                     Source: https://getbootstrap.com/docs/5.3/components/card/ -->
                 <header class="card-header bg-danger text-white">
                     <h2 class="mb-0 h5">Confirm Deletion</h2>
                 </header>
                 <div class="card-body">
                     <h3 class="h4">{{ testimonial.title }}</h3>
                     <div class="mb-3">
+                        <!-- Dynamic star rating display
+                             Source: https://icons.getbootstrap.com/ -->
                         {% for i in "12345" %}
                             {% if forloop.counter <= testimonial.rating %}
                                 <i class="bi bi-star-fill text-warning"></i>
@@ -53,6 +59,8 @@
                     <p>{{ testimonial.content }}</p>
                     
                     <div class="alert alert-warning">
+                        <!-- Bootstrap alert component for warning messages
+                             Source: https://getbootstrap.com/docs/5.3/components/alerts/ -->
                         <i class="bi bi-exclamation-triangle-fill"></i>
                         Are you sure you want to delete this testimonial? This action cannot be undone.
                     </div>
