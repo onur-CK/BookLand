@@ -1,16 +1,24 @@
+# Django's render and redirect functions for view handling
+# Source: https://docs.djangoproject.com/en/5.1/topics/http/shortcuts/
 from django.shortcuts import render, redirect
+# Django's messages framework to display one-time notifications
+# Source: https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
 from django.contrib import messages
 
 def contact_us(request):
     """Render the Contact Us page and handle form submission"""
+    # POST/Redirect/GET pattern to prevent form resubmission
+    # Source: https://en.wikipedia.org/wiki/Post/Redirect/Get
     if request.method == 'POST':
         name = request.POST.get('name')
         
-        # Set a session variable for the success message
+        # Using Django's session framework to store temporary data
+        # Source: https://docs.djangoproject.com/en/5.1/topics/http/sessions/
         request.session['contact_form_submitted'] = True
         request.session['contact_name'] = name
         
-        # Redirect back to the contact page to prevent form resubmission on refresh
+        # Redirect after POST to prevent form resubmission on page refresh
+        # Source: https://docs.djangoproject.com/en/5.1/topics/http/shortcuts/#redirect
         return redirect('contact_us')
     
     # Check if we need to display a success message
@@ -19,7 +27,8 @@ def contact_us(request):
     if request.session.get('contact_form_submitted'):
         contact_success = True
         contact_name = request.session.get('contact_name', '')
-        # Clear the session variables
+        # Clear session variables after use to prevent stale data
+        # Source: https://docs.djangoproject.com/en/5.1/topics/http/sessions/#setting-test-cookies
         request.session.pop('contact_form_submitted', None)
         request.session.pop('contact_name', None)
     

@@ -84,6 +84,8 @@
 
     <!-- Newsletter Section - appears on all pages -->
     <div class="container">
+        <!-- Responsive grid layout with centered content -->
+        <!-- Source: https://getbootstrap.com/docs/5.3/layout/grid/ -->
         <div class="row justify-content-center mt-5 pt-3 border-top">
             <div class="col-12 text-center mb-3">
                 <h4>Join Our Newsletter</h4>
@@ -93,10 +95,13 @@
                      Bootstrap form documentation: https://getbootstrap.com/docs/5.3/forms/overview/ -->
                      <form id="newsletter-form" class="d-flex justify-content-center">
                         <div class="w-100">
+                            <!-- Input group for styling the form elements together -->
+                            <!-- Source: https://getbootstrap.com/docs/5.3/forms/input-group/ -->
                             <div class="input-group">
                                 <input type="email" id="newsletter-email" class="form-control" placeholder="Enter your email">
                                 <button type="submit" id="newsletter-submit" class="btn btn-dark" aria-label="Subscribe to newsletter">Subscribe</button>
                             </div>
+                            <!-- Container for displaying success/error messages -->
                             <div id="newsletter-message" class="mt-2 text-center"></div>
                         </div>
                     </form>
