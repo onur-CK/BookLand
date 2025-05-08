@@ -1,4 +1,4 @@
-/* Styles for shopping cart */
+/* Shopping cart */
 
 /* Cart table */
 .cart-table {
@@ -293,7 +293,7 @@
 /* Custom styles for shopping toasts */
 .toast-container .custom-toast.shopping-toast {
     border-left: 4px solid orangered;
-    max-width: 400px; /* Make shopping toasts a bit wider */
+    max-width: 400px; 
 }
 
 .toast.show {

@@ -33,7 +33,7 @@ const style = {
     }
 };
 
-// Create card Element with zipCode set to false
+// Create card Element
 const card = elements.create('card', {
     style: style
 });

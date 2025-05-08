@@ -17,7 +17,6 @@ from pathlib import Path
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 # This establishes the root directory of the project
 # Source: https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +33,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -193,7 +191,7 @@ if 'USE_AWS' in os.environ:
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and media files
-    # Source: Tutor Support(Tutor support shared this storages part for django 5)
+    # Source: Tutor support shared this storages part for django 5
     STORAGES = {
         "default": {
             "BACKEND": "custom_storages.MediaStorage",

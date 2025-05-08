@@ -297,7 +297,7 @@
     box-shadow: 0 0 0 0.25rem rgba(44, 62, 80, 0.15);
 }
 
-/* Stripe Elements styling - cleaner and simpler */
+/* Stripe Elements styling */
 .card-element-container {
     background-color: white;
     border: 1px solid #e9ecef;
@@ -345,7 +345,7 @@
     font-size: 0.875rem;
     margin-top: 0.5rem;
     color: #dc3545;
-    min-height: 24px; /* Keep consistent space for error messages */
+    min-height: 24px; 
 }
 
 /* Stripe Elements styling */

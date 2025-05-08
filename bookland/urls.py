@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 # Source: https://docs.djangoproject.com/en/5.1/topics/http/urls/
 urlpatterns = [
     # Django admin interface - provides management UI for authorized users
-    # Source: https://docs.djangoproject.com/en/5.1/ref/contrib/admin/
     path('admin/', admin.site.urls),
     
     # Authentication URLs provided by django-allauth (login, signup, password reset, etc.)

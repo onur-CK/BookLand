@@ -17,7 +17,7 @@ def add_to_cart(request, item_id):
     """
     # Get the book object from database
     book = get_object_or_404(Book, pk=item_id)
-    # Get the quantity from the form (default to 1 if not specified)
+    # Get the quantity from the form
     quantity = int(request.POST.get('quantity', 1))
     # Get the URL to redirect back to after processing
     redirect_url = request.POST.get('redirect_url')
