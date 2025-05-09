@@ -908,63 +908,115 @@ Checkot Page:
 Checkout Success Page: 
 [Checkout Success Page](media/html_val/checkout%20success.png)
 
-**Contact Us Page:** 
+**Contact Us Page Note:** 
 
 The W3C validator has flagged an accessibility error: the <img> element used for displaying the country select flag (from the django-countries package) must include an alt attribute. This issue has been noted for future investigation, as it requires detailed debugging. Currently, there is no reliable fix implemented.
 
 [Contact Us Page](media/html_val/contact%20us.png)
 
-FAQ Page: 
 [FAQ Page](media/html_val/FAQ.png)
 
-Home Page: 
 [Home Page](media/html_val/home.png)
 
-Order History: 
 [Order History](media/html_val/order%20history.png)
 
-Privacy and Policy Page: 
 [Privacy and Policy Page](media/html_val/privacy%20and%20policy.png)
 
-Product Details Page: 
 [Product Details Page](media/html_val/product%20details.png)
 
-Product Page: 
 [Product Page](media/html_val/products.png)
 
-Profile Page: 
 [Profile Page](media/html_val/profile.png)
 
-Public Testimonial Page: 
 [Public Testimonial Page](media/html_val/public%20testimonials.png)
 
-Returns Page: 
 [Returns Page](media/html_val/returns.png)
 
-Shipping Policy Page: 
 [Shipping Policy Page](media/html_val/shipping%20policy.png)
 
-**Testimonial Page:**
+**Testimonial Page Note:**
 
 The aria-describedby attribute is currently inheriting help text from forms.py in an unintended manner. This issue has been identified and marked for future resolution, as it requires an in-depth debugging process. At this time, no reliable fix has been implemented.
 
 [Testimonial Page](media/html_val/testimonials.png)
 
-Wishlist Page: 
+
 [Wishlist Page](media/html_val/wishlist.png)
 
 
 ### PEP8 Validation
 
-handlers.py
+**Note:**
+All instances of excessively long lines in the Python files originate from the inclusion of source links.
 
-message_processor.py
 
-settings.py (2 source link are longer than 79)
+[cart/contexts.py](media/PEP8/cart%20context.png)
 
-main urls(source links are too long)
+[cart/urls.py](media/PEP8/cart%20urls.png)
 
-contexts.py 1 long source link
+[cart/views.py](media/PEP8/cart%20views.png)
+
+[checkout/admin.py](media/PEP8/checkout%20admin.png)
+
+[checkout/forms.py](media/PEP8/checkout%20forms.png)
+
+[checkout/models.py](media/PEP8/checkout%20models.png)
+
+[checkout.signals.py](media/PEP8/checkout%20signals.png)
+
+[checkout/urls.py](media/PEP8/checkout%20urls.png)
+
+[checkout/views.py](media/PEP8/checkout%20views.png)
+
+[checkout/webhookhandler.py](media/PEP8/checkout%20webhookhandler.png)
+
+[checkout/webhooks.py](media/PEP8/checkout%20webhooks.png)
+
+[extra_pages/urls.py](media/PEP8/extra)
+
+[extra_pages/views.py](media/PEP8/extra%20views.png)
+
+[handlers.py](media/PEP8/handlers.png)
+
+[main/urls.py](media/PEP8/main%20urls.png)
+
+[message_processor.py](media/PEP8/message_processor.png)
+
+[newsletter/admin.py](media/PEP8/newsletter%20admin.png)
+
+[newsletter/forms.py](media/PEP8/newsletter%20forms.png)
+
+[newsletter/models.py](media/PEP8/newsletter%20models.png)
+
+[newsletter/urls.py](media/PEP8/newsletter%20urls.png)
+
+[newsletter/views.py](media/PEP8/newsletter%20views.png)
+
+[products/admin.py](media/PEP8/products%20admin.png)
+
+[products/contexts.py](media/PEP8)
+
+[products/create_categories.py](media/PEP8/products%20create%20categories.png)
+
+[products/models.py](media/PEP8/products%20models.png)
+
+[products/tags.py](media/PEP8/products%20tags.png)
+
+[products/views.py](media/PEP8/products%20viewsa.png)
+
+[profiles/admin.py](media/PEP8/profiles%20admin.png)
+
+[profiles/contexts.py](media/PEP8/profiles%20contexts.png)
+
+[profiles/forms.py](media/PEP8/profiles%20forms.png)
+
+[profiles/models.py](media/PEP8/profiles%20models.png)
+
+[prfiles/urls.py](media/PEP8/profiles%20url.png)
+
+[profiles/views.py](media/PEP8/profiles%20views.png)
+
+[settings.py](media/PEP8/settings.png)
 
 
 
