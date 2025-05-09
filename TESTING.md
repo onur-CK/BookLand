@@ -61,7 +61,7 @@
   - [Lighthouse Results](#lighthouse-results)
   - [WCAG](#wcag)
   - [CSS Validation](#css-validation)
-  - [JavaScript Validation](#javascript-validation)
+  - [JS Validation](#js-validation)
   
 - [Security Testing](#security-testing)
   - [CSRF Protection](#csrf-protection)
@@ -80,8 +80,10 @@
   - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
   - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
   - [Wishlist to Cart Transfer Error](#wishlist-to-cart-transfer-error)
-  - [### Signup Duplicate Email Verification Bug](#signup-duplicate-email-verification-bug)
-
+  - [Signup Duplicate Email Verification Bug](#signup-duplicate-email-verification-bug)
+- [Known Bugs](#known-bugs)
+  -[CSS Coverage and Layout Issues](#css-coverage-and-layout-issues)
+  -[Testimonial Character Limits and Newsletter Unsubscription Issues](#testimonial-character-limits-and-newsletter-unsubscription-issues)
 
 ## Introduction
 
@@ -1019,7 +1021,7 @@ All instances of excessively long lines in the Python files originate from the i
 [settings.py](media/PEP8/settings.png)
 
 
-## Lighthouse Results
+### Lighthouse Results
 
 [About Us Desktop](media/lighthouse_tests/About%20Us%20Desktop.png)
 
@@ -1086,7 +1088,7 @@ All instances of excessively long lines in the Python files originate from the i
 [Wishlist Mobile](media/lighthouse_tests/Wishlist%20Mobile.png)
 
 
-## WCAG
+### WCAG
 
 [About Us](media/wcag/About%20Us.png)
 
@@ -1127,10 +1129,28 @@ All instances of excessively long lines in the Python files originate from the i
 [Wishlist](media/wcag/Wishlist.png)
 
 
+### CSS Validation
+
+[base.css](media/css_validator/base.css.png)
+
+[cart.css](media/css_validator/cart.css.png)
+
+[checkout.css](media/css_validator/checkout.css.png)
+
+[products.css](media/css_validator/products.css.png)
+
+[profiles.css](media/css_validator/profiles.css)
 
 
+### JS Validation
 
+[newsletter_js](media/js_hint/newsletter.png)
 
+[products_js](media/js_hint/products.png)
+
+[stripe_elements_js](media/js_hint/stripe%20elements.png)
+
+[toast_handler_js](media/js_hint/toast%20handler.png)
 
 
 ## Security Testing
@@ -2063,7 +2083,7 @@ This bug highlights several important considerations for form handling in Django
 Resolving this bug significantly improved the user experience by allowing seamless movement of items between the wishlist and cart. This functionality is particularly important for our target user persona who may save books to their wishlist while browsing and later decide to purchase them. With this fix, users can now easily convert their saved items to actual purchases without encountering errors, supporting our business goal of maximizing conversion from browsing to completed sales.
 
 
-### Sign-up Duplicate Email Verification Bug
+### Signup Duplicate Email Verification Bug
 
 #### Bug Description
 During testing of BookLand's user registration functionality, we discovered an issue with the email verification process. When a user attempted to sign up with an email address that was already registered in the system, instead of displaying an immediate error message on the form, the application would show a "Verify your email address" message and send a verification email. This email would then inform the user that the address already had an account. This created a confusing user experience and unnecessarily triggered the email verification flow for existing users.
@@ -2128,4 +2148,105 @@ Resolving this bug significantly improved the user registration experience by:
 This fix contributes to our goal of creating a frictionless shopping experience by ensuring that the very first interaction a user has with our platform—account creation—is clear, intuitive, and efficient.
 
 
+## Known Bugs
 
+### CSS Coverage and Layout Issues
+
+During the testing process, we identified several persistent layout and styling issues that stem from fundamental architectural decisions made early in the development process. These issues primarily affect responsive behavior and interactive elements when viewed on actual mobile devices despite appearing correct in Chrome DevTools emulation.
+
+#### Coverage Analysis Findings
+
+We conducted a detailed coverage analysis using Chrome DevTools to identify unused CSS and JavaScript. This analysis revealed several concerning patterns:
+
+![Coverage analysis showing unused CSS](media/bugs_and_fixes/Coverage%20records.png)
+
+1. **Bootstrap Framework Overrides**: Our approach of extensively customizing Bootstrap components with manual CSS overrides resulted in poor CSS utilization rates.
+
+2. **Specificity Conflicts**: The combination of Bootstrap classes, custom utility classes, and specific component styling created specificity conflicts that were difficult to debug.
+
+3. **Vendor Prefix Handling**: The manual addition of WebKit and other vendor prefixes for cross-browser compatibility contributed to the codebase complexity without a systematic approach.
+
+These architectural decisions, while initially providing flexibility, ultimately led to a CSS structure that became increasingly difficult to maintain and debug.
+
+#### Responsive Layout Inconsistencies
+
+The most visible manifestation of these architectural issues appears in the product card components, which display inconsistently between browser emulators and actual mobile devices:
+
+1. **Pagination Display Issues**: While pagination controls appear properly spaced in DevTools mobile emulation, on actual mobile devices the pagination controls are compressed and difficult to interact with.
+
+   ![Pagination display issue on real mobile device](media/bugs_and_fixes/paginator%20mobile.jpg)
+
+   ![Pagination display on dev tools](media/bugs_and_fixes/paginator%20mobile.jpg)
+
+2. **Touch Target Sizing**: The "Add to Cart" and "Add/Remove Wishlist" buttons have insufficient separation on real mobile devices despite appearing adequately spaced in emulation.
+
+   ![Cart and wishlist button spacing issue](media/bugs_and_fixes/card%20and%20wishlist%20buttons%20mobile.jpg)
+
+  ![Cart and wishlist button on devtools](media/bugs_and_fixes/cart%20and%20wishlist%20buttons%20dev%20tool.png)
+
+#### Root Causes
+
+Our investigation identified several root causes for these persistent issues:
+
+1. **Absence of Fixed Aspect Ratios**: The product cards were not built with a consistent aspect ratio (such as 2:3), resulting in unpredictable sizing behavior when content varies.
+
+2. **Nested Flexbox and Grid Conflicts**: The combination of Bootstrap's grid system with custom flexbox layouts created rendering inconsistencies between browsers.
+
+3. **Cascading Override Complexity**: The excessive layering of CSS rules (Bootstrap → theme → component → page-specific → responsive overrides) created a brittle system where minor changes could have unpredictable effects.
+
+4. **Responsive Breakpoint Granularity**: The breakpoints defined did not adequately address the full range of device sizes, particularly in the challenging range between small tablets and large phones (576px-768px).
+
+#### Temporary Mitigations
+
+We implemented several temporary mitigations to improve the user experience while acknowledging that a more fundamental refactoring would be required for a complete resolution:
+
+1. **Fixed Item Count Pagination**: Limited product listings to exactly 10 items per page to create more predictable layouts(Also for lighthouse performance increase).
+
+2. **Increased Touch Target Padding**: Added additional padding to interactive elements on mobile views to improve touch target accessibility.
+
+3. **Modified Wireframes**: Adjusted our design wireframes to accommodate larger component sizes, providing more flexibility for the existing implementation.
+
+#### Future Solutions
+
+A comprehensive solution to these issues would require:
+
+1. **Component Refactoring**: Rebuilding the card components from scratch with fixed aspect ratios and simpler CSS hierarchies.
+
+2. **CSS Architecture Overhaul**: Implementing a more structured CSS methodology to prevent specificity conflicts.
+
+3. **Systematic Responsive Testing**: Establishing a testing protocol that includes actual devices rather than relying solely on browser emulation.
+
+4. **Reduced Framework Customization**: Limiting customization of the Bootstrap framework to prevent override conflicts, or considering a lighter-weight alternative.
+
+These architectural changes would involve significant refactoring and are planned for a future release cycle.
+
+### Additional Context
+
+It's worth noting that these issues highlight an important lesson in front-end development: browser emulation tools, while valuable for rapid development, cannot fully replace testing on actual devices. The subtle differences in how real devices render and handle touch interactions versus emulated environments created a situation where problems were difficult to detect during development but became apparent during real-world testing.
+
+The decision to proceed with the current implementation despite these known issues was made based on project timeline constraints and the understanding that the core functionality remains usable, even if the presentation is not optimal on all devices.
+
+
+### Testimonial Character Limits and Newsletter Unsubscription Issues
+
+The following issues have been identified but not yet resolved in the current version of BookLand:
+
+### Testimonial Title Overflow
+
+- **Issue**: Long testimonial titles can cause a disorganized design/layout issues in testimonial cards on the public testimonials page and also overflow in the "Your Testimonials" on My Testimonials page.
+- **Current Status**: Since testimonials require admin approval before publishing, this issue is being managed through the moderation process.
+- **Future Fix**: We plan to implement character limitations on testimonial titles to prevent overflow issues while maintaining a consistent card and page layout.
+
+### Testimonial Edit After Approval
+
+- **Issue**: Users can edit their testimonials after they've been approved by admin, and these edits are published directly without requiring re-approval.
+- **Current Status**: This creates a potential moderation gap where approved content could be substantially changed post-approval.
+- **Future Fix**: We will implement an approval workflow for edited testimonials, requiring admin review of changes before republishing them to the public testimonials page.
+
+### Newsletter Unsubscribe Functionality
+
+- **Issue**: While users can subscribe to the newsletter, there is currently no way for them to unsubscribe directly through the website.
+- **Current Status**: The subscription functionality works, but unsubscribe capability is missing.
+- **Future Fix**: We will implement an unsubscribe link in all newsletter emails sent to subscribers, allowing them to opt out easily at any time. Additionally, we plan to add unsubscribe functionality in the user profile section for logged-in users.
+
+These issues are scheduled to be addressed in upcoming updates to the BookLand platform. They do not affect the core shopping functionality but are documented here for transparency and to inform future development priorities.
