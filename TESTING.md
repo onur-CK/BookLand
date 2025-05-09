@@ -57,12 +57,12 @@
     - [Category Management (Admin)](#category-management-admin)
 - [Validation Testing](#validation-testing)
   - [HTML Validation](#html-validation)
+  - [PEP8 Validation](#pep8-validation)
+  - [Lighthouse Results](#lighthouse-results)
+  - [Accessibility Testing (WCAG)](#accessibility-testing-wcag)
   - [CSS Validation](#css-validation)
   - [JavaScript Validation](#javascript-validation)
-  - [PEP8 Validation](#pep8-validation)
-  - [Accessibility Testing (WCAG)](#accessibility-testing-wcag)
-  - [Lighthouse Results](#lighthouse-results)
-
+  
 - [Security Testing](#security-testing)
   - [CSRF Protection](#csrf-protection)
   - [Form Validation Security](#form-validation-security)
@@ -1019,6 +1019,75 @@ All instances of excessively long lines in the Python files originate from the i
 [settings.py](media/PEP8/settings.png)
 
 
+## Lighthouse Results
+
+[About Us Desktop](media/lighthouse_tests/About%20Us%20Desktop.png)
+
+[About Us Mobile](media/lighthouse_tests/About%20Us%20Mobile.png)
+
+[About Us Desktop](media/lighthouse_tests/About%20Us%20Desktop.png)
+
+[About Us Mobile](media/lighthouse_tests/About%20Us%20Mobile.png)
+
+[Cart Desktop](media/lighthouse_tests/Cart%20Desktop.png)
+
+[Cart Mobile](media/lighthouse_tests/Cart%20Mobile.png)
+
+[FAQ Desktop](media/lighthouse_tests/FAQ%20Desktop.png)
+
+[FAQ Mobile](media/lighthouse_tests/FAQ%20Mobile.png)
+
+[Home Desktop](media/lighthouse_tests/Home%20Desktop.png)
+
+[Home Mobile](media/lighthouse_tests/Home%20Mobile.png)
+
+[Login Desktop](media/lighthouse_tests/Login%20Desktop.png)
+
+[Login Mobile](media/lighthouse_tests/Login%20Mobile.png)
+
+[Logout Desktop](media/lighthouse_tests/Logout%20Desktop.png)
+
+[Logout Mobile](media/lighthouse_tests/Logout%20Mobile.png)
+
+[Order History Desktop](media/lighthouse_tests/order%20history%20desktop.png)
+
+[Order History Mobile](media/lighthouse_tests/order%20history%20mobile.png)
+
+[Privacy and Policy Desktop](media/lighthouse_tests/Privacy%20and%20Policy%20Desktop.png)
+
+[Privacy and Policy Mobile](media/lighthouse_tests/Privacy%20and%20Policy%20Mobile.png)
+
+[Products Desktop](media/lighthouse_tests/Products%20Desktop.png)
+
+[Products Mobile](media/lighthouse_tests/Products%20Mobile.png)
+
+[Profile Desktop](media/lighthouse_tests/Profile%20Desktop.png)
+
+[Profile Mobile](media/lighthouse_tests/Profile%20Mobile.png)
+
+[Returns Desktop](media/lighthouse_tests/Returns%20Desktop.png)
+
+[Returns Mobile](media/lighthouse_tests/Returns%20Mobile.png)
+
+[Shipping Policy Desktop](media/lighthouse_tests/Shipping%20Policy%20Desktop.png)
+
+[Shipping Policy Mobile](media/lighthouse_tests/Shipping%20Policy%20Mobile.png)
+
+[Signup Desktop](media/lighthouse_tests/Signup%20Desktop.png)
+
+[Signup Mobile](media/lighthouse_tests/Signup%20Mobile.png)
+
+[Testimonials Desktop](media/lighthouse_tests/Testimonials%20Desktop.png)
+
+[Testimonials Mobile](media/lighthouse_tests/Testimonials%20Mobile.png)
+
+[Testimonials Public Desktop](media/lighthouse_tests/Testimonials%20Public%20Desktop.png)
+
+[Testimonials Public Mobile](media/lighthouse_tests/Testimonials%20Public%20Mobile.png)
+
+[Wishlist Desktop](media/lighthouse_tests/Wishlist%20Desktop.png)
+
+[Wishlist Mobile](media/lighthouse_tests/Wishlist%20Mobile.png)
 
 
 
