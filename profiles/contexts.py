@@ -4,6 +4,7 @@
 
 from .models import WishlistItem
 
+
 def wishlist_count(request):
     """
     Context processor to add wishlist count to all templates
