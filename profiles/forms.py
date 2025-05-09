@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from allauth.account.forms import SignupForm
 from .models import UserProfile
 from .models import Testimonial
+from django.core.exceptions import ValidationError
 
 class CustomSignupForm(SignupForm):
     """
@@ -14,6 +15,12 @@ class CustomSignupForm(SignupForm):
     Currently doesn't add any additional fields, but can be extended in the future.
     Source: https://django-allauth.readthedocs.io/en/latest/forms.html
     """
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            raise ValidationError("A user with this email already exists.")
+        return email
+    
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         return user

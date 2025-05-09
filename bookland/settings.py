@@ -244,3 +244,7 @@ else:
 
 # ALLOWED_HOSTS
 ALLOWED_HOSTS = ['bookland-e-commerce-2e2b1a60109c.herokuapp.com', 'localhost', '127.0.0.1', '127.0.0.1:8000']
+
+ACCOUNT_FORMS = {
+    'signup': 'profiles.forms.CustomSignupForm',
+}

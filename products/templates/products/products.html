@@ -83,7 +83,7 @@ Browse All Books | BookLand Online Bookstore
         <div class="col-12 col-md-8 col-lg-6">
             <form method="GET" action="{% url 'products' %}" class="search-form mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q" placeholder="Search by title, author..." {% if search_term %}value="{{ search_term }}" {% endif %}>
+                    <input type="text" class="form-control" name="q" placeholder="Search by title, author, desc..." {% if search_term %}value="{{ search_term }}" {% endif %}>
                     <button class="btn" style="background-color: orangered;" type="submit" aria-label="Search books">
                         <i class="bi bi-search" style="color: white;"></i>
                     </button>

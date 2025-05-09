@@ -80,6 +80,7 @@
   - [Order History Detail View Success Message Bug](#order-history-detail-view-success-message-bug)
   - [AWS S3 Integration Django Version Compatibility Bug](#aws-s3-integration-django-version-compatibility-bug)
   - [Wishlist to Cart Transfer Error](#wishlist-to-cart-transfer-error)
+  - [### Signup Duplicate Email Verification Bug](#signup-duplicate-email-verification-bug)
 
 
 ## Introduction
@@ -1839,6 +1840,70 @@ This bug highlights several important considerations for form handling in Django
 ### Impact on BookLand
 Resolving this bug significantly improved the user experience by allowing seamless movement of items between the wishlist and cart. This functionality is particularly important for our target user persona who may save books to their wishlist while browsing and later decide to purchase them. With this fix, users can now easily convert their saved items to actual purchases without encountering errors, supporting our business goal of maximizing conversion from browsing to completed sales.
 
+
+### Sign-up Duplicate Email Verification Bug
+
+#### Bug Description
+During testing of BookLand's user registration functionality, we discovered an issue with the email verification process. When a user attempted to sign up with an email address that was already registered in the system, instead of displaying an immediate error message on the form, the application would show a "Verify your email address" message and send a verification email. This email would then inform the user that the address already had an account. This created a confusing user experience and unnecessarily triggered the email verification flow for existing users.
+
+#### Error Manifestation
+The error occurred during the registration process when users entered an email that already existed in the database. Instead of an immediate form validation error, users would be redirected to a verification page instructing them to check their email, creating the impression that the registration was successful. Only after receiving the email would they learn that the address was already registered.
+
+#### Root Cause
+After investigation, we identified that the issue was related to how django-allauth handles duplicate email validation:
+
+1. **Default Behavior**: The default django-allauth SignupForm doesn't check for the existence of an email during form validation but rather during the account creation process after form submission.
+
+2. **Delayed Validation**: This approach meant that the email uniqueness check was happening after form validation, resulting in the system proceeding to the email verification step before determining that the email was already registered.
+
+3. **Missing Form-Level Validation**: The form lacked a specific clean_email method to check for email existence before proceeding with the registration flow.
+
+#### Solution Implemented
+We resolved the issue by implementing a custom SignupForm that performs early validation of email uniqueness:
+
+1. **Created a Custom SignupForm**:
+```python
+class CustomSignupForm(SignupForm):
+    """
+    Custom signup form that extends the default allauth SignupForm.
+    Adds additional validation to check if email is already in use.
+    """
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            raise ValidationError("A user with this email already exists.")
+        return email
+```
+
+2. **Registered the Custom Form in Settings**:
+```python
+ACCOUNT_FORMS = {
+    'signup': 'profiles.forms.CustomSignupForm',
+}
+```
+
+This solution ensures that the email uniqueness check happens during form validation, displaying an immediate error message to the user rather than proceeding to the email verification step.
+
+#### Lessons Learned
+This bug highlights several important considerations for authentication systems:
+
+1. **Early Validation**: It's important to validate unique constraints as early as possible in the user flow to provide immediate feedback.
+
+2. **User Experience**: Authentication flows should be designed to minimize user confusion and provide clear error messages at the point of input.
+
+3. **Third-Party Package Customization**: When using third-party authentication packages like django-allauth, it's essential to understand their default behaviors and customize them when necessary to meet specific requirements.
+
+4. **Form-Level Validation**: Form-level validation is preferable to process-level validation for user-facing constraints, as it provides more immediate feedback.
+
+#### Impact on BookLand
+Resolving this bug significantly improved the user registration experience by:
+
+1. Providing immediate feedback when a user attempts to register with an existing email address
+2. Eliminating unnecessary emails being sent to users who already have accounts
+3. Reducing potential user confusion during the registration process
+4. Creating a more streamlined and intuitive signup flow that aligns with user expectations
+
+This fix contributes to our goal of creating a frictionless shopping experience by ensuring that the very first interaction a user has with our platform—account creation—is clear, intuitive, and efficient.
 
 
 
