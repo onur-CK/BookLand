@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<main class="container">
+<div class="container">
     <!-- Page Header Section -->
     <header class="row">
         <div class="col-12">
@@ -13,6 +13,7 @@
 
     <!-- Main Content Section - Company Story -->
     <section class="row mb-5">
+        <h2 class="h5 visually-hidden">Company Introduction</h2>
         <article>
             <!-- Company Introduction -->
             <h2>Our Story</h2>
@@ -51,6 +52,7 @@
          Source: https://getbootstrap.com/docs/5.3/components/card/
          Source: https://icons.getbootstrap.com/ -->
     <section class="row mb-5">
+        <h2 class="h5 visually-hidden">What sets us apart</h2>
         <div class="col-12">
             <h2>What Sets Us Apart</h2>
             <div class="row mt-4">
@@ -102,6 +104,7 @@
     <!-- Our Vision Section - Using Bootstrap columns for layout
          Source: https://getbootstrap.com/docs/5.3/layout/columns/ -->
     <section class="row mb-5">
+        <h2 class="h5 visually-hidden">Our Vision</h2>
         <div class="col-12 col-md-6 order-md-2">
             <article>
                 <h2>Our Vision</h2>
@@ -150,14 +153,15 @@
                 </div>
             </aside>
         </div>
-    </div>
+    </section>
     <!-- Call to Action Section - Using Bootstrap button component
          Source: https://getbootstrap.com/docs/5.3/components/buttons/ -->
     <section class="row">
+        <h2 class="h5 visually-hidden">Your Reading Journey</h2>
         <div class="col-12 text-center mb-5">
             <h2 class="mb-4">Start Your Reading Journey</h2>
             <a href="{% url 'products' %}" class="btn btn-dark btn-lg">Browse Our Collection</a>
         </div>
     </section>
-</main>
+</div>
 {% endblock %}

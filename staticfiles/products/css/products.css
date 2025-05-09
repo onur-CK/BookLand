@@ -297,10 +297,10 @@
 }
 
 .rating .badge {
-    background-color: #f39c12;
     padding: 0.35rem 0.75rem;
     font-weight: 500;
     font-size: 0.9rem;
+    color: black;
 }
 
 /* Add to Cart and Wishlist Forms */

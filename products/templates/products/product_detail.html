@@ -1,19 +1,55 @@
 {% extends "base.html" %}
 
 {% block meta %}
-    {{ block.super }}
-    <meta name="description" content="{{ product.title }} by {{ product.author }}. {{ product.description|truncatechars:120 }} Shop now at BookLand with free shipping over $40.">
+    <!-- Override the description meta tag -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Product-specific Open Graph tags -->
-    <meta property="og:title" content="{{ product.title }} by {{ product.author }} | BookLand">
-    <meta property="og:description" content="{{ product.description|truncatechars:200 }}">
-    {% if product.image %}
-        <meta property="og:image" content="{{ product.image.url }}">
+    <!-- SEO meta tags -->
+    {% if active_category %}
+        <meta name="description" content="Browse our curated collection of {{ active_category.friendly_name|default:active_category.name|lower }} books at BookLand. Expert selections, free shipping on orders over $40, secure checkout.">
+    {% else %}
+        <meta name="description" content="Explore our complete catalog of thoughtfully curated books across philosophy, psychology, literature, biographies, and self-development. Free shipping on orders over $40.">
     {% endif %}
-    <meta property="og:type" content="product">
-    <meta property="og:price:amount" content="{{ product.price }}">
-    <meta property="og:price:currency" content="USD">
-    <meta property="og:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+    
+    <meta name="keywords" content="buy books online, psychology books, philosophy books, self-development books, where to buy books online not amazon, online bookstore, book recommendations, book gift ideas, biography books, new book releases, book delivery, curated book collection, free shipping books">
+    <meta name="author" content="BookLand">
+    
+    <!-- The meta tags from the parent template -->
+    <!-- Open Graph Tags (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}BookLand | Your Curated Online Bookstore{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/bookland-og-image.jpg{% endblock %}">
+    <meta property="og:site_name" content="BookLand">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="fb:app_id" content="">
+    <meta property="article:publisher" content="https://www.facebook.com/profile.php?id=61575641435990">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}BookLand | Curated Online Bookstore{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Discover curated books in philosophy, psychology & self-development with free shipping over $40{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/bookland-og-image.jpg{% endblock %}">
+    <meta name="twitter:site" content="@BookLand">
+    
+    <!-- WhatsApp specific meta tags -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#ff7b00">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/favicon-32x32_zcf51t.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/daxe6o2am/image/upload/v1740568028/apple-touch-icon.png">
+    
+    <!-- Canonical URL to prevent duplicate content issues -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 {% endblock %}
 
 {% block head_title %}{{ product.title }} by {{ product.author }} | BookLand Online Bookstore{% endblock %}
@@ -26,8 +62,9 @@
 {% endblock %}
 
 {% block content %}
-<main class="container" itemscope itemtype="https://schema.org/Product">
+<div class="container" itemscope itemtype="https://schema.org/Product">
     <article class="row mt-5">
+        <h2 class="visually-hidden">Book Details</h2>
         <!-- Book Image Column - 5/12 of screen width on medium and larger devices -->
         <!-- Source: Bootstrap grid system documentation - https://getbootstrap.com/docs/5.3/layout/grid/ -->
         <figure class="col-md-5 mb-4">
@@ -51,14 +88,14 @@
         <section class="col-md-7">
             <!-- Book title and author -->
             <header>
-                <h1 class="book-title" itemprop="name">{{ product.title }}</h1>
+                <h2 class="book-title" itemprop="name">{{ product.title }}</h2>
                 <p class="text-muted" itemprop="author" itemscope itemtype="https://schema.org/Person">
                     by <span itemprop="name">{{ product.author }}</span>
                 </p>
 
                 <!-- Rating display with badge - https://getbootstrap.com/docs/5.3/components/badge/ -->
                 {% if product.rating %}
-                <div class="rating mb-2" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <div class="rating mb-2 badge bg-warning text-dark" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                     <span class="badge"><span itemprop="ratingValue">{{ product.rating }}</span> / 5</span>
                 </div>
                 {% endif %}
@@ -79,7 +116,7 @@
                     <div class="input-group">
                         <!-- Quantity selector - limited between 1 and 99 -->
                         <input type="number" name="quantity" value="1" min="1" max="99" class="form-control qty_input">
-                        <button type="submit" class="btn" style="background-color: orangered; color: white;">
+                        <button type="submit" class="btn" style="background-color: blue; color: white;">
                             <i class="bi bi-cart-plus me-1"></i> Add to Cart
                         </button>
                     </div>
@@ -174,7 +211,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="price-tag fw-bold">${{ book.price }}</span>
                             {% if book.rating %}
-                            <span class="badge bg-secondary">{{ book.rating }}</span>
+                            <span class="badge bg-warning text-dark">{{ book.rating }}</span>
                             {% endif %}
                         </div>
                     </div>
@@ -202,5 +239,5 @@
         </div>
     </section>
     {% endif %}
-</main>
+</div>
 {% endblock %}

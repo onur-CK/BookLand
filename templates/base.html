@@ -77,10 +77,10 @@
     {% include 'includes/main_nav.html' %}
 
     <!-- Main content container - flexible for all page templates -->
-    <main class="container py-4">
+    <div class="container py-4">
         {% block content %}
         {% endblock %}
-    </main>
+    </div>
 
     <!-- Newsletter Section - appears on all pages -->
     <div class="container">
@@ -161,7 +161,7 @@
                     <h5>Customer Service</h5>
                     <hr>
                     <ul>
-                        <li class="mb-2"><a href="{% url 'faq' %}" class="text-decoration-none text-dark">FAQ<a></li>
+                        <li class="mb-2"><a href="{% url 'faq' %}" class="text-decoration-none text-dark">FAQ</a></li>
                         <li class="mb-2"><a href="{% url 'shipping_policy' %}" class="text-decoration-none text-dark">Shipping Policy</a></li>
                         <li class="mb-2"><a href="{% url 'returns' %}" class="text-decoration-none text-dark">Returns</a></li>
                         <li class="mb-2"><a href="{% url 'privacy_policy' %}" class="text-decoration-none text-dark">Privacy Policy</a></li>
