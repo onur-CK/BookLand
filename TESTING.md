@@ -59,7 +59,7 @@
   - [HTML Validation](#html-validation)
   - [PEP8 Validation](#pep8-validation)
   - [Lighthouse Results](#lighthouse-results)
-  - [Accessibility Testing (WCAG)](#accessibility-testing-wcag)
+  - [WCAG](#wcag)
   - [CSS Validation](#css-validation)
   - [JavaScript Validation](#javascript-validation)
   
@@ -1025,10 +1025,6 @@ All instances of excessively long lines in the Python files originate from the i
 
 [About Us Mobile](media/lighthouse_tests/About%20Us%20Mobile.png)
 
-[About Us Desktop](media/lighthouse_tests/About%20Us%20Desktop.png)
-
-[About Us Mobile](media/lighthouse_tests/About%20Us%20Mobile.png)
-
 [Cart Desktop](media/lighthouse_tests/Cart%20Desktop.png)
 
 [Cart Mobile](media/lighthouse_tests/Cart%20Mobile.png)
@@ -1089,6 +1085,46 @@ All instances of excessively long lines in the Python files originate from the i
 
 [Wishlist Mobile](media/lighthouse_tests/Wishlist%20Mobile.png)
 
+
+## WCAG
+
+[About Us](media/wcag/About%20Us.png)
+
+[Cart](media/wcag/Cart.png)
+
+[checkout](media/wcag/checkout.png)
+
+[Contact Us](media/wcag/Contact%20us.png)
+
+[FAQ](media/wcag/FAQ.png)
+
+[Home](media/wcag/Home.png)
+
+[logout](media/wcag/logout.png)
+
+[Order History](media/wcag/Order%20History.png)
+
+[Privacy and Policy](media/wcag/Privacy%20and%20Policy.png)
+
+[Product Details](media/wcag/Product%20Details.png)
+
+[Products](media/wcag/Products.png)
+
+[Profile](media/wcag/Profile.png)
+
+[Public Testimonials](media/wcag/Public%20Testimonials.png)
+
+[Returns and Exchanges](media/wcag/Returns%20and%20Exchanges.png)
+
+[Shipping Policy](media/wcag/Shipping%20Policy.png)
+
+[Sign In](media/wcag/Sign%20In.png)
+
+[Signup](media/wcag/Signup.png)
+
+[Testimonials](media/wcag/Testimonials.png)
+
+[Wishlist](media/wcag/Wishlist.png)
 
 
 
