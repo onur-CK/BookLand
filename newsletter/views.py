@@ -4,77 +4,54 @@ from .forms import NewsletterForm
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-import logging
 
-# Set up logging
-logger = logging.getLogger(__name__)
-
+# View function to handle newsletter subscription requests
+# Source: https://docs.djangoproject.com/en/5.0/topics/http/views/
 def subscribe(request):
-    """
-    Handle newsletter subscription requests with improved error handling
-    """
+    # Process subscription form data on POST request
     if request.method == 'POST':
-        try:
-            # Initialize form with POST data
-            form = NewsletterForm(request.POST)
+        # Initialize form with POST data
+        # Source: https://docs.djangoproject.com/en/5.0/topics/forms/#processing-the-data-from-a-form
+        form = NewsletterForm(request.POST)
+        # Validate form data and save if valid
+        # Source: https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#the-save-method
+        if form.is_valid():
+            # Save the subscription
+            form.save()
             
-            # Validate form data and save if valid
-            if form.is_valid():
-                # Save the subscription
-                form.save()
-                
-                # Get the email
-                email = form.cleaned_data['email']
-                
-                try:
-                    # Send welcome email to the subscriber
-                    subject = "Welcome to BookLand's Newsletter!"
-                    # Use template for HTML email content
-                    html_message = render_to_string('newsletter/welcome.html', {'email': email})
-                    # Plain text fallback for email clients that don't support HTML
-                    plain_message = f"Thank you for subscribing to BookLand's newsletter! We'll keep you updated with our latest books and offers."
-                    
-                    # Send the email with both HTML and plain text versions
-                    send_mail(
-                        subject,
-                        plain_message,
-                        settings.DEFAULT_FROM_EMAIL,  # From address from settings
-                        [email],  # To address(es)
-                        html_message=html_message,
-                        fail_silently=True, 
-                    )
-                    
-                    logger.info(f"Newsletter welcome email sent to {email}")
-                except Exception as e:
-                    # Log email sending error but don't fail the subscription
-                    logger.error(f"Error sending newsletter welcome email: {str(e)}")
-             
-                # Return JSON success response for AJAX handling
-                return JsonResponse({
-                    'status': 'success', 
-                    'message': 'Thank you for subscribing to our newsletter!'
-                })
-            else:
-                # Check if it's a duplicate email error
-                if 'email' in form.errors and 'unique' in str(form.errors['email']).lower():
-                    return JsonResponse({
-                        'status': 'error', 
-                        'message': 'This email address is already subscribed.'
-                    })
-                else:
-                    # Log detailed form errors
-                    logger.error(f"Form validation error: {form.errors}")
-                    return JsonResponse({
-                        'status': 'error', 
-                        'message': 'Please provide a valid email address.'
-                    })
-        except Exception as e:
-            # Log any other exceptions
-            logger.error(f"Unexpected error in newsletter subscription: {str(e)}")
+            # Get the email
+            email = form.cleaned_data['email']
+            
+            # Send welcome email to the subscriber
+            # Using Django's email functionality
+            # Source: https://docs.djangoproject.com/en/5.0/topics/email/
+            subject = "Welcome to BookLand's Newsletter!"
+            # Use template for HTML email content
+            # Source: https://docs.djangoproject.com/en/5.0/topics/templates/
+            html_message = render_to_string('newsletter/welcome.html', {'email': email})
+            # Plain text fallback for email clients that don't support HTML
+            plain_message = f"Thank you for subscribing to BookLand's newsletter! We'll keep you updated with our latest books and offers."
+            
+            # Send the email with both HTML and plain text versions
+            # Source: https://docs.djangoproject.com/en/5.0/topics/email/#send-mail
+            send_mail(
+                subject,
+                plain_message,
+                settings.DEFAULT_FROM_EMAIL, # From address from settings
+                [email], # To address(es)
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            # Return JSON success response for AJAX handling
+            # Source: https://docs.djangoproject.com/en/5.0/ref/request-response/#jsonresponse-objects
             return JsonResponse({
-                'status': 'error', 
-                'message': 'An error occurred. Please try again later.'
-            })
+                'status': 'success', 
+                'message': 'Thank you for subscribing to our newsletter. An email has been sent to {}'.format(email)
+})
+        else:
+            # Return error response for invalid form (e.g., duplicate email)
+            return JsonResponse({'status': 'error', 'message': 'This email address is already subscribed or invalid.'})
     
-    # Handle non-POST requests with error response
+   # Handle non-POST requests with error response
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
