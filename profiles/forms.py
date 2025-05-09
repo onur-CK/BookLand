@@ -79,7 +79,7 @@ class TestimonialForm(forms.ModelForm):
         # Define custom widgets for form fields
         # Source: https://docs.djangoproject.com/en/5.1/ref/forms/widgets/
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 5}),
+            'content': forms.Textarea(attrs={'rows': 3, 'maxlength': 300, 'placeholder': 'Share your experience in 300 characters or less...'}),
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
         }
         
@@ -90,7 +90,7 @@ class TestimonialForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'title': 'Title for your testimonial',
-            'content': 'Share your experience with BookLand...',
+            'content': 'Share your experience in 300 characters or less...',
             'rating': 'Rate your experience (1-5)',
         }
         
@@ -98,5 +98,7 @@ class TestimonialForm(forms.ModelForm):
             placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'form-control'
+            if field == 'content':
+                self.fields[field].help_text = '300 characters maximum'
             if field == 'rating':
                 self.fields[field].help_text = 'Rate your experience from 1 to 5 stars'

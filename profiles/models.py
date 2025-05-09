@@ -71,7 +71,7 @@ class Testimonial(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='testimonials')
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = models.TextField(max_length=300)
     # Add validators to ensure rating is between 1 and 5
     # Source: https://docs.djangoproject.com/en/5.1/ref/validators/
     rating = models.IntegerField(

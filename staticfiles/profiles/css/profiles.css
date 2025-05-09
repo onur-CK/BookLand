@@ -195,27 +195,38 @@
     }
 }
 
-/* Testimonial stylings */
+/* Testimonial cards styling */
+.testimonial-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 100%;
+}
 
-testimonial-card:hover {
+.testimonial-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card .card-body {
+    padding: 1.5rem;
+}
+
+.testimonial-card .card-title {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .testimonial-content {
-    height: 100px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+    /* Fixed height with overflow hidden to ensure consistent card sizing */
+    min-height: 100px;
     overflow: hidden;
-    position: relative;
 }
 
-.testimonial-content.truncated::after {
-    content: "...";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 70%);
-    padding-left: 40px;
-    padding-right: 5px;
+.star-rating {
+    margin-bottom: 1rem;
 }
 
 .star-rating i {
@@ -223,12 +234,32 @@ testimonial-card:hover {
     margin-right: 2px;
 }
 
-/* Modal styling */
-.modal-title {
-    color: #2c3e50;
+/* Responsive container styling to handle the column counts */
+@media (max-width: 767.98px) {
+    /* Only show 1 testimonial per row on mobile */
+    .testimonial-card-wrapper {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 
-.modal-testimonial-rating i {
-    color: #f39c12;
-    margin-right: 2px;
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Show 2 testimonials per row on medium screens */
+    .testimonial-card-wrapper {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Show 3 testimonials per row on large screens */
+    .testimonial-card-wrapper {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Custom height control for consistent card appearance */
+.testimonial-card {
+    min-height: 250px;
 }
