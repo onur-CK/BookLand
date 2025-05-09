@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from products.models import Book
 
+
 def view_cart(request):
     """
     A view to return the shopping cart page
@@ -9,6 +10,7 @@ def view_cart(request):
     """
     # Simply render the cart template - context processor adds cart data
     return render(request, 'cart/cart.html')
+
 
 def add_to_cart(request, item_id):
     """
@@ -27,7 +29,10 @@ def add_to_cart(request, item_id):
     # Update quantity if the item is already in the cart
     if item_id in list(cart.keys()):
         cart[item_id] += quantity
-        messages.success(request, f'Updated {book.title} quantity to {cart[item_id]}')
+        messages.success(
+            request,
+            f'Updated {book.title} quantity to {cart[item_id]}'
+        )
     # Otherwise add the item to the cart
     else:
         cart[item_id] = quantity
@@ -37,6 +42,7 @@ def add_to_cart(request, item_id):
     request.session['cart'] = cart
     # Redirect back to the previous page
     return redirect(redirect_url)
+
 
 def adjust_cart(request, item_id):
     """
@@ -53,7 +59,11 @@ def adjust_cart(request, item_id):
     # If quantity is positive, update the item quantity
     if quantity > 0:
         cart[item_id] = quantity
-        messages.success(request, f'Updated {book.title} quantity to {cart[item_id]}')
+        messages.success(
+            request,
+            f'Updated {book.title} quantity to {cart[item_id]}'
+        )
+
     # If quantity is zero or negative, remove the item completely
     else:
         cart.pop(item_id)
@@ -63,6 +73,7 @@ def adjust_cart(request, item_id):
     request.session['cart'] = cart
     # Redirect to the cart page
     return redirect(reverse('view_cart'))
+
 
 def remove_from_cart(request, item_id):
     """

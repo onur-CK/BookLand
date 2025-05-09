@@ -3,6 +3,7 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Book
 
+
 def cart_contents(request):
     """
     Context processor to make cart contents available across all templates
@@ -36,7 +37,7 @@ def cart_contents(request):
         shipping = 0
     else:
         shipping = 5
-        
+
     # Calculate the final total including shipping
     grand_total = total + Decimal(shipping)
 

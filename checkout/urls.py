@@ -7,15 +7,28 @@ from .webhooks import webhook
 urlpatterns = [
     # Main checkout page - handles form submission and payment processing
     path('', views.checkout, name='checkout'),
-    
+
     # Success page after order is completed
-    path('checkout_success/<order_number>', views.checkout_success, name='checkout_success'),
-    
+    path(
+        'checkout_success/<order_number>',
+        views.checkout_success,
+        name='checkout_success'
+    ),
+
     # Cache checkout data endpoint - stores metadata in Stripe payment intent
-    path('cache_checkout_data/', views.cache_checkout_data, name='cache_checkout_data'),
-    
-    # Stripe webhook endpoint - receives and processes webhook events from Stripe
+    path(
+        'cache_checkout_data/',
+        views.cache_checkout_data,
+        name='cache_checkout_data'
+    ),
+
+    # Stripe webhook endpoint -
+    # receives and processes webhook events from Stripe
     path('wh/', webhook, name='webhook'),
 
-    path('order_detail/<order_number>', views.order_detail, name='order_detail'),
+    path(
+        'order_detail/<order_number>',
+        views.order_detail,
+        name='order_detail'
+    ),
 ]

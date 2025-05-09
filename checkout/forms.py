@@ -5,6 +5,7 @@ from django_countries.widgets import CountrySelectWidget
 from django import forms
 from .models import Order
 
+
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
@@ -18,7 +19,7 @@ class OrderForm(forms.ModelForm):
                 'class': 'form-select',
             }),
         }
-        
+
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
@@ -37,7 +38,7 @@ class OrderForm(forms.ModelForm):
 
         # Set autofocus on the first field
         self.fields['full_name'].widget.attrs['autofocus'] = True
-        
+
         # Loop through other fields for styling
         for field in self.fields:
             if field != 'country':  # Skip country as it has custom widget

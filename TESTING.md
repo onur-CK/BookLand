@@ -59,7 +59,7 @@
   - [HTML Validation](#html-validation)
   - [CSS Validation](#css-validation)
   - [JavaScript Validation](#javascript-validation)
-  - [Python (PEP8) Validation](#python-pep8-validation)
+  - [PEP8 Validation](#pep8-validation)
   - [Accessibility Testing (WCAG)](#accessibility-testing-wcag)
   - [Lighthouse Results](#lighthouse-results)
 
@@ -892,15 +892,22 @@ CRUD (Create, Read, Update, Delete) functionality testing was conducted across a
 All CRUD operations were tested extensively across user roles (anonymous users, registered users, and administrators) to ensure proper authorization controls and data integrity throughout the application.
 
 
+## Validation Testing
 
 
 
+### PEP8 Validation
 
+handlers.py
 
+message_processor.py
 
+settings.py (2 source link are longer than 79)
 
+main urls(source links are too long)
 
-VALIDATORS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+contexts.py 1 long source link
+
 
 
 

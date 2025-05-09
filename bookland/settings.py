@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import os 
+import os
 import dj_database_url
 from dotenv import load_dotenv
 from pathlib import Path
@@ -113,8 +113,14 @@ LOGIN_URL = '/accounts/login/'
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True # Allows confirmation by clicking the link in email
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True # Allows confirmation by clicking the link in email
+
+
+# Allows confirmation by clicking the link in email
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+
+# Allows confirmation by clicking the link in email
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 SOCIALACCOUNT_PROVIDERS = {}
 ACCOUNT_SOCIALACCOUNT_ENABLED = False
@@ -129,7 +135,7 @@ if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-else: 
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -142,16 +148,20 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -221,9 +231,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Stripe Settings
 # Source: https://stripe.com/docs/keys
 STRIPE_CURRENCY = 'usd'
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')  
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')  
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')   
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 
 # Email Settings for order confirmations
@@ -243,7 +253,12 @@ else:
 
 
 # ALLOWED_HOSTS
-ALLOWED_HOSTS = ['bookland-e-commerce-2e2b1a60109c.herokuapp.com', 'localhost', '127.0.0.1', '127.0.0.1:8000']
+ALLOWED_HOSTS = [
+    'bookland-e-commerce-2e2b1a60109c.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+    '127.0.0.1:8000'
+]
 
 ACCOUNT_FORMS = {
     'signup': 'profiles.forms.CustomSignupForm',
