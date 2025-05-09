@@ -23,22 +23,22 @@ class StripeWH_Handler:
         """Send the user a confirmation email"""
         customer_email = order.email
         subject = f'BookLand - Order Confirmation {order.order_number}'
-        
+
         # Create context for the email template
         context = {
-            'order': order, 
+            'order': order,
             'contact_email': settings.DEFAULT_FROM_EMAIL
         }
-        
+
         # Render HTML email
         html_message = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.html',
             context
         )
-        
+
         # Create plain text version
         plain_message = strip_tags(html_message)
-        
+
         # Send email with both HTML and text versions
         msg = EmailMultiAlternatives(
             subject,
@@ -70,7 +70,7 @@ class StripeWH_Handler:
 
         # Get the Charge object to access billing/shipping details
         stripe_charge = intent.latest_charge
-        
+
         billing_details = intent.shipping
         shipping_details = intent.shipping
 
@@ -89,16 +89,20 @@ class StripeWH_Handler:
                 profile.default_street_address = shipping_details.address.line1
                 profile.default_apartment = shipping_details.address.line2
                 profile.default_city = shipping_details.address.city
-                profile.default_postal_code = shipping_details.address.postal_code
+                profile.default_postal_code = (
+                    shipping_details.address.postal_code
+                )
                 profile.default_country = shipping_details.address.country
                 profile.save()
 
         # Check if order exists already
         order_exists = False
         attempt = 1
-        
-        # Sometimes the form submission view creates the order before the webhook
-        # This handles the race condition by checking a few times before creating a new order
+
+        # Sometimes the form submission view
+        # creates the order before the webhook
+        # This handles the race condition by checking
+        # a few times before creating a new order
         while attempt <= 5:
             try:
                 order = Order.objects.get(
@@ -123,8 +127,12 @@ class StripeWH_Handler:
             # Send confirmation email
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
-                status=200)
+                content=(
+                    f'Webhook received: {event["type"]} | SUCCESS: Verified '
+                    'order already in database',
+                ),
+                status=200
+            )
         else:
             # Create new order if it doesn't exist in our database
             order = None
@@ -140,10 +148,10 @@ class StripeWH_Handler:
                     postal_code=shipping_details.address.postal_code,
                     country=shipping_details.address.country,
                 )
-                
+
                 # Convert JSON string to Python dictionary
                 cart_dict = json.loads(cart)
-                
+
                 # Create order line items
                 for item_id, quantity in cart_dict.items():
                     book = Book.objects.get(id=item_id)
@@ -170,10 +178,14 @@ class StripeWH_Handler:
 
         # Send confirmation email
         self._send_confirmation_email(order)
-        
+
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
-            status=200)
+            content=(
+                f'Webhook received: {event["type"]} | SUCCESS: Created '
+                'order in webhook'
+            ),
+            status=200
+        )
 
     def handle_payment_intent_payment_failed(self, event):
         """
@@ -183,5 +195,3 @@ class StripeWH_Handler:
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
-    
-

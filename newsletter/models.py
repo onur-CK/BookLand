@@ -2,6 +2,8 @@ from django.db import models
 
 # Newsletter subscriber model to store email subscriptions
 # Source: https://docs.djangoproject.com/en/5.0/topics/db/models/
+
+
 class NewsletterSubscriber(models.Model):
     # Email field with unique constraint to prevent duplicate subscriptions
     # Source: https://docs.djangoproject.com/en/5.0/ref/models/fields/#emailfield

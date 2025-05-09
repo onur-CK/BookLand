@@ -21,7 +21,10 @@ class CategoryAdmin(admin.ModelAdmin):
 # Admin configuration for the Book model
 class BookAdmin(admin.ModelAdmin):
     # Fields displayed in the book list view in admin
-    list_display = ('title', 'author', 'category', 'price', 'rating', 'available', 'inventory')
+    list_display = (
+        'title', 'author', 'category', 'price',
+        'rating', 'available', 'inventory'
+    )
     # Filters for the right sidebar in the list view
     list_filter = ('category', 'available')
     # Fields that can be searched using the search bar
@@ -50,14 +53,20 @@ class BookAdmin(admin.ModelAdmin):
         }),
     )
 
-    # Filter the foreign key dropdown for category to only show active categories
+    # Filter the foreign key dropdown for
+    # category to only show active categories
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-         # If the field is category, sort categories alphabetically by friendly name
+        # If the field is category, sort categories
+        # alphabetically by friendly name
         if db_field.name == "category":
-            kwargs["queryset"] = Category.objects.all().order_by('friendly_name')
+            kwargs["queryset"] = (
+                Category.objects.all()
+                .order_by('friendly_name')
+            )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
-# Register the models with their custom admin configurations 
+# Register the models with their custom admin configurations
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Book, BookAdmin)
-

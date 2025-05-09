@@ -3,6 +3,8 @@ from .models import NewsletterSubscriber
 
 # Custom admin configuration for the NewsletterSubscriber model
 # Source: https://docs.djangoproject.com/en/5.0/ref/contrib/admin/#modeladmin-objects
+
+
 @admin.register(NewsletterSubscriber)
 class NewsletterSubscriberAdmin(admin.ModelAdmin):
     # Customize which fields appear in the list display

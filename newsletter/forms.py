@@ -3,11 +3,13 @@ from .models import NewsletterSubscriber
 
 # ModelForm for handling newsletter subscriptions
 # Source: https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
+
+
 class NewsletterForm(forms.ModelForm):
     class Meta:
         model = NewsletterSubscriber
-        fields = ['email'] # Only need email field for subscription
-        
+        fields = ['email']
+
     def __init__(self, *args, **kwargs):
         # Override initialization to customize form attributes
         # Source: https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#overriding-the-default-fields
