@@ -896,7 +896,7 @@ All CRUD operations were tested extensively across user roles (anonymous users, 
 
 ### HTML Validation
 
-[About Us Page](media/html_val/about%20us.png)
+![About Us Page](media/html_val/about%20us.png)
 
 
 
