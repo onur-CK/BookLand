@@ -896,8 +896,62 @@ All CRUD operations were tested extensively across user roles (anonymous users, 
 
 ### HTML Validation
 
-![About Us Page](media/html_val/about%20us.png)
+About Us Page:
+[About Us Page](media/html_val/about%20us.png)
 
+Cart Page: 
+[Cart Page](media/html_val/cart.png)
+
+Checkot Page: 
+[Checkot Page](media/html_val/checkout%20.png)
+
+Checkout Success Page: 
+[Checkout Success Page](media/html_val/checkout%20success.png)
+
+**Contact Us Page:** 
+
+The W3C validator has flagged an accessibility error: the <img> element used for displaying the country select flag (from the django-countries package) must include an alt attribute. This issue has been noted for future investigation, as it requires detailed debugging. Currently, there is no reliable fix implemented.
+
+[Contact Us Page](media/html_val/contact%20us.png)
+
+FAQ Page: 
+[FAQ Page](media/html_val/FAQ.png)
+
+Home Page: 
+[Home Page](media/html_val/home.png)
+
+Order History: 
+[Order History](media/html_val/order%20history.png)
+
+Privacy and Policy Page: 
+[Privacy and Policy Page](media/html_val/privacy%20and%20policy.png)
+
+Product Details Page: 
+[Product Details Page](media/html_val/product%20details.png)
+
+Product Page: 
+[Product Page](media/html_val/products.png)
+
+Profile Page: 
+[Profile Page](media/html_val/profile.png)
+
+Public Testimonial Page: 
+[Public Testimonial Page](media/html_val/public%20testimonials.png)
+
+Returns Page: 
+[Returns Page](media/html_val/returns.png)
+
+Shipping Policy Page: 
+[Shipping Policy Page](media/html_val/shipping%20policy.png)
+
+**Testimonial Page:**
+
+The aria-describedby attribute is currently inheriting help text from forms.py in an unintended manner. This issue has been identified and marked for future resolution, as it requires an in-depth debugging process. At this time, no reliable fix has been implemented.
+
+[Testimonial Page](media/html_val/testimonials.png)
+
+Wishlist Page: 
+[Wishlist Page](media/html_val/wishlist.png)
 
 
 ### PEP8 Validation
