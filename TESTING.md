@@ -894,6 +894,10 @@ All CRUD operations were tested extensively across user roles (anonymous users, 
 
 ## Validation Testing
 
+### HTML Validation
+
+[About Us Page](media/html_val/about%20us.png)
+
 
 
 ### PEP8 Validation
