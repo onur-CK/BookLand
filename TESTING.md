@@ -123,8 +123,8 @@ Screen Resolutions:
 
 - Mobile: 320px - 480px
 - Tablets: 768px - 1024px
-- Laptops/Desktops: 1024px - 1920px+
-- Ultrawide Monitors: 
+- Laptops/Desktops: 1024px - 1920px
+- Monitors: 
 1. 27 inch -- 2560 x 1440 px -- Asus VG27AQL1A 
 2. 34 inch -- 3440 x 1440 px -- Gigabyte M34WQ 
 3. 38 inch -- 3840 x 1600 px -- Lg 38GN950P-B
@@ -904,8 +904,8 @@ About Us Page:
 Cart Page: 
 [Cart Page](media/html_val/cart.png)
 
-Checkot Page: 
-[Checkot Page](media/html_val/checkout%20.png)
+Checkout Page: 
+[Checkout Page](media/html_val/checkout%20.png)
 
 Checkout Success Page: 
 [Checkout Success Page](media/html_val/checkout%20success.png)
@@ -2174,9 +2174,9 @@ The most visible manifestation of these architectural issues appears in the prod
 
 1. **Pagination Display Issues**: While pagination controls appear properly spaced in DevTools mobile emulation, on actual mobile devices the pagination controls are compressed and difficult to interact with.
 
-   ![Pagination display issue on real mobile device](media/bugs_and_fixes/paginator%20mobile.jpg)
+   [Pagination display issue on real mobile device](media/bugs_and_fixes/paginator%20mobile.jpg)
 
-   ![Pagination display on dev tools](media/bugs_and_fixes/paginator%20mobile.jpg)
+   [Pagination display on dev tools](media/bugs_and_fixes/paginator%20google%20dev%20tool.png)
 
 2. **Touch Target Sizing**: The "Add to Cart" and "Add/Remove Wishlist" buttons have insufficient separation on real mobile devices despite appearing adequately spaced in emulation.
 
