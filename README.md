@@ -1438,19 +1438,19 @@ Their collective support has been a vital part of the project’s success.
 ### Agile Methodology
 
 For more detailed information on this topic, please refer to the dedicated document: 
-[Agile_Methodology.md](Agile.md).
+[Agile Methodology](AGILE.md)
 
 ### Deployment
 
 For more detailed information on this topic, please refer to the dedicated document: 
-[Deployment.md](Deployment.md).
+[Deployment Guide](DEPLOYMENT.md)
 
 ### Testing
 
 For more detailed information on this topic, please refer to the dedicated document: 
-[Testing.md](Testing.md).
+[Testing Documentation](TESTING.md)
 
 ### SEO and Marketing
 
 For more detailed information on this topic, please refer to the dedicated document: 
-[SEO_and_Marketing.md](Seo_and_Marketing.md).
+[SEO and Marketing Strategy](SEO_and_MARKETING.md)
