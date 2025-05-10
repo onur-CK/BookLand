@@ -78,7 +78,7 @@ As avid readers ourselves, we understand the joy of finding the perfect book. Bo
   - [Product Details](#product-details)
     - [Add to Cart & Wishlist](#add-to-cart--wishlist)
   - [Shopping Cart](#shopping-cart)
-  - [Checkout](#checkout))
+  - [Checkout](#checkout)
     - [Order Confirmation](#order-confirmation)
   - [User Profile](#user-profile)
     - [Order History](#order-history-feature)
@@ -500,6 +500,11 @@ The design process included multiple iterations and testing phases:
 
 #### Wireframes
 
+**Note:** 
+
+Some changes has been applied to first wireframe layouts after encountering the "CSS Coverage and Layout Issues" bug. Check TESTING.md for more information.
+
+
 The main entry point featuring category navigation and featured books
 
 [Home page medium+](media/wireframes/Home%20Page%20Medium%20Plus.png)
@@ -551,9 +556,12 @@ Authentication form
 [Login/Sign-In](media/wireframes/Login.png)
 
 
-Saved items for future consideration
+Saved books for future consideration
 
 [Wishlist](media/wireframes/Wishlist.png)
+
+
+[Testimonials Public](media/wireframes/Customer%20Testimonials.png)
 
 
 In the final implementation, we made some refinements to the original wireframes. For instance, on the Shopping Cart page, we moved the cart summary from a left sidebar to a right-positioned card on larger screens to improve the visual balance and align with common e-commerce patterns users are familiar with. This adjustment enhanced usability while maintaining the essential functionality outlined in the wireframes. The "Add to Cart" button was replaced with a shopping cart icon to streamline the interface and improve the overall user experience.
