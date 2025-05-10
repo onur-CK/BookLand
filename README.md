@@ -4,9 +4,9 @@ BookLand is an online bookstore platform designed to provide book enthusiasts wi
 
 As avid readers ourselves, we understand the joy of finding the perfect book. BookLand was born out of our passion for literature and our desire to create a digital space where readers can easily browse, purchase, and manage their book orders without the hassle often associated with online shopping.
 
-![BookLand Logo/Hero Image](path-to-image)
+![BookLand Logo/Hero Image](media/readme/AmIResponsive.png)
 
-[View live site here](link-to-deployed-site)
+[View live site here](https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/)
 
 ## 📚 Table of Contents 
 
