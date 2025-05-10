@@ -12,7 +12,6 @@ Disallow: /checkout_success/
 Disallow: /order_detail/
 Disallow: /delete_testimonial/
 Disallow: /edit_testimonial/
-Disallow: /*?*  # Block URLs with query parameters
 Allow: /
 
 # Googlebot specific rules

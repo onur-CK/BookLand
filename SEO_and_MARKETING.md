@@ -16,7 +16,7 @@
 ### Initial Keyword Brainstorming
 Based on the nature of our BookLand online bookstore, we identified the following potential keywords(Due to the two-word limitation imposed by Wordtracker, we conducted a broader keyword research using Google.):
 
-# Professional SEO Keyword Research Analysis for BookLand(related walkthrough content: Introduction to Search Engine Optimization > Keywords)
+### SEO Keyword Research Analysis for BookLand(related walkthrough content: Introduction to Search Engine Optimization > Keywords)
 
 ## 1. Targeting: Uncovering Strategic Queries
 
@@ -98,9 +98,9 @@ Based on the research, we recommend the following implementation strategies for 
 
 By implementing these strategies based on our research into targeting, popularity, and ranking difficulty, BookLand can develop a comprehensive SEO approach that drives relevant traffic and increases conversions in the competitive online bookstore market.
 
-# BookLand - Keyword Research List
+## BookLand - Keyword Research List
 
-## Primary Keywords
+### Primary Keywords
 - Online bookstore
 - Buy books online
 - Book delivery
@@ -109,21 +109,21 @@ By implementing these strategies based on our research into targeting, popularit
 - Book store near me
 - Books
 
-## Product-Related Keywords
+### Product-Related Keywords
 - Philosophy books
 - Psychology books
 - Self-development books
 - Literature classics
 - Biography books
 
-## User Intent Keywords
+### User Intent Keywords
 - Best books for beginners
 - Book recommendations
 - Book gift ideas
 - Top rated books
 - Affordable books
 
-## General Bookstore Keywords
+### General Bookstore Keywords
 - Online bookstore
 - Buy books online
 - Books online
@@ -141,7 +141,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Cheap books
 - Bookstore with free shipping
 
-## Genre-Specific Keywords
+### Genre-Specific Keywords
 - Philosophy books
 - Psychology books
 - Self-development books
@@ -159,7 +159,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Business books
 - Academic books
 
-## Customer Intent Keywords
+### Customer Intent Keywords
 - Best books to read
 - Must-read books
 - Book recommendations
@@ -176,7 +176,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Philosophy for beginners
 - Psychology fundamentals books
 
-## Seasonal and Promotional Keywords
+### Seasonal and Promotional Keywords
 - Summer reading list
 - Winter reading books
 - Holiday book gifts
@@ -189,7 +189,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Limited edition books
 - Signed books
 
-## Service-Related Keywords
+### Service-Related Keywords
 - Free book shipping
 - Fast book delivery
 - International book shipping
@@ -200,7 +200,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Curated book selection
 - Personalized book recommendations
 
-## Local and Geographic Keywords
+### Local and Geographic Keywords
 - Local bookstore
 - Bookstore near me
 - Online bookstore [city/country]
@@ -209,7 +209,7 @@ By implementing these strategies based on our research into targeting, popularit
 - European bookstore
 - International books
 
-## Niche-Specific Keywords
+### Niche-Specific Keywords
 - Curated book collection
 - Independent bookstore online
 - Specialty bookstore
@@ -226,7 +226,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Existential philosophy texts
 - Stoicism books
 
-## Technical and Website-Related Keywords
+### Technical and Website-Related Keywords
 - Secure book shopping
 - Online book payment
 - Book wishlist
@@ -239,7 +239,7 @@ By implementing these strategies based on our research into targeting, popularit
 - Book ordering system
 - Book delivery tracking
 
-## Competitor Alternative Keywords
+### Competitor Alternative Keywords
 - Amazon books alternative
 - Better than Amazon books
 - Alternatives to large bookstores
@@ -297,7 +297,9 @@ Using Wordtracker, we analyzed the search volume and competition for our top key
 After being limited to three searches by Wordtracker—one on Google Chrome, one on Internet Explorer, and one on mobile Chrome using mobile data we conducted an in-depth keyword research on Google.
 
 ![Word Tracker "buy books"](media/seo_marketing/buy%20books.png)
+
 ![Word Tracker "online book store"](media/seo_marketing/online%20book%20store.png)
+
 ![Word Tracker "online books"](media/seo_marketing/online%20books.png)
 
 ## BookLand's SEO Keyword Strategy - Final Selection and Decision Process
@@ -314,7 +316,7 @@ Our keyword selection was driven by three main factors:
 2. User Intent Matching: We prioritized keywords that demonstrated clear purchase intent over merely informational queries. For example, terms like "buy philosophy books online" and "where to buy books online not amazon" were given preference as they suggest higher conversion potential than generic terms like "books" which might attract casual browsers.
 3. Competition Assessment: We selected a balanced mix of keyword difficulties, focusing primarily on low-competition keywords with commercial or transactional intent while gradually building capability to rank for more competitive terms. This balanced portfolio approach provides short-term wins while building toward longer-term SEO goals.
 
-#### Meta Tags Implementation
+### Meta Tags Implementation
 In our HTML implementation, we carefully crafted meta tags that incorporated our selected keywords while maintaining readability and relevance:
 For the title tag, we chose: "BookLand | Your Curated Online Bookstore for Philosophy, Psychology & More" which succinctly communicates our brand name, business type, and primary categories.
 Our meta description reads: "BookLand - Your one-stop online bookstore offering a curated collection of books across philosophy, psychology, literature, biographies, and self-development. Shop with free shipping on orders over $40, easy returns, and secure checkout. Join our community of book lovers today!"
@@ -550,7 +552,7 @@ Our marketing model acknowledges the growing importance of social proof in purch
 
 Through this comprehensive B2C marketing approach, BookLand creates a virtuous cycle where thoughtful curation attracts the right customers, quality experiences convert them to advocates, and their authentic recommendations bring in new customers who share similar values and interests. This sustainable growth model allows us to compete effectively against larger retailers by fostering genuine connections rather than competing on scale or price alone.
 
-# Optimal Marketing Strategies for BookLand (related walkthrough section Web Marketing > Types of Web Marketing/Choosing the Right Marketing Types for Your Business Part 1/2)
+### Optimal Marketing Strategies for BookLand (related walkthrough section Web Marketing > Types of Web Marketing/Choosing the Right Marketing Types for Your Business Part 1/2)
 
 ## Why These Marketing Types Will Give Our Business a Competitive Edge
 
@@ -636,7 +638,7 @@ Based on our business model, these topic clusters should be prioritized for our 
 - How to approach challenging books
 - Contemporary literature worth your time
 
-## Answering Key Questions About Our Business Model
+## Answering Key Questions About Our Business Model(walkthrough related questions)
 
 ### How will we leverage our niche focus into marketing success?
 
@@ -672,7 +674,7 @@ By starting with these customer-centric, relationship-building strategies, we es
 
 Our BookLand marketing strategy leverages content marketing, email marketing, social media presence, and SEO to build a distinctive brand in the online bookstore space. By focusing on curation, community, and expertise rather than competing solely on price or selection breadth, we create sustainable advantages that align perfectly with our target audience of thoughtful readers seeking quality books in philosophy, psychology, and self-development.
 
-### GDPR Compliance
+#### GDPR Compliance
 **Implementation Plan:**
 - Clear, concise privacy policy written in plain language
 - Granular cookie consent management system allowing visitors to opt in/out of specific tracking
@@ -688,7 +690,7 @@ GDPR compliance isn't just a legal requirement for serving European customers—
 
 ## Additional Marketing Considerations
 
-### Business Model Questions
+#### Business Model Questions(Walkthrough related questions)
 
 1. **How will BookLand make money?**
    - Primary revenue through direct book sales with competitive markup
@@ -907,6 +909,8 @@ We've created a Facebook Business Page for BookLand that includes:
 
 [Facebook Page](https://www.facebook.com/profile.php?id=61575641435990)
 
+![Facebook Page](media/seo_marketing/facebook%20page.png)
+
 ### 5. Newsletter Subscription
 A newsletter subscription feature has been implemented using mailchimp.
 - Sign-up form in the footer of every page
@@ -931,4 +935,4 @@ A comprehensive Privacy Policy has been created and is accessible via the footer
 
 The Privacy Policy was generated using [Privacy Policy Generator](https://www.privacypolicygenerator.info/) and customized for BookLand's specific needs. 
 
-[Privacy and Policy](https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/extra_pages/privacy_policy/)
+[Privacy and Policy Page of Bookland](https://bookland-e-commerce-2e2b1a60109c.herokuapp.com/extra_pages/privacy_policy/)

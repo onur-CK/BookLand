@@ -82,8 +82,8 @@
   - [Wishlist to Cart Transfer Error](#wishlist-to-cart-transfer-error)
   - [Signup Duplicate Email Verification Bug](#signup-duplicate-email-verification-bug)
 - [Known Bugs](#known-bugs)
-  -[CSS Coverage and Layout Issues](#css-coverage-and-layout-issues)
-  -[Testimonial Character Limits and Newsletter Unsubscription Issues](#testimonial-character-limits-and-newsletter-unsubscription-issues)
+  - [CSS Coverage and Layout Issues](#css-coverage-and-layout-issues)
+  - [Testimonial Character Limits and Newsletter Unsubscription Issues](#testimonial-character-limits-and-newsletter-unsubscription-issues)
 
 ## Introduction
 
@@ -95,7 +95,7 @@ The BookLand e-commerce project has undergone extensive testing to ensure functi
 
 Testing for BookLand followed a multi-layered strategy combining manual and automated approaches:
 
-1.Manual Testing: Systematic verification of user stories, feature functionality, responsive design, browser compatibility, and user experience across various devices and screen sizes.
+1. Manual Testing: Systematic verification of user stories, feature functionality, responsive design, browser compatibility, and user experience across various devices and screen sizes.
 2. Validation Testing: Rigorous code validation using industry-standard tools to ensure HTML, CSS, JavaScript, and Python code meets best practices and standards.
 3. Accessibility Testing: Evaluation of the application against WCAG guidelines to ensure inclusivity for all users, including those using assistive technologies.
 4. Performance Testing: Analysis of application performance metrics including page load times, resource optimization, and overall responsiveness.

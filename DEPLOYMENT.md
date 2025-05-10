@@ -126,7 +126,9 @@ AWS_SECRET_ACCESS_KEY=your_aws_secret_key
 1. Navigate to the [BookLand repository](https://github.com/onur-CK/BookLand)
 2. Click the "Code" button and copy the repository URL
 3. Open your terminal and run:
+
 git clone https://github.com/onur-CK/BookLand.git
+
 cd bookland
 
 ### Virtual Environment Setup

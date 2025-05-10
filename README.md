@@ -1395,7 +1395,7 @@ Complete SEO Course for Beginners: Learn to Rank #1 in Google;
 
 - Keywords research was made with [Word Tracker](https://www.wordtracker.com/)
 
-- Contents of the pages are created by using [chat gpt](https://chatgpt.com/)
+- Contents of the pages are created by using(only page contents, no codes adopted from chatgpt) [chat gpt](https://chatgpt.com/)
 
 - Grammer corrections for Readme files was made with; 
 

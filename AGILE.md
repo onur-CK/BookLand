@@ -58,42 +58,42 @@ We used the MoSCoW method to prioritize features throughout the development proc
 
 ### Epic Template
 
-### Epic: [Epic Name]
+#### Epic: [Epic Name]
 
-## Description
+#### Description
 [Brief description of the epic and its overall purpose]
 
-## Business Value
+#### Business Value
 [Explanation of why this epic is important to the business/project]
 
-## Acceptance Criteria
+#### Acceptance Criteria
 - [Criteria 1]
 - [Criteria 2]
 - [Criteria n]
 
-## Related User Stories
+#### Related User Stories
 - [Link to user story 1]
 - [Link to user story 2]
 - [Link to user story n]
 
 ## User Story Template
 
-# User Story: [User Story Title]
+### User Story: [User Story Title]
 
-## Story
+### Story
 As a [user type], I want [action] so that [benefit].
 
-## Acceptance Criteria
+### Acceptance Criteria
 - [ ] [Criteria 1]
 - [ ] [Criteria 2]
 - [ ] [Criteria n]
 
-## Tasks
+### Tasks
 - [ ] [Task 1]
 - [ ] [Task 2]
 - [ ] [Task n]
 
-## Priority
+### Priority
 [Must Have/Should Have/Could Have]
 
 ## Epics
