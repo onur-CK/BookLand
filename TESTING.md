@@ -2180,9 +2180,9 @@ The most visible manifestation of these architectural issues appears in the prod
 
 2. **Touch Target Sizing**: The "Add to Cart" and "Add/Remove Wishlist" buttons have insufficient separation on real mobile devices despite appearing adequately spaced in emulation.
 
-   ![Cart and wishlist button spacing issue](media/bugs_and_fixes/card%20and%20wishlist%20buttons%20mobile.jpg)
+    [Cart and wishlist button spacing issue](media/bugs_and_fixes/card%20and%20wishlist%20buttons%20mobile.jpg)
 
-  ![Cart and wishlist button on devtools](media/bugs_and_fixes/cart%20and%20wishlist%20buttons%20dev%20tool.png)
+    [Cart and wishlist button on devtools](media/bugs_and_fixes/cart%20and%20wishlist%20buttons%20dev%20tool.png)
 
 #### Root Causes
 
